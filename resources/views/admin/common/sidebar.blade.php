@@ -31,19 +31,26 @@
         {{--<li class="header"></li>--}}
         <!-- Optionally, you can add icons to the links -->
             <li class="treeview">
-                <a href="#"><i class="fa fa-link" target="menuFrame"></i> <span>营业看板</span>
+                <a href="#"><i class="fa fa-link" target="menuFrame"></i> <span>首页</span>
                     <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ url('admin/index') }}" target="menuFrame">首页</a></li>
-                    <li><a href="#" target="menuFrame">角色管理</a></li>
-                    <li><a href="#" target="menuFrame">系统管理员</a></li>
+                    <li><a href="{{ url('admin/index') }}" target="menuFrame">营业看板</a></li>
+                    <li><a href="#" target="menuFrame"></a></li>
                 </ul>
             </li>
-            <li>
-                <a href="#" target="menuFrame"><i class="fa fa-link"></i> <span>Another Link</span></a>
+            <li class="treeview">
+                <a href="#"><i class="fa fa-link" target="menuFrame"></i> <span>单店管理</span>
+                    <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="#" target="menuFrame">房间管理</a></li>
+                    <li><a href="#" target="menuFrame">店铺管理</a></li>
+                </ul>
             </li>
             <li class="treeview">
                 <a href="#"><i class="fa fa-link" target="menuFrame"></i> <span>系统管理员</span>

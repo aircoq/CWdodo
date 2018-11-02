@@ -14,13 +14,13 @@ class CreateInnModel extends Migration
     public function up()
     {
         # 商家表
-        Schema::create('inn',function(Blueprint $table){
+        Schema::create('inn_for_pet',function(Blueprint $table){
             // 声明表结构
             $table->engine = 'InnoDB';
             $table->increments('id')->comment('主键ID');
             $table->string('inn_name',150)->nullable()->comment('门店名称');
             $table->string('inn_sn',25)->unique()->comment('门店编码');
-            $table->unsignedTinyInteger('cate_id')->default(1)->comment('门店类型');
+            $table->unsignedTinyInteger('cate_id')->default(1)->comment('门店类型，暂时没开启此功能');
             $table->enum('is_self',['0','1'])->default(0)->comment('是否直营：0不是,1是');
             $table->enum('inn_status',['-2','-1','0','1'])->default(0)->comment('-2已停止;-1拒绝;0未审核;1已审核');
             $table->unsignedTinyInteger('is_running')->default(1)->comment('0休息中,1营业中');

@@ -20,9 +20,8 @@ Route::any('/','Home\IndexController@index');//设置默认访问控制器方法
 Route::group(['namespace' => 'Admin','prefix'=>'admin'],function (){
     # 后台展示模块
     Route::match(['get', 'post'],'login','IndexController@login')->name('admin.login');
-    Route::post('admin/re_store','AdminController@re_store');//恢复管理员
     # 后台防翻墙
-    Route::middleware(['CheckAdmin','web'])->group(function () {
+    Route::middleware(['CheckAdmin','web'])->group(function () {//带‘/’的只能ajax访问
 //    Route::middleware(['web'])->group(function () {
         # 后台首页
         Route::any('index', 'IndexController@index');
@@ -30,6 +29,7 @@ Route::group(['namespace' => 'Admin','prefix'=>'admin'],function (){
         # 管理员模块
         Route::resource('admin','AdminController');
         Route::post('admin/ajax_list','AdminController@ajax_list');//管理员数据展示页
+        Route::post('admin/re_store','AdminController@re_store');//恢复管理员
         Route::match(['get', 'post'],'avatar_upload','AdminController@avatar_upload');//上传头像
         Route::resource('auth','AuthController');
         Route::resource('role','RoleController');
