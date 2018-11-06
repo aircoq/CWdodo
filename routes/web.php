@@ -20,9 +20,10 @@ Route::any('/','Home\IndexController@index');//设置默认访问控制器方法
 Route::group(['namespace' => 'Admin','prefix'=>'admin'],function (){
     # 后台展示模块
     Route::match(['get', 'post'],'login','IndexController@login')->name('admin.login');
+
     # 后台防翻墙
     Route::middleware(['CheckAdmin','web'])->group(function () {//带‘/’的只能ajax访问
-//    Route::middleware(['web'])->group(function () {
+//   Route::group(['middleware' => 'web'],function (){//重置，无验证项
         # 后台首页
         Route::any('index', 'IndexController@index');
         Route::any('dashboard', 'IndexController@dashboard');
@@ -36,6 +37,13 @@ Route::group(['namespace' => 'Admin','prefix'=>'admin'],function (){
         Route::get('logout','IndexController@logout');
         # 用户模块
         Route::resource('user','UserController');
+        Route::post('user/ajax_list','UserController@ajax_list');//用户数据展示页
+        Route::post('User/re_store','UserController@re_store');//恢复用户
+        # 门店管理模块
+        Route::resource('inn_for_pet','InnForPetController');
+        Route::post('inn_for_pet/ajax_list','InnForPetController@ajax_list');//门店数据展示页
+        Route::post('inn_for_pet/re_store','InnForPetController@re_store');//恢复门店
+
     });
 });
 

@@ -352,7 +352,7 @@
                     }else{
                         location.reload();
                         $(obj).parents('tr').remove();
-                        layer.msg('删除成功',{icon:1,time:1000});
+                        layer.msg('恢复成功',{icon:1,time:1000});
                     }
                 });
             });

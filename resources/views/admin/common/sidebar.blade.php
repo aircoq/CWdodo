@@ -49,7 +49,18 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="#" target="menuFrame">房间管理</a></li>
-                    <li><a href="#" target="menuFrame">店铺管理</a></li>
+                    <li><a href="{{ url('admin/inn_for_pet') }}" target="menuFrame">店铺管理</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#"><i class="fa fa-link" target="menuFrame"></i> <span>用户管理</span>
+                    <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="#" target="menuFrame">地址管理</a></li>
+                    <li><a href="{{ url('admin/user') }}" target="menuFrame">用户管理</a></li>
                 </ul>
             </li>
             <li class="treeview">

@@ -5,103 +5,112 @@
 @endsection
 
 @section('css')
+    <link rel="stylesheet" href="{{asset('plugins/timepicker/bootstrap-timepicker.min.css')}}">
     <style>
         .error{color:red;}
     </style>
 @endsection
 
 @section('content')
-            <div class="cl-sm-12">
-                <!-- /.box-header -->
-                <!-- form start -->
-                <form class="form-horizontal" id="form-admin-add" action="{{ url('admin/admin')  }}" method="post" enctype="multipart/form-data">
-                    {{ csrf_field() }}
-                    <div class="box-body">
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">姓名</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="姓名" name="username" id="username"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">性别</label>
-                            <div class="col-sm-10">
-                                <select class="form-control" style="width:70%;" name="sex" >
-                                    <option value="0">女</option>
-                                    <option value="1">男</option>
-                                    <option value="2">保密</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">手机</label>
-                            <div class="col-sm-10">
-                                <input type="tel" class="form-control" style="width:70%;display:inline;" placeholder="手机"  name="phone" id="phone"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">邮箱</label>
-                            <div class="col-sm-10">
-                                <input type="email" class="form-control" style="width:70%;display:inline;" placeholder="邮箱" name="email" id="email">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">密码</label>
-                            <div class="col-sm-10">
-                                <input type="password" class="form-control" style="width:70%;display:inline;" placeholder="密码" id="password" name="password"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">确认密码</label>
-                            <div class="col-sm-10">
-                                <input type="password" class="form-control" style="width:70%;display:inline;" placeholder="确认密码" id="confirm_password" name="confirm_password">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">角色</font></font></label>
-                            <div class="col-sm-10">
-                                <select class="form-control" name="role_id" style="width:70%;">
-                                    <option value="1"><font  style="vertical-align: inherit;"><font style="vertical-align: inherit;">选项1</font></font></option>
-                                    <option value="2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">选项2</font></font></option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">账号状态</font></font></label>
-                            <div class="col-sm-10">
-                                <select class="form-control" style="width:70%;" name="admin_status">
-                                    <option value="-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">拒绝</font></font></option>
-                                    <option value="-1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">已停止</font></font></option>
-                                    <option value="0" selected><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">未审核</font></font></option>
-                                    <option value="1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通过</font></font></option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">备注</label>
-                            <div class="col-sm-10">
-                                <textarea class="textarea" style="width: 70%; height: 200px; font-size: 14px;" placeholder="备注" name="note"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="checkbox">
-                                <label class="col-sm-2 control-label"></label>
-                                <div class="col-sm-10">
-                                    <input type="checkbox" id="form_check" name="form_check"> 已阅读并同意公司隐私协议
-                                </div>
-
-                            </div>
-                        </div>
+    <div class="cl-sm-12">
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form class="form-horizontal" id="form-inn-add" action="{{ url('admin/inn_for_pet')  }}" method="post" enctype="multipart/form-data">
+            {{ csrf_field() }}
+            <div class="box-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">门店名称</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="门店名称" name="inn_name" id="inn_name"/>
                     </div>
-                    <!-- /.box-body -->
-                    <div class="box-footer">
-                        <label class="col-sm-2 control-label"></label>
-                        <div class="col-sm-10">
-                            <input type="submit" class="btn btn-primary radius" value="确认提交"/>
-                        </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">门店编号</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="所在市首字母大写+四位门店编号，例：SZ0185"  name="inn_sn" id="inn_sn"/>
                     </div>
-                </form>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">是否直营</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" style="width:70%;" name="is_self" >
+                            <option value="0">否</option>
+                            <option value="1" selected>是</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">门店电话</label>
+                    <div class="col-sm-10">
+                        <input type="tel" class="form-control" style="width:70%;display:inline;" placeholder="门店电话"  name="inn_tel" id="inn_tel"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">门店详细地址</label>
+                    <div class="col-sm-10">
+                        <input type="tel" class="form-control" style="width:70%;display:inline;" placeholder="门店详细地址"  name="inn_address" id="inn_address"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">营业时间</label>
+                    <div class="col-sm-10">
+                        从
+                        <input type="text" class="form-control start_time" style="width:30%;display:inline;" placeholder="营业开始时间" name="start_time" id="start_time"/>
+                        营业到
+                        <input type="text" class="form-control end_time" style="width:30%;display:inline;" placeholder="营业结束时间" name="end_time" id="end_time"/>
+                        结束
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">门店状态</font></font></label>
+                    <div class="col-sm-10">
+                        <select class="form-control" style="width:70%;" name="inn_status">
+                            <option value="-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">拒绝</font></font></option>
+                            <option value="-1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">已停止</font></font></option>
+                            <option value="0" selected><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">未审核</font></font></option>
+                            <option value="1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">已通过</font></font></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">是否营业中</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" style="width:70%;" name="is_running" >
+                            <option value="0">否</option>
+                            <option value="1" selected>是</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">所有者</label>
+                    <div class="col-sm-10">
+                        <input type="tel" class="form-control" style="width:70%;display:inline;" placeholder="所有者id"  name="admin_id" id="admin_id"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">上传logo</label>
+                    <div class="col-sm-10">
+                        <a href="javascript:;" onclick="layer_show('上传头像','','350','350')" id="a-admin-avatar" class="btn-sm btn-primary">
+                            选择文件
+                        </a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">备注</label>
+                    <div class="col-sm-10">
+                        <textarea class="textarea" style="width: 70%; height: 100px; font-size: 14px;" placeholder="备注" name="note"></textarea>
+                    </div>
+                </div>
             </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <label class="col-sm-2 control-label"></label>
+                <div class="col-sm-10">
+                    <input type="submit" class="btn btn-primary radius" value="确认提交"/>
+                </div>
+            </div>
+        </form>
+    </div>
     </div>
 @endsection
 
@@ -113,41 +122,59 @@
     <script type="text/javascript" src="{{ asset('plugins/layer/admin_layer.js')}}"></script>
     <script type="text/javascript" src="{{ asset('plugins/layer/admin_layer.js')}}"></script>
     <script type="text/javascript" src="{{ asset('plugins/jQueryUI/jquery.form.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/timepicker/bootstrap-timepicker.min.js')}}"></script>
     <script>
         $(function(){
+            $('.start_time').timepicker({
+                defaultTime:'9:00',
+                showMeridian:false,
+            });
+            $('.end_time').timepicker({
+                defaultTime:'21:00',
+                showMeridian:false,
+            });
             /***编写Javascript表单验证区域*/
-            $("#form-admin-add").validate({
+            $("#form-inn-add").validate({
                 rules:{//规则
-                    username:{
+                    inn_name:{
                         required:true,
-                        rangelength:[5,12]
+                        rangelength:[1,12]
                     },
-                    phone:{
+                    inn_sn:{
                         required:true,
-                        minlength:11,
-                        maxlength:11,
-                        digits:true
+                        rangelength:[5,12],
                     },
-                    email:{
+                    is_self:{
                         required:true,
-                        email:true,
+                    },
+                    inn_status:{
+                        required:true,
+                    },
+                    is_running:{
+                        required:true,
                     },
                     password:{
                         required:true,
                         rangelength:[5,20]
                     },
-                    confirm_password:{
+                    inn_tel:{
                         required:true,
-                        equalTo: "#password"
+                        rangelength:[11,11],
+                        digits:true
                     },
-                    form_check:{
+                    inn_address:{
+                        required:true,
+                        rangelength:[10,52],
+                    },
+                    start_time:{
+                        required:true,
+                    },
+                    end_time:{
                         required:true,
                     },
                 },
                 messages: {//自定义提示信息
-                    form_check:{
-                        required:"请仔细阅读相关条款",
-                    },
+
                 },
                 onkeyup:false,
                 focusCleanup:false,

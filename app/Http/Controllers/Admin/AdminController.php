@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 Use Redis;
 
+# 只有超级管理员才有权限
 class AdminController extends Controller
 {
     /**
@@ -45,7 +46,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        if(Auth::guard('admin')->user()->role_id == '*'){
+        if(Auth::guard('admin')->user()->role_id == '*'){//重置屏蔽项
             return view('admin.admin.create');
         }
         echo '您暂无权限！';
@@ -58,8 +59,8 @@ class AdminController extends Controller
      */
     public function store(Request $request,Admin $admin)
     {
-        if ($request->ajax() && Auth::guard('admin')->user()->role_id == '*') {
-            $data = $request->only('username','sex','phone','email','password','confirm_password','admin_status','role_id','avatar','accepted');
+        if ($request->ajax() && Auth::guard('admin')->user()->role_id == '*') {//重置屏蔽项目 Auth::guard('admin')->user()->role_id == '*'
+            $data = $request->only('username','sex','phone','email','password','confirm_password','admin_status','role_id','avatar','note','accepted');
             $role = [
                 'username' => 'required|alpha_num|between:5,12|unique:admin',
                 'sex' => 'integer',
@@ -69,6 +70,7 @@ class AdminController extends Controller
                 'admin_status' => 'integer',
                 'role_id' => 'required|exists:role,id',
                 'avatar'   => 'file|image|mimes:png,gif,jpeg,jpg|max:600',
+                'note' => 'nullable|string|between:0,100',
 //                'accepted' => 'accepted',
             ];
             $message = [
@@ -93,6 +95,8 @@ class AdminController extends Controller
                 'avatar.image'     => '头像必须是图片格式！',
                 'avatar.mimes'     => '头像的文件格式不正确！',
                 'avatar.max'       => '头像的文件最大500K',
+                'note.string' => '备注不正确',
+                'note.between' => '备注最大100个字节',
 //                'accepted.accepted' => '请仔细阅读服务条款'
             ];
             $validator = Validator::make( $data, $role, $message );
@@ -147,7 +151,7 @@ class AdminController extends Controller
      */
     public function update(Request $request,Admin $admin)
     {
-        $data = $request->only('id','username','sex','phone','email','password','confirm_password','admin_status','role_id');
+        $data = $request->only('id','username','sex','phone','email','password','confirm_password','admin_status','role_id','note');
         $role = [
             'username' => 'nullable|alpha_num|between:5,12|unique:admin,username,'.$admin->id,
             'sex' => 'nullable|integer',
@@ -156,6 +160,7 @@ class AdminController extends Controller
             'password' => 'nullable|between:6,20|same:confirm_password',
             'admin_status' => 'nullable|integer',
             'role_id' => 'nullable|exists:role,id',
+            'note' => 'nullable|string|between:0,100',
         ];
         $message = [
             'username.alpha_num' => '用户长度为5到12位的英文、数字组成',
@@ -170,6 +175,8 @@ class AdminController extends Controller
             'password.same' => '密码不一致',
             'admin_status.integer' => '请正确填写状态',
             'role_id.exists' => '角色不存在',
+            'note.string' => '备注不正确',
+            'note.between' => '备注最大100个字节',
         ];
         $validator = Validator::make($data, $role, $message);
         if ($validator->fails()) {
@@ -236,15 +243,6 @@ class AdminController extends Controller
             return ['status' => 'fail', 'msg' => '您暂无操作权限'];
         }
     }
-
-
-
-
-
-
-
-
-
     /**
      * 上传并剪辑头像的方法(超级会员可以修改任何人的头像，非超级会员只能修改自己的头像)
      */

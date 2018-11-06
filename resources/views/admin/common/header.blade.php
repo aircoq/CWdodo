@@ -117,14 +117,14 @@
                     <!-- Menu Toggle Button -->
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <!-- The user image in the navbar-->
-                        <img src="<?php echo url('').'/'.Auth::guard('admin')->user()->avatar; ?>" class="user-image" alt="User Image">
+                        <img src="<?php echo Auth::guard('admin')->user()->avatar ? url('').'/'.Auth::guard('admin')->user()->avatar : url('').'/'.'sys_img/user_avatar.png' ; ?>" class="user-image" alt="User Image">
                         <!-- hidden-xs hides the username on small devices so only the image appears. -->
                         <span class="hidden-xs">{{ Auth::guard('admin')->user()->username }}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- The user image in the menu -->
                         <li class="user-header">
-                            <img src="<?php echo url('').'/'.Auth::guard('admin')->user()->avatar; ?>" class="img-circle" alt="User Image">
+                            <img src="<?php echo Auth::guard('admin')->user()->avatar ? url('').'/'.Auth::guard('admin')->user()->avatar : url('').'/'.'sys_img/user_avatar.png' ; ?>" class="img-circle" alt="User Image">
 
                             <p>
                                 {{ Auth::guard('admin')->user()->username }}

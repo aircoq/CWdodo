@@ -46,13 +46,14 @@ class CreateUserAddressModel extends Migration
             //社交信息
             $table->mediumInteger('parent_id')->nullable()->comment('介绍人id');
             $table->jsonb('zone_cate_id')->nullable()->comment('关注的兴趣群，json格式');
-            $table->jsonb('friends_id')->nullable()->comment('好友id,json格式');
-            $table->jsonb('fans_id')->nullable()->comment('粉丝id,json格式');
-            $table->jsonb('last_ip',50)->nullable()->comment('最后登陆IP');
+            $table->jsonb('friends_list')->nullable()->comment('好友id,json格式');
+            $table->jsonb('fans_list')->nullable()->comment('粉丝id,json格式');
+            $table->jsonb('last_ip')->nullable()->comment('最后登陆IP');
             $table->text('desc')->nullable()->comment('个性签名');
             //密保信息
-            $table->string('question',255)->nullable()->comment( '密码提问');
-            $table->string('answer',255)->nullable()->comment( '密码回答');
+            $table->jsonb('question_answer')->nullable()->comment( '密保问题');
+            $table->string('last_ip',50)->default(0)->comment('最后登陆IP');
+            $table->unsignedInteger('last_login')->nullable()->comment('最后登陆时间');
             $table->timestamps();//注册时间
             $table->softDeletes();
         });
