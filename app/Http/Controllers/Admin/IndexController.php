@@ -48,7 +48,7 @@ class IndexController extends Controller
 //            dump($res1,$res2);die();
             # 登录
             if ($res1 || $res2) {// 登录成功
-                return redirect('admin/admin');
+                return redirect('admin/index');
             } else {// 登录失败
                 return redirect()->back()->withErrors(['账号或密码错误']);
             }
