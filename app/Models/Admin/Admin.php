@@ -18,7 +18,7 @@ class Admin extends Authenticatable
     //是否开启时间戳,自动维护时间戳
 //    protected $timestamps = false;
     //过滤，只有以下字段才能被修改
-    protected $fillable = ['id','username','phone','email','password','role_id','sex', 'admin_status', 'avatar','friends_list','last_ip','last_login','login_total','remember_token','agency_id','note','create_at','updated_at', 'deleted_at'];
+    protected $fillable = ['id','username','phone','email','password','role_id','sex', 'admin_status', 'avatar','friends_list','last_ip','last_login','login_total','remember_token','agency_id','note','created_at','updated_at', 'deleted_at'];
     //隐藏字段
     protected $hidden = ['password'];
     // 列表页显示的字段

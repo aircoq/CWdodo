@@ -36,7 +36,7 @@ class CreateInnModel extends Migration
             $table->string('inn_img',255)->nullable()->comment('门店图片');
             $table->string('start_time',10)->comment('营业开始时间');
             $table->string('end_time',10)->comment('营业结束时间');
-            $table->string('inn_star',1)->nulladble()->comment('门店星级');//暂用（店铺评论表‘inn_evaluation_star’暂未开发）
+            $table->string('inn_star',1)->default(5)->comment('门店星级');//暂用（店铺评论表‘inn_evaluation_star’暂未开发）
             $table->text('note',255)->nullable()->comment('门店备注');
             $table->unsignedInteger('admin_id')->nullable()->comment('门店所有人admin id,空为直营店');
             $table->unsignedTinyInteger('bank_id')->nullable()->comment('银行id');

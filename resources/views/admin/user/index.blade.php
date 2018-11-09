@@ -19,12 +19,12 @@
             <!-- 内容页眉标题 -->
             <section class="content-header">
                 <h1>
-                    系统管理员
+                    用户管理
                     <small>首页</small>
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="{{ url('admin/index') }}"><i class="fa fa-dashboard"></i>系统首页</a></li>
-                    <li class="active">系统管理员</li>
+                    <li class="active">用户管理</li>
                 </ol>
             </section>
             <!-- 主要内容 -->
@@ -35,8 +35,8 @@
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">系统管理员表</h3>
-                        <a class="btn btn-box-tool btn-xs"  href="javascript:;" onclick="admin_add('添加管理员','{{ url('admin/admin/create')  }}','800','500')" id="a-admin-add">
-                            <font style="vertical-align:inherit; color:#3c8dbc;"><font style="font-size:14px;"><i class="fa fa-fw fa-user-plus"></i>新增系统管理员</font></font>
+                        <a class="btn btn-box-tool btn-xs"  href="javascript:;" onclick="admin_add('添加','{{ url('admin/user/create')  }}','800','500')" id="a-admin-add">
+                            <font style="vertical-align:inherit; color:#3c8dbc;"><font style="font-size:14px;"><i class="fa fa-fw fa-user-plus"></i>添加用户</font></font>
                         </a>
                     </div>
                     <!-- /.box-header -->
@@ -51,27 +51,33 @@
                                                 ID
                                             </th>
                                             <th class="sorting" tabindex="1">
-                                                用户名
-                                            </th>
-                                            <th class="sorting" tabindex="2">
                                                 头像
                                             </th>
-                                            <th class="sorting" tabindex="3">
-                                                状态
+                                            <th class="sorting" tabindex="2">
+                                                昵称
+                                            </th>
+                                            <th class="sorting td-manage" tabindex="3">
+                                                手机
                                             </th>
                                             <th class="sorting" tabindex="4">
-                                                角色
+                                                状态
                                             </th>
                                             <th class="sorting" tabindex="5">
-                                                办事处
+                                                积分
                                             </th>
                                             <th class="sorting" tabindex="6">
-                                                最后登陆时间
+                                                等级
                                             </th>
                                             <th class="sorting" tabindex="7">
+                                                最后登陆时间
+                                            </th>
+                                            <th class="sorting" tabindex="8">
+                                                备注
+                                            </th>
+                                            <th class="sorting" tabindex="9">
                                                 删除时间
                                             </th>
-                                            <th class="sorting td-manage" tabindex="8">
+                                            <th class="sorting td-manage" tabindex="10">
                                                 操作
                                             </th>
                                         </tr>
@@ -85,6 +91,8 @@
                                             <td>role_id</td>
                                             <td>agency_id</td>
                                             <td>last_login</td>
+                                            <td>last_login</td>
+                                            <td>note</td>
                                             <td>deleted_at</td>
                                             <td class="td-manage">do</td>
                                         </tr>
@@ -95,22 +103,28 @@
                                                 ID
                                             </th>
                                             <th class="sorting">
-                                                用户名
+                                                头像
                                             </th>
                                             <th class="sorting">
-                                                头像
+                                                昵称
+                                            </th>
+                                            <th class="sorting td-manage">
+                                                手机
                                             </th>
                                             <th class="sorting">
                                                 状态
                                             </th>
                                             <th class="sorting">
-                                                角色
+                                                积分
                                             </th>
                                             <th class="sorting">
-                                                办事处
+                                                等级
                                             </th>
                                             <th class="sorting">
                                                 最后登陆时间
+                                            </th>
+                                            <th class="sorting">
+                                                备注
                                             </th>
                                             <th class="sorting">
                                                 删除时间
@@ -168,18 +182,20 @@
                         "orderable": false
                     }],
                     "ajax": {
-                        "url": "{{ url('admin/admin/ajax_list') }}",// 服务端uri地址，显示数据的uri
+                        "url": "{{ url('admin/user/ajax_list') }}",// 服务端uri地址，显示数据的uri
                         "type": "post",   // ajax 的http请求类型
                         'headers': { 'X-CSRF-TOKEN' : '{{ csrf_token() }}' },
                     },
                     'columns':[//按列显示从服务器端过来的数据
                         {'data':'id',"defaultContent": ""},
-                        {'data':'username',"defaultContent": ""},
                         {'data':'',"defaultContent": ""},
-                        {'data':'',"defaultContent": "暂无"},
-                        {'data':'role_id',"defaultContent": ""},
-                        {'data':'agency_id',"defaultContent": ""},
+                        {'data':'nickname',"defaultContent": ""},
+                        {'data':'phone',"defaultContent": ""},
+                        {'data':'',"defaultContent": ""},
+                        {'data':'integral',"defaultContent": "0"},
+                        {'data':'user_level',"defaultContent": ""},
                         {'data':'last_login',"defaultContent": ""},
+                        {'data':'note',"defaultContent": ""},
                         {'data':'deleted_at',"defaultContent": ""},
                         {'data':'b',"defaultContent": ""},
                     ],
@@ -211,21 +227,26 @@
                         var cnt = data.recordsFiltered;//分页数据
                         $('#coutent').html( cnt );
                         $(row).addClass('text-c');//居中
-                        $(row).find('td:eq(2)').html(
+                        $(row).find('td:eq(1)').html(
                             data.avatar ==
                             null ? '<img src="{{ url('sys_img/user_avatar.png') }}" style="width: 50px;height: 40px;">' : '<img src="/'+ data.avatar +'" style="width: 50px;height: 40px;">'
                         );
-                        $(row).find('td:eq(3)').html(data.deleted_at==null  ? '启用' : '禁用');//z状态
+                        $(row).find('td:eq(3)').html(
+                            data.user_status==0 ? '<font style="vertical-align:inherit; color:green;">未审核</font>' :
+                                data.user_status==1 ? '<font style="vertical-align:inherit; color:blue;">已通过</font>' :
+                                    data.user_status==-1 ? '<font style="vertical-align:inherit; color:grey;">已停止</font>' :
+                                        '<font style="vertical-align:inherit; color:red;">拒绝</font>'
+                        );//z状态
                         //操作
                         $(row).find('td:eq(-1)').html(
                             '<div class="btn-group">' +
-                            '<button type="button" class="btn btn-info" onclick="admin_edit(' + '\'编辑\',\'/admin/admin/'+data.id+'/edit\',\''+data.id+'\')" >' +
+                            '<button type="button" class="btn btn-info" onclick="admin_edit(' + '\'编辑\',\'/admin/user/'+data.id+'/edit\',\''+data.id+'\')" >' +
                             '<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">编辑</font></font>' +
                             '</button>' +
-                            '<button type="button" class="btn btn-danger" onclick="admin_del(this,\''+data.id+'\',\''+data.username+'\')" >' +
+                            '<button type="button" class="btn btn-danger" onclick="admin_del(this,\''+data.id+'\',\''+data.nickname+'\')" >' +
                             '<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">删除</font></font>' +
                             '</button>' +
-                            '<button type="button" class="btn btn-warning" onclick="admin_restore(this,\''+data.id+'\',\''+data.username+'\')">' +
+                            '<button type="button" class="btn btn-warning" onclick="admin_restore(this,\''+data.id+'\',\''+data.nickname+'\')">' +
                             '<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">恢复</font></font>' +
                             '</button>' +
                             '</div>'
@@ -251,18 +272,19 @@
                         "orderable": false
                     }],
                     "ajax": {
-                        "url": "{{ url('admin/admin/ajax_list') }}",// 服务端uri地址，显示数据的uri
+                        "url": "{{ url('admin/user/ajax_list') }}",// 服务端uri地址，显示数据的uri
                         "type": "post",   // ajax 的http请求类型
                         'headers': { 'X-CSRF-TOKEN' : '{{ csrf_token() }}' },
                     },
                     'columns':[//按列显示从服务器端过来的数据
                         {'data':'id',"defaultContent": ""},
-                        {'data':'username',"defaultContent": ""},
                         {'data':'',"defaultContent": ""},
-                        {'data':'',"defaultContent": "暂无"},
-                        {'data':'role_id',"defaultContent": ""},
-                        {'data':'agency_id',"defaultContent": ""},
+                        {'data':'nickname',"defaultContent": ""},
+                        {'data':'',"defaultContent": ""},
+                        {'data':'integral',"defaultContent": "0"},
+                        {'data':'user_level',"defaultContent": ""},
                         {'data':'last_login',"defaultContent": ""},
+                        {'data':'note',"defaultContent": ""},
                         {'data':'deleted_at',"defaultContent": ""},
                     ],
                     language: {//汉化显示
@@ -297,7 +319,12 @@
                             data.avatar ==
                             null ? '<img src="{{ url('sys_img/user_avatar.png') }}" style="width: 50px;height: 40px;">' : '<img src="/'+ data.avatar +'" style="width: 50px;height: 40px;">'
                         );
-                        $(row).find('td:eq(3)').html(data.deleted_at==null  ? '启用' : '禁用');//z状态
+                        $(row).find('td:eq(3)').html(
+                            data.user_status==0 ? '<font style="vertical-align:inherit; color:green;">未审核</font>' :
+                                data.user_status==1 ? '<font style="vertical-align:inherit; color:blue;">已通过</font>' :
+                                    data.user_status==-1 ? '<font style="vertical-align:inherit; color:grey;">已停止</font>' :
+                                        '<font style="vertical-align:inherit; color:red;">拒绝</font>'
+                        );//z状态
                     }
                 });
             }
@@ -314,7 +341,7 @@
         function admin_del(obj,id,usrname){
             layer.confirm('<font color="red" >危险！确定删除用户(<b>'+usrname+'<b/>)吗？</font>',function(index){
                 //此处请求后台程序，下方是成功后的前台处理……
-                url = '/admin/admin/'+ id;
+                url = '/admin/user/'+ id;
                 data = {
                     '_token':'{{ csrf_token() }}',
                     '_method':'delete',
@@ -337,7 +364,7 @@
         function admin_restore(obj,id,usrname){
             layer.confirm('确认要恢复当前用户(<font color="red" ><b>'+usrname+'<b/></font>)吗？',function(index){
                 //此处请求后台程序，下方是成功后的前台处理……
-                url = '/admin/admin/re_store';
+                url = '/admin/user/re_store';
                 data = {
                     '_token':'{{ csrf_token()  }}',
                     'id':id,

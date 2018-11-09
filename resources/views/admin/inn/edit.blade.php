@@ -18,6 +18,7 @@
         <form class="form-horizontal" id="form-inn-edit" action="{{ url('admin/inn_for_pet/'. $inn->id)  }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             {{ method_field('put') }}
+            <input type="hidden" name="adcode" id="adcode"/>
             <div class="box-body">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">门店名称</label>
@@ -49,7 +50,16 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">门店详细地址</label>
                     <div class="col-sm-10">
-                        <input type="tel" class="form-control" style="width:70%;display:inline;" placeholder="门店详细地址"  name="inn_address" id="inn_address" value="{{ $inn->inn_address }}"/>
+                        <select class="form-control" style="width:10%;display:inline" id="province" name="province">
+                            <option value=null><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">省级</font></font></option>
+                        </select>
+                        <select class="form-control" style="width:10%;display:inline"  id="city" name="city">
+                            <option value=null><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">地级市</font></font></option>
+                        </select>
+                        <select class="form-control" style="width:10%;display:inline"  id="district" name="district">
+                            <option value=null><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">区/县级</font></font></option>
+                        </select>
+                        <input type="tel" class="form-control" style="width:39%;display:inline;"  name="inn_address" id="inn_address" value="{{ $inn->inn_address }}"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -137,6 +147,63 @@
             $('#is_self{{$inn->is_self}}').attr('selected','selected');//自营选中
             $('#inn_status{{$inn->inn_status}}').attr('selected','selected');//自营选中
             $('#is_running{{$inn->is_running}}').attr('selected','selected');//自营选中
+            /***编写省市县三级联动*/
+            var i, j, k;
+            var province = document.getElementById('province');
+            var city = document.getElementById('city');
+            var districtDiv = document.getElementById('district');
+            var adCodeVal = $('#adcode');
+            var url = "{{ asset('local-data/gao-province-city-district.json')}}";//本地数据
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {//请求成功
+                        var jsonObj = JSON.parse(xhr.responseText);
+                        var provinceList = jsonObj.districts[0].districts;
+                        var flag = document.createDocumentFragment();
+                        for (i=0; i<provinceList.length; i++) {
+                            var option = document.createElement('option');
+                            option.innerHTML = provinceList[i].name;
+                            flag.appendChild(option);
+                        }
+                        province.appendChild(flag);
+                        province.addEventListener('change', function (e) {
+                            if (this.selectedIndex === 0) {
+                                city.innerHTML = '<option value=null>地级市</option>';
+                                districtDiv.innerHTML = '<option value=null>区/县级</option>';
+                            } else {
+                                var cityList = provinceList[e.target.selectedIndex-1].districts;
+                                city.innerHTML = '<option value=null>地级市</option>';
+                                for (j=0; j<cityList.length; j++) {
+                                    var option = document.createElement('option');
+                                    option.innerHTML = cityList[j].name;
+                                    flag.appendChild(option);
+
+                                }
+                                city.appendChild(flag);
+                            }
+
+                        })
+                        city.addEventListener('change', function (e) {
+                            if (this.selectedIndex === 0) {
+                                districtDiv.innerHTML = '<option value=null>区/县级</option>';
+                            } else {
+                                var district = provinceList[province.selectedIndex-1].districts[e.target.selectedIndex-1].districts;
+                                districtDiv.innerHTML = '<option value=null>区/县级</option>';
+                                for (k=0; k<district.length; k++) {
+                                    var option = document.createElement('option');
+                                    option.innerHTML = district[k].name;
+                                    flag.appendChild(option);
+                                    adCodeVal.val(district[k].adcode);//记录adcode
+                                }
+                                districtDiv.appendChild(flag);
+                            }
+                        })
+                    }
+                }
+            }
+            xhr.send();
             /***编写Javascript表单验证区域*/
             $('#form-inn-edit').validate({
                 rules:{//规则

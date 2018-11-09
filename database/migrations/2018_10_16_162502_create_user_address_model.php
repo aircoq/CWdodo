@@ -41,15 +41,15 @@ class CreateUserAddressModel extends Migration
             $table->unsignedSmallInteger('weight')->nullable()->comment('体重');
             $table->string('has_medal',255)->nullable()->comment('获得奖章');
             $table->text('flag')->nullable()->comment('用户标识');
-            $table->mediumInteger('address_id')->nullable()->comment('收货地址id');
+            $table->mediumInteger('address_id')->nullable()->comment('默认的收货地址id');
             $table->string('qr_code',255)->nullable()->comment('二维码');
             //社交信息
             $table->mediumInteger('parent_id')->nullable()->comment('介绍人id');
             $table->jsonb('zone_cate_id')->nullable()->comment('关注的兴趣群，json格式');
             $table->jsonb('friends_list')->nullable()->comment('好友id,json格式');
             $table->jsonb('fans_list')->nullable()->comment('粉丝id,json格式');
-            $table->jsonb('last_ip')->nullable()->comment('最后登陆IP');
-            $table->text('desc')->nullable()->comment('个性签名');
+            $table->string('desc',60)->nullable()->comment('个性签名');
+            $table->string('note',100)->nullable()->comment('管理员对用户的备注');
             //密保信息
             $table->jsonb('question_answer')->nullable()->comment( '密保问题');
             $table->string('last_ip',50)->default(0)->comment('最后登陆IP');
@@ -74,7 +74,6 @@ class CreateUserAddressModel extends Migration
             $table->unsignedSmallInteger('street')->comment('街道');
             $table->string('address',255)->comment('收货人详细地址');
             $table->string('zip_code',60)->comment('收货人邮编:系统根据API自动生成');
-            $table->enum('is_default',['0','1'])->default(0)->comment('是否为默认地址：0不是;1是');
             $table->timestamps();
         });
         # 用户积分和现金自操作记录表（对应的还有管理员操作记录表）

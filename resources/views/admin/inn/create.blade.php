@@ -17,6 +17,7 @@
         <!-- form start -->
         <form class="form-horizontal" id="form-inn-add" action="{{ url('admin/inn_for_pet')  }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
+            <input type="hidden" name="adcode" id="adcode"/>
             <div class="box-body">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">门店名称</label>
@@ -48,7 +49,17 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">门店详细地址</label>
                     <div class="col-sm-10">
-                        <input type="tel" class="form-control" style="width:70%;display:inline;" placeholder="门店详细地址"  name="inn_address" id="inn_address"/>
+                        <select class="form-control" style="width:10%;display:inline" id="province" name="province">
+                            <option value=null><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">省级</font></font></option>
+                        </select>
+
+                        <select class="form-control" style="width:10%;display:inline"  id="city" name="city">
+                            <option value=null><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">地级市</font></font></option>
+                        </select>
+                        <select class="form-control" style="width:10%;display:inline"  id="district" name="district">
+                            <option value=null><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">区/县级</font></font></option>
+                        </select>
+                        <input type="tel" class="form-control" style="width:39%;display:inline;" placeholder="门店详细地址"  name="inn_address" id="inn_address"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -125,6 +136,7 @@
     <script type="text/javascript" src="{{ asset('plugins/timepicker/bootstrap-timepicker.min.js')}}"></script>
     <script>
         $(function(){
+            /***时间插件*/
             $('.start_time').timepicker({
                 defaultTime:'9:00',
                 showMeridian:false,
@@ -133,6 +145,63 @@
                 defaultTime:'21:00',
                 showMeridian:false,
             });
+            /***编写省市县三级联动*/
+            var i, j, k;
+            var province = document.getElementById('province');
+            var city = document.getElementById('city');
+            var districtDiv = document.getElementById('district');
+            var adCodeVal = $('#adcode');
+            var url = "{{ asset('local-data/gao-province-city-district.json')}}";//本地数据
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {//请求成功
+                        var jsonObj = JSON.parse(xhr.responseText);
+                        var provinceList = jsonObj.districts[0].districts;
+                        var flag = document.createDocumentFragment();
+                        for (i=0; i<provinceList.length; i++) {
+                            var option = document.createElement('option');
+                            option.innerHTML = provinceList[i].name;
+                            flag.appendChild(option);
+                        }
+                        province.appendChild(flag);
+                        province.addEventListener('change', function (e) {
+                            if (this.selectedIndex === 0) {
+                                city.innerHTML = '<option value=null>地级市</option>';
+                                districtDiv.innerHTML = '<option value=null>区/县级</option>';
+                            } else {
+                                var cityList = provinceList[e.target.selectedIndex-1].districts;
+                                city.innerHTML = '<option value=null>地级市</option>';
+                                for (j=0; j<cityList.length; j++) {
+                                    var option = document.createElement('option');
+                                    option.innerHTML = cityList[j].name;
+                                    flag.appendChild(option);
+
+                                }
+                                city.appendChild(flag);
+                            }
+
+                        })
+                        city.addEventListener('change', function (e) {
+                            if (this.selectedIndex === 0) {
+                                districtDiv.innerHTML = '<option value=null>区/县级</option>';
+                            } else {
+                                var district = provinceList[province.selectedIndex-1].districts[e.target.selectedIndex-1].districts;
+                                districtDiv.innerHTML = '<option value=null>区/县级</option>';
+                                for (k=0; k<district.length; k++) {
+                                    var option = document.createElement('option');
+                                    option.innerHTML = district[k].name;
+                                    flag.appendChild(option);
+                                    adCodeVal.val(district[k].adcode);//记录adcode
+                                }
+                                districtDiv.appendChild(flag);
+                            }
+                        })
+                    }
+                }
+            }
+            xhr.send();
             /***编写Javascript表单验证区域*/
             $("#form-inn-add").validate({
                 rules:{//规则
@@ -164,13 +233,16 @@
                     },
                     inn_address:{
                         required:true,
-                        rangelength:[10,52],
+                        rangelength:[3,30],
                     },
                     start_time:{
                         required:true,
                     },
                     end_time:{
                         required:true,
+                    },
+                    district:{
+                        isDistrict:true
                     },
                 },
                 messages: {//自定义提示信息
@@ -202,6 +274,12 @@
                     });
                 }
             });
+            //自定义jquery.validate验证规则
+            $.validator.addMethod("isDistrict",function(value,element,params){//params错误提示
+                var check_rules = /^[\u4e00-\u9fa5]{2,15}/;
+                return this.optional(element)||(check_rules.test(value));
+            },"请填写地址");
+
         });
     </script>
 @endsection

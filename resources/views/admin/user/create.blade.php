@@ -14,23 +14,13 @@
             <div class="cl-sm-12">
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" id="form-admin-add" action="{{ url('admin/admin')  }}" method="post" enctype="multipart/form-data">
+                <form class="form-horizontal" id="form-admin-add" action="{{ url('admin/user')  }}" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="box-body">
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">姓名</label>
+                            <label class="col-sm-2 control-label">昵称</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="姓名" name="username" id="username"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">性别</label>
-                            <div class="col-sm-10">
-                                <select class="form-control" style="width:70%;" name="sex" >
-                                    <option value="0">女</option>
-                                    <option value="1">男</option>
-                                    <option value="2">保密</option>
-                                </select>
+                                <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="昵称" name="nickname" id="nickname"/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -58,18 +48,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">角色</font></font></label>
+                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">状态</font></font></label>
                             <div class="col-sm-10">
-                                <select class="form-control" name="role_id" style="width:70%;">
-                                    <option value="1"><font  style="vertical-align: inherit;"><font style="vertical-align: inherit;">选项1</font></font></option>
-                                    <option value="2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">选项2</font></font></option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">账号状态</font></font></label>
-                            <div class="col-sm-10">
-                                <select class="form-control" style="width:70%;" name="admin_status">
+                                <select class="form-control" style="width:70%;" name="user_status">
                                     <option value="-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">拒绝</font></font></option>
                                     <option value="-1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">已停止</font></font></option>
                                     <option value="0" selected><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">未审核</font></font></option>
@@ -80,7 +61,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">备注</label>
                             <div class="col-sm-10">
-                                <textarea class="textarea" style="width: 70%; height: 200px; font-size: 14px;" placeholder="备注" name="note"></textarea>
+                                <textarea class="textarea" style="width: 70%; height: 200px; font-size: 14px;" placeholder="管理员的备注" name="note"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -118,9 +99,9 @@
             /***编写Javascript表单验证区域*/
             $("#form-admin-add").validate({
                 rules:{//规则
-                    username:{
+                    nickname:{
                         required:true,
-                        rangelength:[5,12]
+                        rangelength:[3,12]
                     },
                     phone:{
                         required:true,

@@ -23,19 +23,19 @@ class InnForPetController extends Controller
      */
     public function ajax_list(Request $request, InnForPet $innForPet)
     {
-            if(Auth::guard('admin')->user()->role_id == '*') {//管理员查看包括软删除的用户
-                $data = $innForPet->select('id','inn_name','inn_sn','cate_id','is_self','inn_status','is_running','inn_tel','lat','lng','province','city','district','adcode','inn_address','inn_avatar','inn_img','start_time','end_time','note','admin_id','bank_id','bank_account_name','bank_account','created_at','updated_at', 'deleted_at')->withTrashed()->get();
-            }else{
-                $data = $innForPet->select('id','inn_name','inn_sn','cate_id','is_self','inn_status','is_running','inn_tel','lat','lng','province','city','district','adcode','inn_address','inn_avatar','inn_img','start_time','end_time','note','admin_id','bank_id','bank_account_name','bank_account','created_at','updated_at')->get();
-            }
-            $cnt = count($data);
-            $info = [
-                'draw' => $request->get('draw'),
-                'recordsTotal' => $cnt,
-                'recordsFiltered' => $cnt,
-                'data' => $data,
-            ];
-            return $info;
+        if(Auth::guard('admin')->user()->role_id == '*') {//管理员查看包括软删除的用户
+            $data = $innForPet->select('id','inn_name','inn_sn','cate_id','is_self','inn_status','is_running','inn_tel','lat','lng','province','city','district','adcode','inn_address','inn_avatar','inn_img','start_time','end_time','note','admin_id','bank_id','bank_account_name','bank_account','created_at','updated_at', 'deleted_at')->withTrashed()->get();
+        }else{
+            $data = $innForPet->select('id','inn_name','inn_sn','cate_id','is_self','inn_status','is_running','inn_tel','lat','lng','province','city','district','adcode','inn_address','inn_avatar','inn_img','start_time','end_time','note','admin_id','bank_id','bank_account_name','bank_account','created_at','updated_at')->get();
+        }
+        $cnt = count($data);
+        $info = [
+            'draw' => $request->get('draw'),
+            'recordsTotal' => $cnt,
+            'recordsFiltered' => $cnt,
+            'data' => $data,
+        ];
+        return $info;
     }
 
     /**
@@ -54,7 +54,7 @@ class InnForPetController extends Controller
      */
     public function store(Request $request,InnForPet $innForPet)
     {
-        $data = $request->only('inn_name','inn_sn','is_self','inn_status','is_running','inn_tel','inn_address','inn_img','start_time','end_time','note','admin_id');
+        $data = $request->only('inn_name','inn_sn','is_self','inn_status','is_running','inn_tel','inn_address','inn_img','start_time','end_time','note','admin_id','city','adcode');
         $role = [
             'inn_name' => 'required|string|between:1,12|unique:inn_for_pet',
             'inn_sn' => 'required|alpha_num|between:5,12|unique:inn_for_pet',
@@ -62,11 +62,13 @@ class InnForPetController extends Controller
             'inn_status' => 'required|in:-2,-1,0,1',
             'is_running' => 'required|in:0,1',
             'inn_tel' => 'required|digits:11|unique:inn_for_pet',
-            'inn_address' => 'required|string|between:10,52',
+            'inn_address' => 'required|string|between:3,30',
             'start_time' => 'required|string|between:4,5',
             'end_time' => 'required|string|between:4,5|after:start_time',
             'note' => 'nullable|string|between:0,100',
-            'admin_id' => 'exists:admin,id'
+            'admin_id' => 'exists:admin,id',
+            'city' => 'required|string|between:2,10',
+            'adcode' => 'required|digits:6'
         ];
         $message = [
             'inn_name.string' => '门店名称为1到12位的字符串组成',
@@ -88,14 +90,19 @@ class InnForPetController extends Controller
             'note.string' => '备注不正确',
             'note.between' => '备注最大100个字节',
             'admin_id.exists' => '所有人不存在',
+            'city.required' => '所属市不能为空',
+            'city.string' => '请填写正确的地址',
+            'city.between' => '请填写正确的地址',
+            'adcode.digits' => '请填写正确的地址',
         ];
         $validator = Validator::make( $data, $role, $message );
         if( $validator->fails() ){
 //            $request->flash();//保存当前数据到一次性session中
             return ['status' => "fail", 'msg' => $validator->messages()->first()];
         }
-        //获取当前地图的高德信息
-        $get_adr_info = get_gao_map_info($data['inn_address']);
+        //获取当前地址的高德信息
+        $get_adr_info = get_gao_map_info($data['inn_address'],$data['city']);
+
         if($get_adr_info){
             $lat_lng = explode(',',$get_adr_info['geocodes'][0]['location']);
             $data['lat'] = $lat_lng['0'];
@@ -104,6 +111,8 @@ class InnForPetController extends Controller
             $data['city'] = $get_adr_info['geocodes'][0]['city'];
             $data['district'] = $get_adr_info['geocodes'][0]['district'];
             $data['adcode'] = $get_adr_info['geocodes'][0]['adcode'];
+        }else{
+            return ['status' => "fail", 'msg' => '请求失败，请重新输入地址'];
         }
         $res = $innForPet->create($data);
         if ($res->id) {
@@ -146,7 +155,7 @@ class InnForPetController extends Controller
      */
     public function update(InnForPet $innForPet,Request $request)
     {
-        $data = $request->only('inn_name','inn_sn','is_self','inn_status','is_running','inn_tel','inn_address','inn_img','start_time','end_time','note','admin_id');
+        $data = $request->only('inn_name','inn_sn','is_self','inn_status','is_running','inn_tel','inn_address','inn_img','start_time','end_time','note','admin_id','city','adcode');
         $role = [
             'inn_name' => 'nullable|string|between:1,12|unique:inn_for_pet,inn_name,'.$innForPet->id,
             'inn_sn' => 'nullable|alpha_num|between:5,12|unique:inn_for_pet,inn_sn,'.$innForPet->id,
@@ -154,11 +163,13 @@ class InnForPetController extends Controller
             'inn_status' => 'nullable|in:-2,-1,0,1',
             'is_running' => 'nullable|in:0,1',
             'inn_tel' => 'nullable|digits:11|unique:inn_for_pet,inn_tel,'.$innForPet->id,
-            'inn_address' => 'nullable|string|between:10,52',
+            'inn_address' => 'nullable|string|between:3,22',
             'start_time' => 'nullable|string|between:4,5',
             'end_time' => 'nullable|string|between:4,5|after:start_time',
             'note' => 'nullable|string|between:0,100',
-            'admin_id' => 'nullable|exists:admin,id'
+            'admin_id' => 'nullable|exists:admin,id',
+            'city' => 'nullable|string|between:2,10',
+            'adcode' => 'nullable|digits:6'
         ];
         $message = [
             'inn_name.string' => '门店名称为1到12位的字符串组成',
@@ -180,15 +191,18 @@ class InnForPetController extends Controller
             'note.string' => '备注不正确',
             'note.between' => '备注最大100个字节',
             'admin_id.exists' => '所有人不存在',
+            'city.string' => '请填写正确的地址',
+            'city.between' => '请填写正确的地址',
+            'adcode.digits' => '请填写正确的地址',
         ];
         $validator = Validator::make( $data, $role, $message );
         if( $validator->fails() ){
 //            $request->flash();//保存当前数据到一次性session中
             return ['status' => "fail", 'msg' => $validator->messages()->first()];
         }
-        if(!empty($data['inn_address'])){
-            //获取当前地图的高德信息
-            $get_adr_info = get_gao_map_info($data['inn_address']);
+        if(!empty($data['adcode'])){
+            //获取当前地址的高德信息
+            $get_adr_info = get_gao_map_info($data['inn_address'],$data['city']);
             if($get_adr_info){
                 $lat_lng = explode(',',$get_adr_info['geocodes'][0]['location']);
                 $data['lat'] = $lat_lng['0'];
@@ -197,7 +211,12 @@ class InnForPetController extends Controller
                 $data['city'] = $get_adr_info['geocodes'][0]['city'];
                 $data['district'] = $get_adr_info['geocodes'][0]['district'];
                 $data['adcode'] = $get_adr_info['geocodes'][0]['adcode'];
+            }else{
+                return ['status' => "fail", 'msg' => '请求失败，请重新输入地址'];
             }
+        }else{
+            unset($data['city']);
+            unset($data['adcode']);
         }
         $res = $innForPet->update($data);
         if ($res) { // 如果添加数据成功，则返回列表页
