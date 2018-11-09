@@ -29,9 +29,9 @@
                 </div>
                 <br/>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">姓名</label>
+                    <label class="col-sm-2 control-label">昵称</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="姓名" name="username" id="username" value="{{$user->username}}"/>
+                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="姓名" name="nickname" id="nickname" value="{{$user->nickname}}"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -68,19 +68,10 @@
                         <input type="password" class="form-control" style="width:70%;display:inline;" placeholder="确认密码" id="confirm_password" name="confirm_password">
                     </div>
                 </div>
-                <div class="form-group" id="div-role-id">
-                    <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">角色</font></font></label>
-                    <div class="col-sm-10">
-                        <select class="form-control" name="role_id" style="width:70%;">
-                            <option value="1" id=""><font  style="vertical-align: inherit;"><font style="vertical-align: inherit;">选项1</font></font></option>
-                            <option value="2" id=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">选项2</font></font></option>
-                        </select>
-                    </div>
-                </div>
                 <div class="form-group" id="div-admin-status">
                     <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">账号状态</font></font></label>
                     <div class="col-sm-10">
-                        <select class="form-control" style="width:70%;" name="admin_status">
+                        <select class="form-control" style="width:70%;" name="user_status">
                             <option value="-2" id="admin_status-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">拒绝</font></font></option>
                             <option value="-1" id="admin_status-1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">已停止</font></font></option>
                             <option value="0" id="admin_status0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">未审核</font></font></option>
@@ -91,7 +82,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">备注</label>
                     <div class="col-sm-10">
-                        <textarea class="textarea" style="width: 70%; height: 100px; font-size: 14px;" placeholder="备注" name="note"></textarea>
+                        <textarea class="textarea" style="width: 70%; height: 100px; font-size: 14px;" placeholder="管理员备注" name="note"></textarea>
                     </div>
                 </div>
             </div>
@@ -119,19 +110,13 @@
         $(function(){
             /** 数据渲染 ***/
             //隐藏无权限部分
-            var role_id_now = "<?php echo (Auth::guard('admin')->user()->role_id); ?>";//当前用户role_id
-            var role_id_edit = "<?php echo $user->role_id; ?>";//被编辑的用户id
-            if(role_id_now != '*' || role_id_edit=='*' ){//当前不是超级管理员或在编辑管理员
-                $('#div-role-id').remove();
-                $('#div-admin-status').remove();
-            }
             $('#sex{{$user->sex}}').attr('selected','selected');//性别选中
-            $('#admin_status{{$user->admin_status}}').attr('selected','selected');//状态选中
+            $('#admin_status{{$user->user_status}}').attr('selected','selected');//状态选中
 
             /***编写Javascript表单验证区域*/
             $("#form-admin-edit").validate({
                 rules:{//规则
-                    username:{
+                    nickname:{
                         rangelength:[5,12]
                     },
                     phone:{

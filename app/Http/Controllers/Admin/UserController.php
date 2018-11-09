@@ -138,12 +138,12 @@ class UserController extends Controller
     {
         $data = $request->only('nickname','sex','phone','email','password','confirm_password','user_status','birthday','city','avatar','height','weight','note','accepted');
         $role = [
-            'nickname' => 'required|alpha_num|between:5,12|unique:user',
+            'nickname' => 'required|alpha_num|between:5,12|unique:user,nickname,'.$user->id,
             'sex' => 'nullable|in:0,1,2',
-            'phone'=> 'required|unique:admin|regex:/^1[3-9]\d{9}/',
-            'email' => 'required|email|unique:user',
-            'password' => 'required|between:6,20|same:confirm_password',
-            'user_status' => 'integer',
+            'phone'=> 'required|digits:11|unique:user,phone,'.$user->id,
+            'email' => 'nullable|email|unique:user,email,'.$user->id,
+            'password' => 'nullable|between:6,20|same:confirm_password',
+            'user_status' => 'nullable|integer',
             'birthday' => 'nullable|date',
             'city' => 'nullable|string',
             'height' => 'nullable|integer',
@@ -190,8 +190,8 @@ class UserController extends Controller
             // store默认会帮我们把上传文件保存到 storage/app/public目录下
             $data['avatar'] = $data['avatar']->store( $path,'public');
         }
-        $res = $user->create($data);
-        if ($res->id) {
+        $res = $user->update($data);
+        if ($res) {
             // 如果添加数据成功，则返回列表页
             return ['status' => "success", 'msg' => '添加成功'];
         }else{
