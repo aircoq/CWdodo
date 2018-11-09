@@ -31,7 +31,7 @@
         {{--<li class="header"></li>--}}
         <!-- Optionally, you can add icons to the links -->
             <li class="treeview">
-                <a href="#"><i class="fa fa-link" target="menuFrame"></i> <span>营业看板</span>
+                <a href="#"><i class="fa fa-link"></i> <span>营业看板</span>
                     <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>

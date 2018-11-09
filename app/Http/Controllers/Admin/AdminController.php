@@ -141,7 +141,7 @@ class AdminController extends Controller
     public function edit(Admin $admin)
     {
         if($admin){
-            $data['admin_info'] = $admin;
+            $data['user'] = $admin;
             return view('admin.admin.edit',$data);
         }
     }

@@ -14,7 +14,7 @@
     <div class="cl-sm-12">
         <!-- /.box-header -->
         <!-- form start -->
-        <form class="form-horizontal" id="form-admin-edit" action="{{ url('admin/admin/' . $admin_info->id ) }}" method="post">
+        <form class="form-horizontal" id="form-admin-edit" action="{{ url('admin/admin/' . $user->id ) }}" method="post">
             {{ csrf_field() }}
             {{ method_field('put') }}
             <div class="box-body">
@@ -22,8 +22,8 @@
                     <br/>
                     <label class="col-sm-3 control-label"></label>
                     <div class="col-sm-7">
-                        <a href="javascript:;" onclick="layer_show('上传头像','{{ url('admin/avatar_upload?id='.$admin_info->id) }}','350','350')" id="a-admin-avatar">
-                            <img src="{{ url("$admin_info->avatar" ? "$admin_info->avatar" : 'sys_img/user_avatar.png') }}" style="width:15%;height:15%;display:flex;border-radius: 50%;align-items: center;justify-content:center;overflow: hidden;"/>
+                        <a href="javascript:;" onclick="layer_show('上传头像','{{ url('admin/avatar_upload?id='.$user->id) }}','350','350')" id="a-admin-avatar">
+                            <img src="{{ url("$user->avatar" ? "$user->avatar" : 'sys_img/user_avatar.png') }}" style="width:15%;height:15%;display:flex;border-radius: 50%;align-items: center;justify-content:center;overflow: hidden;"/>
                         </a>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">姓名</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="姓名" name="username" id="username" value="{{$admin_info->username}}"/>
+                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="姓名" name="username" id="username" value="{{$user->username}}"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -47,13 +47,13 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">手机</label>
                     <div class="col-sm-10">
-                        <input type="tel" class="form-control" style="width:70%;display:inline;" placeholder="手机"  name="phone" id="phone" value="{{$admin_info->phone}}"/>
+                        <input type="tel" class="form-control" style="width:70%;display:inline;" placeholder="手机"  name="phone" id="phone" value="{{$user->phone}}"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">邮箱</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" style="width:70%;display:inline;" placeholder="邮箱" name="email" id="email" value="{{$admin_info->email}}">
+                        <input type="email" class="form-control" style="width:70%;display:inline;" placeholder="邮箱" name="email" id="email" value="{{$user->email}}">
                     </div>
                 </div>
                 <div class="form-group">
@@ -120,13 +120,13 @@
             /** 数据渲染 ***/
             //隐藏无权限部分
             var role_id_now = "<?php echo (Auth::guard('admin')->user()->role_id); ?>";//当前用户role_id
-            var role_id_edit = "<?php echo $admin_info->role_id; ?>";//被编辑的用户id
+            var role_id_edit = "<?php echo $user->role_id; ?>";//被编辑的用户id
             if(role_id_now != '*' || role_id_edit=='*' ){//当前不是超级管理员或在编辑管理员
                 $('#div-role-id').remove();
                 $('#div-admin-status').remove();
             }
-            $('#sex{{$admin_info->sex}}').attr('selected','selected');//性别选中
-            $('#admin_status{{$admin_info->admin_status}}').attr('selected','selected');//状态选中
+            $('#sex{{$user->sex}}').attr('selected','selected');//性别选中
+            $('#admin_status{{$user->admin_status}}').attr('selected','selected');//状态选中
 
             /***编写Javascript表单验证区域*/
             $("#form-admin-edit").validate({

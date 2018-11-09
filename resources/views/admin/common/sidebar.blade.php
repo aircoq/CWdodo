@@ -31,7 +31,7 @@
         {{--<li class="header"></li>--}}
         <!-- Optionally, you can add icons to the links -->
             <li class="treeview">
-                <a href="#"><i class="fa fa-link" target="menuFrame"></i> <span>首页</span>
+                <a href="#" target="menuFrame"><i class="fa fa-link"></i> <span>首页</span>
                     <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
@@ -42,7 +42,7 @@
                 </ul>
             </li>
             <li class="treeview">
-                <a href="#"><i class="fa fa-link" target="menuFrame"></i> <span>单店管理</span>
+                <a href="#" target="menuFrame"><i class="fa fa-link"></i> <span>单店管理</span>
                     <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
@@ -53,7 +53,7 @@
                 </ul>
             </li>
             <li class="treeview">
-                <a href="#"><i class="fa fa-link" target="menuFrame"></i> <span>用户管理</span>
+                <a href="#" target="menuFrame"><i class="fa fa-link" ></i> <span>用户管理</span>
                     <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>

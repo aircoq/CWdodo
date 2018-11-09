@@ -96,7 +96,7 @@
                                             <td>is_self</td>
                                             <td>address</td>
                                             <td>tel</td>
-                                            <td>admin_info</td>
+                                            <td>user</td>
                                             <td>deleted_at</td>
                                             <td class="td-manage">do</td>
                                         </tr>
