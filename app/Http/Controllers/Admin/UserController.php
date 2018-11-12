@@ -61,7 +61,7 @@ class UserController extends Controller
         $data = $request->only('nickname','phone','email','password','confirm_password','user_status','note','accepted');
         $role = [
             'nickname' => 'required|alpha_num|between:5,12|unique:user',
-            'phone'=> 'required|unique:admin|regex:/^1[3-9]\d{9}/',
+            'phone'=> 'required|unique:user|regex:/^1[3-9]\d{9}/',
             'email' => 'required|email|unique:user',
             'password' => 'required|between:6,20|same:confirm_password',
             'user_status' => 'integer',

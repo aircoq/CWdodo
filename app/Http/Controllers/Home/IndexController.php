@@ -23,7 +23,6 @@ class IndexController extends Controller
     {
         if($request->isMethod('post')){
             $data = $request->only('username','password','verify','online');
-            dump($data);die();
             $role = [
                 //'verify' => 'required|captcha',
                 'username' =>'required',
@@ -42,22 +41,19 @@ class IndexController extends Controller
             $validator = Validator::make($data, $role, $message );
             if($validator->fails()) {
 //                dump( $validator->messages()->first() ); exit();// 获取一条错误信息
-                // return ['status' => 'fail', 'msg' => $validator->messages()->first()];
-                return redirect()->back()->withErrors($validator->messages()->first());//如果出错返回上一页
+                return ['status' => 'fail', 'msg' => $validator->messages()->first()];
             }
-            // 记住登录
+            # 记住登录
             $remember = $request->input('online');
-            // 验证登录
-            // 手机号码登录
-            $res1 = Auth::guard('users')->attempt( [ 'password'=>$data['password'], 'phone'=>$data['username'] ], $remember );
-            // 邮箱登录
-            $res2 = Auth::guard('users')->attempt( [ 'password'=>$data['password'], 'email'=>$data['username'] ],$remember );
+            # 用户验证登录
+            $res1 = Auth::guard('web')->attempt( [ 'password'=>$data['password'], 'phone'=>$data['username'] ], $remember );// 手机验证
+            $res2 = Auth::guard('web')->attempt( [ 'password'=>$data['password'], 'email'=>$data['username'] ],$remember );// 邮箱验证
             if( $res1 || $res2 ){
                 // 登录成功!
                 return ['status' => "success", 'msg' => '登陆成功！'];
             }else{
                 // 登录失败！
-                return ['status' => "fail", 'msg' => '登陆失败！账号或密码错误！'];
+                return ['status' => "fail", 'msg' => '登陆失败！账号及密码无效或错误！'];
             }
         }
         return view('home.index.login');

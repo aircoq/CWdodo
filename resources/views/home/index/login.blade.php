@@ -35,7 +35,7 @@
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg"></p>
-    <form action="{{ url('login') }}" method="post" id="form-user-log">
+    <form action="{{ url('home/login') }}" method="post" id="form-user-log">
       {{ csrf_field() }}
       <div class="form-group has-feedback">
         <input type="text" class="form-control" placeholder="邮箱" name="username">
@@ -60,16 +60,22 @@
         <!-- /.col -->
       </div>
     </form>
-
     <div class="social-auth-links text-center">
       <p></p>
       <a href="#" class="btn btn-block btn-social btn-info btn-flat"><i class="fa fa-phone"></i>手机登录</a>
       <a href="#" class="btn btn-block btn-social btn-success btn-flat"><i class="fa fa-weixin"></i>微信登陆</a>
     </div>
     <!-- /.social-auth-links -->
-
-    <a href="#">忘记密码</a><br>
-
+    <div>
+      <div style="display:inline;float:left;">
+        <a href="#" >忘记密码</a>
+      </div>
+      <div style="display:inline;float: right;color:red;">
+        <a href="#" style="color:red;">立即注册</a>
+        <i class="fa fa-fw fa-arrow-circle-o-right"></i>
+      </div>
+    </div>
+    <br>
   </div>
   <!-- /.login-box-body -->
 </div>
@@ -87,42 +93,52 @@
 <script type="text/javascript" src="{{ asset('plugins/layer/layer.js')}}"></script>
 <script type="text/javascript" src="{{ asset('plugins/jQueryUI/jquery.form.js')}}"></script>
 <script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' /* optional */
+
+    $(function () {
+        var from_adr = document.referrer;
+        console.log($.trim(from_adr));
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' /* optional */
+        });
+        $("#form-user-log").validate({
+            rules:{//规则
+                username:{
+                    rangelength:[5,12]
+                },
+                password:{
+                    rangelength:[5,20]
+                },
+            },
+            messages: {//自定义提示信息
+            },
+            onkeyup:false,
+            focusCleanup:false,
+            errorElement: "span",
+            errorPlacement: function(error, element) {//错误信息位置设置方法
+                error.appendTo( element.parent());//这里的element是录入数据的对象
+            },
+            submitHandler:function(form){
+                $(form).ajaxSubmit(function(msg){
+                    if( msg.status != 'success' ){
+                        layer.msg(msg.msg, {
+                            skin: 'layer-ext-moon'
+                        });
+                    }else{//登陆成功,如果来源于本网站就返回请求登陆页，否则跳转首页
+                        if($.trim(from_adr) === ''){//来源为空
+                            window.location.href="{{ url('home/') }}";//重定向到首页
+                        }else {
+                            if (from_adr.indexOf('pet.com') == -1) { //来自其它站点
+                                window.location.href = "{{ url('home/') }}";//重定向到首页
+                            }
+                            window.history.go(-1);//返回本网站
+                        }
+                    }
+                });
+            }
+        });
     });
-      $("#form-user-log").validate({
-          rules:{//规则
-              username:{
-                  rangelength:[5,12]
-              },
-              password:{
-                  rangelength:[5,20]
-              },
-          },
-          messages: {//自定义提示信息
-          },
-          onkeyup:false,
-          focusCleanup:false,
-          errorElement: "span",
-          errorPlacement: function(error, element) {//错误信息位置设置方法
-              error.appendTo( element.parent());//这里的element是录入数据的对象
-          },
-          submitHandler:function(form){
-              $(form).ajaxSubmit(function(msg){
-                  if( msg.status != 'success' ){
-                      layer.msg(msg.msg, {
-                          skin: 'layer-ext-moon'
-                      });
-                  }else{//登陆成功
-                      window.location.href="{{ url('/') }}";
-                  }
-              });
-          }
-      });
-  });
 </script>
 </body>
 </html>

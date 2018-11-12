@@ -36,14 +36,13 @@ return [
     */
 
     'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
-
-        'api' => [
+        'api' => [//移动端用户认证
             'driver' => 'token',
-            'provider' => 'users',
+            'provider' => 'user',
+        ],
+        'web' => [//网页端用户认证
+            'driver' => 'session',
+            'provider' => 'user',
         ],
         'admin' => [//新增一个验证规则
             'driver' => 'session',
@@ -69,19 +68,18 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'api' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' =>  App\Models\Admin\user::class,
+        ],
+        'user' => [
+            'driver' => 'eloquent',
+            'model' =>  App\Models\Admin\user::class,
         ],
         'admin' => [
             'driver' => 'eloquent',//这里用database或者eloquent,建议使用eloquent
             'model' => App\Models\Admin\Admin::class,//用database的话，用表名，用eloquent的话，用模型
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
 
     /*
