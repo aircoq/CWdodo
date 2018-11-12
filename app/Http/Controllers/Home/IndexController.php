@@ -29,7 +29,6 @@ class IndexController extends Controller
                 'password' => 'required',
                 'online' => 'boolean',
             ];
-
             $message = [
                 //'verify.required'  => '验证码不能为空！',
                 //'verify.captcha'  => '验证码错误！',
@@ -63,7 +62,7 @@ class IndexController extends Controller
      */
     function logout()
     {
-        Auth::guard('users')->logout();
-        return redirect()->to('home/index/login')->withErrors('退出登录成功！');
+        Auth::guard('web')->logout();
+        return redirect()->to('home/login')->withErrors('退出登录成功！');
     }
 }
