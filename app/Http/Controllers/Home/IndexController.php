@@ -23,6 +23,7 @@ class IndexController extends Controller
     {
         if($request->isMethod('post')){
             $data = $request->only('username','password','verify','online');
+            dump($data);die();
             $role = [
                 //'verify' => 'required|captcha',
                 'username' =>'required',
@@ -53,10 +54,10 @@ class IndexController extends Controller
             $res2 = Auth::guard('users')->attempt( [ 'password'=>$data['password'], 'email'=>$data['username'] ],$remember );
             if( $res1 || $res2 ){
                 // 登录成功!
-                return redirect()->to('home/index');
+                return ['status' => "success", 'msg' => '登陆成功！'];
             }else{
                 // 登录失败！
-                return redirect()->back()->withErrors(['登录失败!']);
+                return ['status' => "fail", 'msg' => '登陆失败！账号或密码错误！'];
             }
         }
         return view('home.index.login');

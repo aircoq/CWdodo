@@ -83,12 +83,43 @@
 <script type="text/javascript" src="{{ asset('plugins/validation/jquery.validate.js')}}"></script>
 <script type="text/javascript" src="{{ asset('plugins/validation/validate-methods.js')}}"></script>
 <script type="text/javascript" src="{{ asset('plugins/validation/messages_zh.js')}}"></script>
+<script type="text/javascript" src="{{ asset('plugins/layer/layer.js')}}"></script>
+<script type="text/javascript" src="{{ asset('plugins/jQueryUI/jquery.form.js')}}"></script>
 <script>
     $(function () {
         $('input').iCheck({
             checkboxClass: 'icheckbox_square-blue',
             radioClass: 'iradio_square-blue',
             increaseArea: '20%' /* optional */
+        });
+        $("#form-admin-log").validate({
+            rules:{//规则
+                username:{
+                    rangelength:[5,12]
+                },
+                password:{
+                    rangelength:[5,20]
+                },
+            },
+            messages: {//自定义提示信息
+            },
+            onkeyup:false,
+            focusCleanup:false,
+            errorElement: "span",
+            errorPlacement: function(error, element) {//错误信息位置设置方法
+                error.appendTo( element.parent());//这里的element是录入数据的对象
+            },
+            submitHandler:function(form){
+                $(form).ajaxSubmit(function(msg){
+                    if( msg.status != 'success' ){
+                        layer.msg(msg.msg, {
+                            skin: 'layer-ext-moon'
+                        });
+                    }else{//登陆成功
+                        window.location.href="{{ url('admin/index') }}";
+                    }
+                });
+            }
         });
     });
 </script>

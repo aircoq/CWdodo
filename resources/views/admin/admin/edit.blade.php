@@ -113,7 +113,6 @@
     <script type="text/javascript" src="{{ asset('plugins/validation/messages_zh.js')}}"></script>
     <script type="text/javascript" src="{{ asset('plugins/layer/layer.js')}}"></script>
     <script type="text/javascript" src="{{ asset('plugins/layer/admin_layer.js')}}"></script>
-    <script type="text/javascript" src="{{ asset('plugins/layer/admin_layer.js')}}"></script>
     <script type="text/javascript" src="{{ asset('plugins/jQueryUI/jquery.form.js')}}"></script>
     <script>
         $(function(){

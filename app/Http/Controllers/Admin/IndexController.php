@@ -48,9 +48,10 @@ class IndexController extends Controller
 //            dump($res1,$res2);die();
             # 登录
             if ($res1 || $res2) {// 登录成功
-                return redirect('admin/index');
+//                return redirect('admin/index');//定义跳转
+                return ['status' => "success", 'msg' => '登陆成功！'];//跳转有js实现
             } else {// 登录失败
-                return redirect()->back()->withErrors(['账号或密码错误']);
+                return ['status' => "fail", 'msg' => '登陆失败！账号或密码错误！'];
             }
         }
         return view('admin.index.login');

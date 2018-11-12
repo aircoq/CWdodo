@@ -35,21 +35,21 @@
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg"></p>
-
-    <form action="{{ url('index/login') }}" method="post">
+    <form action="{{ url('login') }}" method="post">
+      {{ csrf_field() }}
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="账号">
+        <input type="text" class="form-control" placeholder="邮箱" name="username">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="密码">
+        <input type="password" class="form-control" placeholder="密码" name="password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
         <div class="col-xs-8">
           <div class="checkbox icheck">
             <label>
-              <input type="checkbox"> 记住登陆
+              <input type="checkbox" name=""> 记住登陆
             </label>
           </div>
         </div>
@@ -64,7 +64,7 @@
     <div class="social-auth-links text-center">
       <p></p>
       <a href="#" class="btn btn-block btn-social btn-info btn-flat"><i class="fa fa-phone"></i>手机登录</a>
-      <a href="#" class="btn btn-block btn-social btn-bitbucket btn-flat"><i class="fa fa-envelope-o"></i>邮箱登陆</a>
+      <a href="#" class="btn btn-block btn-social btn-success btn-flat"><i class="fa fa-weixin"></i>微信登陆</a>
     </div>
     <!-- /.social-auth-links -->
 
@@ -81,6 +81,11 @@
 <script src="{{asset('bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
 <!-- iCheck -->
 <script src="{{asset('plugins/iCheck/icheck.min.js')}}"></script>
+<script type="text/javascript" src="{{ asset('plugins/validation/jquery.validate.js')}}"></script>
+<script type="text/javascript" src="{{ asset('plugins/validation/validate-methods.js')}}"></script>
+<script type="text/javascript" src="{{ asset('plugins/validation/messages_zh.js')}}"></script>
+<script type="text/javascript" src="{{ asset('plugins/layer/layer.js')}}"></script>
+<script type="text/javascript" src="{{ asset('plugins/jQueryUI/jquery.form.js')}}"></script>
 <script>
   $(function () {
     $('input').iCheck({
@@ -88,6 +93,35 @@
       radioClass: 'iradio_square-blue',
       increaseArea: '20%' /* optional */
     });
+      $("#form-user-log").validate({
+          rules:{//规则
+              username:{
+                  rangelength:[5,12]
+              },
+              password:{
+                  rangelength:[5,20]
+              },
+          },
+          messages: {//自定义提示信息
+          },
+          onkeyup:false,
+          focusCleanup:false,
+          errorElement: "span",
+          errorPlacement: function(error, element) {//错误信息位置设置方法
+              error.appendTo( element.parent());//这里的element是录入数据的对象
+          },
+          submitHandler:function(form){
+              $(form).ajaxSubmit(function(msg){
+                  if( msg.status != 'success' ){
+                      layer.msg(msg.msg, {
+                          skin: 'layer-ext-moon'
+                      });
+                  }else{//登陆成功
+                      window.location.href="{{ url('/') }}";
+                  }
+              });
+          }
+      });
   });
 </script>
 </body>
