@@ -162,172 +162,93 @@
     <script type="text/javascript" src="{{ asset('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
     <script>
         $(function (){
-            /** 数据渲染 ***/
-            //隐藏无权限部分
-            var role_id_now = "<?php echo(Auth::guard('admin')->user()->role_id); ?>";//当前用户role_id
-            if (role_id_now == '*') {//当前是超级管理员
-                /* database 插件  */
-                $('#dataTables').DataTable({
-                    "lengthMenu":[[10,20,50,-1],[10,20,50,'全部']],
-                    'paging':true,//分页
-                    'info':true,//分页辅助
-                    'searching':true,//既时搜索
-                    'ordering':true,//启用排序
-                    "order": [[ 0, "desc" ]],//排序规则  默认下标为1的显示倒序
-                    "processing":true,//当表格在处理的时候（比如排序操作）是否显示“处理中...”
-                    "stateSave":true,//是否开启状态保存,这样当终端用户重新加载这个页面的时候可以使用以前的设置
-                    "serverSide": false,//是否开启服务端
-                    "columnDefs": [{//设置不需要排序的字段
-                        "targets": [1,2,-1],
-                        "orderable": false
-                    }],
-                    "ajax": {
-                        "url": "{{ url('admin/user/ajax_list') }}",// 服务端uri地址，显示数据的uri
-                        "type": "post",   // ajax 的http请求类型
-                        'headers': { 'X-CSRF-TOKEN' : '{{ csrf_token() }}' },
+            /** database 插件  */
+            $('#dataTables').DataTable({
+                "lengthMenu":[[10,20,50,-1],[10,20,50,'全部']],
+                'paging':true,//分页
+                'info':true,//分页辅助
+                'searching':true,//既时搜索
+                'ordering':true,//启用排序
+                "order": [[ 0, "desc" ]],//排序规则  默认下标为1的显示倒序
+                "processing":true,//当表格在处理的时候（比如排序操作）是否显示“处理中...”
+                "stateSave":true,//是否开启状态保存,这样当终端用户重新加载这个页面的时候可以使用以前的设置
+                "serverSide": false,//是否开启服务端
+                "columnDefs": [{//设置不需要排序的字段
+                    "targets": [1,2,-1],
+                    "orderable": false
+                }],
+                "ajax": {
+                    "url": "{{ url('admin/user/ajax_list') }}",// 服务端uri地址，显示数据的uri
+                    "type": "post",   // ajax 的http请求类型
+                    'headers': { 'X-CSRF-TOKEN' : '{{ csrf_token() }}' },
+                },
+                'columns':[//按列显示从服务器端过来的数据
+                    {'data':'id',"defaultContent": ""},
+                    {'data':'',"defaultContent": ""},
+                    {'data':'nickname',"defaultContent": ""},
+                    {'data':'phone',"defaultContent": ""},
+                    {'data':'',"defaultContent": ""},
+                    {'data':'integral',"defaultContent": "0"},
+                    {'data':'user_level',"defaultContent": ""},
+                    {'data':'last_login',"defaultContent": ""},
+                    {'data':'note',"defaultContent": ""},
+                    {'data':'deleted_at',"defaultContent": ""},
+                    {'data':'b',"defaultContent": ""},
+                ],
+                language: {//汉化显示
+                    "sProcessing": "处理中...",
+                    "sLengthMenu": "每页 _MENU_ 条记录",
+                    "sZeroRecords": "没有匹配结果",
+                    "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                    "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                    "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                    "sInfoPostFix": "",
+                    "sSearch": "搜索:",
+                    "sUrl": "",
+                    "sEmptyTable": "表中数据为空",
+                    "sLoadingRecords": "载入中...",
+                    "sInfoThousands": ",",
+                    "oPaginate": {
+                        "sFirst": "首页",
+                        "sPrevious": "上页",
+                        "sNext": "下页",
+                        "sLast": "末页"
                     },
-                    'columns':[//按列显示从服务器端过来的数据
-                        {'data':'id',"defaultContent": ""},
-                        {'data':'',"defaultContent": ""},
-                        {'data':'nickname',"defaultContent": ""},
-                        {'data':'phone',"defaultContent": ""},
-                        {'data':'',"defaultContent": ""},
-                        {'data':'integral',"defaultContent": "0"},
-                        {'data':'user_level',"defaultContent": ""},
-                        {'data':'last_login',"defaultContent": ""},
-                        {'data':'note',"defaultContent": ""},
-                        {'data':'deleted_at',"defaultContent": ""},
-                        {'data':'b',"defaultContent": ""},
-                    ],
-                    language: {//汉化显示
-                        "sProcessing": "处理中...",
-                        "sLengthMenu": "每页 _MENU_ 条记录",
-                        "sZeroRecords": "没有匹配结果",
-                        "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-                        "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
-                        "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
-                        "sInfoPostFix": "",
-                        "sSearch": "搜索:",
-                        "sUrl": "",
-                        "sEmptyTable": "表中数据为空",
-                        "sLoadingRecords": "载入中...",
-                        "sInfoThousands": ",",
-                        "oPaginate": {
-                            "sFirst": "首页",
-                            "sPrevious": "上页",
-                            "sNext": "下页",
-                            "sLast": "末页"
-                        },
-                        "oAria": {
-                            "sSortAscending": ": 以升序排列此列",
-                            "sSortDescending": ": 以降序排列此列"
-                        }
-                    },
-                    'createdRow':function ( row,data,dataIndex ) {
-                        var cnt = data.recordsFiltered;//分页数据
-                        $('#coutent').html( cnt );
-                        $(row).addClass('text-c');//居中
-                        $(row).find('td:eq(1)').html(
-                            data.avatar ==
-                            null ? '<img src="{{ url('sys_img/user_avatar.png') }}" style="width: 50px;height: 40px;">' : '<img src="/'+ data.avatar +'" style="width: 50px;height: 40px;">'
-                        );
-                        $(row).find('td:eq(3)').html(
-                            data.user_status==0 ? '<font style="vertical-align:inherit; color:green;">未审核</font>' :
-                                data.user_status==1 ? '<font style="vertical-align:inherit; color:blue;">已通过</font>' :
-                                    data.user_status==-1 ? '<font style="vertical-align:inherit; color:grey;">已停止</font>' :
-                                        '<font style="vertical-align:inherit; color:red;">拒绝</font>'
-                        );//z状态
-                        //操作
-                        $(row).find('td:eq(-1)').html(
-                            '<div class="btn-group">' +
-                            '<button type="button" class="btn btn-info" onclick="admin_edit(' + '\'编辑\',\'/admin/user/'+data.id+'/edit\',\''+data.id+'\')" >' +
-                            '<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">编辑</font></font>' +
-                            '</button>' +
-                            '<button type="button" class="btn btn-danger" onclick="admin_del(this,\''+data.id+'\',\''+data.nickname+'\')" >' +
-                            '<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">删除</font></font>' +
-                            '</button>' +
-                            '<button type="button" class="btn btn-warning" onclick="admin_restore(this,\''+data.id+'\',\''+data.nickname+'\')">' +
-                            '<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">恢复</font></font>' +
-                            '</button>' +
-                            '</div>'
-                        ).attr('class','td-manage');
+                    "oAria": {
+                        "sSortAscending": ": 以升序排列此列",
+                        "sSortDescending": ": 以降序排列此列"
                     }
-                });
-
-            }else{//不是超级管理员
-                $('#a-admin-add').remove();
-                $('.td-manage').remove();
-                $('#dataTables').DataTable({
-                    "lengthMenu":[[10,20,50,-1],[10,20,50,'全部']],
-                    'paging':true,//分页
-                    'info':true,//分页辅助
-                    'searching':true,//既时搜索
-                    'ordering':true,//启用排序
-                    "order": [[ 0, "desc" ]],//排序规则  默认下标为1的显示倒序
-                    "processing":true,//当表格在处理的时候（比如排序操作）是否显示“处理中...”
-                    "stateSave":true,//是否开启状态保存,这样当终端用户重新加载这个页面的时候可以使用以前的设置
-                    "serverSide": false,//是否开启服务端
-                    "columnDefs": [{//设置不需要排序的字段
-                        "targets": [1,2,-1],
-                        "orderable": false
-                    }],
-                    "ajax": {
-                        "url": "{{ url('admin/user/ajax_list') }}",// 服务端uri地址，显示数据的uri
-                        "type": "post",   // ajax 的http请求类型
-                        'headers': { 'X-CSRF-TOKEN' : '{{ csrf_token() }}' },
-                    },
-                    'columns':[//按列显示从服务器端过来的数据
-                        {'data':'id',"defaultContent": ""},
-                        {'data':'',"defaultContent": ""},
-                        {'data':'nickname',"defaultContent": ""},
-                        {'data':'',"defaultContent": ""},
-                        {'data':'integral',"defaultContent": "0"},
-                        {'data':'user_level',"defaultContent": ""},
-                        {'data':'last_login',"defaultContent": ""},
-                        {'data':'note',"defaultContent": ""},
-                        {'data':'deleted_at',"defaultContent": ""},
-                    ],
-                    language: {//汉化显示
-                        "sProcessing": "处理中...",
-                        "sLengthMenu": "每页 _MENU_ 条记录",
-                        "sZeroRecords": "没有匹配结果",
-                        "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-                        "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
-                        "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
-                        "sInfoPostFix": "",
-                        "sSearch": "搜索:",
-                        "sUrl": "",
-                        "sEmptyTable": "表中数据为空",
-                        "sLoadingRecords": "载入中...",
-                        "sInfoThousands": ",",
-                        "oPaginate": {
-                            "sFirst": "首页",
-                            "sPrevious": "上页",
-                            "sNext": "下页",
-                            "sLast": "末页"
-                        },
-                        "oAria": {
-                            "sSortAscending": ": 以升序排列此列",
-                            "sSortDescending": ": 以降序排列此列"
-                        }
-                    },
-                    'createdRow':function ( row,data,dataIndex ) {
-                        var cnt = data.recordsFiltered;//分页数据
-                        $('#coutent').html( cnt );
-                        $(row).addClass('text-c');//居中
-                        $(row).find('td:eq(2)').html(
-                            data.avatar ==
-                            null ? '<img src="{{ url('sys_img/user_avatar.png') }}" style="width: 50px;height: 40px;">' : '<img src="/'+ data.avatar +'" style="width: 50px;height: 40px;">'
-                        );
-                        $(row).find('td:eq(3)').html(
-                            data.user_status==0 ? '<font style="vertical-align:inherit; color:green;">未审核</font>' :
-                                data.user_status==1 ? '<font style="vertical-align:inherit; color:blue;">已通过</font>' :
-                                    data.user_status==-1 ? '<font style="vertical-align:inherit; color:grey;">已停止</font>' :
-                                        '<font style="vertical-align:inherit; color:red;">拒绝</font>'
-                        );//z状态
-                    }
-                });
-            }
+                },
+                'createdRow':function ( row,data,dataIndex ) {
+                    var cnt = data.recordsFiltered;//分页数据
+                    $('#coutent').html( cnt );
+                    $(row).addClass('text-c');//居中
+                    $(row).find('td:eq(1)').html(
+                        data.avatar ==
+                        null ? '<img src="{{ url('sys_img/user_avatar.png') }}" style="width: 50px;height: 40px;">' : '<img src="/'+ data.avatar +'" style="width: 50px;height: 40px;">'
+                    );
+                    $(row).find('td:eq(4)').html(
+                        data.user_status==0 ? '<font style="vertical-align:inherit; color:green;">未审核</font>' :
+                            data.user_status==1 ? '<font style="vertical-align:inherit; color:blue;">已通过</font>' :
+                                data.user_status==-1 ? '<font style="vertical-align:inherit; color:grey;">已停止</font>' :
+                                    '<font style="vertical-align:inherit; color:red;">拒绝</font>'
+                    );//z状态
+                    //操作
+                    $(row).find('td:eq(-1)').html(
+                        '<div class="btn-group">' +
+                        '<button type="button" class="btn btn-info" onclick="admin_edit(' + '\'编辑\',\'/admin/user/'+data.id+'/edit\',\''+data.id+'\')" >' +
+                        '<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">编辑</font></font>' +
+                        '</button>' +
+                        '<button type="button" class="btn btn-danger" onclick="admin_del(this,\''+data.id+'\',\''+data.nickname+'\')" >' +
+                        '<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">删除</font></font>' +
+                        '</button>' +
+                        '<button type="button" class="btn btn-warning" onclick="admin_restore(this,\''+data.id+'\',\''+data.nickname+'\')">' +
+                        '<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">恢复</font></font>' +
+                        '</button>' +
+                        '</div>'
+                    ).attr('class','td-manage');
+                }
+            });
         });
         /*管理员-管理员-添加*/
         function admin_add(title,url,w,h){
