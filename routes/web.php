@@ -88,3 +88,11 @@ Route::group(['namespace' => 'Admin','prefix'=>'admin'],function (){
 
 
 /******    前台路由    **************************************************/
+Route::group(['namespace' => 'Home'],function (){
+    # 登陆
+    Route::match(['get', 'post'],'login','IndexController@login')->name('admin.login');
+    # 前台防翻墙
+    Route::middleware(['CheckAdmin','web'])->group(function () {//带‘/’的只能ajax访问
+
+    });
+});
