@@ -338,8 +338,8 @@
             layer_show(title,url,'1200','800');
         }
         /*管理员-管理员-删除*/
-        function admin_del(obj,id,usrname){
-            layer.confirm('<font color="red" >危险！确定删除用户(<b>'+usrname+'<b/>)吗？</font>',function(index){
+        function admin_del(obj,id,username){
+            layer.confirm('<font color="red" >危险！确定删除用户(<b>'+username+'<b/>)吗？</font>',function(index){
                 //此处请求后台程序，下方是成功后的前台处理……
                 url = '/admin/user/'+ id;
                 data = {
@@ -361,8 +361,8 @@
             });
         }
         /*管理员-管理员-恢复*/
-        function admin_restore(obj,id,usrname){
-            layer.confirm('确认要恢复当前用户(<font color="red" ><b>'+usrname+'<b/></font>)吗？',function(index){
+        function admin_restore(obj,id,username){
+            layer.confirm('确认要恢复当前用户(<font color="red" ><b>'+username+'<b/></font>)吗？',function(index){
                 //此处请求后台程序，下方是成功后的前台处理……
                 url = '/admin/user/re_store';
                 data = {
