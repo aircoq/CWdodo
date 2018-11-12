@@ -35,7 +35,7 @@
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg"></p>
-    <form action="{{ url('login') }}" method="post">
+    <form action="{{ url('login') }}" method="post" id="form-user-log">
       {{ csrf_field() }}
       <div class="form-group has-feedback">
         <input type="text" class="form-control" placeholder="邮箱" name="username">
