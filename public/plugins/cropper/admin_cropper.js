@@ -226,7 +226,6 @@ $(function () {
     }());
 
 });
-
 function timer(nexturl) {
     var timer = setInterval(function () {
         $('.tip').hide();

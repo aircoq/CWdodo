@@ -93,6 +93,7 @@ Route::group(['namespace' => 'Home','prefix'=>'home'],function (){
     Route::match(['get', 'post'],'login','IndexController@login')->name('home.login');
     # 前台防翻墙
     Route::middleware(['web'])->group(function () {//带‘/’的只能ajax访问
-
+        Route::match(['get', 'post'],'avatar_upload','IndexController@avatar_upload')->name('home.avatar_upload');
     });
+
 });
