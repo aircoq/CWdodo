@@ -40,13 +40,17 @@ return [
             'driver' => 'token',
             'provider' => 'user',
         ],
-        'web' => [//网页端用户认证
+        'user' => [//网页端用户认证
             'driver' => 'session',
             'provider' => 'user',
         ],
         'admin' => [//新增一个验证规则
             'driver' => 'session',
             'provider' => 'admin',
+        ],
+        'web' => [//网页端用户认证
+            'driver' => 'session',
+            'provider' => 'user',
         ],
     ],
 

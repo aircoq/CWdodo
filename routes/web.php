@@ -91,9 +91,10 @@ Route::group(['namespace' => 'Admin','prefix'=>'admin'],function (){
 Route::group(['namespace' => 'Home','prefix'=>'home'],function (){
     # 登陆
     Route::match(['get', 'post'],'login','IndexController@login')->name('home.login');
+    Route::match(['get', 'post'],'avatar_upload','IndexController@avatar_upload');//上传头像
     # 前台防翻墙
-    Route::middleware(['web'])->group(function () {//带‘/’的只能ajax访问
-        Route::match(['get', 'post'],'avatar_upload','IndexController@avatar_upload')->name('home.avatar_upload');
+    Route::middleware(['CheckUser'])->group(function () {//带‘/’的只能ajax访问
+//        Route::match(['get', 'post'],'avatar_upload','IndexController@avatar_upload');//上传头像
     });
 
 });

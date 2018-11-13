@@ -59,5 +59,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         /********自定义中间件************/
         'CheckAdmin' => \App\Http\Middleware\CheckAdmin::class,
+        'CheckUser' => \App\Http\Middleware\CheckUser::class,
     ];
 }

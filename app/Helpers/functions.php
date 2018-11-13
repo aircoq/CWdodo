@@ -15,8 +15,17 @@ function get_gao_map_info($address,$city=null){
 }
 //每年更新一次高德省市区三级联动的本地json数据
 
-function copper_upload($request,$img_path,$img= "date('Ymd').uniqid()"){
+/***
+ * 上传剪切头像
+ * @param $request  laravel request 类
+ * @param $img_path 存放图片文件夹的路径（格式：uploads / backend or frontend / 模型下+方法 / date('Ymd') /）；
+ * 例如： $img_path = 'uploads/frontend/user_avatar/'.date('Ymd').'/';
+ * @param null $img_name 重命名的文件名
+ * @return bool|string 成功返回地址，失败返回false
+ */
+function upload_base64_img($request,$img_path,$img_name = null ){
     error_reporting(0);//禁用错误报告
+    $img_name = empty($img_name) ? date('Ymd').uniqid() : $img_name;
     if ($request->isMethod('post')) {
         header('Content-type:text/html;charset=utf-8');
         $base64_image_content = $_POST['imgBase'];//获取图片编码
@@ -25,18 +34,18 @@ function copper_upload($request,$img_path,$img= "date('Ymd').uniqid()"){
             $type = $result[2];
             //检查是否有该文件夹，如果没有就创建，给予权限
             if (!file_exists($img_path)) {
-                mkdir($img_path, 0700);
+                mkdir($img_path, 0700,true);//递归生成文件夹
             }
-            $img = $img. ".{$type}";//重写文件名
+            $img = $img_name. ".{$type}";//重写文件名
             $new_file = $img_path . $img;
             //将图片保存到指定的位置
             if (file_put_contents($new_file, base64_decode(str_replace($result[1], '', $base64_image_content)))) {
-                return ['status' => 'success','msg' => '上传成功','value'=>"$new_file"];//返回前端图片地址
+                return $new_file;//返回前端图片地址
             }else{
-                return ['status' => 'fail', 'msg' => '保存失败'];
+                return false;
             }
         }else{
-            return ['status' => 'fail', 'msg' => '保存失败'];
+            return false;
         }
 
     }

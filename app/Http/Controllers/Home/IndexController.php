@@ -139,9 +139,49 @@ class IndexController extends Controller
     /**
      * 上传并剪辑头像的方法
      */
-    public function avatar_upload(Request $request)
+    public function avatar_upload(Request $request,User $user)
     {
-        $img_path = 'uploads/frontend/user_avatar/'.date('Ymd').'/';
-        copper_upload($request,$img_path);
+        $data = $request->only('id','file');
+        $role = [
+            'id' =>'required|exists:user,id',
+        ];
+        $message = [
+            'id.exists'  => '用户id非法！',
+
+        ];
+        $validator = Validator::make($data, $role, $message );
+        if($validator->fails()) {
+            return ['status' => 'fail', 'msg' => $validator->messages()->first()];
+//                return redirect()->back()->withErrors(['id非法']);
+        }
+        if($request->isMethod('get')){//展示页面
+            return view('home.index.avatar_upload',$data);
+        }else{//上传到服务器
+            # 判断当前请求的是管理员还是用户
+            if(!Auth::guard('admin')->check()){//不是系统管理员，只能自己编辑自己
+                $data['id'] = Auth::guard('user')->user()->id;//当前用户id
+            }
+            $img_path = 'uploads/frontend/user_avatar/'.date('Ymd').'/';
+            $new_img_adr = upload_base64_img($request,$img_path);//上传
+            if($new_img_adr){//成功返回地址
+                $avatar_old = $user->where('id',$data['id'])->select('avatar')->first();
+                if(!empty($avatar_old['avatar'])){//1.删除老图片
+                    if(file_exists('./'.$new_img_adr)){
+                        unlink('./'.$avatar_old['avatar']);
+                    }
+                }
+                $tf = $user->where('id',$data['id'])->update(['avatar'=>$new_img_adr]);//2.更新图片地址
+                if($tf){
+                    return ['status' => 'success','msg' => '上传成功','value'=>"$new_img_adr"];//返回前端图片地址
+                }else{//数据库更新失败，删除图片
+                    if(file_exists('./'.$new_img_adr)){
+                        unlink('./'.$new_img_adr);
+                    }
+                    return ['status' => 'fail', 'msg' => '更新数据库失败'];
+                }
+            }else{
+                return ['status' => 'fail', 'msg' => '保存失败'];
+            }
+        }
     }
 }
