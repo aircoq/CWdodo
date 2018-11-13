@@ -256,14 +256,13 @@ class AdminController extends Controller
             # base64转图片并上传，更新数据库
             if (preg_match('/^(data:\s*image\/(\w+);base64,)/', $base64_image_content, $result)) {
                 $type = $result[2];
-                $img_path = 'uploads/avatar/'.date('Ymd').'/';//存储的文件夹地址
+                $img_path = 'uploads/backend/avatar/'.date('Ymd').'/';//存储的管理员文件夹地址：uploads/backend/avatar
                 if (!file_exists($img_path)){
                     mkdir ($img_path,0700,true);
                 }
-                $img=date('Ymd') .uniqid(). ".{$type}";
+                $img=date('Ymd') .uniqid(). ".{$type}";//重写文件名
                 $new_file = $img_path . $img;
-                //将图片保存到指定的位置，更新数据库
-                if (file_put_contents($new_file, base64_decode(str_replace($result[1], '', $base64_image_content)))) {
+                if (file_put_contents($new_file, base64_decode(str_replace($result[1], '', $base64_image_content)))) {//将图片保存到指定的位置，并更新数据库
                     try{
                         //如果是超级管理员则可以更改任何人的头像，普通管理员只能修改自己的
                         $admin_role = Auth::guard('admin')->user()->role_id;
