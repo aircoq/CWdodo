@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-
     /**
      * 注册页面
      */
@@ -27,7 +26,7 @@ class UserController extends Controller
     {
         $data = $request->only('phone','password','password_confirmation','email','nickname','sex','birthday','avatar');
         $role = [
-            'phone'=> 'required|unique:users|regex:/\d{11}/',
+            'phone'=> 'required|unique:users|digits:11',
             'password' => 'required|between:6,20|same:password_confirmation',
             'email' => 'sometimes|email|unique:users',
             'nickname' => 'required|min:3|max:8',
@@ -38,7 +37,7 @@ class UserController extends Controller
         $message = [
             'phone.required' => '电话号码不能为空',
             'phone.unique' => '此号码已存在，请勿重复申请',
-            'phone.regex' => '号码格式不正确',
+            'phone.digits' => '号码格式不正确',
             'password.required' => '密码不能为空',
             'password.between' => '密码长度必须为6到20位',
             'password.same' => '密码不一致',
@@ -80,39 +79,5 @@ class UserController extends Controller
             echo '注册失败!';
 //            return redirect()->back()->withErrors(['error'=>'添加失败！']);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
 }
