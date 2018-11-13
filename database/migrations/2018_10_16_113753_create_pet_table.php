@@ -19,7 +19,7 @@ class CreatePetTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id')->comment('主键ID');
             $table->unsignedInteger('user_id')->comment('主人id');
-            $table->string('pet_avatar',255)->default('sys_img/pet_avatar.png')->nullable()->comment('宠物头像');
+            $table->string('pet_avatar',255)->nullable()->comment('宠物头像');
             $table->enum('sex',['0','1'])->comment('性别:0母;1公');
             $table->string('pet_name',50)->nullable()->comment('宠物昵称');
             $table->string('typename',50)->nullable()->comment('宠物品种');

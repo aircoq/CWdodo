@@ -33,7 +33,7 @@ class CreateUserAddressModel extends Migration
             //用户个人信息
             $table->string('nickname',150)->nullable()->comment('昵称');
             $table->unsignedSmallInteger('user_level')->default(0)->comment('账户等级');
-            $table->string('avatar',255)->default('sys_img/user_avatar.png')->nullable()->comment('头像');
+            $table->string('avatar',255)->nullable()->comment('头像');
             $table->enum('sex',['0','1','2'])->default(2)->comment('性别:0女；1男；2保密');
             $table->dateTime('birthday')->nullable()->comment('生日');
             $table->string('city',40)->nullable()->default('深圳')->comment('所在城市');
