@@ -162,7 +162,7 @@ class IndexController extends Controller
                 $data['id'] = Auth::guard('user')->user()->id;//当前用户id
             }
             $img_path = 'uploads/frontend/user_avatar/'.date('Ymd').'/';
-            $new_img_adr = upload_base64_img($request,$img_path);//上传
+            $new_img_adr = uploadBase64Img($request,$img_path);//上传
             if($new_img_adr){//成功返回地址
                 $avatar_old = $user->where('id',$data['id'])->select('avatar')->first();
                 if(!empty($avatar_old['avatar'])){//1.删除老图片

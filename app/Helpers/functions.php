@@ -1,9 +1,10 @@
 <?php
-/**方法命名规则：小写首个单次+大写首个字母，如：sampleMethod/
+/**方法命名规则：小写首个单次+大写首个字母，如：sampleMethod*/
 
 /**
- * @param $addrress 输入地址
- * @return bool|mixed 输出高德地图相关信息
+ * @param $address
+ * @param null $city
+ * @return bool|mixed
  */
 function getGaoMapInfo($address,$city=null){
     $map_url = 'https://restapi.amap.com/v3/geocode/geo?';
@@ -19,13 +20,14 @@ function getGaoMapInfo($address,$city=null){
 
 /***
  * 上传剪切头像
- * @param $request  laravel request 类
- * @param $img_path 存放图片文件夹的路径（格式：uploads / backend or frontend / 模型下+方法 / date('Ymd') /）；
- * 例如： $img_path = 'uploads/frontend/user_avatar/'.date('Ymd').'/';
+ * @param $request
+ * laravel request 类
+ * @param $img_path
+ * 存放图片文件夹的路径（格式：uploads / backend or frontend / 模型下+方法 / date('Ymd') /）；例如： $img_path = 'uploads/frontend/user_avatar/'.date('Ymd').'/';
  * @param null $img_name 重命名的文件名
  * @return bool|string 成功返回地址，失败返回false
  */
-function upload_base64_img($request,$img_path,$img_name = null ){
+function uploadBase64Img($request,$img_path,$img_name = null ){
     error_reporting(0);//禁用错误报告
     $img_name = empty($img_name) ? date('Ymd').uniqid() : $img_name;
     if ($request->isMethod('post')) {
