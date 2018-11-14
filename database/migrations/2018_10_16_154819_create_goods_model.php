@@ -104,6 +104,7 @@ class CreateGoodsModel extends Migration
             //关联关系
             $table->foreign('cate_id')->references('id')->on('goods_category') ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('type_id')->references('id')->on('goods_type') ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('brand_id')->references('id')->on('goods_brand') ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
