@@ -42,32 +42,11 @@ Route::group(['namespace' => 'Admin','prefix'=>'admin'],function (){
         Route::resource('inn_for_pet','InnForPetController');
         Route::post('inn_for_pet/ajax_list','InnForPetController@ajax_list');//门店数据展示页
         Route::post('inn_for_pet/re_store','InnForPetController@re_store');//恢复门店
+        # 商品模块
+
 
     });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -91,10 +70,10 @@ Route::group(['namespace' => 'Admin','prefix'=>'admin'],function (){
 Route::group(['namespace' => 'Home','prefix'=>'home'],function (){
     # 登陆
     Route::match(['get', 'post'],'login','IndexController@login')->name('home.login');
-    Route::match(['get', 'post'],'avatar_upload','IndexController@avatar_upload');//上传头像
+
     # 前台防翻墙
     Route::middleware(['CheckUser'])->group(function () {//带‘/’的只能ajax访问
-//        Route::match(['get', 'post'],'avatar_upload','IndexController@avatar_upload');//上传头像
+        Route::match(['get', 'post'],'avatar_upload','IndexController@avatar_upload');//用户上传头像
     });
 
 });

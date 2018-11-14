@@ -101,7 +101,7 @@ class InnForPetController extends Controller
             return ['status' => "fail", 'msg' => $validator->messages()->first()];
         }
         //获取当前地址的高德信息
-        $get_adr_info = get_gao_map_info($data['inn_address'],$data['city']);
+        $get_adr_info = getGaoMapInfo($data['inn_address'],$data['city']);
 
         if($get_adr_info){
             $lat_lng = explode(',',$get_adr_info['geocodes'][0]['location']);
@@ -202,7 +202,7 @@ class InnForPetController extends Controller
         }
         if(!empty($data['adcode'])){
             //获取当前地址的高德信息
-            $get_adr_info = get_gao_map_info($data['inn_address'],$data['city']);
+            $get_adr_info = getGaoMapInfo($data['inn_address'],$data['city']);
             if($get_adr_info){
                 $lat_lng = explode(',',$get_adr_info['geocodes'][0]['location']);
                 $data['lat'] = $lat_lng['0'];

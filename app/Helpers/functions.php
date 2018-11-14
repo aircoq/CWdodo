@@ -1,9 +1,11 @@
 <?php
+/**方法命名规则：小写首个单次+大写首个字母，如：sampleMethod/
+
 /**
  * @param $addrress 输入地址
  * @return bool|mixed 输出高德地图相关信息
  */
-function get_gao_map_info($address,$city=null){
+function getGaoMapInfo($address,$city=null){
     $map_url = 'https://restapi.amap.com/v3/geocode/geo?';
     $gao_key = 'a7fd905b7c27f710443e0104dd87aa3b';
     $get_url = $map_url.'key='.$gao_key.'&address='.$address.'&output=json'.'&city='.$city;

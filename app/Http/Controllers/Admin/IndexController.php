@@ -52,6 +52,7 @@ class IndexController extends Controller
                 return ['status' => "success", 'msg' => '登陆成功！'];//跳转有js实现
             } else {// 登录失败
                 return ['status' => "fail", 'msg' => '登陆失败！账号或密码错误！'];
+                return ['status' => "fail", 'msg' => '登陆失败！账号或密码错误！'];
             }
         }
         return view('admin.index.login');

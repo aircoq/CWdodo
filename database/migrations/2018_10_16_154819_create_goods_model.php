@@ -17,9 +17,11 @@ class CreateGoodsModel extends Migration
         Schema::create('goods_attr',function(Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id')->comment('主键ID');
-            $table->unsignedInteger('type_id')->comment('商品类型id');
             $table->string('attr_name', 50)->comment('属性名称');
-            $table->enum('attr_type',['0','1'])->default(0)->comment('是否可以多选：0否；1是');
+            $table->unsignedInteger('type_id')->comment('商品类型id');
+            $table->enum('attr_type',['0','1'])->default(0)->comment('是否可以多选：0单选；1多选');
+            $table->enum('attr_input_type',['0','1'])->default(0)->comment('属性的录入方式：0手工;1列表选择');
+            $table->string('attr_values',255)->nullable()->comment('属性的可选值，当属性的录入方式为列表选择的时候对应的可选值，使用逗号进行分割');
             $table->unsignedTinyInteger('sort_order')->nullable()->comment('属性排序字段');
             $table->text('note')->nullable()->comment('属性描述');
             $table->enum('is_linked',['0','1'])->default(0)->comment('是否关联:0不关联；1关联,那么用户在购买该商品时，推荐相同属性给用户');
@@ -32,7 +34,7 @@ class CreateGoodsModel extends Migration
             $table->engine = 'InnoDB';
             $table->smallincrements('id')->comment('主键ID');
             $table->string('type_name', 50)->unique()->comment('商品类型名');
-            $table->text('note')->nullable()->comment('商品类型描述');
+            $table->text('mark_up')->nullable()->comment('商品类型描述');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -44,10 +46,10 @@ class CreateGoodsModel extends Migration
             $table->string('cate_name', 50)->unique()->comment('商品分类名称');
             $table->text('cat_desc')->nullable()->comment('分类描述');
             $table->unsignedSmallInteger('parent_id')->nullable()->comment('该分类的父id');
-            //减少递归内存消耗
-            $table->unsignedInteger('first_cate_id')->comment('所属一级分类，一级分类为其本身');
             $table->enum('show_in_nav',['0','1'])->default(1)->comment('是否显示在导航栏：0否；1是');
             $table->enum('is_show',['0','1'])->default(1)->comment('是否在前台显示：0否；1是');
+            $table->unsignedInteger('first_cate_id')->comment('所属一级分类，一级分类为其本身');//减少递归内存消耗
+            $table->unsignedInteger('path')->comment('层级关系');//减少递归内存消耗
             $table->unsignedTinyInteger('sort_order')->nullable()->comment('排序字段');
             $table->timestamps();
             $table->softDeletes();
@@ -69,9 +71,9 @@ class CreateGoodsModel extends Migration
         Schema::create('goods',function(Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id')->comment('主键ID');
-            $table->unsignedSmallInteger('cate_id')->comment('所属分类');
-            $table->unsignedSmallInteger('goods_type')->comment('商品类型id');
             $table->string('goods_name', 50)->comment('商品名称');
+            $table->unsignedSmallInteger('cate_id')->comment('所属分类');
+            $table->unsignedSmallInteger('type_id')->comment('商品类型id(属性框)');
             $table->unsignedSmallInteger('brand_id')->nullable()->comment('品牌id');
             $table->unsignedSmallInteger('inventory')->comment('商品库存数量');
             $table->decimal('goods_weight', 5, 2)->nullable()->comment('商品的重量');
@@ -95,10 +97,13 @@ class CreateGoodsModel extends Migration
             $table->unsignedSmallInteger('integral')->nullable()->comment('所需积分');
             $table->unsignedInteger('sort_order')->nullable()->comment('搜索时的排序字段，越大越靠前');
             $table->text('goods_desc')->nullable()->comment('商品描述富文本');
-            $table->text('seller_note')->nullable()->comment('商品的商家备注，仅商家可见');
+            $table->string('seller_note',150)->nullable()->comment('商品的商家备注，仅商家可见');
             $table->unsignedSmallInteger('give_integral')->nullable()->comment('购买商品时赠送的积分');
             $table->timestamps();//商品创建时间
-            $table->softDeletes();
+            $table->softDeletes();//一般来说商品信息是不能物理删除
+            //关联关系
+            $table->foreign('cate_id')->references('id')->on('goods_category') ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('type_id')->references('id')->on('goods_type') ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
@@ -109,10 +114,10 @@ class CreateGoodsModel extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('goods');
         Schema::dropIfExists('goods_attr');
         Schema::dropIfExists('goods_type');
         Schema::dropIfExists('goods_category');
         Schema::dropIfExists('goods_brand');
-        Schema::dropIfExists('goods');
     }
 }
