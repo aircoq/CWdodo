@@ -15,7 +15,7 @@
     <div class="cl-sm-12">
         <!-- /.box-header -->
         <!-- form start -->
-        <form class="form-horizontal" id="form-inn-edit" action="{{ url('admin/inn_for_pet/'. $inn->id)  }}" method="post" enctype="multipart/form-data">
+        <form class="form-horizontal" id="form-inn-edit" action="{{ url('admin/inn/'. $inn->id)  }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             {{ method_field('put') }}
             <input type="hidden" name="adcode" id="adcode"/>

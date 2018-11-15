@@ -49,7 +49,7 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="#" target="menuFrame">房间管理</a></li>
-                    <li><a href="{{ url('admin/inn_for_pet') }}" target="menuFrame">店铺管理</a></li>
+                    <li><a href="{{ url('admin/inn') }}" target="menuFrame">店铺管理</a></li>
                 </ul>
             </li>
             <li class="treeview">

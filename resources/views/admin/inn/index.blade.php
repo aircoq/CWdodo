@@ -35,7 +35,7 @@
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">门店列表</h3>
-                        <a class="btn btn-box-tool btn-xs"  href="javascript:;" onclick="admin_add('添加门店','{{ url('admin/inn_for_pet/create')  }}','800','500')" id="a-admin-add">
+                        <a class="btn btn-box-tool btn-xs"  href="javascript:;" onclick="admin_add('添加门店','{{ url('admin/inn/create')  }}','800','500')" id="a-admin-add">
                             <font style="vertical-align:inherit; color:#3c8dbc;"><font style="font-size:14px;"><i class="fa fa-fw fa-plus"></i>新增门店</font></font>
                         </a>
                     </div>
@@ -187,7 +187,7 @@
                     "orderable": false
                 }],
                 "ajax": {
-                    "url": "{{ url('admin/inn_for_pet/ajax_list') }}",// 服务端uri地址，显示数据的uri
+                    "url": "{{ url('admin/inn/list') }}",// 服务端uri地址，显示数据的uri
                     "type": "post",   // ajax 的http请求类型
                     'headers': { 'X-CSRF-TOKEN' : '{{ csrf_token() }}' },
                 },
@@ -248,7 +248,7 @@
                     //操作
                     $(row).find('td:eq(-1)').html(
                         '<div class="btn-group">' +
-                        '<button type="button" class="btn btn-info" onclick="admin_edit(' + '\'编辑\',\'/admin/inn_for_pet/'+data.id+'/edit\',\''+data.id+'\')" >' +
+                        '<button type="button" class="btn btn-info" onclick="admin_edit(' + '\'编辑\',\'/admin/inn/'+data.id+'/edit\',\''+data.id+'\')" >' +
                         '<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">编辑</font></font>' +
                         '</button>' +
                         '<button type="button" class="btn btn-danger" onclick="admin_del(this,\''+data.id+'\',\''+data.inn_name+'\')" >' +
@@ -276,7 +276,7 @@
         function admin_del(obj,id,usrname){
             layer.confirm('<font color="red" >危险！确定删除用户(<b>'+usrname+'<b/>)吗？</font>',function(index){
                 //此处请求后台程序，下方是成功后的前台处理……
-                url = '/admin/inn_for_pet/'+ id;
+                url = '/admin/inn/'+ id;
                 data = {
                     '_token':'{{ csrf_token() }}',
                     '_method':'delete',
@@ -299,7 +299,7 @@
         function admin_restore(obj,id,usrname){
             layer.confirm('确认要恢复当前用户(<font color="red" ><b>'+usrname+'<b/></font>)吗？',function(index){
                 //此处请求后台程序，下方是成功后的前台处理……
-                url = '/admin/inn_for_pet/re_store';
+                url = '/admin/inn/restore';
                 data = {
                     '_token':'{{ csrf_token()  }}',
                     'id':id,

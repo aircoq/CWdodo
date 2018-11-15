@@ -178,7 +178,7 @@
                     "orderable": false
                 }],
                 "ajax": {
-                    "url": "{{ url('admin/auth/ajax_list') }}",// 服务端uri地址，显示数据的uri
+                    "url": "{{ url('admin/auth/list') }}",// 服务端uri地址，显示数据的uri
                     "type": "post",   // ajax 的http请求类型
                     'headers': { 'X-CSRF-TOKEN' : '{{ csrf_token() }}' },
                 },
@@ -282,7 +282,7 @@
         function admin_restore(obj,id,name){
             layer.confirm('确认要恢复当前(<font color="red" ><b>'+name+'<b/></font>)吗？',function(index){
                 //此处请求后台程序，下方是成功后的前台处理……
-                url = '/admin/auth/re_store';
+                url = '/admin/auth/restore';
                 data = {
                     '_token':'{{ csrf_token()  }}',
                     'id':id,

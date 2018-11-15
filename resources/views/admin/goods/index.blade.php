@@ -156,7 +156,7 @@
                 "orderable": false
             }],
             "ajax": {
-                "url": "{{ url('admin/admin/ajax_list') }}",// 服务端uri地址，显示数据的uri
+                "url": "{{ url('admin/goods/list') }}",// 服务端uri地址，显示数据的uri
                 "type": "post",   // ajax 的http请求类型
                 'headers': { 'X-CSRF-TOKEN' : '{{ csrf_token() }}' },
             },
