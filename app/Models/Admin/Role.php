@@ -15,7 +15,7 @@ class Role extends Model
     //应更改为日期的属性
     protected $dates = ['deleted_at'];
     //过滤，只有以下字段才能被修改
-    protected $fillable = ['id','role_name','note','role_auth_list','role_auth_adr'];
+    protected $fillable = ['id','role_name','note','role_auth_list','role_auth_adr','created_at','updated_at', 'deleted_at'];
     //隐藏字段
     protected $hidden = ['password'];
     // 列表页显示的字段

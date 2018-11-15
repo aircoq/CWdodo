@@ -32,6 +32,8 @@ Route::group(['namespace' => 'Admin','prefix'=>'admin'],function (){
         Route::post('admin/re_store','AdminController@re_store');//恢复管理员
         Route::match(['get', 'post'],'avatar_upload','AdminController@avatar_upload');//上传头像
         Route::resource('auth','AuthController');
+        Route::post('auth/ajax_list','AuthController@ajax_list');//管理员数据展示页
+        Route::post('auth/re_store','AuthController@re_store');//管理员数据展示页
         Route::resource('role','RoleController');
         Route::get('logout','IndexController@logout');
         # 用户模块
@@ -43,8 +45,11 @@ Route::group(['namespace' => 'Admin','prefix'=>'admin'],function (){
         Route::post('inn_for_pet/ajax_list','InnForPetController@ajax_list');//门店数据展示页
         Route::post('inn_for_pet/re_store','InnForPetController@re_store');//恢复门店
         # 商品模块
-
-
+        Route::resource('goods_type','GoodsTypeController');
+        Route::resource('goods_attr','GoodsAttrController');
+        Route::resource('goods_category','GoodsCategoryController');
+        Route::resource('goods_brand','GoodsBrandController');
+        Route::resource('goods','GoodsController');
     });
 });
 
