@@ -32,9 +32,11 @@ Route::group(['namespace' => 'Admin','prefix'=>'admin'],function (){
         Route::post('admin/re_store','AdminController@re_store');//恢复管理员
         Route::match(['get', 'post'],'avatar_upload','AdminController@avatar_upload');//上传头像
         Route::resource('auth','AuthController');
-        Route::post('auth/ajax_list','AuthController@ajax_list');//管理员数据展示页
-        Route::post('auth/re_store','AuthController@re_store');//管理员数据展示页
+        Route::post('auth/ajax_list','AuthController@ajax_list');//管理权限列表
+        Route::post('auth/re_store','AuthController@re_store');//恢复权限
         Route::resource('role','RoleController');
+        Route::post('role/ajax_list','RoleController@ajax_list');//角色列表
+        Route::post('role/re_store','RoleController@re_store');//恢复角色
         Route::get('logout','IndexController@logout');
         # 用户模块
         Route::resource('user','UserController');

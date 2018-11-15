@@ -16,6 +16,7 @@ class CreateAdminRoleAuthModel extends Migration
             $table->string('auth_controller',50) ->nullable() ->comment('权限所属控制器，如果是顶级，则用字符串null表示');
             $table->string('auth_action',50) ->nullable() ->comment('权限所属方法，如果是顶级，则用字符串null表示');
             $table->integer('auth_pid') ->default(0) ->comment('父级ID，如果是顶级权限，则为0；否则其他的为自己父级的主键ID');
+            $table->string('auth_route_name')->comment('如：');
             $table->enum('is_menu',['0','1'])->default(0)->comment('是否作为左边的菜单显示:0否，1是(可能是button)');
             $table->enum('is_enable',['0','1'])->default(1)->comment('是否可用:0否，1是');
             $table->unsignedInteger('path')->comment('层级关系');//减少递归内存消耗
@@ -30,7 +31,7 @@ class CreateAdminRoleAuthModel extends Migration
             $table->engine = 'InnoDB';
             $table->smallincrements('id')->comment('主键ID');
             $table->string('role_name',50)->unique()->comment('角色名称');
-            $table->text('role_auth_id_list')->nullable()->comment('权限列表字符串集：*超级管理员不受权限管理，1初始化角色不受权限管理。');
+            $table->text('role_auth_id_list')->nullable()->comment('权限列表字符串集：*超级管理员不受权限管理，1初始化角色不受权限管理');
             $table->text('note')->nullable()->comment('角色描述');
             $table->timestamps();
             $table->softDeletes();
