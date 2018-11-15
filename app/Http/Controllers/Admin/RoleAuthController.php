@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Admin\Auth;
+use App\Models\Admin\RoleAuth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
-class AuthController extends Controller
+class RoleAuthController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,10 +22,10 @@ class AuthController extends Controller
     /**
      * 列表数据
      */
-    public function ajax_list(Request $request, Auth $auth)
+    public function ajax_list(Request $request, RoleAuth $roleAuth)
     {
         if ($request->ajax()) {
-                $data = $auth->select('id','auth_name','auth_controller','auth_action','auth_pid','is_menu','is_enable','sort_order','auth_desc','created_at','updated_at', 'deleted_at')->withTrashed()->get();
+                $data = $roleAuth->select('id','auth_name','auth_controller','auth_action','auth_pid','is_menu','is_enable','sort_order','auth_desc','created_at','updated_at', 'deleted_at')->withTrashed()->get();
             $cnt = count($data);
             $info = [
                 'draw' => $request->get('draw'),
@@ -42,9 +42,9 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Auth $auth)
+    public function create(RoleAuth $roleAuth)
     {
-        $data['auth'] = $auth->where('is_menu','1')->get();
+        $data['auth'] = $roleAuth->where('is_menu','1')->get();
         return view('admin.auth.create',$data);
     }
 
@@ -54,7 +54,7 @@ class AuthController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,Auth $auth)
+    public function store(Request $request,RoleAuth $roleAuth)
     {
         $data = $request->only('auth_name','auth_controller','auth_action','auth_pid','is_menu','is_enable','sort_order','auth_desc');
         $role = [
@@ -87,10 +87,10 @@ class AuthController extends Controller
         if($data['auth_pid'] === 0){//顶级菜单
             $data['path'] = 1;
         }else{
-            $p_path = $auth->where('id',$data['auth_pid'])->first();
+            $p_path = $roleAuth->where('id',$data['auth_pid'])->first();
             $data['path'] = $p_path['path']+1;
         }
-        $res = $auth->create($data);
+        $res = $roleAuth->create($data);
         if ($res->id) {
             // 如果添加数据成功，则返回列表页
             return ['status' => "success", 'msg' => '添加成功'];
@@ -116,10 +116,10 @@ class AuthController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Auth $auth)
+    public function edit(RoleAuth $roleAuth)
     {
-        $data['auth'] = $auth;//当前记录
-        $all_auth = new Auth();
+        $data['auth'] = $roleAuth;//当前记录
+        $all_auth = new RoleAuth();
         $data['all_auth'] = $all_auth->where('is_menu','1')->get();//所有记录
         return view('admin.auth.edit',$data);
     }
@@ -131,11 +131,11 @@ class AuthController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Auth $auth)
+    public function update(Request $request,RoleAuth $roleAuth)
     {
         $data = $request->only('auth_name','auth_controller','auth_action','auth_pid','is_menu','is_enable','sort_order','auth_desc');
         $role = [
-            'auth_name' => 'nullable|alpha_num|between:2,8|unique:auth,auth_name,'.$auth->id,
+            'auth_name' => 'nullable|alpha_num|between:2,8|unique:auth,auth_name,'.$roleAuth->id,
             'auth_controller' => 'nullable|alpha_dash',
             'auth_action'=> 'nullable|alpha_dash',
             'auth_pid' => 'nullable|integer',
@@ -164,10 +164,10 @@ class AuthController extends Controller
         if($data['auth_pid'] === 0){//顶级菜单
             $data['path'] = 1;
         }else{
-            $p_path = $auth->where('id',$data['auth_pid'])->first();
+            $p_path = $roleAuth->where('id',$data['auth_pid'])->first();
             $data['path'] = $p_path['path']+1;
         }
-        $res = $auth->update($data);
+        $res = $roleAuth->update($data);
         if ($res) {
             // 如果添加数据成功，则返回列表页
             return ['status' => "success", 'msg' => '更新成功'];
@@ -179,9 +179,9 @@ class AuthController extends Controller
     /**
      * 软删除
      */
-    public function destroy(Auth $auth)
+    public function destroy(RoleAuth $roleAuth)
     {
-        $res = $auth->delete();
+        $res = $roleAuth->delete();
         if ($res) {
             // 如果添加数据成功，则返回列表页
             return ['status' => "success", 'msg' => '删除成功'];
@@ -193,11 +193,11 @@ class AuthController extends Controller
     /**
      * 恢复软删除（超级管理员权限）
      */
-    public function re_store(Request $request,Auth $auth)
+    public function re_store(Request $request,RoleAuth $roleAuth)
     {
         if ($request->ajax()) {
                 $id = $request->only('id');
-                $res = $auth->where('id', $id)->restore();
+                $res = $roleAuth->where('id', $id)->restore();
                 if ($res) {
                     return ['status' => 'success','msg' => '恢复完毕！'];
                 } else {

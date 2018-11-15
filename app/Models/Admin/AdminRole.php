@@ -5,11 +5,11 @@ namespace App\Models\Admin;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Role extends Model
+class AdminRole extends Model
 {
     use softDeletes;
     //指定表
-    protected $table = 'role';
+    protected $table = 'admin_role';
     //指定主键
     protected $primaryKey = 'id';
     //应更改为日期的属性
@@ -20,4 +20,16 @@ class Role extends Model
     protected $hidden = ['password'];
     // 列表页显示的字段
 //    protected $fields_show = [''];
+
+    // 用户和角色的模型关联关系 多对多
+    public function admins()
+    {
+        return $this->belongsToMany(Admin::class);
+    }
+
+    // 角色和权限的模型关联关系 多对多
+    public function roleAuth()
+    {
+        return $this->belongsToMany(RoleAuth::class);
+    }
 }

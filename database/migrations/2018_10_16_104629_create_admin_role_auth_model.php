@@ -9,14 +9,14 @@ class CreateAdminRoleAuthModel extends Migration
     public function up()
     {
         # 权限表
-        Schema::create('auth',function(Blueprint $table){
+        Schema::create('role_auth',function(Blueprint $table){
             $table->engine = 'InnoDB';
             $table->increments('id')->comment('主键ID') ;
             $table->string('auth_name',50) ->comment('权限名称:如果controller、action都为空则为一级菜单');
-            $table->string('auth_controller',50) ->nullable() ->comment('权限所属控制器，如果是顶级，则用字符串null表示');
-            $table->string('auth_action',50) ->nullable() ->comment('权限所属方法，如果是顶级，则用字符串null表示');
-            $table->integer('auth_pid') ->default(0) ->comment('父级ID，如果是顶级权限，则为0；否则其他的为自己父级的主键ID');
-            $table->string('route_name')->comment('如：admin.create ');
+            $table->string('auth_controller',50)->nullable()->comment('权限所属控制器，如果是顶级，则用字符串null表示');
+            $table->string('auth_action',50)->nullable()->comment('权限所属方法，如果是顶级，则用字符串null表示');
+            $table->integer('auth_pid')->default(0)->comment('父级ID，如果是顶级权限，则为0；否则其他的为自己父级的主键ID');
+            $table->string('route_name')->nullable()->comment('路由别名，如：admin.create');
             $table->enum('is_menu',['0','1'])->default(0)->comment('是否作为左边的菜单显示:0否，1是(可能是button)');
             $table->enum('is_enable',['0','1'])->default(1)->comment('是否可用:0否，1是');
             $table->unsignedInteger('path')->comment('层级关系');//减少递归内存消耗
@@ -27,7 +27,7 @@ class CreateAdminRoleAuthModel extends Migration
         });
 
         # 角色表
-        Schema::create('role',function(Blueprint $table){
+        Schema::create('admin_role',function(Blueprint $table){
             $table->engine = 'InnoDB';
             $table->smallincrements('id')->comment('主键ID');
             $table->string('role_name',50)->unique()->comment('角色名称');

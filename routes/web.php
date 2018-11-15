@@ -21,7 +21,7 @@ Route::group(['namespace' => 'Admin','prefix'=>'admin'],function (){
     # 后台展示模块
     Route::match(['get', 'post'],'login','IndexController@login')->name('admin.login');
     # 后台防翻墙
-    Route::middleware(['CheckAdmin'])->group(function () {//带‘/’的只能ajax访问
+    Route::middleware(['CheckAdminAuth'])->group(function () {//带‘/’的只能ajax访问
 //   Route::group(['middleware' => 'web'],function (){//重置，无验证项
         # 后台首页
         Route::any('index', 'IndexController@index');
