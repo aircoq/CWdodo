@@ -57,7 +57,7 @@
                                                 角色描述
                                             </th>
                                             <th class="sorting td-manage" tabindex="3">
-                                                角色权限
+                                                拥有权限
                                             </th>
                                             <th class="sorting" tabindex="4">
                                                 创建时间
@@ -92,7 +92,7 @@
                                                 角色描述
                                             </th>
                                             <th class="sorting">
-                                                角色权限
+                                                拥有权限
                                             </th>
                                             <th class="sorting">
                                                 创建时间
