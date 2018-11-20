@@ -40,9 +40,9 @@
                             <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">父级菜单</font></font></label>
                             <div class="col-sm-10">
                                 <select class="form-control" style="width:70%;" name="auth_pid">
-                                    <option value="0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">顶级菜单</font></font></option>
+                                    <option value="0" id = 'option0'><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">顶级菜单</font></font></option>
                                     @foreach ($all_auth as $v)
-                                    <option value="{{ $v['id'] }}">
+                                    <option value="{{ $v['id'] }}" id = 'option{{ $v['id'] }}'>
                                         <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
                                                 <?php
                                                 for ($i=$v['path'];$i>0;$i--){
@@ -61,12 +61,12 @@
                             <div class="col-sm-10">
                                 <div class="col-sm-4 radio">
                                     <label>
-                                        <input type="radio" name="is_menu" id="is_menu" value="1" checked="">是
+                                        <input type="radio" name="is_menu" id="is_menu1" value="1">是
                                     </label>
                                 </div>
                                 <div class="col-sm-6 radio">
                                     <label>
-                                        <input type="radio" name="is_menu" id="is_menu" value="0" checked="">否
+                                        <input type="radio" name="is_menu" id="is_menu0" value="0">否
                                     </label>
                                 </div>
                             </div>
@@ -76,12 +76,12 @@
                             <div class="col-sm-10">
                                 <div class="col-sm-4 radio">
                                     <label>
-                                        <input type="radio" name="is_enable" id="is_enable" value="1" checked="">是
+                                        <input type="radio" name="is_enable" id="is_enable1" value="1">是
                                     </label>
                                 </div>
                                 <div class="col-sm-6 radio">
                                     <label>
-                                        <input type="radio" name="is_enable" id="is_enable" value="0" checked="">否
+                                        <input type="radio" name="is_enable" id="is_enable0" value="0">否
                                     </label>
                                 </div>
                             </div>
@@ -129,6 +129,9 @@
     <script type="text/javascript" src="{{ asset('plugins/jQueryUI/jquery.form.js')}}"></script>
     <script>
         $(function(){
+            $('#option{{$auth->auth_pid}}').attr('selected','selected');//父id选中
+            $('#is_menu{{$auth->is_menu}}').attr('checked','true');//是否显示
+            $('#is_enable{{$auth->is_enable}}').attr('checked','true');//是否可用
             /***编写Javascript表单验证区域*/
             $("#form-admin-add").validate({
                 rules:{//规则

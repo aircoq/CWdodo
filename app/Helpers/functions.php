@@ -61,6 +61,6 @@ function uploadBase64Img($request,$img_path,$img_name = null ){
  * @param $obj
  * @return mixed
  */
-function obj_arr ($obj){
+function objArr ($obj){
     return json_decode(json_encode($obj),true);
 }

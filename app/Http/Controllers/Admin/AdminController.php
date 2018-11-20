@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Admin\Admin;
+use App\Models\Admin\AdminRoleRelated;
+use App\Models\Admin\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
-Use Redis;
+use Redis;
+use Illuminate\Support\Facades\DB;
 
 # 只有超级管理员才有权限
 class AdminController extends Controller
@@ -44,10 +47,11 @@ class AdminController extends Controller
     /**
      * 渲染新建管理员页面
      */
-    public function create()
+    public function create(Role $role)
     {
         if(Auth::guard('admin')->user()->role_class == '*'){//重置屏蔽项
-            return view('admin.admin.create');
+            $data['role'] = $role->all();
+            return view('admin.admin.create',$data);
         }
         echo '您暂无权限！';
     }
@@ -57,10 +61,10 @@ class AdminController extends Controller
      *  ['username','password','role_class','phone','nickname','email','sex',
      *  ,'avatar','last_ip','last_login']
      */
-    public function store(Request $request,Admin $admin)
+    public function store(Request $request,Admin $admin,AdminRoleRelated $adminRoleRelated)
     {
         if ($request->ajax() && Auth::guard('admin')->user()->role_class == '*') {//重置屏蔽项目 Auth::guard('admin')->user()->role_class == '*'
-            $data = $request->only('username','sex','phone','email','password','confirm_password','admin_status','avatar','note','accepted');
+            $data = $request->only('username','sex','phone','email','password','confirm_password','admin_status','note','role_id_list','accepted');
             $role = [
                 'username' => 'required|alpha_num|between:5,12|unique:admin',
                 'sex' => 'integer',
@@ -68,9 +72,8 @@ class AdminController extends Controller
                 'email' => 'required|email|unique:admin',
                 'password' => 'required|between:6,20|same:confirm_password',
                 'admin_status' => 'integer',
-                'role_class' => 'required|in:'*',0,1,2',
-                'avatar'   => 'file|image|mimes:png,gif,jpeg,jpg|max:600',
                 'note' => 'nullable|string|between:0,100',
+                'role_id_list' => 'required|array',
 //                'accepted' => 'accepted',
             ];
             $message = [
@@ -89,14 +92,10 @@ class AdminController extends Controller
                 'password.between' => '密码长度必须为6到20位',
                 'password.same' => '密码不一致',
                 'admin_status.integer' => '请正确填写状态',
-                'role_class.required' => '角色名必须填写',
-                'role_class.exists' => '角色不存在',
-                'avatar.file'      => '头像上传失败！',
-                'avatar.image'     => '头像必须是图片格式！',
-                'avatar.mimes'     => '头像的文件格式不正确！',
-                'avatar.max'       => '头像的文件最大500K',
                 'note.string' => '备注不正确',
                 'note.between' => '备注最大100个字节',
+                'role_id_list.required' => '角色不能为空',
+                'role_id_list.array' => '角色列表格式不正确',
 //                'accepted.accepted' => '请仔细阅读服务条款'
             ];
             $validator = Validator::make( $data, $role, $message );
@@ -106,21 +105,28 @@ class AdminController extends Controller
                 //返回上一页做提示！
                 return ['status' => "fail", 'msg' => $validator->messages()->first()];
             }
-            // 数据调整
+            # 数据调整
             $data['password'] = bcrypt($data['password']);
-            //保存头像
-            if( $request->hasFile('avatar') ){
-                $path = '/AdminAvatar/'.date('Y-m-d');
-                // store默认会帮我们把上传文件保存到 storage/app/public目录下
-                $data['avatar'] = $data['avatar']->store( $path,'public');
-            }
-            $res = $admin->create($data);
-            if ($res->id) {
-                // 如果添加数据成功，则返回列表页
-                return ['status' => "success", 'msg' => '添加成功'];
-            }else{
+            # 开启事务处理 处理auth_id_list
+            DB::beginTransaction();
+            try{
+                $tf1 = $admin->create($data);
+                $tf2 = true;
+                foreach ($data['role_id_list'] as $v){
+                    $tf = $adminRoleRelated->create( ['admin_id' => $tf1->id , 'role_id' => $v ]);
+                    if(!$tf){
+                        $tf2 = false;
+                        break;
+                    }
+                }
+                if ($tf1 && $tf2) {
+                    DB::commit();
+                }
+            }catch(\Illuminate\Database\QueryException $ex){
+                DB::rollback();//事务回滚
                 return ['status' => 'fail', 'msg' => '添加失败'];
             }
+            return ['status' => "success", 'msg' => '添加成功'];
         }else{
             return ['status' => 'fail', 'msg' => '非法请求'];
         }
@@ -138,10 +144,16 @@ class AdminController extends Controller
     /**
      * 编辑页面
      */
-    public function edit(Admin $admin)
+    public function edit(Admin $admin,AdminRoleRelated $adminRoleRelated,Role $role)
     {
         if($admin){
+            $role_list = $adminRoleRelated->where('admin_id',$admin->id)->get();
+            $data['role_list'] = [];
+            foreach (objArr($role_list) as $v){
+                $data['role_list'][] += $v['role_id'];
+            }
             $data['user'] = $admin;
+            $data['role'] = $role->all();
             return view('admin.admin.edit',$data);
         }
     }
@@ -149,9 +161,9 @@ class AdminController extends Controller
     /**
      * 更新功能
      */
-    public function update(Request $request,Admin $admin)
+    public function update(Request $request,Admin $admin,AdminRoleRelated $adminRoleRelated)
     {
-        $data = $request->only('id','username','sex','phone','email','password','confirm_password','admin_status','role_class','note');
+        $data = $request->only('id','username','sex','phone','email','password','confirm_password','admin_status','note','role_id_list');
         $role = [
             'username' => 'nullable|alpha_num|between:5,12|unique:admin,username,'.$admin->id,
             'sex' => 'nullable|integer',
@@ -159,8 +171,8 @@ class AdminController extends Controller
             'email' => 'nullable|email|unique:admin,email,'.$admin->id,
             'password' => 'nullable|between:6,20|same:confirm_password',
             'admin_status' => 'nullable|integer',
-            'role_class' => 'required|in:'*',0,1,2',
             'note' => 'nullable|string|between:0,100',
+            'role_id_list' => 'required|array',
         ];
         $message = [
             'username.alpha_num' => '用户长度为5到12位的英文、数字组成',
@@ -174,9 +186,10 @@ class AdminController extends Controller
             'password.between' => '密码长度必须为6到20位',
             'password.same' => '密码不一致',
             'admin_status.integer' => '请正确填写状态',
-            'role_class.in' => '角色不存在',
             'note.string' => '备注不正确',
             'note.between' => '备注最大100个字节',
+            'role_id_list.required' => '角色不能为空',
+            'role_id_list.array' => '角色列表格式不正确',
         ];
         $validator = Validator::make($data, $role, $message);
         if ($validator->fails()) {
@@ -198,11 +211,30 @@ class AdminController extends Controller
         }
         $data['password'] = empty($data['password']) ? null : bcrypt($data['password']);
         $data = empty($data) ? null :  array_filter($data);//去除空值表示不更新
-        $tf = $admin->update($data);
-        if ($tf){
-            return ['status' => 'success', 'msg' => '更新成功！'];
+        # 开启事务处理 处理auth_id_list
+        DB::beginTransaction();
+        try{
+            $tf1 = $admin->update($data);
+            $tf2 = true;
+            if(!$adminRoleRelated->where('admin_id',$admin->id)->get()->isEmpty()){//用户角色表记录不为空则先删除
+                $tf2 = $adminRoleRelated->where('admin_id',$admin->id)->forceDelete();
+            }
+            $tf3 = true;
+            foreach ($data['role_id_list'] as $v){
+                $tf = $adminRoleRelated->create( ['admin_id' => $admin->id , 'role_id' => $v ]);
+                if(!$tf){
+                    $tf2 = false;
+                    break;
+                }
+            }
+            if ($tf1 && $tf2 && $tf3) {
+                DB::commit();
+            }
+        }catch(\Illuminate\Database\QueryException $ex){
+            DB::rollback();//事务回滚
+            return ['status' => 'fail', 'msg' => '更新失败'];
         }
-        return ['status' => 'fail', 'msg' => '更新失败'];
+        return ['status' => "success", 'msg' => '更新成功'];
     }
 
     /**

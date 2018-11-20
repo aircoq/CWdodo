@@ -44,7 +44,7 @@ class AuthController extends Controller
      */
     public function create(Auth $auth)
     {
-        $data['auth'] = $auth->where('is_menu','1')->get()->toArray();
+        $data['auth'] = $auth->where('is_menu','1')->get();
         return view('admin.auth.create',$data);
     }
 
@@ -58,7 +58,7 @@ class AuthController extends Controller
     {
         $data = $request->only('auth_name','auth_controller','auth_action','auth_pid','is_menu','is_enable','sort_order','auth_desc');
         $role = [
-            'auth_name' => 'nullable|alpha_num|between:2,8|unique:role_auth',
+            'auth_name' => 'nullable|alpha_num|between:2,8|unique:auth',
             'auth_controller' => 'nullable|required_if:is_enable,1|required_with:auth_action|alpha_dash',
             'auth_action'=> 'nullable|alpha_dash',
             'auth_pid' => 'required|integer',
@@ -126,7 +126,8 @@ class AuthController extends Controller
     {
         $data['auth'] = $auth;//当前记录
         $all_auth = new Auth();
-        $data['all_auth'] = $all_auth->where('is_menu','1')->get();//所有记录
+//        $data['all_auth'] = $all_auth->where('is_menu','1')->where('id','!=',$auth->id)->get();//除去本身外的所有记录
+        $data['all_auth'] = $all_auth->where('is_menu','1')->get();//除去本身外的所有记录
         return view('admin.auth.edit',$data);
     }
 
@@ -141,10 +142,10 @@ class AuthController extends Controller
     {
         $data = $request->only('auth_name','auth_controller','auth_action','auth_pid','is_menu','is_enable','sort_order','auth_desc');
         $role = [
-            'auth_name' => 'nullable|alpha_num|between:2,8|unique:role_auth,auth_name,'.$auth->id,
+            'auth_name' => 'nullable|alpha_num|between:2,8|unique:auth,auth_name,'.$auth->id,
             'auth_controller' => 'nullable|required_if:is_enable,1|required_with:auth_action|alpha_dash',
             'auth_action'=> 'nullable|alpha_dash',
-            'auth_pid' => 'required|integer',
+            'auth_pid' => 'required|integer|not_in:'.$auth->id,
             'is_menu' => 'required|in:0,1',
             'is_enable' => 'required|in:0,1',
             'sort_order' => 'nullable|integer',
@@ -159,6 +160,8 @@ class AuthController extends Controller
             'auth_controller.required_with' => '当前情况控制器为必填',
             'auth_controller.alpha_dash' => '控制器为普通字符串',
             'auth_action.alpha_dash' => '方法为普通字符串',
+            'auth_pid.integer' => '父级菜单非法',
+            'auth_pid.not_in' => '父级菜单不能为其本身',
             'is_menu.in' => '菜单显示的值有误',
             'is_enable.in' => '是否可用的值有误',
             'sort_order.integer' => '排序字段必须为整数',
@@ -175,8 +178,10 @@ class AuthController extends Controller
             $p_path = $auth->where('id',$data['auth_pid'])->first();
             $data['path'] = $p_path['path']+1;
         }
+        # 定义route_name字段
         if(!empty($data['auth_controller'])){
-            $data['route_name'] = $data['auth_controller'].'.'.$data['auth_action'];
+            $data['action'] = empty($data['auth_action']) ? 'index' : $data['auth_action'];
+            $data['route_name'] = $data['auth_controller'].'.'.$data['action'];
         }
         $res = $auth->update($data);
         if ($res) {

@@ -57,27 +57,30 @@
                                                 所属控制器
                                             </th>
                                             <th class="sorting" tabindex="3">
-                                                所属控制器下的方法
+                                                控制器下的方法
                                             </th>
                                             <th class="sorting" tabindex="4">
-                                                父级菜单
+                                                路由别名
                                             </th>
                                             <th class="sorting" tabindex="5">
-                                                作为左边的菜单显示
+                                                父级菜单
                                             </th>
                                             <th class="sorting" tabindex="6">
-                                                是否可用
+                                                作为左边的菜单显示
                                             </th>
                                             <th class="sorting" tabindex="7">
-                                                排序权重
+                                                是否可用
                                             </th>
                                             <th class="sorting" tabindex="8">
-                                                权限描述
+                                                排序权重
                                             </th>
                                             <th class="sorting" tabindex="9">
+                                                权限描述
+                                            </th>
+                                            <th class="sorting" tabindex="10">
                                                 删除时间
                                             </th>
-                                            <th class="sorting td-manage" tabindex="10">
+                                            <th class="sorting td-manage" tabindex="11">
                                                 操作
                                             </th>
                                         </tr>
@@ -108,8 +111,11 @@
                                             <th class="sorting">
                                                 所属控制器
                                             </th>
-                                            <th class="sorting td-manage">
-                                                所属控制器下的方法
+                                            <th class="sorting">
+                                                控制器下的方法
+                                            </th>
+                                            <th class="sorting">
+                                                路由别名
                                             </th>
                                             <th class="sorting">
                                                 父级菜单
@@ -187,6 +193,7 @@
                     {'data':'auth_name',"defaultContent": ""},
                     {'data':'auth_controller',"defaultContent": ""},
                     {'data':'auth_action',"defaultContent": ""},
+                    {'data':'route_name',"defaultContent": ""},
                     {'data':'auth_pid',"defaultContent": ""},
                     {'data':'',"defaultContent": ""},
                     {'data':'',"defaultContent": ""},
@@ -223,11 +230,11 @@
                     var cnt = data.recordsFiltered;//分页数据
                     $('#coutent').html( cnt );
                     $(row).addClass('text-c');//居中
-                    $(row).find('td:eq(5)').html(
+                    $(row).find('td:eq(6)').html(
                             data.is_menu==1 ? '<font style="vertical-align:inherit; color:blue;">是</font>' : '<font style="vertical-align:inherit; color:grey;">否</font>'
 
                     );//z状态
-                    $(row).find('td:eq(6)').html(
+                    $(row).find('td:eq(7)').html(
                         data.is_enable==1 ? '<font style="vertical-align:inherit; color:blue;">是</font>' : '<font style="vertical-align:inherit; color:grey;">否</font>'
                     );//z状态
                     //操作

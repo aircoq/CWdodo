@@ -58,17 +58,6 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">拥有的权限</label>
-                            <div class="col-sm-7">
-                                @foreach($auth as $v)
-                                    <label>
-                                        <input type="checkbox" name="role_auth_id_list[]" id="role_auth_id_list" value="{{ $v->id }}">
-                                        {{ $v->auth_name }}
-                                    </label>
-                                @endforeach
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">账号状态</font></font></label>
                             <div class="col-sm-10">
                                 <select class="form-control" style="width:70%;" name="admin_status">
@@ -82,7 +71,18 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">备注</label>
                             <div class="col-sm-10">
-                                <textarea class="textarea" style="width: 70%; height: 200px; font-size: 14px;" placeholder="备注" name="note"></textarea>
+                                <textarea class="textarea" style="width: 70%; height: 50px; font-size: 14px;" placeholder="备注" name="note"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">拥有的角色</label>
+                            <div class="col-sm-7">
+                                @foreach($role as $v)
+                                    <label>
+                                        <input type="checkbox" name="role_id_list[]" value="{{ $v->id }}">
+                                        {{ $v->role_name }}
+                                    </label>
+                                @endforeach
                             </div>
                         </div>
                         <div class="form-group">

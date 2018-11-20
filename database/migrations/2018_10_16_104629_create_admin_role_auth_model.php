@@ -27,16 +27,6 @@ class CreateAdminRoleAuthModel extends Migration
             // 一层菜单为：显示是，可用否，控制器方法为空；二级菜单为显示是，可用是，只填控制器，方法‘index’需省略；三级一般为显示否，可用是（按钮类型），方法和控制器必填
         });
 
-        # 角色权限表
-        Schema::create('role_auth_related',function(Blueprint $table){
-            $table->engine = 'InnoDB';
-            $table->smallincrements('id')->comment('主键ID');
-            $table->unsignedSmallInteger('role_id')->comment('角色ID');
-            $table->unsignedInteger('auth_id')->nullable()->comment('权限id');
-            $table->timestamps();
-            $table->softDeletes();
-        });
-
         # 角色表
         Schema::create('role',function(Blueprint $table){
             $table->engine = 'InnoDB';
@@ -47,15 +37,16 @@ class CreateAdminRoleAuthModel extends Migration
             $table->softDeletes();
         });
 
-        # 管理员拥有的角色表
-        Schema::create('admin_role_related',function(Blueprint $table){
+        # 角色权限表
+        Schema::create('role_auth_related',function(Blueprint $table){
             $table->engine = 'InnoDB';
             $table->smallincrements('id')->comment('主键ID');
             $table->unsignedSmallInteger('role_id')->comment('角色ID');
-            $table->unsignedInteger('admin_id')->nullable()->comment('管理员id');
+            $table->unsignedInteger('auth_id')->nullable()->comment('权限id');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('role_id')->references('id')->on('role') ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('auth_id')->references('id')->on('auth') ->onUpdate('cascade')->onDelete('cascade');
         });
 
         # 管理员表
@@ -68,7 +59,7 @@ class CreateAdminRoleAuthModel extends Migration
             $table->string('email',150)->comment('邮箱');
             $table->string('password','255')->comment('登陆密码');
             //权限管理
-            $table->enum('role_class',['*','0','1','2'])->default(1)->commemt('角色类型:*为超级管理员;1初始化角色;2......');
+            $table->enum('role_class',['*','0','1','2'])->default(0)->commemt('角色类型:*为超级管理员;0一般角色;1......');
             $table->enum('admin_status',['-2','-1','0','1'])->default(0)->comment('-2拒绝;-1已停止;0未审核;1已审核');
             //社交
             $table->jsonb('friends_list')->nullable()->comment( '关注的好友,json格式' );
@@ -83,8 +74,18 @@ class CreateAdminRoleAuthModel extends Migration
             $table->text('note')->nullable()->comment('备注');
             $table->timestamps();//创建时间created_at，更新时间updated_at
             $table->softDeletes();//禁用时间：deleted_at
-            //关联关系
-//            $table->foreign('role_id')->references('id')->on('role') ->onUpdate('cascade')->onDelete('cascade');//超级管理员为*
+        });
+
+        # 管理员拥有的角色表
+        Schema::create('admin_role_related',function(Blueprint $table){
+            $table->engine = 'InnoDB';
+            $table->smallincrements('id')->comment('主键ID');
+            $table->unsignedSmallInteger('role_id')->comment('角色ID');
+            $table->unsignedInteger('admin_id')->nullable()->comment('管理员id');
+            $table->timestamps();
+            $table->softDeletes();
+            $table->foreign('role_id')->references('id')->on('role') ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('admin_id')->references('id')->on('admin') ->onUpdate('cascade')->onDelete('cascade');
         });
 
         # 管理员积分和现金操作记录表

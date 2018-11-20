@@ -14,13 +14,20 @@
     <div class="cl-sm-12">
         <!-- /.box-header -->
         <!-- form start -->
-        <form class="form-horizontal" id="form-admin-add" action="{{ url('admin/role')  }}" method="post" enctype="multipart/form-data">
+        <form class="form-horizontal" id="form-admin-add" action="{{ url('admin/role/'. $role->id)  }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
+            {{ method_field('put') }}
             <div class="box-body">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">角色名称</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="角色名称" name="role_name" id="role_name"/>
+                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="角色名称" name="role_name" id="role_name" value="{{ $role->role_name }}"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">角色描述</label>
+                    <div class="col-sm-10">
+                        <textarea class="textarea" style="width: 70%; height: 50px; font-size: 14px;" placeholder="管理员的备注" name="note">{{ $role->note }}</textarea>
                     </div>
                 </div>
                 <div class="form-group">
@@ -28,16 +35,10 @@
                     <div class="col-sm-7">
                         @foreach($auth as $v)
                             <label>
-                                <input type="checkbox" name="role_auth_id_list[]" id="role_auth_id_list" value="{{ $v->id }}">
+                                <input type="checkbox" name="auth_id_list[]" id="auth_id_list{{ $v->id }}" value="{{ $v->id }}">
                                 {{ $v->auth_name }}
                             </label>
                         @endforeach
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">角色描述</label>
-                    <div class="col-sm-10">
-                        <textarea class="textarea" style="width: 70%; height: 200px; font-size: 14px;" placeholder="管理员的备注" name="note"></textarea>
                     </div>
                 </div>
             </div>
@@ -63,6 +64,9 @@
     <script type="text/javascript" src="{{ asset('plugins/jQueryUI/jquery.form.js')}}"></script>
     <script>
         $(function(){
+            @foreach($auth_list as $v)
+            $('#auth_id_list{{$v}}').attr('checked','checked');//权限选择中
+            @endforeach
             /***编写Javascript表单验证区域*/
             $("#form-admin-add").validate({
                 rules:{//规则

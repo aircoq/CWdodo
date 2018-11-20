@@ -91,8 +91,19 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">备注</label>
                     <div class="col-sm-10">
-                        <textarea class="textarea" style="width: 70%; height: 100px; font-size: 14px;" placeholder="备注" name="note"></textarea>
+                        <textarea class="textarea" style="width: 70%; height: 50px; font-size: 14px;" placeholder="备注" name="note"></textarea>
                     </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">拥有的角色</label>
+                <div class="col-sm-7">
+                    @foreach($role as $v)
+                        <label>
+                            <input type="checkbox" name="role_id_list[]" id="role_id_list{{ $v->id }}" value="{{ $v->id }}">
+                            {{ $v->role_name }}
+                        </label>
+                    @endforeach
                 </div>
             </div>
             <!-- /.box-body -->
@@ -117,6 +128,9 @@
     <script>
         $(function(){
             /** 数据渲染 ***/
+            @foreach($role_list as $v)
+            $('#role_id_list{{$v}}').attr('checked','checked');//权限选择中
+            @endforeach
             //隐藏无权限部分
             var role_id_now = "<?php echo (Auth::guard('admin')->user()->role_id); ?>";//当前用户role_id
             var role_id_edit = "<?php echo $user->role_id; ?>";//被编辑的用户id
