@@ -31,8 +31,8 @@ class CreateAdminRoleAuthModel extends Migration
         Schema::create('role_auth_related',function(Blueprint $table){
             $table->engine = 'InnoDB';
             $table->smallincrements('id')->comment('主键ID');
-            $table->unsignedSmallInteger('admin_role_id')->comment('角色ID');
-            $table->unsignedInteger('role_auth_id')->nullable()->comment('权限id');
+            $table->unsignedSmallInteger('role_id')->comment('角色ID');
+            $table->unsignedInteger('auth_id')->nullable()->comment('权限id');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -51,11 +51,11 @@ class CreateAdminRoleAuthModel extends Migration
         Schema::create('admin_role_related',function(Blueprint $table){
             $table->engine = 'InnoDB';
             $table->smallincrements('id')->comment('主键ID');
-            $table->unsignedSmallInteger('admin_role_id')->comment('角色ID');
+            $table->unsignedSmallInteger('role_id')->comment('角色ID');
             $table->unsignedInteger('admin_id')->nullable()->comment('管理员id');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('admin_role_id')->references('id')->on('admin_role') ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('role_id')->references('id')->on('role') ->onUpdate('cascade')->onDelete('cascade');
         });
 
         # 管理员表
@@ -115,8 +115,8 @@ class CreateAdminRoleAuthModel extends Migration
         Schema::dropIfExists('role_auth_related');
         Schema::dropIfExists('admin_role_related');
         Schema::dropIfExists('admin');
-        Schema::dropIfExists('admin_role');
-        Schema::dropIfExists('role_auth');
+        Schema::dropIfExists('role');
+        Schema::dropIfExists('auth');
         Schema::dropIfExists('admin_account_log');
 
     }

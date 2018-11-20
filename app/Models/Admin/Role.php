@@ -21,7 +21,7 @@ class Role extends Model
 
     public function getAuth()
     {
-        return $this->belongsToMany(Auth::class, 'role_auth_related', 'admin_role_id', 'role_auth_id')->withPivot(['admin_role_id', 'role_auth_id']);
+        return $this->belongsToMany(Auth::class, 'role_auth_related', 'role_id', 'auth_id')->withPivot(['role_id', 'auth_id']);
     }
 
 }

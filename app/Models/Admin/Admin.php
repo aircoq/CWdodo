@@ -26,7 +26,7 @@ class Admin extends Authenticatable
     # 用户和角色的模型关联关系
     public function roles()
     {
-        return $this->belongsToMany(Role::class, 'admin_role_related', 'admin_id', 'admin_role_id')->withPivot('admin_id', 'admin_role_id');
+        return $this->belongsToMany(Role::class, 'admin_role_related', 'admin_id', 'role_id')->withPivot('admin_id', 'role_id');
     }
     /**
      * 判断是否拥有该路由的权限的方法

@@ -18,12 +18,4 @@ class Auth extends Model
 //    protected $timestamps = false;
     //过滤，只有以下字段才能被修改
     protected $fillable = ['id','auth_name','auth_controller','auth_action','auth_pid','route_name','is_menu','is_enable','path','sort_order','auth_desc','created_at','updated_at', 'deleted_at'];
-
-    // 角色和权限的模型关联关系
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class);
-    }
-
-
 }

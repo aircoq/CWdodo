@@ -15,6 +15,6 @@ class AdminRoleRelated extends Model
     //应更改为日期的属性
     protected $dates = ['deleted_at'];
     //过滤，只有以下字段才能被修改
-    protected $fillable = ['id','admin_role_id','admin_id','created_at','updated_at', 'deleted_at'];
+    protected $fillable = ['id','role_id','admin_id','created_at','updated_at', 'deleted_at'];
 
 }
