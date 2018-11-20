@@ -24,10 +24,21 @@ class RoleController extends Controller
     /**
      * 列表数据
      */
-    public function ajax_list(Request $request, Role $role)
+    public function ajax_list(Request $request, Role $role,RoleAuthRelated $roleAuthRelated)
     {
         if ($request->ajax()) {
-            $data = $role->select('id','role_name','note','created_at', 'deleted_at')->withTrashed()->get();
+            $all_data = $role->with('getAuth')->select('id','role_name','note','created_at', 'deleted_at')->withTrashed()->get();
+            $data =[];
+            foreach (objArr($all_data) as $key => $role) {//显示角色拥有的权限
+                $data[$key] = $role;
+                $auth_name = '';
+                if (!empty($data[$key]['get_auth'])){
+                    foreach ($role['get_auth'] as $k=>$v){
+                        $auth_name .= $v['auth_name'].' / ';
+                    }
+                    $data[$key]['get_auth'] = $auth_name;
+                }
+            }
             $cnt = count($data);
             $info = [
                 'draw' => $request->get('draw'),
@@ -183,9 +194,9 @@ class RoleController extends Controller
             }
         }catch(\Illuminate\Database\QueryException $ex){
             DB::rollback();//事务回滚
-            return ['status' => 'fail', 'msg' => '添加失败'];
+            return ['status' => 'fail', 'msg' => '更新失败'];
         }
-        return ['status' => "success", 'msg' => '添加成功'];
+        return ['status' => "success", 'msg' => '更新成功'];
     }
 
     /**

@@ -53,8 +53,11 @@
                                             <th class="sorting" tabindex="1">
                                                 角色名称
                                             </th>
-                                            <th class="sorting td-manage" tabindex="3">
+                                            <th class="sorting td-manage" tabindex="2">
                                                 角色描述
+                                            </th>
+                                            <th class="sorting td-manage" tabindex="3">
+                                                角色权限
                                             </th>
                                             <th class="sorting" tabindex="4">
                                                 创建时间
@@ -87,6 +90,9 @@
                                             </th>
                                             <th class="sorting">
                                                 角色描述
+                                            </th>
+                                            <th class="sorting">
+                                                角色权限
                                             </th>
                                             <th class="sorting">
                                                 创建时间
@@ -151,6 +157,7 @@
                     {'data':'id',"defaultContent": ""},
                     {'data':'role_name',"defaultContent": ""},
                     {'data':'note',"defaultContent": ""},
+                    {'data':'get_auth',"defaultContent": ""},
                     {'data':'created_at',"defaultContent": ""},
                     {'data':'deleted_at',"defaultContent": ""},
                     {'data':'b',"defaultContent": ""},
@@ -184,6 +191,9 @@
                     $('#coutent').html( cnt );
                     $(row).addClass('text-c');//居中
                     //操作
+                    $(row).find('td:eq(3)').html(
+
+                    );
                     $(row).find('td:eq(-1)').html(
                         '<div class="btn-group">' +
                         '<button type="button" class="btn btn-info" onclick="admin_edit(' + '\'编辑\',\'/admin/role/'+data.id+'/edit\',\''+data.id+'\')" >' +

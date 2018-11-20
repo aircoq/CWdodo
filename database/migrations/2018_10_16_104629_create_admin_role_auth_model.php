@@ -42,7 +42,7 @@ class CreateAdminRoleAuthModel extends Migration
             $table->engine = 'InnoDB';
             $table->smallincrements('id')->comment('主键ID');
             $table->unsignedSmallInteger('role_id')->comment('角色ID');
-            $table->unsignedInteger('auth_id')->nullable()->comment('权限id');
+            $table->unsignedInteger('auth_id')->comment('权限id');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('role_id')->references('id')->on('role') ->onUpdate('cascade')->onDelete('cascade');
@@ -81,7 +81,7 @@ class CreateAdminRoleAuthModel extends Migration
             $table->engine = 'InnoDB';
             $table->smallincrements('id')->comment('主键ID');
             $table->unsignedSmallInteger('role_id')->comment('角色ID');
-            $table->unsignedInteger('admin_id')->nullable()->comment('管理员id');
+            $table->unsignedInteger('admin_id')->comment('管理员id');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('role_id')->references('id')->on('role') ->onUpdate('cascade')->onDelete('cascade');

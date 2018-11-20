@@ -3,17 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5e34fc05-11b0-4cd3-8661-f499f1c56395" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Helpers/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/functions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/AuthController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/RoleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/RoleController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2018_10_16_104629_create_admin_role_auth_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2018_10_16_104629_create_admin_role_auth_model.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/admin/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/admin/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/admin/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/admin/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/auth/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/auth/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/auth/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/auth/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/role/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/role/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/role/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/role/edit.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/role/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/role/index.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,7 +18,55 @@
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="RoleController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/RoleController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="380">
+              <caret line="31" column="64" selection-start-line="31" selection-start-column="64" selection-end-line="31" selection-end-column="64" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RoleAuthRelated.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Models/Admin/RoleAuthRelated.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="380">
+              <caret line="19" column="40" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="40" />
+              <folding>
+                <element signature="e#36#75#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/admin/role/index.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="271">
+              <caret line="159" column="33" selection-start-line="159" selection-start-column="33" selection-end-line="159" selection-end-column="33" />
+              <folding>
+                <element signature="n#style#0;n#font#0;n#button#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#font#0;n#font#0;n#button#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#font#0;n#button#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#font#0;n#font#0;n#button#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#font#0;n#button#2;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#font#0;n#font#0;n#button#2;n#div#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Role.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Models/Admin/Role.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="400">
+              <caret line="21" column="29" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -106,23 +145,23 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/AdminRoleController.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/app/Models/Admin/Admin.php" />
-        <option value="$PROJECT_DIR$/app/Models/Admin/Role.php" />
         <option value="$PROJECT_DIR$/app/Http/Middleware/CheckAdminAuth.php" />
         <option value="$PROJECT_DIR$/app/Models/Admin/Auth.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/auth/edit.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/AuthController.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/role/create.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/role/edit.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/admin/role/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Models/Admin/RoleAuthRelated.php" />
         <option value="$PROJECT_DIR$/app/Models/Admin/AdminRoleRelated.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/auth/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/admin/create.blade.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2018_10_16_104629_create_admin_role_auth_model.php" />
         <option value="$PROJECT_DIR$/app/Helpers/functions.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/RoleController.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/admin/edit.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/AdminController.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2018_10_16_104629_create_admin_role_auth_model.php" />
+        <option value="$PROJECT_DIR$/app/Models/Admin/Role.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/role/index.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/RoleController.php" />
       </list>
     </option>
   </component>
@@ -274,9 +313,25 @@
               <item name="pet" type="b2602c69:ProjectViewProjectNode" />
               <item name="pet" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Http" type="462c0819:PsiDirectoryNode" />
-              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="Models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pet" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Models" type="462c0819:PsiDirectoryNode" />
               <item name="Admin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pet" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pet" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
+              <item name="migrations" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pet" type="b2602c69:ProjectViewProjectNode" />
@@ -288,6 +343,21 @@
               <item name="pet" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pet" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pet" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="role" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -349,7 +419,8 @@
       <workItem from="1542591502931" duration="11991000" />
       <workItem from="1542678619547" duration="10912000" />
       <workItem from="1542690749351" duration="1170000" />
-      <workItem from="1542691929664" duration="17522000" />
+      <workItem from="1542691929664" duration="17754000" />
+      <workItem from="1542713587227" duration="8905000" />
     </task>
     <task id="LOCAL-00001" summary="登陆定位">
       <created>1541747557847</created>
@@ -523,10 +594,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="209298000" />
+    <option name="totallyTimeSpent" value="218435000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32897604" />
@@ -670,13 +742,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/CheckAdminAuth.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/auth/edit.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="331">
@@ -688,9 +753,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="660">
           <caret line="42" column="18" selection-start-line="42" selection-start-column="18" selection-end-line="42" selection-end-column="18" />
-          <folding>
-            <element signature="e#1018#1069#0#HTML" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -705,25 +767,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="267">
           <caret line="59" column="48" selection-start-line="59" selection-start-column="48" selection-end-line="59" selection-end-column="48" />
-          <folding>
-            <element signature="n#style#0;n#font#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#font#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#font#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#font#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#font#0;n#button#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#font#0;n#font#0;n#button#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#font#0;n#button#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#font#0;n#font#0;n#button#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#font#0;n#button#2;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#font#0;n#font#0;n#button#2;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2018_10_16_104629_create_admin_role_auth_model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="61" column="87" selection-start-line="61" selection-start-column="87" selection-end-line="61" selection-end-column="87" />
         </state>
       </provider>
     </entry>
@@ -731,9 +774,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
           <caret line="77" column="79" selection-start-line="77" selection-start-column="79" selection-end-line="77" selection-end-column="79" />
-          <folding>
-            <element signature="e#5079#5130#0#HTML" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -790,13 +830,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/Admin/Admin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Models/Admin/AdminRoleRelated.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
@@ -808,31 +841,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="17" column="36" lean-forward="true" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
-          <folding>
-            <element signature="e#36#75#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Models/Admin/User.php">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/Admin/RoleAuthRelated.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="9" selection-start-line="9" selection-end-line="9" selection-end-column="20" />
-          <folding>
-            <element signature="e#36#75#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/Admin/Role.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="27" lean-forward="true" selection-start-line="27" selection-end-line="27" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Models/Admin/InnRoom.php">
       <provider selected="true" editor-type-id="text-editor" />
@@ -855,21 +868,6 @@
     <entry file="file://$PROJECT_DIR$/app/Models/Admin/Goods.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/role/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1651">
-          <caret line="188" column="113" selection-start-line="188" selection-start-column="113" selection-end-line="188" selection-end-column="113" />
-          <folding>
-            <element signature="n#style#0;n#font#0;n#button#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#font#0;n#font#0;n#button#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#font#0;n#button#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#font#0;n#font#0;n#button#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#font#0;n#button#2;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#font#0;n#font#0;n#button#2;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/admin/edit.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1935">
@@ -884,13 +882,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/RoleController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="165" column="31" lean-forward="true" selection-end-line="231" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="580">
@@ -902,10 +893,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="675">
           <caret line="204" column="72" lean-forward="true" selection-start-line="204" selection-start-column="72" selection-end-line="204" selection-end-column="72" />
-          <folding>
-            <element signature="e#46#73#0#PHP" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -913,6 +900,66 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6">
           <caret line="30" column="14" lean-forward="true" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Middleware/CheckAdminAuth.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/Admin/Admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/Admin/RoleAuthRelated.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="19" column="40" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="40" />
+          <folding>
+            <element signature="e#36#75#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/role/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="159" column="33" selection-start-line="159" selection-start-column="33" selection-end-line="159" selection-end-column="33" />
+          <folding>
+            <element signature="n#style#0;n#font#0;n#button#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#font#0;n#font#0;n#button#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#font#0;n#button#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#font#0;n#font#0;n#button#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#font#0;n#button#2;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#font#0;n#font#0;n#button#2;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2018_10_16_104629_create_admin_role_auth_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="79" column="71" selection-start-line="79" selection-start-column="71" selection-end-line="79" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/Admin/Role.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="21" column="29" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/RoleController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="31" column="64" selection-start-line="31" selection-start-column="64" selection-end-line="31" selection-end-column="64" />
         </state>
       </provider>
     </entry>
