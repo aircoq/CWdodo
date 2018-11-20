@@ -27,7 +27,7 @@ class UserController extends Controller
     public function ajax_list(Request $request,User $user)
     {
 //        echo '123kk';die();
-        if(Auth::guard('admin')->user()->role_id == '*') {//管理员查看包括软删除的用户
+        if(Auth::guard('admin')->user()->role_class == '*') {//管理员查看包括软删除的用户
             $data = $user->select('id','nickname','phone','email','sex', 'user_status','integral','frozen_integral','user_money','frozen_money','credit_line','cost_total','user_level', 'avatar','birthday','city','height','weight','has_medal','flag','address_id','qr_code','parent_id','zone_cate_id','fans_list','friends_list','last_ip','last_login','remember_token','desc','note','question_answer','created_at','updated_at', 'deleted_at')->withTrashed()->get();
             $cnt = count($data);
             $info = [

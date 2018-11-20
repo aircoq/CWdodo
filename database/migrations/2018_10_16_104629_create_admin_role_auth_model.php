@@ -8,33 +8,54 @@ class CreateAdminRoleAuthModel extends Migration
 {
     public function up()
     {
-        # 权限表
-        Schema::create('role_auth',function(Blueprint $table){
+        # 菜单模块/权限表
+        Schema::create('auth',function(Blueprint $table){
             $table->engine = 'InnoDB';
             $table->increments('id')->comment('主键ID') ;
-            $table->string('auth_name',50) ->comment('权限名称:如果controller、action都为空则为一级菜单');
+            $table->string('auth_name',50) ->comment('菜单模块或权限名称:如果controller、action都为空则为一级菜单');
             $table->string('auth_controller',50)->nullable()->comment('权限所属控制器，如果是顶级，则用字符串null表示');
             $table->string('auth_action',50)->nullable()->comment('权限所属方法，如果是顶级，则用字符串null表示');
             $table->integer('auth_pid')->default(0)->comment('父级ID，如果是顶级权限，则为0；否则其他的为自己父级的主键ID');
             $table->string('route_name')->nullable()->comment('路由别名，如：admin.create');
-            $table->enum('is_menu',['0','1'])->default(0)->comment('是否作为左边的菜单显示:0否，1是(可能是button)');
-            $table->enum('is_enable',['0','1'])->default(1)->comment('是否可用:0否，1是');
+            $table->enum('is_menu',['0','1'])->default(0)->comment('是否作为左边的菜单显示:0否(可能是button)，1是');
+            $table->enum('is_enable',['0','1'])->default(1)->comment('是否可用:0否(只是作为菜单显示)，1是');
             $table->unsignedInteger('path')->comment('层级关系');//减少递归内存消耗
             $table->unsignedInteger('sort_order')->nullable()->comment('显示时的排序字段，越大越靠前');
             $table->string('auth_desc')->nullable()->comment('权限描述');
             $table->timestamps();
             $table->softDeletes();
+            // 一层菜单为：显示是，可用否，控制器方法为空；二级菜单为显示是，可用是，只填控制器，方法‘index’需省略；三级一般为显示否，可用是（按钮类型），方法和控制器必填
+        });
+
+        # 角色权限表
+        Schema::create('role_auth_related',function(Blueprint $table){
+            $table->engine = 'InnoDB';
+            $table->smallincrements('id')->comment('主键ID');
+            $table->unsignedSmallInteger('admin_role_id')->comment('角色ID');
+            $table->unsignedInteger('role_auth_id')->nullable()->comment('权限id');
+            $table->timestamps();
+            $table->softDeletes();
         });
 
         # 角色表
-        Schema::create('admin_role',function(Blueprint $table){
+        Schema::create('role',function(Blueprint $table){
             $table->engine = 'InnoDB';
             $table->smallincrements('id')->comment('主键ID');
             $table->string('role_name',50)->unique()->comment('角色名称');
-            $table->text('role_auth_id_list')->nullable()->comment('权限列表字符串集：*超级管理员不受权限管理，1初始化角色不受权限管理');
             $table->text('note')->nullable()->comment('角色描述');
             $table->timestamps();
             $table->softDeletes();
+        });
+
+        # 管理员拥有的角色表
+        Schema::create('admin_role_related',function(Blueprint $table){
+            $table->engine = 'InnoDB';
+            $table->smallincrements('id')->comment('主键ID');
+            $table->unsignedSmallInteger('admin_role_id')->comment('角色ID');
+            $table->unsignedInteger('admin_id')->nullable()->comment('管理员id');
+            $table->timestamps();
+            $table->softDeletes();
+            $table->foreign('admin_role_id')->references('id')->on('admin_role') ->onUpdate('cascade')->onDelete('cascade');
         });
 
         # 管理员表
@@ -47,7 +68,7 @@ class CreateAdminRoleAuthModel extends Migration
             $table->string('email',150)->comment('邮箱');
             $table->string('password','255')->comment('登陆密码');
             //权限管理
-            $table->string('role_id',6)->commemt('角色ID:*为超级管理员;1初始化角色;2......');
+            $table->enum('role_class',['*','0','1','2'])->default(1)->commemt('角色类型:*为超级管理员;1初始化角色;2......');
             $table->enum('admin_status',['-2','-1','0','1'])->default(0)->comment('-2拒绝;-1已停止;0未审核;1已审核');
             //社交
             $table->jsonb('friends_list')->nullable()->comment( '关注的好友,json格式' );
@@ -91,9 +112,11 @@ class CreateAdminRoleAuthModel extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('role_auth_related');
+        Schema::dropIfExists('admin_role_related');
         Schema::dropIfExists('admin');
-        Schema::dropIfExists('role');
-        Schema::dropIfExists('auth');
+        Schema::dropIfExists('admin_role');
+        Schema::dropIfExists('role_auth');
         Schema::dropIfExists('admin_account_log');
 
     }

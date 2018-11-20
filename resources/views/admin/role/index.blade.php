@@ -54,10 +54,10 @@
                                                 角色名称
                                             </th>
                                             <th class="sorting td-manage" tabindex="3">
-                                                拥有的权限
+                                                角色描述
                                             </th>
                                             <th class="sorting" tabindex="4">
-                                                角色描述
+                                                创建时间
                                             </th>
                                             <th class="sorting" tabindex="9">
                                                 删除时间
@@ -86,10 +86,10 @@
                                                 角色名称
                                             </th>
                                             <th class="sorting">
-                                                拥有的权限
+                                                角色描述
                                             </th>
                                             <th class="sorting">
-                                                角色描述
+                                                创建时间
                                             </th>
                                             <th class="sorting">
                                                 删除时间
@@ -150,8 +150,8 @@
                 'columns':[//按列显示从服务器端过来的数据
                     {'data':'id',"defaultContent": ""},
                     {'data':'role_name',"defaultContent": ""},
-                    {'data':'role_auth_id_list',"defaultContent": ""},
                     {'data':'note',"defaultContent": ""},
+                    {'data':'created_at',"defaultContent": ""},
                     {'data':'deleted_at',"defaultContent": ""},
                     {'data':'b',"defaultContent": ""},
                 ],

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Admin\AdminRole;
+use App\Models\Admin\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Admin\RoleAuth;
+use App\Models\Admin\Auth as RoleAuth;
 
 class RoleController extends Controller
 {
@@ -22,10 +22,10 @@ class RoleController extends Controller
     /**
      * 列表数据
      */
-    public function ajax_list(Request $request, AdminRole $role)
+    public function ajax_list(Request $request, Role $role)
     {
         if ($request->ajax()) {
-            $data = $role->select('id','role_name','role_auth_id_list','note','created_at', 'deleted_at')->withTrashed()->get();
+            $data = $role->select('id','role_name','note','created_at', 'deleted_at')->withTrashed()->get();
             $cnt = count($data);
             $info = [
                 'draw' => $request->get('draw'),
@@ -54,7 +54,7 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,AdminRole $adminRole)
+    public function store(Request $request,Role $role)
     {
         $data = $request->only('role_name','role_auth_id_list','note','created_at', 'deleted_at');
         $role = [
@@ -76,7 +76,7 @@ class RoleController extends Controller
         }
         #role_auth_id_list转json存储
         $data['role_auth_id_list'] = json_encode($data['role_auth_id_list']);
-        $res = $adminRole->create($data);
+        $res = $role->create($data);
         if ($res->id) {
             // 如果添加数据成功，则返回列表页
             return ['status' => "success", 'msg' => '添加成功'];
@@ -102,7 +102,7 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(AdminRole $role,RoleAuth $auth)
+    public function edit(Role $role,RoleAuth $auth)
     {
         $data['role'] = $role;
         $data['auth'] = $auth->all();
@@ -116,11 +116,11 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AdminRole $adminRole)
+    public function update(Request $request, Role $role)
     {
         $data = $request->only('role_name','role_auth_id_list','note','created_at', 'deleted_at');
         $role = [
-            'role_name' => 'nullable|alpha_num|between:2,8|unique:role,role_name,'.$adminRole->id,
+            'role_name' => 'nullable|alpha_num|between:2,8|unique:role,role_name,'.$role->id,
             'role_auth_id_list' => 'nullable|array',
             'note' => 'nullable|string',
 
@@ -138,7 +138,7 @@ class RoleController extends Controller
         }
         #role_auth_id_list转json存储
         $data['role_auth_id_list'] = json_encode($data['role_auth_id_list']);
-        $res = $adminRole->update($data);
+        $res = $role->update($data);
         if ($res) {
             // 如果添加数据成功，则返回列表页
             return ['status' => "success", 'msg' => '更新成功'];

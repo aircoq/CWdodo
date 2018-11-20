@@ -24,18 +24,6 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">拥有的权限</label>
-                    <div class="col-sm-7">
-                        @foreach($auth as $v)
-                            <label>
-                                <input type="checkbox" name="role_auth_id_list[]" id="role_auth_id_list" value="{{ $v->id }}">
-                                {{ $v->auth_name }}
-                            </label>
-
-                        @endforeach
-                    </div>
-                </div>
-                <div class="form-group">
                     <label class="col-sm-2 control-label">角色描述</label>
                     <div class="col-sm-10">
                         <textarea class="textarea" style="width: 70%; height: 200px; font-size: 14px;" placeholder="管理员的备注" name="note"></textarea>

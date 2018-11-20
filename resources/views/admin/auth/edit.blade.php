@@ -19,7 +19,7 @@
                     {{ method_field('put') }}
                     <div class="box-body">
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">权限名称</label>
+                            <label class="col-sm-2 control-label">模块/权限名称</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="权限名称，显示在菜单栏的名称" name="auth_name" id="auth_name" value="{{ $auth->auth_name }}"/>
                             </div>
@@ -96,6 +96,14 @@
                             <label class="col-sm-2 control-label">权限描述</label>
                             <div class="col-sm-10">
                                 <textarea class="textarea" style="width: 70%; height: 200px; font-size: 14px;" placeholder="管理员的备注" name="auth_desc">{{ $auth->auth_desc }}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">提示</label>
+                        <div class="col-sm-10">
+                            <div style="width:70%;">
+                                一层菜单为：显示是，可用否，控制器方法为空；二级菜单为显示是，可用是，只填控制器，方法‘index’需省略；三级一般为显示否，可用是（按钮类型），方法和控制器必填
                             </div>
                         </div>
                     </div>

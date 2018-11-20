@@ -58,12 +58,14 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">角色</font></font></label>
-                            <div class="col-sm-10">
-                                <select class="form-control" name="role_id" style="width:70%;">
-                                    <option value="1"><font  style="vertical-align: inherit;"><font style="vertical-align: inherit;">选项1</font></font></option>
-                                    <option value="2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">选项2</font></font></option>
-                                </select>
+                            <label class="col-sm-2 control-label">拥有的权限</label>
+                            <div class="col-sm-7">
+                                @foreach($auth as $v)
+                                    <label>
+                                        <input type="checkbox" name="role_auth_id_list[]" id="role_auth_id_list" value="{{ $v->id }}">
+                                        {{ $v->auth_name }}
+                                    </label>
+                                @endforeach
                             </div>
                         </div>
                         <div class="form-group">

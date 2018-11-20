@@ -82,7 +82,7 @@
                                             <td>username</td>
                                             <td>avatar</td>
                                             <td>status</td>
-                                            <td>role_id</td>
+                                            <td>role_class</td>
                                             <td>agency_id</td>
                                             <td>last_login</td>
                                             <td>deleted_at</td>
@@ -150,8 +150,8 @@
         $(function (){
             /** 数据渲染 ***/
             //隐藏无权限部分
-            var role_id_now = "<?php echo(Auth::guard('admin')->user()->role_id); ?>";//当前用户role_id
-            if (role_id_now == '*') {//当前是超级管理员
+            var role_class_now = "<?php echo(Auth::guard('admin')->user()->role_class); ?>";//当前用户role_class
+            if (role_class_now == '*') {//当前是超级管理员
                 /* database 插件  */
                 $('#dataTables').DataTable({
                     "lengthMenu":[[10,20,50,-1],[10,20,50,'全部']],
@@ -177,7 +177,7 @@
                         {'data':'username',"defaultContent": ""},
                         {'data':'',"defaultContent": ""},
                         {'data':'',"defaultContent": "暂无"},
-                        {'data':'role_id',"defaultContent": ""},
+                        {'data':'role_class',"defaultContent": ""},
                         {'data':'agency_id',"defaultContent": ""},
                         {'data':'last_login',"defaultContent": ""},
                         {'data':'deleted_at',"defaultContent": ""},
@@ -251,7 +251,7 @@
                         "orderable": false
                     }],
                     "ajax": {
-                        "url": "{{ url('admin/admin/ajax_list') }}",// 服务端uri地址，显示数据的uri
+                        "url": "{{ url('admin/admin/list') }}",// 服务端uri地址，显示数据的uri
                         "type": "post",   // ajax 的http请求类型
                         'headers': { 'X-CSRF-TOKEN' : '{{ csrf_token() }}' },
                     },
@@ -260,7 +260,7 @@
                         {'data':'username',"defaultContent": ""},
                         {'data':'',"defaultContent": ""},
                         {'data':'',"defaultContent": "暂无"},
-                        {'data':'role_id',"defaultContent": ""},
+                        {'data':'role_class',"defaultContent": ""},
                         {'data':'agency_id',"defaultContent": ""},
                         {'data':'last_login',"defaultContent": ""},
                         {'data':'deleted_at',"defaultContent": ""},

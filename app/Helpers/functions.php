@@ -54,3 +54,13 @@ function uploadBase64Img($request,$img_path,$img_name = null ){
 
     }
 }
+
+/**
+ * 在数据库中获取的数据 Collection 转数组
+ * 就是这么吊！
+ * @param $obj
+ * @return mixed
+ */
+function obj_arr ($obj){
+    return json_decode(json_encode($obj),true);
+}

@@ -67,18 +67,10 @@ class IndexController extends Controller
     }
 
     /**
-     * 用户协议
+     * 404页面
      */
-    public function reg_protocol()
+    public function err404()
     {
-        return view('home.index.reg_protocol');
-    }
-
-    /**
-     * 隐私政策
-     */
-    public function privacy()
-    {
-        return view('home.index.privacy');
+        return view('admin.index.404');
     }
 }

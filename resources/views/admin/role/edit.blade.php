@@ -31,7 +31,6 @@
                                 <input type="checkbox" name="role_auth_id_list[]" id="role_auth_id_list" value="{{ $v->id }}">
                                 {{ $v->auth_name }}
                             </label>
-
                         @endforeach
                     </div>
                 </div>

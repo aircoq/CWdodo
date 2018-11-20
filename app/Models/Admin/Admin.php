@@ -18,7 +18,7 @@ class Admin extends Authenticatable
     //是否开启时间戳,自动维护时间戳
 //    protected $timestamps = false;
     //过滤，只有以下字段才能被修改
-    protected $fillable = ['id','username','phone','email','password','role_id','sex', 'admin_status', 'avatar','friends_list','last_ip','last_login','login_total','remember_token','agency_id','note','created_at','updated_at', 'deleted_at'];
+    protected $fillable = ['id','username','phone','email','password','role_class','sex', 'admin_status', 'avatar','friends_list','last_ip','last_login','login_total','remember_token','agency_id','note','created_at','updated_at', 'deleted_at'];
     //隐藏字段
     protected $hidden = ['password','remember_token'];
     // 列表页显示的字段
@@ -26,22 +26,20 @@ class Admin extends Authenticatable
     # 用户和角色的模型关联关系
     public function roles()
     {
-        return $this->belongsToMany(AdminRole::class,'role');
+        return $this->belongsToMany(Role::class, 'admin_role_related', 'admin_id', 'admin_role_id')->withPivot('admin_id', 'admin_role_id');
     }
-    /****************************************
-     * 封装一个方法方便使用 1. 需要的权限 2. 遍历当期那用户拥有的所有权限 3. 再通过角色判断是否有当前需要的权限
-     ****************************************/
+    /**
+     * 判断是否拥有该路由的权限的方法
+     * @param $authName
+     * @return bool|string
+     */
     public function hasAuth($authName)
     {
-        foreach ($this->roles as $role) {
-//            if ($role->$authName->where('name', $authName)->exists()) {
-//                return true;;
-//            }
+        foreach ($this->roles as $role) { //$role admin_role模型
+            if ($role->getAuth()->where('route_name', $authName)->exists()) {
+                return true;
+            }
         }
         return false;
     }
-
-
-
-
 }

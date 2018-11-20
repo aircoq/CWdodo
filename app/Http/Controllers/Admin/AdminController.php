@@ -15,7 +15,7 @@ class AdminController extends Controller
     /**
      * 管理员首页
      */
-    public function index()
+    public function index()//获取当前用户的菜单
     {
         return view('admin.admin.index');
     }
@@ -26,10 +26,10 @@ class AdminController extends Controller
     public function ajax_list(Request $request, Admin $admin)
     {
         if ($request->ajax()) {
-            if(Auth::guard('admin')->user()->role_id == '*') {//管理员查看包括软删除的用户
-                $data = $admin->select('id','username','avatar','role_id','admin_status','agency_id','note','deleted_at')->withTrashed()->get();
+            if(Auth::guard('admin')->user()->role_class == '*') {//管理员查看包括软删除的用户
+                $data = $admin->select('id','username','avatar','role_class','admin_status','agency_id','note','deleted_at')->withTrashed()->get();
             }else{
-                $data = $admin->select('id','username','avatar','role_id','admin_status','agency_id','note','deleted_at')->get();
+                $data = $admin->select('id','username','avatar','role_class','admin_status','agency_id','note','deleted_at')->get();
             }
             $cnt = count($data);
             $info = [
@@ -46,7 +46,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        if(Auth::guard('admin')->user()->role_id == '*'){//重置屏蔽项
+        if(Auth::guard('admin')->user()->role_class == '*'){//重置屏蔽项
             return view('admin.admin.create');
         }
         echo '您暂无权限！';
@@ -54,13 +54,13 @@ class AdminController extends Controller
 
     /**
      * 新增管理员
-     *  ['username','password','role_id','phone','nickname','email','sex',
+     *  ['username','password','role_class','phone','nickname','email','sex',
      *  ,'avatar','last_ip','last_login']
      */
     public function store(Request $request,Admin $admin)
     {
-        if ($request->ajax() && Auth::guard('admin')->user()->role_id == '*') {//重置屏蔽项目 Auth::guard('admin')->user()->role_id == '*'
-            $data = $request->only('username','sex','phone','email','password','confirm_password','admin_status','role_id','avatar','note','accepted');
+        if ($request->ajax() && Auth::guard('admin')->user()->role_class == '*') {//重置屏蔽项目 Auth::guard('admin')->user()->role_class == '*'
+            $data = $request->only('username','sex','phone','email','password','confirm_password','admin_status','avatar','note','accepted');
             $role = [
                 'username' => 'required|alpha_num|between:5,12|unique:admin',
                 'sex' => 'integer',
@@ -68,7 +68,7 @@ class AdminController extends Controller
                 'email' => 'required|email|unique:admin',
                 'password' => 'required|between:6,20|same:confirm_password',
                 'admin_status' => 'integer',
-                'role_id' => 'required|exists:role,id',
+                'role_class' => 'required|in:'*',0,1,2',
                 'avatar'   => 'file|image|mimes:png,gif,jpeg,jpg|max:600',
                 'note' => 'nullable|string|between:0,100',
 //                'accepted' => 'accepted',
@@ -89,8 +89,8 @@ class AdminController extends Controller
                 'password.between' => '密码长度必须为6到20位',
                 'password.same' => '密码不一致',
                 'admin_status.integer' => '请正确填写状态',
-                'role_id.required' => '角色名必须填写',
-                'role_id.exists' => '角色不存在',
+                'role_class.required' => '角色名必须填写',
+                'role_class.exists' => '角色不存在',
                 'avatar.file'      => '头像上传失败！',
                 'avatar.image'     => '头像必须是图片格式！',
                 'avatar.mimes'     => '头像的文件格式不正确！',
@@ -151,7 +151,7 @@ class AdminController extends Controller
      */
     public function update(Request $request,Admin $admin)
     {
-        $data = $request->only('id','username','sex','phone','email','password','confirm_password','admin_status','role_id','note');
+        $data = $request->only('id','username','sex','phone','email','password','confirm_password','admin_status','role_class','note');
         $role = [
             'username' => 'nullable|alpha_num|between:5,12|unique:admin,username,'.$admin->id,
             'sex' => 'nullable|integer',
@@ -159,7 +159,7 @@ class AdminController extends Controller
             'email' => 'nullable|email|unique:admin,email,'.$admin->id,
             'password' => 'nullable|between:6,20|same:confirm_password',
             'admin_status' => 'nullable|integer',
-            'role_id' => 'nullable|exists:role,id',
+            'role_class' => 'required|in:'*',0,1,2',
             'note' => 'nullable|string|between:0,100',
         ];
         $message = [
@@ -174,7 +174,7 @@ class AdminController extends Controller
             'password.between' => '密码长度必须为6到20位',
             'password.same' => '密码不一致',
             'admin_status.integer' => '请正确填写状态',
-            'role_id.exists' => '角色不存在',
+            'role_class.in' => '角色不存在',
             'note.string' => '备注不正确',
             'note.between' => '备注最大100个字节',
         ];
@@ -183,9 +183,9 @@ class AdminController extends Controller
             return ['status' => 'fail', 'msg' => $validator->messages()->first()];
         }
         # 修改系统管理员的权限 1.超级管理员修改任何人的 2.普通管理员修改自己的信息
-        if(Auth::guard('admin')->user()->role_id == '*'){//1.当前是超级管理员可以修改任何人
-            if($admin->role_id == '*' && Auth::guard('admin')->user()->id == $admin->id){//如果修改的是超级管理员信息：只能修改自己
-                $data['role_id'] = '*';
+        if(Auth::guard('admin')->user()->role_class == '*'){//1.当前是超级管理员可以修改任何人
+            if($admin->role_class == '*' && Auth::guard('admin')->user()->id == $admin->id){//如果修改的是超级管理员信息：只能修改自己
+                $data['role_class'] = '*';
                 $data['admin_status'] = '1';
             }
         }else{//2.当前是普通管理员：只能修改自己
@@ -193,7 +193,7 @@ class AdminController extends Controller
             if($admin->id != $user_id){//修改自己的信息
                 return ['status' => 'fail', 'msg' => '危险！您暂无权限修改此项'];
             }
-            unset($data['role_id']);//无权限修改项
+            unset($data['role_class']);//无权限修改项
             unset($data['admin_status']);//无权限修改项
         }
         $data['password'] = empty($data['password']) ? null : bcrypt($data['password']);
@@ -211,8 +211,8 @@ class AdminController extends Controller
     public function destroy(Admin $admin)
     {
         # 只有超级管理员才可以操作
-        if(Auth::guard('admin')->user()->role_id == '*') {//1.当前是超级管理员可以禁用任何人
-            if ($admin->role_id == '*') {//超级管理员不能被删除
+        if(Auth::guard('admin')->user()->role_class == '*') {//1.当前是超级管理员可以禁用任何人
+            if ($admin->role_class == '*') {//超级管理员不能被删除
                 return ['status' => 'fail', 'msg' => '超级管理员不能被删除！'];
             }
             $res = $admin->delete();
@@ -231,7 +231,7 @@ class AdminController extends Controller
     {
         if ($request->ajax()) {
             # 只有超级管理员才可以操作
-            if (Auth::guard('admin')->user()->role_id == '*') {//当前是超级管理员可以
+            if (Auth::guard('admin')->user()->role_class == '*') {//当前是超级管理员可以
                 $id = $request->only('id');
                 $res = $admin->where('id', $id)->restore();
                 if ($res) {
@@ -265,7 +265,7 @@ class AdminController extends Controller
                 if (file_put_contents($new_file, base64_decode(str_replace($result[1], '', $base64_image_content)))) {//将图片保存到指定的位置，并更新数据库
                     try{
                         //如果是超级管理员则可以更改任何人的头像，普通管理员只能修改自己的
-                        $admin_role = Auth::guard('admin')->user()->role_id;
+                        $admin_role = Auth::guard('admin')->user()->role_class;
                         if($admin_role == '*'){
                             $id = Redis::get('edit_admin_id_avatar');//传入的用户id
                         }else{
@@ -301,7 +301,7 @@ class AdminController extends Controller
                 return redirect()->back()->withErrors(['id非法']);
             }
             # 无权限的返回去 不是超级管理员只能编辑自己的
-            $admin_role = Auth::guard('admin')->user()->role_id;
+            $admin_role = Auth::guard('admin')->user()->role_class;
             if($admin_role != '*' ){//不是超级管理员
                 $id_now = Auth::guard('admin')->user()->id;//当前用户id
                 if($id_now != $data['edit_id']){//不是在编辑自己
