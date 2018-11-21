@@ -24,7 +24,7 @@
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="{{ url('admin/index') }}"><i class="fa fa-dashboard"></i>系统首页</a></li>
-                    <li class="active">角色管理</li>
+                    <li class="active">商品类型管理</li>
                 </ol>
             </section>
             <!-- 主要内容 -->
@@ -36,7 +36,7 @@
                     <div class="box-header">
                         <h3 class="box-title">商品类型表</h3>
                         <a class="btn btn-box-tool btn-xs"  href="javascript:;" onclick="admin_add('添加','{{ url('admin/goods_type/create')  }}','800','500')" id="a-admin-add">
-                            <font style="vertical-align:inherit; color:#3c8dbc;"><font style="font-size:14px;"><i class="fa fa-fw fa-user-plus"></i>新增类型</font></font>
+                            <font style="vertical-align:inherit; color:#3c8dbc;"><font style="font-size:14px;"><i class="fa fa-fw fa-plus"></i>新增类型</font></font>
                         </a>
                     </div>
                     <!-- /.box-header -->

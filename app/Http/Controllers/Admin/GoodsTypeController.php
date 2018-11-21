@@ -46,7 +46,7 @@ class GoodsTypeController extends Controller
             'role_name.string' => '名称长度为2到8位字节组成',
             'role_name.between' => '名称长度为2到8位字节组成',
             'role_name.unique' => '角色名重复',
-            'note.string' => '描述的值必须为字符串格式'
+            'mark_up.string' => '描述的值必须为字符串格式'
         ];
         $validator = Validator::make($data, $role, $message);
         if ($validator->fails()) {
@@ -103,7 +103,7 @@ class GoodsTypeController extends Controller
             'role_name.string' => '名称长度为2到8位字节组成',
             'role_name.between' => '名称长度为2到8位字节组成',
             'role_name.unique' => '角色名重复',
-            'note.string' => '描述的值必须为字符串格式'
+            'mark_up.string' => '描述的值必须为字符串格式'
         ];
         $validator = Validator::make($data, $role, $message);
         if ($validator->fails()) {
@@ -119,7 +119,7 @@ class GoodsTypeController extends Controller
     }
 
     /**
-     *
+     *软删除
      */
     public function destroy(GoodsType $goodsType)
     {
@@ -132,6 +132,12 @@ class GoodsTypeController extends Controller
         }
     }
 
+    /**
+     * 回复软删除
+     * @param Request $request
+     * @param GoodsType $goodsType
+     * @return array
+     */
     public function re_store(Request $request,GoodsType $goodsType)
     {
         if ($request->ajax()) {

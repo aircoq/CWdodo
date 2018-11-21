@@ -29,7 +29,7 @@ class CreateGoodsModel extends Migration
             $table->increments('id')->comment('主键ID');
             $table->string('attr_name', 50)->comment('属性名称');
             $table->unsignedInteger('type_id')->comment('商品类型id');
-            $table->enum('attr_type',['0','1'])->default(0)->comment('是否可以多选：0单选；1多选');
+            $table->enum('attr_type',['0','1'])->default(0)->comment('是否可以多选：0单选；1多选但唯一');
             $table->enum('attr_input_type',['0','1'])->default(0)->comment('属性的录入方式：0手工;1列表选择');
             $table->string('attr_values',255)->nullable()->comment('属性的可选值，当属性的录入方式为列表选择的时候对应的可选值，使用逗号进行分割');
             $table->unsignedTinyInteger('sort_order')->nullable()->comment('属性排序字段');

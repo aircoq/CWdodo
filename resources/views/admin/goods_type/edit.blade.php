@@ -56,36 +56,12 @@
             /***编写Javascript表单验证区域*/
             $("#form-admin-add").validate({
                 rules:{//规则
-                    nickname:{
+                    type_name:{
                         required:true,
-                        rangelength:[3,12]
-                    },
-                    phone:{
-                        required:true,
-                        minlength:11,
-                        maxlength:11,
-                        digits:true
-                    },
-                    email:{
-                        required:true,
-                        email:true,
-                    },
-                    password:{
-                        required:true,
-                        rangelength:[5,20]
-                    },
-                    confirm_password:{
-                        required:true,
-                        equalTo: "#password"
-                    },
-                    form_check:{
-                        required:true,
+                        rangelength:[1,12]
                     },
                 },
                 messages: {//自定义提示信息
-                    form_check:{
-                        required:"请仔细阅读相关条款",
-                    },
                 },
                 onkeyup:false,
                 focusCleanup:false,
