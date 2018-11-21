@@ -6,6 +6,7 @@ use App\Models\Admin\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -25,7 +26,7 @@ class AuthController extends Controller
     public function ajax_list(Request $request, Auth $auth)
     {
         if ($request->ajax()) {
-            $data = $auth->select('id','auth_name','auth_controller','auth_action','auth_pid','route_name','is_menu','is_enable','sort_order','auth_desc','created_at','updated_at', 'deleted_at')->withTrashed()->get();
+            $data = $auth->select('id','auth_name','auth_controller','auth_action','auth_pid','route_name','is_menu','is_enable','path','sort_order','auth_desc','created_at','updated_at', 'deleted_at')->withTrashed()->get();
             $cnt = count($data);
             $info = [
                 'draw' => $request->get('draw'),
@@ -86,16 +87,19 @@ class AuthController extends Controller
             return ['status' => 'fail', 'msg' => $validator->messages()->first()];
         }
         # 层级关系为：父级的层级+1
-        if($data['auth_pid'] === 0){//顶级菜单
+        if($data['auth_pid'] == 0){//当前为顶级菜单
             $data['path'] = 1;
+            $data['first_pid'] = 0;
         }else{
-            $p_path = $auth->where('id',$data['auth_pid'])->first();
-            $data['path'] = $p_path['path']+1;
+            $p_auth = $auth->where('id',$data['auth_pid'])->first();
+            $data['path'] = $p_auth['path']+1;
+            $data['first_pid'] = $p_auth['first_pid']==0 ? $p_auth['id'] : $p_auth['first_pid'];
         }
         if(!empty($data['auth_controller'])){
             $data['action'] = empty($data['auth_action']) ? 'index' : $data['auth_action'];
             $data['route_name'] = $data['auth_controller'].'.'.$data['action'];
         }
+//        dump($data);die();
         $res = $auth->create($data);
         if ($res->id) {
             // 如果添加数据成功，则返回列表页
@@ -103,6 +107,7 @@ class AuthController extends Controller
         }else{
             return ['status' => 'fail', 'msg' => '添加失败'];
         }
+
     }
 
     /**
@@ -171,12 +176,14 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return ['status' => 'fail', 'msg' => $validator->messages()->first()];
         }
-        # 层级关系为：父级的层级+1
-        if($data['auth_pid'] === 0){//顶级菜单
+        # 层级关系、一级分支
+        if($data['auth_pid'] == 0){//当前为顶级菜单
             $data['path'] = 1;
+            $data['first_pid'] = 0;
         }else{
-            $p_path = $auth->where('id',$data['auth_pid'])->first();
-            $data['path'] = $p_path['path']+1;
+            $p_auth = $auth->where('id',$data['auth_pid'])->first();
+            $data['path'] = $p_auth['path']+1;
+            $data['first_pid'] = $p_auth['first_pid']==0 ? $p_auth['id'] : $p_auth['first_pid'];
         }
         # 定义route_name字段
         if(!empty($data['auth_controller'])){

@@ -56,8 +56,8 @@
                                             <th class="sorting td-manage" tabindex="2">
                                                 角色描述
                                             </th>
-                                            <th class="sorting td-manage" tabindex="3">
-                                                拥有权限
+                                            <th class="sorting td-manage" tabindex="3" style="width: 50%">
+                                                角色拥有的权限
                                             </th>
                                             <th class="sorting" tabindex="4">
                                                 创建时间
@@ -77,6 +77,7 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
+                                            <td></td>
                                             <td class="td-manage">do</td>
                                         </tr>
                                         </tbody>
@@ -92,7 +93,7 @@
                                                 角色描述
                                             </th>
                                             <th class="sorting">
-                                                拥有权限
+                                                角色拥有的权限
                                             </th>
                                             <th class="sorting">
                                                 创建时间

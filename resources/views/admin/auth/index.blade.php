@@ -72,15 +72,18 @@
                                                 是否可用
                                             </th>
                                             <th class="sorting" tabindex="8">
-                                                排序权重
+                                                层级
                                             </th>
                                             <th class="sorting" tabindex="9">
-                                                权限描述
+                                                排序权重
                                             </th>
                                             <th class="sorting" tabindex="10">
+                                                权限描述
+                                            </th>
+                                            <th class="sorting" tabindex="11">
                                                 删除时间
                                             </th>
-                                            <th class="sorting td-manage" tabindex="11">
+                                            <th class="sorting td-manage" tabindex="12">
                                                 操作
                                             </th>
                                         </tr>
@@ -125,6 +128,9 @@
                                             </th>
                                             <th class="sorting">
                                                 是否可用
+                                            </th>
+                                            <th class="sorting">
+                                                层级
                                             </th>
                                             <th class="sorting">
                                                 排序权重
@@ -197,6 +203,7 @@
                     {'data':'auth_pid',"defaultContent": ""},
                     {'data':'',"defaultContent": ""},
                     {'data':'',"defaultContent": ""},
+                    {'data':'path',"defaultContent": ""},
                     {'data':'sort_order',"defaultContent": ""},
                     {'data':'auth_desc',"defaultContent": ""},
                     {'data':'deleted_at',"defaultContent": ""},

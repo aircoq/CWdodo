@@ -19,6 +19,7 @@ class CreateAdminRoleAuthModel extends Migration
             $table->string('route_name')->nullable()->comment('路由别名，如：admin.create');
             $table->enum('is_menu',['0','1'])->default(0)->comment('是否作为左边的菜单显示:0否(可能是button)，1是');
             $table->enum('is_enable',['0','1'])->default(1)->comment('是否可用:0否(只是作为菜单显示)，1是');
+            $table->integer('first_pid')->comment('一级父ID，指向顶级菜单path=1 pid=0；顶级菜单为其本身');
             $table->unsignedInteger('path')->comment('层级关系');//减少递归内存消耗
             $table->unsignedInteger('sort_order')->nullable()->comment('显示时的排序字段，越大越靠前');
             $table->string('auth_desc')->nullable()->comment('权限描述');
