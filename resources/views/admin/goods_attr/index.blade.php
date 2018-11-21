@@ -35,7 +35,7 @@
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">系统管理员表</h3>
-                        <a class="btn btn-box-tool btn-xs"  href="javascript:;" onclick="admin_add('添加管理员','{{ url('admin/admin/create')  }}','800','500')">
+                        <a class="btn btn-box-tool btn-xs"  href="javascript:;" onclick="admin_add('添加','{{ url('admin/goods_attr/create')  }}','800','500')">
                             <font style="vertical-align:inherit; color:#3c8dbc;"><font style="font-size:14px;"><i class="fa fa-fw fa-user-plus"></i>新增系统管理员</font></font>
                         </a>
                     </div>

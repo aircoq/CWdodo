@@ -48,8 +48,12 @@ Route::group(['namespace' => 'Admin','prefix'=>'admin'],function (){
         Route::post('/inn/list','InnForPetController@ajax_list')->name('inn.list');//门店数据展示页
         Route::post('/inn/restore','InnForPetController@re_store')->name('inn.restore');//恢复门店
         # 商品模块
-        Route::resource('goods_type','GoodsTypeController');
+        Route::resource('goods_type','GoodsTypeController');//商品类型
+        Route::post('goods_type/list','GoodsTypeController@ajaxList')->name('goods_type.list');
+        Route::post('goods_type/restore','GoodsTypeController@re_store')->name('goods_type.restore');
         Route::resource('goods_attr','GoodsAttrController');
+        Route::post('goods_attr/list','GoodsAttrController@ajaxList')->name('goods_attr.list');
+        Route::post('goods_attr/restore','GoodsAttrController@re_store')->name('goods_attr.restore');
         Route::resource('goods_category','GoodsCategoryController');
         Route::resource('goods_brand','GoodsBrandController');
         Route::resource('goods','GoodsController');

@@ -13,6 +13,16 @@ class CreateGoodsModel extends Migration
      */
     public function up()
     {
+        # 商品类型
+        Schema::create('goods_type',function(Blueprint $table) {
+            $table->engine = 'InnoDB';
+            $table->smallincrements('id')->comment('主键ID');
+            $table->string('type_name', 50)->unique()->comment('商品类型名');
+            $table->text('mark_up')->nullable()->comment('商品类型说明');
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
         # 商品属性
         Schema::create('goods_attr',function(Blueprint $table) {
             $table->engine = 'InnoDB';
@@ -25,16 +35,6 @@ class CreateGoodsModel extends Migration
             $table->unsignedTinyInteger('sort_order')->nullable()->comment('属性排序字段');
             $table->text('note')->nullable()->comment('属性描述');
             $table->enum('is_linked',['0','1'])->default(0)->comment('是否关联:0不关联；1关联,那么用户在购买该商品时，推荐相同属性给用户');
-            $table->timestamps();
-            $table->softDeletes();
-        });
-
-        # 商品类型
-        Schema::create('goods_type',function(Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->smallincrements('id')->comment('主键ID');
-            $table->string('type_name', 50)->unique()->comment('商品类型名');
-            $table->text('mark_up')->nullable()->comment('商品类型描述');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -10,7 +10,7 @@ class GoodsType extends Model
     //使用软删除
     use SoftDeletes;
     //指定表
-    protected $table = 'goods_attr';
+    protected $table = 'goods_type';
     //指定主键
     protected $primaryKey = 'id';
     //应更改为日期的属性

@@ -99,7 +99,6 @@ class AuthController extends Controller
             $data['action'] = empty($data['auth_action']) ? 'index' : $data['auth_action'];
             $data['route_name'] = $data['auth_controller'].'.'.$data['action'];
         }
-//        dump($data);die();
         $res = $auth->create($data);
         if ($res->id) {
             // 如果添加数据成功，则返回列表页
