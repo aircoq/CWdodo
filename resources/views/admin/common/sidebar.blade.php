@@ -40,9 +40,11 @@
               </span>
                 </a>
                 <ul class="treeview-menu">
+                    @if(!empty(session('menus')[$menu->id]))
                     @foreach(session('menus')[$menu->id] as $k )
                     <li><a href="{{ url("admin/$k->auth_controller") }}" target="menuFrame">{{ $k->auth_name }}</a></li>
                     @endforeach
+                    @endif
                 </ul>
             </li>
             @endforeach
