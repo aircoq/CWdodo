@@ -8,28 +8,27 @@
         <div class="tab-content">
             <!-- Home tab content -->
             <div class="tab-pane active" id="control-sidebar-home-tab">
-                <h3 class="control-sidebar-heading">Recent Activity</h3>
+                <h3 class="control-sidebar-heading">待办事项</h3>
                 <ul class="control-sidebar-menu">
                     <li>
                         <a href="javascript:;">
                             <i class="menu-icon fa fa-birthday-cake bg-red"></i>
 
                             <div class="menu-info">
-                                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+                                <h4 class="control-sidebar-subheading">兰登的生日</h4>
 
-                                <p>Will be 23 on April 24th</p>
+                                <p>4月23号</p>
                             </div>
                         </a>
                     </li>
                 </ul>
                 <!-- /.control-sidebar-menu -->
 
-                <h3 class="control-sidebar-heading">Tasks Progress</h3>
+                <h3 class="control-sidebar-heading">任务进展</h3>
                 <ul class="control-sidebar-menu">
                     <li>
                         <a href="javascript:;">
                             <h4 class="control-sidebar-subheading">
-                                Custom Template Design
                                 <span class="pull-right-container">
                     <span class="label label-danger pull-right">70%</span>
                   </span>
@@ -51,16 +50,16 @@
             <!-- Settings tab content -->
             <div class="tab-pane" id="control-sidebar-settings-tab">
                 <form method="post">
-                    <h3 class="control-sidebar-heading">General Settings</h3>
+                    <h3 class="control-sidebar-heading">一般设置</h3>
 
                     <div class="form-group">
                         <label class="control-sidebar-subheading">
-                            Report panel usage
+                            报告面板的使用
                             <input type="checkbox" class="pull-right" checked>
                         </label>
 
                         <p>
-                            Some information about this general settings option
+                            关于这个通用设置选项的一些信息
                         </p>
                     </div>
                     <!-- /.form-group -->

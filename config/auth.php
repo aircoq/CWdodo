@@ -44,7 +44,7 @@ return [
             'driver' => 'session',
             'provider' => 'user',
         ],
-        'admin' => [//新增一个验证规则
+        'admin' => [//管理员验证规则
             'driver' => 'session',
             'provider' => 'admin',
         ],

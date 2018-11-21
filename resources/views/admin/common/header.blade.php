@@ -24,7 +24,7 @@
                         <span class="label label-success">4</span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header">You have 4 messages</li>
+                        <li class="header"> 4 条新信息</li>
                         <li>
                             <!-- inner menu: contains the messages -->
                             <ul class="menu">
@@ -47,7 +47,7 @@
                             </ul>
                             <!-- /.menu -->
                         </li>
-                        <li class="footer"><a href="#">See All Messages</a></li>
+                        <li class="footer"><a href="#">查看所有信息</a></li>
                     </ul>
                 </li>
                 <!-- /.messages-menu -->
@@ -60,7 +60,7 @@
                         <span class="label label-warning">10</span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header">You have 10 notifications</li>
+                        <li class="header"> 10 条通知</li>
                         <li>
                             <!-- Inner Menu: contains the notifications -->
                             <ul class="menu">
@@ -72,7 +72,7 @@
                                 <!-- end notification -->
                             </ul>
                         </li>
-                        <li class="footer"><a href="#">View all</a></li>
+                        <li class="footer"><a href="#">查看所有</a></li>
                     </ul>
                 </li>
                 <!-- Tasks Menu -->
@@ -83,7 +83,7 @@
                         <span class="label label-danger">9</span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="header">You have 9 tasks</li>
+                        <li class="header">您有 9 个任务</li>
                         <li>
                             <!-- Inner menu: contains the tasks -->
                             <ul class="menu">
@@ -99,7 +99,7 @@
                                             <!-- Change the css width attribute to simulate progress -->
                                             <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar"
                                                  aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                <span class="sr-only">20% Complete</span>
+                                                <span class="sr-only">完成20%</span>
                                             </div>
                                         </div>
                                     </a>
@@ -108,7 +108,7 @@
                             </ul>
                         </li>
                         <li class="footer">
-                            <a href="#">View all tasks</a>
+                            <a href="#">查看所有进程</a>
                         </li>
                     </ul>
                 </li>

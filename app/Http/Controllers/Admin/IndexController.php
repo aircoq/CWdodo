@@ -15,7 +15,6 @@ class IndexController extends Controller
      */
     public function index()
     {
-//        dump(objArr( session('menus')));die();
         return view('admin.index.index');
     }
 
@@ -46,7 +45,6 @@ class IndexController extends Controller
             $remember = $request->only('online');
             $res1 = Auth::guard('admin')->attempt(['password' => $data['password'], 'username' => $data['username'], 'admin_status' => '1','deleted_at' => null],$remember);
             $res2 = Auth::guard('admin')->attempt(['password' => $data['password'], 'phone' => $data['username'], 'admin_status' => '1','deleted_at' => null], $remember);
-
             # 登录
             if ($res1 || $res2) {// 登录成功
                 # 获取当前用户权限菜单保存到cookie中

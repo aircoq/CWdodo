@@ -30,100 +30,28 @@
         <ul class="sidebar-menu" data-widget="tree">
         {{--<li class="header"></li>--}}
         <!-- Optionally, you can add icons to the links -->
-            @foreach( session('menus')[0] as $menu )
-            <li class="treeview">
-                <a href="#">
-                    {{--<i class="fa fa-link" target="menuFrame"></i> --}}
-                    <span>{{ $menu->auth_name }}</span>
-                    <span class="pull-right-container">
+            @if(!empty(session('menus')[0]))
+                @foreach( session('menus')[0] as $menu )
+                    <li class="treeview">
+                        <a href="#">
+                            {{--<i class="fa fa-link" target="menuFrame"></i> --}}
+                            <span>{{ $menu->auth_name }}</span>
+                            <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
-                </a>
-                <ul class="treeview-menu">
-                    @if(!empty(session('menus')[$menu->id]))
-                    @foreach(session('menus')[$menu->id] as $k )
-                    <li><a href="{{ url("admin/$k->auth_controller") }}" target="menuFrame">{{ $k->auth_name }}</a></li>
-                    @endforeach
-                    @endif
-                </ul>
-            </li>
-            @endforeach
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            {{--<li class="treeview">--}}
-                {{--<a href="#" target="menuFrame"><i class="fa fa-link"></i> <span>首页</span>--}}
-                    {{--<span class="pull-right-container">--}}
-                {{--<i class="fa fa-angle-left pull-right"></i>--}}
-              {{--</span>--}}
-                {{--</a>--}}
-                {{--<ul class="treeview-menu">--}}
-                    {{--<li><a href="{{ url('admin/index') }}" target="menuFrame">营业看板</a></li>--}}
-                    {{--<li><a href="#" target="menuFrame"></a></li>--}}
-                {{--</ul>--}}
-            {{--</li>--}}
-            {{--<li class="treeview">--}}
-                {{--<a href="#" target="menuFrame"><i class="fa fa-link"></i> <span>单店管理</span>--}}
-                    {{--<span class="pull-right-container">--}}
-                {{--<i class="fa fa-angle-left pull-right"></i>--}}
-              {{--</span>--}}
-                {{--</a>--}}
-                {{--<ul class="treeview-menu">--}}
-                    {{--<li><a href="#" target="menuFrame">房间管理</a></li>--}}
-                    {{--<li><a href="{{ url('admin/inn') }}" target="menuFrame">店铺管理</a></li>--}}
-                {{--</ul>--}}
-            {{--</li>--}}
-            {{--<li class="treeview">--}}
-                {{--<a href="#" target="menuFrame"><i class="fa fa-link" ></i> <span>用户管理</span>--}}
-                    {{--<span class="pull-right-container">--}}
-                {{--<i class="fa fa-angle-left pull-right"></i>--}}
-              {{--</span>--}}
-                {{--</a>--}}
-                {{--<ul class="treeview-menu">--}}
-                    {{--<li><a href="#" target="menuFrame">地址管理</a></li>--}}
-                    {{--<li><a href="{{ url('admin/user') }}" target="menuFrame">用户管理</a></li>--}}
-                {{--</ul>--}}
-            {{--</li>--}}
-            {{--<li class="treeview">--}}
-                {{--<a href="#"><i class="fa fa-link" target="menuFrame"></i> <span>系统管理员</span>--}}
-                    {{--<span class="pull-right-container">--}}
-                {{--<i class="fa fa-angle-left pull-right"></i>--}}
-              {{--</span>--}}
-                {{--</a>--}}
-                {{--<ul class="treeview-menu">--}}
-                    {{--<li><a href="{{ url('admin/auth') }}" target="menuFrame">权限管理</a></li>--}}
-                    {{--<li><a href="{{ url('admin/role') }}" target="menuFrame">角色管理</a></li>--}}
-                    {{--<li><a href="{{ url('admin/admin') }}" target="menuFrame">系统管理员</a></li>--}}
-                {{--</ul>--}}
-            {{--</li>--}}
-            {{--<li class="treeview">--}}
-                {{--<a href="#"><i class="fa fa-link" target="menuFrame"></i> <span>Multilevel</span>--}}
-                    {{--<span class="pull-right-container">--}}
-                {{--<i class="fa fa-angle-left pull-right"></i>--}}
-              {{--</span>--}}
-                {{--</a>--}}
-                {{--<ul class="treeview-menu">--}}
-                    {{--<li><a href="#" target="menuFrame">Link in level 2</a></li>--}}
-                    {{--<li><a href="#" target="menuFrame">Link in level 2</a></li>--}}
-                {{--</ul>--}}
-            {{--</li>--}}
+                        </a>
+                        <ul class="treeview-menu">
+                            @if(!empty(session('menus')[$menu->id]))
+                                @foreach(session('menus')[$menu->id] as $k )
+                                    <li><a href="{{ url("admin/$k->auth_controller") }}" target="menuFrame">{{ $k->auth_name }}</a></li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </li>
+                @endforeach
+            @endif
         </ul>
         <!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
 </aside>
-{{--<script>--}}
-    {{--var menus = "{{session('menus')}}";--}}
-    {{--alert(menus);--}}
-{{--</script>--}}

@@ -20,6 +20,7 @@ Route::any('/','Home\IndexController@index');//设置默认访问控制器方法
 Route::group(['namespace' => 'Admin','prefix'=>'admin'],function (){
 
     Route::match(['get', 'post'],'login','IndexController@login')->name('admin.login');//后台登陆
+    Route::get('logout','IndexController@logout');//后台登出
     Route::match(['get', 'post'],'err404','IndexController@err404')->name('admin.404');//404
     # 后台防翻墙
     Route::middleware(['CheckAdminAuth'])->group(function () {//带‘/’的只能ajax访问
@@ -38,7 +39,6 @@ Route::group(['namespace' => 'Admin','prefix'=>'admin'],function (){
         Route::resource('role','RoleController');
         Route::post('/role/list','RoleController@ajax_list')->name('role.list');//角色列表
         Route::post('/role/restore','RoleController@re_store')->name('role.restore');//恢复角色
-        Route::get('logout','IndexController@logout');
         # 用户模块
         Route::resource('user','UserController');
         Route::post('/user/list','UserController@ajax_list')->name('user.list');//用户数据展示页
@@ -55,20 +55,6 @@ Route::group(['namespace' => 'Admin','prefix'=>'admin'],function (){
         Route::resource('goods','GoodsController');
     });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
