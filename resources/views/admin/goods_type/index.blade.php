@@ -181,15 +181,18 @@
                     );
                     $(row).find('td:eq(-1)').html(
                         '<div class="btn-group">' +
+                        '<button type="button" class="btn btn-info" onclick="layer_show(' + '\'查看属性\',\'/admin/goods_type/'+data.id+'\',1200,800)" >' +
+                        '<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">查看属性</font></font>' +
+                        '</button>'+
                         '<button type="button" class="btn btn-info" onclick="admin_edit(' + '\'编辑\',\'/admin/goods_type/'+data.id+'/edit\',\''+data.id+'\')" >' +
                         '<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">编辑</font></font>' +
-                        '</button>' +
+                        '</button>'+
                         '<button type="button" class="btn btn-danger" onclick="admin_del(this,\''+data.id+'\',\''+data.type_name+'\')" >' +
                         '<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">删除</font></font>' +
-                        '</button>' +
+                        '</button>'+
                         '<button type="button" class="btn btn-warning" onclick="admin_restore(this,\''+data.id+'\',\''+data.type_name+'\')">' +
                         '<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">恢复</font></font>' +
-                        '</button>' +
+                        '</button>'+
                         '</div>'
                     ).attr('class','td-manage');
                 }

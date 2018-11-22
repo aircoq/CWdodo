@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Admin\GoodsAttr;
 use App\Models\Admin\GoodsType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -9,8 +10,19 @@ use Illuminate\Support\Facades\Validator;
 
 class GoodsTypeController extends Controller
 {
-    public function index()
+    public function index(Request $request,GoodsType $goodsType)
     {
+        if ($request->ajax()) {
+            $data = $goodsType->select('id','type_name','mark_up','deleted_at')->withTrashed()->get();
+            $cnt = count($data);
+            $info = [
+                'draw' => $request->get('draw'),
+                'recordsTotal' => $cnt,
+                'recordsFiltered' => $cnt,
+                'data' => $data,
+            ];
+            return $info;
+        }
         return view('admin.goods_type.index');
     }
 
@@ -61,15 +73,18 @@ class GoodsTypeController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+//    public function showPage(GoodsType $goodsType,GoodsAttr $goodsAttr)
+//    {
+//        return view('admin.goods_type.show');
+//    }
+
+
+
+    public function show(Request $request,GoodsType $goodsType,GoodsAttr $goodsAttr)
     {
-        //
+//        $data = $goodsAttr->where('type_id', $goodsType->id)->get();
+
+        return view('admin.goods_type.show');
     }
 
     /**
