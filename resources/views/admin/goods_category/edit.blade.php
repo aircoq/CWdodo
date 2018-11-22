@@ -11,99 +11,99 @@
 @endsection
 
 @section('content')
-    <div class="cl-sm-12">
-        <!-- /.box-header -->
-        <!-- form start -->
-        <form class="form-horizontal" id="form-admin-edit" action="{{ url('admin/admin/' . $user->id ) }}" method="post">
-            {{ csrf_field() }}
-            {{ method_field('put') }}
-            <div class="box-body">
-                <div class="form-group">
-                    <br/>
-                    <label class="col-sm-3 control-label"></label>
-                    <div class="col-sm-7">
-                        <a href="javascript:;" onclick="layer_show('上传头像','{{ url('admin/avatar_upload?id='.$user->id) }}','350','350')" id="a-admin-avatar">
-                            <img src="{{ url("$user->avatar" ? "$user->avatar" : 'sys_img/user_avatar.png') }}" style="width:15%;height:15%;display:flex;border-radius: 50%;align-items: center;justify-content:center;overflow: hidden;"/>
-                        </a>
+            <div class="cl-sm-12">
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form class="form-horizontal" id="form-admin-add" action="{{ url('admin/goods_category/'.$cate->id)  }}" method="post" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    {{ method_field('put') }}
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">分类名称</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="分类名称，显示在菜单栏" name="cate_name" id="cate_name" value="{{ $cate->cate_name }}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">父级菜单</font></font></label>
+                            <div class="col-sm-10">
+                                <select class="form-control" style="width:70%;" name="p_id">
+                                    <option value="0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">顶级菜单</font></font></option>
+                                    @foreach ($goods_category as $v)
+                                        <option value="{{ $v['id'] }}" id = 'option{{ $v['id'] }}'>
+                                            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                                                    <?php
+                                                        for ($i=$v['path'];$i>0;$i--){
+                                                            echo '&nbsp&nbsp&nbsp&nbsp&nbsp';
+                                                        }
+                                                    ?>
+                                                    {{ $v['cate_name'] }}
+                                            </font></font>
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">是否显示在导航栏</font></font></label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-4 radio">
+                                    <label>
+                                        <input type="radio" name="show_in_nav" id="show_in_nav1" value="1">是
+                                    </label>
+                                </div>
+                                <div class="col-sm-6 radio">
+                                    <label>
+                                        <input type="radio" name="show_in_nav" id="show_in_nav0" value="0">否
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">是否显示在前台</font></font></label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-4 radio">
+                                    <label>
+                                        <input type="radio" name="is_show" id="is_show1" value="1">是
+                                    </label>
+                                </div>
+                                <div class="col-sm-6 radio">
+                                    <label>
+                                        <input type="radio" name="is_show" id="is_show0" value="0">否
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">排序权重</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="数值越大排名越前" id="sort_order" name="sort_order" value="{{ $cate->sort_order }}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">分类描述</label>
+                            <div class="col-sm-10">
+                                <textarea class="textarea" style="width: 70%; height: 200px; font-size: 14px;" placeholder="分类描述" name="cat_desc">{{ $cate->cat_desc }}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">提示</label>
+                            <div class="col-sm-10">
+                                <div style="width:70%;">
+                                一层菜单为：显示是，可用否，控制器方法为空；二级菜单为显示是，可用是，只填控制器，方法‘index’需省略；三级一般为显示否，可用是（按钮类型），方法和控制器必填
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <br/>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">姓名</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="姓名" name="username" id="username" value="{{$user->username}}"/>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <label class="col-sm-2 control-label"></label>
+                        <div class="col-sm-10">
+                            <input type="submit" class="btn btn-primary radius" value="确认提交"/>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">性别</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" style="width:70%;" name="sex" >
-                            <option id="sex0" value="0">女</option>
-                            <option id="sex1" value="1">男</option>
-                            <option id="sex2" value="2">保密</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">手机</label>
-                    <div class="col-sm-10">
-                        <input type="tel" class="form-control" style="width:70%;display:inline;" placeholder="手机"  name="phone" id="phone" value="{{$user->phone}}"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">邮箱</label>
-                    <div class="col-sm-10">
-                        <input type="email" class="form-control" style="width:70%;display:inline;" placeholder="邮箱" name="email" id="email" value="{{$user->email}}">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">密码</label>
-                    <div class="col-sm-10">
-                        <input type="password" class="form-control" style="width:70%;display:inline;" placeholder="密码" id="password" name="password"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">确认密码</label>
-                    <div class="col-sm-10">
-                        <input type="password" class="form-control" style="width:70%;display:inline;" placeholder="确认密码" id="confirm_password" name="confirm_password">
-                    </div>
-                </div>
-                <div class="form-group" id="div-role-id">
-                    <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">角色</font></font></label>
-                    <div class="col-sm-10">
-                        <select class="form-control" name="role_id" style="width:70%;">
-                            <option value="1" id=""><font  style="vertical-align: inherit;"><font style="vertical-align: inherit;">选项1</font></font></option>
-                            <option value="2" id=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">选项2</font></font></option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group" id="div-admin-status">
-                    <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">账号状态</font></font></label>
-                    <div class="col-sm-10">
-                        <select class="form-control" style="width:70%;" name="admin_status">
-                            <option value="-2" id="admin_status-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">拒绝</font></font></option>
-                            <option value="-1" id="admin_status-1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">已停止</font></font></option>
-                            <option value="0" id="admin_status0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">未审核</font></font></option>
-                            <option value="1" id="admin_status1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通过</font></font></option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">备注</label>
-                    <div class="col-sm-10">
-                        <textarea class="textarea" style="width: 70%; height: 100px; font-size: 14px;" placeholder="备注" name="note"></textarea>
-                    </div>
-                </div>
+                </form>
             </div>
-            <!-- /.box-body -->
-            <div class="box-footer">
-                <label class="col-sm-2 control-label"></label>
-                <div class="col-sm-10">
-                    <input type="submit" class="btn btn-primary radius" value="确认提交"/>
-                </div>
-            </div>
-        </form>
-    </div>
     </div>
 @endsection
 
@@ -117,45 +117,18 @@
     <script type="text/javascript" src="{{ asset('plugins/jQueryUI/jquery.form.js')}}"></script>
     <script>
         $(function(){
-            /** 数据渲染 ***/
-            //隐藏无权限部分
-            var role_id_now = "<?php echo (Auth::guard('admin')->user()->role_id); ?>";//当前用户role_id
-            var role_id_edit = "<?php echo $user->role_id; ?>";//被编辑的用户id
-            if(role_id_now != '*' || role_id_edit=='*' ){//当前不是超级管理员或在编辑管理员
-                $('#div-role-id').remove();
-                $('#div-admin-status').remove();
-            }
-            $('#sex{{$user->sex}}').attr('selected','selected');//性别选中
-            $('#admin_status{{$user->admin_status}}').attr('selected','selected');//状态选中
-
+            $('#option{{$cate->p_id}}').attr('selected','selected');
+            $('#show_in_nav{{$cate->show_in_nav}}').attr('checked','true');
+            $('#is_show{{$cate->is_show}}').attr('checked','true');
             /***编写Javascript表单验证区域*/
-            $("#form-admin-edit").validate({
+            $("#form-admin-add").validate({
                 rules:{//规则
-                    username:{
-                        rangelength:[5,12]
-                    },
-                    phone:{
-                        minlength:11,
-                        maxlength:11,
-                        digits:true
-                    },
-                    email:{
-                        email:true,
-                    },
-                    password:{
-                        rangelength:[5,20]
-                    },
-                    confirm_password:{
-                        equalTo: "#password"
-                    },
-                    form_check:{
+                    cate_name:{
                         required:true,
+                        rangelength:[1,15]
                     },
                 },
                 messages: {//自定义提示信息
-                    form_check:{
-                        required:"请仔细阅读相关条款",
-                    },
                 },
                 onkeyup:false,
                 focusCleanup:false,
@@ -171,12 +144,12 @@
                                 skin: 'layer-ext-moon'
                             });
                         }else{ // 成功
-                            layer.msg('更新成功！', {
+                            layer.msg('添加成功！', {
                                 icon: 1,
                                 skin: 'layer-ext-moon'
                             },function(){
                                 parent.location.reload();
-                                var index = parent.layer.getFrameIndex(window.name);
+                                var index = parent.layer.getFrameIndex( window.name );
                                 parent.layer.close(index);
                             });
                         }

@@ -48,6 +48,7 @@ Route::group(['namespace' => 'Admin','prefix'=>'admin'],function (){
         Route::resource('goods_attr','GoodsAttrController');//商品属性
         Route::post('goods_attr/restore','GoodsAttrController@re_store')->name('goods_attr.restore');
         Route::resource('goods_category','GoodsCategoryController');//商品分类
+        Route::post('goods_category/restore','GoodsCategoryController@re_store')->name('goods_category.restore');
         Route::resource('goods_brand','GoodsBrandController');//商品品牌
         Route::resource('goods','GoodsController');//商品管理
     });

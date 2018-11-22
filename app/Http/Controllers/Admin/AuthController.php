@@ -10,15 +10,10 @@ use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request, Auth $auth)
     {
         if ($request->ajax()) {
-            $data = $auth->select('id','auth_name','auth_controller','auth_action','auth_pid','route_name','is_menu','is_enable','path','sort_order','auth_desc','created_at','updated_at', 'deleted_at')->withTrashed()->get();
+            $data = $auth->select('id','auth_name','auth_controller','auth_action','auth_pid','route_name','is_menu','is_enable','path','sort_order','auth_desc','deleted_at')->withTrashed()->get();
             $cnt = count($data);
             $info = [
                 'draw' => $request->get('draw'),
@@ -31,23 +26,14 @@ class AuthController extends Controller
         return view('admin.auth.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create(Auth $auth)
     {
         $data['auth'] = $auth->where('is_menu','1')->get();
         return view('admin.auth.create',$data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request,Auth $auth)
     {
         $data = $request->only('auth_name','auth_controller','auth_action','auth_pid','is_menu','is_enable','sort_order','auth_desc');
@@ -102,39 +88,20 @@ class AuthController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit(auth $auth)
     {
         $data['auth'] = $auth;//当前记录
         $all_auth = new Auth();
-//        $data['all_auth'] = $all_auth->where('is_menu','1')->where('id','!=',$auth->id)->get();//除去本身外的所有记录
-        $data['all_auth'] = $all_auth->where('is_menu','1')->get();//除去本身外的所有记录
+        $data['all_auth'] = $all_auth->where('is_menu','1')->where('id','!=',$auth->id)->get();//除去本身外的所有记录
         return view('admin.auth.edit',$data);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request,auth $auth)
     {
         $data = $request->only('auth_name','auth_controller','auth_action','auth_pid','is_menu','is_enable','sort_order','auth_desc');

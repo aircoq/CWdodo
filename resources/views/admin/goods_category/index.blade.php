@@ -19,12 +19,12 @@
             <!-- 内容页眉标题 -->
             <section class="content-header">
                 <h1>
-                    系统管理员
-                    <small>首页</small>
+                    商品管理
+                    <small>商品分类</small>
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="{{ url('admin/index') }}"><i class="fa fa-dashboard"></i>系统首页</a></li>
-                    <li class="active">系统管理员</li>
+                    <li class="active">商品分类管理</li>
                 </ol>
             </section>
             <!-- 主要内容 -->
@@ -34,9 +34,9 @@
                 -------------------------->
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">系统管理员表</h3>
-                        <a class="btn btn-box-tool btn-xs"  href="javascript:;" onclick="admin_add('添加管理员','{{ url('admin/admin/create')  }}','800','500')">
-                            <font style="vertical-align:inherit; color:#3c8dbc;"><font style="font-size:14px;"><i class="fa fa-fw fa-user-plus"></i>新增系统管理员</font></font>
+                        <h3 class="box-title">商品分类表</h3>
+                        <a class="btn btn-box-tool btn-xs"  href="javascript:;" onclick="layer_show('添加','{{ url('admin/goods_category/create')  }}','1200','800')" id="a-admin-add">
+                            <font style="vertical-align:inherit; color:#3c8dbc;"><font style="font-size:14px;"><i class="fa fa-fw fa-plus"></i>新增分类</font></font>
                         </a>
                     </div>
                     <!-- /.box-header -->
@@ -51,24 +51,33 @@
                                                 ID
                                             </th>
                                             <th class="sorting" tabindex="1">
-                                                用户名
+                                                分类名称
                                             </th>
-                                            <th class="sorting" tabindex="2">
-                                                头像
+                                            <th class="sorting td-manage" tabindex="2">
+                                                导航栏显示
                                             </th>
-                                            <th class="sorting" tabindex="3">
-                                                状态
+                                            <th class="sorting td-manage" tabindex="3">
+                                                前台显示
                                             </th>
-                                            <th class="sorting" tabindex="4">
-                                                角色
+                                            <th class="sorting td-manage" tabindex="4">
+                                                父级分类
                                             </th>
-                                            <th class="sorting" tabindex="5">
-                                                办事处
+                                            <th class="sorting td-manage" tabindex="5">
+                                                一级分类
                                             </th>
-                                            <th class="sorting" tabindex="6">
+                                            <th class="sorting td-manage" tabindex="6">
+                                                层级
+                                            </th>
+                                            <th class="sorting td-manage" tabindex="7">
+                                                排序权重
+                                            </th>
+                                            <th class="sorting td-manage" tabindex="8">
+                                                分类描述
+                                            </th>
+                                            <th class="sorting" tabindex="9">
                                                 删除时间
                                             </th>
-                                            <th class="sorting" tabindex="7">
+                                            <th class="sorting td-manage" tabindex="10">
                                                 操作
                                             </th>
                                         </tr>
@@ -76,12 +85,15 @@
                                         <tbody>
                                         <tr role="row">
                                             <td class="sorting_1">id</td>
-                                            <td>username</td>
-                                            <td>avatar</td>
-                                            <td>status</td>
-                                            <td>role_id</td>
-                                            <td>agency_id</td>
-                                            <td>deleted_at</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                             <td class="td-manage">do</td>
                                         </tr>
                                         </tbody>
@@ -91,24 +103,33 @@
                                                 ID
                                             </th>
                                             <th class="sorting">
-                                                用户名
+                                                分类名称
                                             </th>
                                             <th class="sorting">
-                                                头像
+                                                导航栏显示
                                             </th>
                                             <th class="sorting">
-                                                状态
+                                                前台显示
                                             </th>
                                             <th class="sorting">
-                                                角色
+                                                父级分类
                                             </th>
                                             <th class="sorting">
-                                                办事处
+                                                一级分类
+                                            </th>
+                                            <th class="sorting">
+                                                层级
+                                            </th>
+                                            <th class="sorting">
+                                                排序权重
+                                            </th>
+                                            <th class="sorting">
+                                                分类描述
                                             </th>
                                             <th class="sorting">
                                                 删除时间
                                             </th>
-                                            <th class="sorting">
+                                            <th class="sorting td-manage">
                                                 操作
                                             </th>
                                         </tr>
@@ -140,7 +161,7 @@
 @section('script')
     <script type="text/javascript" src="{{ asset('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
     <script>
-        /* database 插件  */
+        /** database 插件  */
         $('#dataTables').DataTable({
             "lengthMenu":[[10,20,50,-1],[10,20,50,'全部']],
             'paging':true,//分页
@@ -156,17 +177,20 @@
                 "orderable": false
             }],
             "ajax": {
-                "url": "{{ url('admin/admin/ajax_list') }}",// 服务端uri地址，显示数据的uri
-                "type": "post",   // ajax 的http请求类型
+                "url": "{{ url('admin/goods_category/') }}",// 服务端uri地址，显示数据的uri
+                "type": "get",   // ajax 的http请求类型
                 'headers': { 'X-CSRF-TOKEN' : '{{ csrf_token() }}' },
             },
             'columns':[//按列显示从服务器端过来的数据
                 {'data':'id',"defaultContent": ""},
-                {'data':'username',"defaultContent": ""},
+                {'data':'cate_name',"defaultContent": ""},
                 {'data':'',"defaultContent": ""},
-                {'data':'',"defaultContent": "暂无"},
-                {'data':'role_id',"defaultContent": ""},
-                {'data':'agency_id',"defaultContent": ""},
+                {'data':'',"defaultContent": ""},
+                {'data':'p_id',"defaultContent": ""},
+                {'data':'first_p_id',"defaultContent": ""},
+                {'data':'path',"defaultContent": ""},
+                {'data':'sort_order',"defaultContent": ""},
+                {'data':'cat_desc',"defaultContent": ""},
                 {'data':'deleted_at',"defaultContent": ""},
                 {'data':'b',"defaultContent": ""},
             ],
@@ -198,40 +222,33 @@
                 var cnt = data.recordsFiltered;//分页数据
                 $('#coutent').html( cnt );
                 $(row).addClass('text-c');//居中
-                $(row).find('td:eq(2)').html(
-                    data.avatar ==
-                    null ? '<img src="{{ url('sys_img/user_avatar.png') }}" style="width: 50px;height: 40px;">' : '<img src="/'+ data.avatar +'" style="width: 50px;height: 40px;">'
-                );
-                $(row).find('td:eq(3)').html(data.deleted_at ? '启用' : '禁用');//z状态
                 //操作
+                $(row).find('td:eq(2)').html(
+                    data.show_in_nav == 1 ? '是' : '否'
+                );
+                $(row).find('td:eq(3)').html(
+                    data.is_show == 1 ? '是' : '否'
+                );
                 $(row).find('td:eq(-1)').html(
                     '<div class="btn-group">' +
-                    '<button type="button" class="btn btn-info" onclick="admin_edit(' + '\'编辑\',\'/admin/admin/'+data.id+'/edit\',\''+data.id+'\')" >' +
+                    '<button type="button" class="btn btn-info" onclick="layer_show(' + '\'编辑\',\'/admin/goods_category/'+data.id+'/edit\',1200,800)" >' +
                     '<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">编辑</font></font>' +
-                    '</button>' +
-                    '<button type="button" class="btn btn-danger" onclick="admin_del(this,\''+data.id+'\',\''+data.username+'\')" >' +
+                    '</button>'+
+                    '<button type="button" class="btn btn-danger" onclick="do_del(this,\''+data.id+'\',\''+data.type_name+'\',1200,800)" >' +
                     '<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">删除</font></font>' +
-                    '</button>' +
-                    '<button type="button" class="btn btn-warning" onclick="admin_restore(this,\''+data.id+'\',\''+data.username+'\')">' +
+                    '</button>'+
+                    '<button type="button" class="btn btn-warning" onclick="re_store(this,\''+data.id+'\',\''+data.type_name+'\')">' +
                     '<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">恢复</font></font>' +
-                    '</button>' +
+                    '</button>'+
                     '</div>'
-                );
+                ).attr('class','td-manage');
             }
         });
-        /*管理员-管理员-添加*/
-        function admin_add(title,url,w,h){
-            layer_show(title,url,'1200','800');
-        }
-        /*管理员-管理员-编辑*/
-        function admin_edit(title,url,id,w,h){
-            layer_show(title,url,'1200','800');
-        }
-        /*管理员-管理员-删除*/
-        function admin_del(obj,id,usrname){
-            layer.confirm('<font color="red" >危险！确定删除用户(<b>'+usrname+'<b/>)吗？</font>',function(index){
+        /*删除*/
+        function do_del(obj,id,username){
+            layer.confirm('<font color="red" >危险！确定删除(<b>'+username+'<b/>)吗？</font>',function(index){
                 //此处请求后台程序，下方是成功后的前台处理……
-                url = '/admin/admin/'+ id;
+                url = '/admin/goods_category/'+ id;
                 data = {
                     '_token':'{{ csrf_token() }}',
                     '_method':'delete',
@@ -250,11 +267,11 @@
                 });
             });
         }
-        /*管理员-管理员-恢复*/
-        function admin_restore(obj,id,usrname){
-            layer.confirm('确认要恢复当前用户(<font color="red" ><b>'+usrname+'<b/></font>)吗？',function(index){
+        /*恢复*/
+        function re_store(obj,id,username){
+            layer.confirm('确认要恢复当前(<font color="red" ><b>'+username+'<b/></font>)吗？',function(index){
                 //此处请求后台程序，下方是成功后的前台处理……
-                url = '/admin/admin/re_store';
+                url = '/admin/goods_category/restore';
                 data = {
                     '_token':'{{ csrf_token()  }}',
                     'id':id,
@@ -269,7 +286,7 @@
                     }else{
                         location.reload();
                         $(obj).parents('tr').remove();
-                        layer.msg('删除成功',{icon:1,time:1000});
+                        layer.msg(msg.msg,{icon:1,time:1000});
                     }
                 });
             });

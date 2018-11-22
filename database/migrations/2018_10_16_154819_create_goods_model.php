@@ -44,13 +44,13 @@ class CreateGoodsModel extends Migration
             $table->engine = 'InnoDB';
             $table->smallincrements('id')->comment('主键ID');
             $table->string('cate_name', 50)->unique()->comment('商品分类名称');
-            $table->text('cat_desc')->nullable()->comment('分类描述');
-            $table->unsignedSmallInteger('parent_id')->nullable()->comment('该分类的父id');
+            $table->unsignedSmallInteger('p_id')->comment('该分类的父id');
             $table->enum('show_in_nav',['0','1'])->default(1)->comment('是否显示在导航栏：0否；1是');
-            $table->enum('is_show',['0','1'])->default(1)->comment('是否在前台显示：0否；1是');
-            $table->unsignedInteger('first_cate_id')->comment('所属一级分类，一级分类为其本身');//减少递归内存消耗
+            $table->enum('is_show',['0','1'])->default(1)->comment('是否显示在前台：0否；1是');
+            $table->unsignedInteger('first_p_id')->comment('所属一级分类，一级分类为0');//减少递归内存消耗
             $table->unsignedInteger('path')->comment('层级关系');//减少递归内存消耗
-            $table->unsignedTinyInteger('sort_order')->nullable()->comment('排序字段');
+            $table->unsignedSmallInteger('sort_order')->nullable()->comment('排序权重');
+            $table->text('cat_desc')->nullable()->comment('分类描述');
             $table->timestamps();
             $table->softDeletes();
         });

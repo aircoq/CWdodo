@@ -14,82 +14,83 @@
             <div class="cl-sm-12">
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" id="form-admin-add" action="{{ url('admin/admin')  }}" method="post" enctype="multipart/form-data">
+                <form class="form-horizontal" id="form-admin-add" action="{{ url('admin/goods_category')  }}" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="box-body">
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">姓名</label>
+                            <label class="col-sm-2 control-label">分类名称</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="姓名" name="username" id="username"/>
+                                <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="分类名称，显示在菜单栏" name="cate_name" id="cate_name"/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">性别</label>
+                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">父级菜单</font></font></label>
                             <div class="col-sm-10">
-                                <select class="form-control" style="width:70%;" name="sex" >
-                                    <option value="0">女</option>
-                                    <option value="1">男</option>
-                                    <option value="2">保密</option>
+                                <select class="form-control" style="width:70%;" name="p_id">
+                                    <option value="0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">顶级菜单</font></font></option>
+                                    @foreach ($goods_category as $v)
+                                        <option value="{{ $v['id'] }}">
+                                            <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
+                                                    <?php
+                                                        for ($i=$v['path'];$i>0;$i--){
+                                                            echo '&nbsp&nbsp&nbsp&nbsp&nbsp';
+                                                        }
+                                                    ?>
+                                                    {{ $v['cate_name'] }}
+                                            </font></font>
+                                        </option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">手机</label>
+                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">是否显示在导航栏</font></font></label>
                             <div class="col-sm-10">
-                                <input type="tel" class="form-control" style="width:70%;display:inline;" placeholder="手机"  name="phone" id="phone"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">邮箱</label>
-                            <div class="col-sm-10">
-                                <input type="email" class="form-control" style="width:70%;display:inline;" placeholder="邮箱" name="email" id="email">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">密码</label>
-                            <div class="col-sm-10">
-                                <input type="password" class="form-control" style="width:70%;display:inline;" placeholder="密码" id="password" name="password"/>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">确认密码</label>
-                            <div class="col-sm-10">
-                                <input type="password" class="form-control" style="width:70%;display:inline;" placeholder="确认密码" id="confirm_password" name="confirm_password">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">角色</font></font></label>
-                            <div class="col-sm-10">
-                                <select class="form-control" name="role_id" style="width:70%;">
-                                    <option value="1"><font  style="vertical-align: inherit;"><font style="vertical-align: inherit;">选项1</font></font></option>
-                                    <option value="2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">选项2</font></font></option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">账号状态</font></font></label>
-                            <div class="col-sm-10">
-                                <select class="form-control" style="width:70%;" name="admin_status">
-                                    <option value="-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">拒绝</font></font></option>
-                                    <option value="-1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">已停止</font></font></option>
-                                    <option value="0" selected><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">未审核</font></font></option>
-                                    <option value="1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通过</font></font></option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">备注</label>
-                            <div class="col-sm-10">
-                                <textarea class="textarea" style="width: 70%; height: 200px; font-size: 14px;" placeholder="备注" name="note"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="checkbox">
-                                <label class="col-sm-2 control-label"></label>
-                                <div class="col-sm-10">
-                                    <input type="checkbox" id="form_check" name="form_check"> 已阅读并同意公司隐私协议
+                                <div class="col-sm-4 radio">
+                                    <label>
+                                        <input type="radio" name="show_in_nav" value="1" checked="">是
+                                    </label>
                                 </div>
-
+                                <div class="col-sm-6 radio">
+                                    <label>
+                                        <input type="radio" name="show_in_nav" value="0" checked="">否
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">是否显示在前台</font></font></label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-4 radio">
+                                    <label>
+                                        <input type="radio" name="is_show" value="1" checked="">是
+                                    </label>
+                                </div>
+                                <div class="col-sm-6 radio">
+                                    <label>
+                                        <input type="radio" name="is_show" value="0" checked="">否
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">排序权重</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="数值越大排名越前" id="sort_order" name="sort_order">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">分类描述</label>
+                            <div class="col-sm-10">
+                                <textarea class="textarea" style="width: 70%; height: 200px; font-size: 14px;" placeholder="分类描述" name="cat_desc"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">提示</label>
+                            <div class="col-sm-10">
+                                <div style="width:70%;">
+                                一层菜单为：显示是，可用否，控制器方法为空；二级菜单为显示是，可用是，只填控制器，方法‘index’需省略；三级一般为显示否，可用是（按钮类型），方法和控制器必填
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -118,36 +119,12 @@
             /***编写Javascript表单验证区域*/
             $("#form-admin-add").validate({
                 rules:{//规则
-                    username:{
+                    cate_name:{
                         required:true,
-                        rangelength:[5,12]
-                    },
-                    phone:{
-                        required:true,
-                        minlength:11,
-                        maxlength:11,
-                        digits:true
-                    },
-                    email:{
-                        required:true,
-                        email:true,
-                    },
-                    password:{
-                        required:true,
-                        rangelength:[5,20]
-                    },
-                    confirm_password:{
-                        required:true,
-                        equalTo: "#password"
-                    },
-                    form_check:{
-                        required:true,
+                        rangelength:[1,15]
                     },
                 },
                 messages: {//自定义提示信息
-                    form_check:{
-                        required:"请仔细阅读相关条款",
-                    },
                 },
                 onkeyup:false,
                 focusCleanup:false,
