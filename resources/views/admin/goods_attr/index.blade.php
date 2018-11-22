@@ -150,8 +150,8 @@
                     "orderable": false
                 }],
                 "ajax": {
-                    "url": "{{ url('admin/goods_attr/list') }}",// 服务端uri地址，显示数据的uri
-                    "type": "post",   // ajax 的http请求类型
+                    "url": "{{ url('admin/goods_attr') }}",// 服务端uri地址，显示数据的uri
+                    "type": "get",   // ajax 的http请求类型
                     'headers': { 'X-CSRF-TOKEN' : '{{ csrf_token() }}' },
                 },
                 'columns':[//按列显示从服务器端过来的数据

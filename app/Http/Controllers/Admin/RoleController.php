@@ -17,14 +17,7 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view('admin.role.index');
-    }
-    /**
-     * 列表数据
-     */
-    public function ajax_list(Request $request, Role $role,RoleAuthRelated $roleAuthRelated)
+    public function index(Request $request, Role $role,RoleAuthRelated $roleAuthRelated)
     {
         if ($request->ajax()) {
             $all_data = $role->with('getAuth')->select('id','role_name','note','created_at', 'deleted_at')->withTrashed()->get();
@@ -48,8 +41,8 @@ class RoleController extends Controller
             ];
             return $info;
         }
+        return view('admin.role.index');
     }
-
     /**
      * Show the form for creating a new resource.
      *

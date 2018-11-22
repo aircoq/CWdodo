@@ -35,7 +35,7 @@
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">商品类型表</h3>
-                        <a class="btn btn-box-tool btn-xs"  href="javascript:;" onclick="admin_add('添加','{{ url('admin/goods_type/create')  }}','800','500')" id="a-admin-add">
+                        <a class="btn btn-box-tool btn-xs"  href="javascript:;" onclick="layer_show('添加','{{ url('admin/goods_type/create')  }}','1200','800')" id="a-admin-add">
                             <font style="vertical-align:inherit; color:#3c8dbc;"><font style="font-size:14px;"><i class="fa fa-fw fa-plus"></i>新增类型</font></font>
                         </a>
                     </div>
@@ -136,8 +136,8 @@
                     "orderable": false
                 }],
                 "ajax": {
-                    "url": "{{ url('admin/goods_type/list') }}",// 服务端uri地址，显示数据的uri
-                    "type": "post",   // ajax 的http请求类型
+                    "url": "{{ url('admin/goods_type/') }}",// 服务端uri地址，显示数据的uri
+                    "type": "get",   // ajax 的http请求类型
                     'headers': { 'X-CSRF-TOKEN' : '{{ csrf_token() }}' },
                 },
                 'columns':[//按列显示从服务器端过来的数据
@@ -184,13 +184,13 @@
                         '<button type="button" class="btn btn-info" onclick="layer_show(' + '\'查看属性\',\'/admin/goods_type/'+data.id+'\',1200,800)" >' +
                         '<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">查看属性</font></font>' +
                         '</button>'+
-                        '<button type="button" class="btn btn-info" onclick="admin_edit(' + '\'编辑\',\'/admin/goods_type/'+data.id+'/edit\',\''+data.id+'\')" >' +
+                        '<button type="button" class="btn btn-info" onclick="layer_show(' + '\'编辑\',\'/admin/goods_type/'+data.id+'/edit\',1200,800)" >' +
                         '<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">编辑</font></font>' +
                         '</button>'+
-                        '<button type="button" class="btn btn-danger" onclick="admin_del(this,\''+data.id+'\',\''+data.type_name+'\')" >' +
+                        '<button type="button" class="btn btn-danger" onclick="do_del(this,\''+data.id+'\',\''+data.type_name+'\',1200,800)" >' +
                         '<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">删除</font></font>' +
                         '</button>'+
-                        '<button type="button" class="btn btn-warning" onclick="admin_restore(this,\''+data.id+'\',\''+data.type_name+'\')">' +
+                        '<button type="button" class="btn btn-warning" onclick="re_store(this,\''+data.id+'\',\''+data.type_name+'\')">' +
                         '<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">恢复</font></font>' +
                         '</button>'+
                         '</div>'
@@ -198,17 +198,9 @@
                 }
             });
         });
-        /*-添加*/
-        function admin_add(title,url,w,h){
-            layer_show(title,url,'1200','800');
-        }
-        /*编辑*/
-        function admin_edit(title,url,id,w,h){
-            layer_show(title,url,'1200','800');
-        }
         /*删除*/
-        function admin_del(obj,id,username){
-            layer.confirm('<font color="red" >危险！确定删除用户(<b>'+username+'<b/>)吗？</font>',function(index){
+        function do_del(obj,id,username){
+            layer.confirm('<font color="red" >危险！确定删除(<b>'+username+'<b/>)吗？</font>',function(index){
                 //此处请求后台程序，下方是成功后的前台处理……
                 url = '/admin/goods_type/'+ id;
                 data = {
@@ -229,9 +221,9 @@
                 });
             });
         }
-        /*管理员-管理员-恢复*/
-        function admin_restore(obj,id,username){
-            layer.confirm('确认要恢复当前用户(<font color="red" ><b>'+username+'<b/></font>)吗？',function(index){
+        /*恢复*/
+        function re_store(obj,id,username){
+            layer.confirm('确认要恢复当前(<font color="red" ><b>'+username+'<b/></font>)吗？',function(index){
                 //此处请求后台程序，下方是成功后的前台处理……
                 url = '/admin/goods_type/restore';
                 data = {

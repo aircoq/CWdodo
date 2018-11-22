@@ -10,12 +10,7 @@ use Illuminate\Support\Facades\Validator;
 
 class GoodsAttrController extends Controller
 {
-    public function index()
-    {
-        return view('admin.goods_attr.index');
-    }
-
-    public function ajaxList(Request $request ,GoodsAttr $goodsAttr)
+    public function index(Request $request ,GoodsAttr $goodsAttr)
     {
         if ($request->ajax()) {
             $data = $goodsAttr->select('id','attr_name','type_id','attr_type','attr_input_type','attr_values','sort_order','note','is_linked','deleted_at')->get();
@@ -28,8 +23,9 @@ class GoodsAttrController extends Controller
             ];
             return $info;
         }
+        return view('admin.goods_attr.index');
     }
-
+    
     public function create(GoodsType $goodsType)
     {
         $data['goods_type'] = $goodsType->all();

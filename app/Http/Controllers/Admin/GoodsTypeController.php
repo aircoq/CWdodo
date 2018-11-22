@@ -26,21 +26,6 @@ class GoodsTypeController extends Controller
         return view('admin.goods_type.index');
     }
 
-    public function ajaxList(Request $request ,GoodsType $goodsType)
-    {
-        if ($request->ajax()) {
-            $data = $goodsType->select('id','type_name','mark_up','deleted_at')->withTrashed()->get();
-            $cnt = count($data);
-            $info = [
-                'draw' => $request->get('draw'),
-                'recordsTotal' => $cnt,
-                'recordsFiltered' => $cnt,
-                'data' => $data,
-            ];
-            return $info;
-        }
-    }
-
     public function create()
     {
         return view('admin.goods_type.create');

@@ -13,29 +13,24 @@ class InnForPetController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request, InnForPet $innForPet)
     {
-        return view('admin.inn.index');
-    }
-
-    /**
-     * 列表数据
-     */
-    public function ajax_list(Request $request, InnForPet $innForPet)
-    {
-        if(Auth::guard('admin')->user()->role_id == '*') {//管理员查看包括软删除的用户
-            $data = $innForPet->select('id','inn_name','inn_sn','cate_id','is_self','inn_status','is_running','inn_tel','lat','lng','province','city','district','adcode','inn_address','inn_avatar','inn_img','start_time','end_time','note','admin_id','bank_id','bank_account_name','bank_account','created_at','updated_at', 'deleted_at')->withTrashed()->get();
-        }else{
-            $data = $innForPet->select('id','inn_name','inn_sn','cate_id','is_self','inn_status','is_running','inn_tel','lat','lng','province','city','district','adcode','inn_address','inn_avatar','inn_img','start_time','end_time','note','admin_id','bank_id','bank_account_name','bank_account','created_at','updated_at')->get();
+        if ($request->ajax()) {
+            if (Auth::guard('admin')->user()->role_id == '*') {//管理员查看包括软删除的用户
+                $data = $innForPet->select('id', 'inn_name', 'inn_sn', 'cate_id', 'is_self', 'inn_status', 'is_running', 'inn_tel', 'lat', 'lng', 'province', 'city', 'district', 'adcode', 'inn_address', 'inn_avatar', 'inn_img', 'start_time', 'end_time', 'note', 'admin_id', 'bank_id', 'bank_account_name', 'bank_account', 'created_at', 'updated_at', 'deleted_at')->withTrashed()->get();
+            } else {
+                $data = $innForPet->select('id', 'inn_name', 'inn_sn', 'cate_id', 'is_self', 'inn_status', 'is_running', 'inn_tel', 'lat', 'lng', 'province', 'city', 'district', 'adcode', 'inn_address', 'inn_avatar', 'inn_img', 'start_time', 'end_time', 'note', 'admin_id', 'bank_id', 'bank_account_name', 'bank_account', 'created_at', 'updated_at')->get();
+            }
+            $cnt = count($data);
+            $info = [
+                'draw' => $request->get('draw'),
+                'recordsTotal' => $cnt,
+                'recordsFiltered' => $cnt,
+                'data' => $data,
+            ];
+            return $info;
         }
-        $cnt = count($data);
-        $info = [
-            'draw' => $request->get('draw'),
-            'recordsTotal' => $cnt,
-            'recordsFiltered' => $cnt,
-            'data' => $data,
-        ];
-        return $info;
+        return view('admin.inn.index');
     }
 
     /**

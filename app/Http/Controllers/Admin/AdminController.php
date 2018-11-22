@@ -18,15 +18,7 @@ class AdminController extends Controller
     /**
      * 管理员首页
      */
-    public function index()//获取当前用户的菜单
-    {
-        return view('admin.admin.index');
-    }
-
-    /**
-     * 列表数据
-     */
-    public function ajax_list(Request $request, Admin $admin)
+    public function index(Request $request,Admin $admin)//获取当前用户的菜单
     {
         if ($request->ajax()) {
             if(Auth::guard('admin')->user()->role_class == '*') {//管理员查看包括软删除的用户
@@ -43,7 +35,9 @@ class AdminController extends Controller
             ];
             return $info;
         }
+        return view('admin.admin.index');
     }
+
     /**
      * 渲染新建管理员页面
      */

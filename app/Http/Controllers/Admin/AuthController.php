@@ -15,15 +15,7 @@ class AuthController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view('admin.auth.index');
-    }
-
-    /**
-     * 列表数据
-     */
-    public function ajax_list(Request $request, Auth $auth)
+    public function index(Request $request, Auth $auth)
     {
         if ($request->ajax()) {
             $data = $auth->select('id','auth_name','auth_controller','auth_action','auth_pid','route_name','is_menu','is_enable','path','sort_order','auth_desc','created_at','updated_at', 'deleted_at')->withTrashed()->get();
@@ -36,6 +28,7 @@ class AuthController extends Controller
             ];
             return $info;
         }
+        return view('admin.auth.index');
     }
 
     /**
