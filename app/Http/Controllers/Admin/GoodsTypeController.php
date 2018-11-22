@@ -58,18 +58,24 @@ class GoodsTypeController extends Controller
         }
     }
 
-//    public function showPage(GoodsType $goodsType,GoodsAttr $goodsAttr)
-//    {
-//        return view('admin.goods_type.show');
-//    }
-
-
-
     public function show(Request $request,GoodsType $goodsType,GoodsAttr $goodsAttr)
     {
-//        $data = $goodsAttr->where('type_id', $goodsType->id)->get();
-
-        return view('admin.goods_type.show');
+        if ($request->ajax()) {
+            $data = $goodsAttr->where('type_id', $goodsType->id)->get();
+            $cnt = count($data);
+            $info = [
+                'draw' => $request->get('draw'),
+                'recordsTotal' => $cnt,
+                'recordsFiltered' => $cnt,
+                'data' => $data,
+            ];
+            return $info;
+        }else{
+            $all_type = new GoodsType();
+            $data['all_type'] = $all_type->all();
+            $data['id'] = $goodsType->id;
+            return view('admin.goods_type.show',$data);
+        }
     }
 
     /**
@@ -145,9 +151,9 @@ class GoodsTypeController extends Controller
             $tf = $goodsType->where('id', $id['id'])->restore();
             if ($tf) {
                 // 如果添加数据成功，则返回列表页
-                return ['status' => "success", 'msg' => '删除成功'];
+                return ['status' => "success", 'msg' => '恢复成功'];
             } else {
-                return ['status' => 'fail', 'msg' => '删除失败'];
+                return ['status' => 'fail', 'msg' => '恢复失败'];
             }
         }
     }
