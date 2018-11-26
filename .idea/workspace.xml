@@ -2,22 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5e34fc05-11b0-4cd3-8661-f499f1c56395" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/GoodsCategoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/GoodsCategoryController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/GoodsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/GoodsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/RoleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/RoleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Admin/Goods.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Admin/Goods.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2018_10_16_154819_create_goods_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2018_10_16_154819_create_goods_model.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/goods/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/goods/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/goods/edit.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/goods/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/goods/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/goods_attr/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/goods_attr/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/goods_attr/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/goods_attr/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/goods_category/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/goods_category/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/goods_category/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/goods_category/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/goods_category/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/goods_category/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/goods_type/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/goods_type/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/role/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/role/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/GoodsTypeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/GoodsTypeController.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -49,26 +34,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GoodsTypeController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GoodsTypeController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/GoodsTypeController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="631">
-              <caret line="75" column="41" lean-forward="true" selection-start-line="75" selection-start-column="41" selection-end-line="75" selection-end-column="41" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="show.blade.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/admin/goods_type/show.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="611">
-              <caret line="203" column="22" lean-forward="true" selection-start-line="203" selection-start-column="22" selection-end-line="203" selection-end-column="22" />
-              <folding>
-                <element signature="n#style#0;n#font#0;n#button#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#font#0;n#font#0;n#button#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#font#0;n#button#1;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#font#0;n#font#0;n#button#1;n#div#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="1160">
+              <caret line="125" column="5" lean-forward="true" selection-start-line="125" selection-start-column="5" selection-end-line="125" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -244,8 +214,8 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/GoodsController.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/goods/index.blade.php" />
         <option value="$PROJECT_DIR$/database/migrations/2018_10_16_154819_create_goods_model.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/GoodsTypeController.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/goods_type/show.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/GoodsTypeController.php" />
       </list>
     </option>
   </component>
@@ -534,7 +504,7 @@
       <workItem from="1543024215869" duration="598000" />
       <workItem from="1543044261070" duration="598000" />
       <workItem from="1543113983615" duration="1199000" />
-      <workItem from="1543194422605" duration="6834000" />
+      <workItem from="1543194422605" duration="7031000" />
     </task>
     <task id="LOCAL-00001" summary="登陆定位">
       <created>1541747557847</created>
@@ -715,11 +685,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="297719000" />
+    <option name="totallyTimeSpent" value="297916000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32897604" />
@@ -1126,23 +1095,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/GoodsTypeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="631">
-          <caret line="75" column="41" lean-forward="true" selection-start-line="75" selection-start-column="41" selection-end-line="75" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/goods_type/show.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="611">
-          <caret line="203" column="22" lean-forward="true" selection-start-line="203" selection-start-column="22" selection-end-line="203" selection-end-column="22" />
+        <state relative-caret-position="3231">
+          <caret line="199" column="21" lean-forward="true" selection-start-line="199" selection-start-column="21" selection-end-line="199" selection-end-column="21" />
           <folding>
             <element signature="n#style#0;n#font#0;n#button#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#font#0;n#font#0;n#button#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#font#0;n#button#1;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#font#0;n#font#0;n#button#1;n#div#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/GoodsTypeController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1160">
+          <caret line="125" column="5" lean-forward="true" selection-start-line="125" selection-start-column="5" selection-end-line="125" selection-end-column="5" />
         </state>
       </provider>
     </entry>

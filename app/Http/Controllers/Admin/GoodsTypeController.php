@@ -78,25 +78,12 @@ class GoodsTypeController extends Controller
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit(GoodsType $goodsType)
     {
         $data['goods_type'] = $goodsType;
         return view('admin.goods_type.edit',$data);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request,GoodsType $goodsType)
     {
         $data = $request->only('type_name','mark_up');
@@ -139,10 +126,7 @@ class GoodsTypeController extends Controller
     }
 
     /**
-     * 回复软删除
-     * @param Request $request
-     * @param GoodsType $goodsType
-     * @return array
+     * 恢复软删除
      */
     public function re_store(Request $request,GoodsType $goodsType)
     {
