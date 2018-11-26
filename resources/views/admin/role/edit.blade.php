@@ -69,11 +69,12 @@
             @endforeach
             /***编写Javascript表单验证区域*/
             $("#form-admin-add").validate({
-                rules:{//规则
-                    role_name:{
-                        required:true,
-                        rangelength:[1,12]
+                rules: {//规则
+                    role_name: {
+                        required: true,
+                        rangelength: [1, 12]
                     },
+                },
                 messages: {//自定义提示信息
                 },
                 onkeyup:false,

@@ -45,7 +45,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">是否显示在导航栏</font></font></label>
+                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">显示在顶部导航栏</font></font></label>
                             <div class="col-sm-10">
                                 <div class="col-sm-4 radio">
                                     <label>
@@ -60,7 +60,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">是否显示在前台</font></font></label>
+                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">显示在左侧菜单</font></font></label>
                             <div class="col-sm-10">
                                 <div class="col-sm-4 radio">
                                     <label>

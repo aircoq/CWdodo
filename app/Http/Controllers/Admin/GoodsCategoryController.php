@@ -25,7 +25,6 @@ class GoodsCategoryController extends Controller
         return view('admin.goods_category.index');
     }
 
-
     public function create(GoodsCategory $goodsCategory)
     {
         $data['goods_category'] = $goodsCategory->where('is_show','1')->get();
@@ -40,7 +39,7 @@ class GoodsCategoryController extends Controller
             'cate_name' => 'nullable|alpha_num|between:1,15|unique:goods_category',
             'p_id' => 'required|integer',
             'show_in_nav' => 'required|in:0,1',
-            'is_show' => 'required|in:0,1',
+            'is_show' => 'nullable|in:0,1',
             'sort_order' => 'nullable|integer',
             'cate_desc' => 'nullable|string',
 
@@ -98,7 +97,7 @@ class GoodsCategoryController extends Controller
             'cate_name' => 'nullable|alpha_num|between:1,15|unique:goods_category,cate_name,'.$goodsCategory->id,
             'p_id' => 'required|integer',
             'show_in_nav' => 'required|in:0,1',
-            'is_show' => 'required|in:0,1',
+            'is_show' => 'nullable|in:0,1',
             'sort_order' => 'nullable|integer',
             'cate_desc' => 'nullable|string',
 

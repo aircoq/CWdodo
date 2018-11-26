@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Goods extends Model
 {
+    use SoftDeletes;
     //指定表
     protected $table = 'goods';
     //指定主键

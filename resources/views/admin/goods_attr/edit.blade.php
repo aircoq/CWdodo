@@ -71,7 +71,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">属性可选值</label>
                     <div class="col-sm-10">
-                        <textarea class="textarea" style="width: 70%; height: 50px; font-size: 14px;" placeholder="属性的可选值，当属性的录入方式为列表选择的时候对应的可选值，使用逗号进行分割" name="attr_values" id="attr_values">{{ $goods_attr->attr_values }}</textarea>
+                        <textarea class="textarea" style="width: 70%; height: 50px; font-size: 14px;" placeholder="属性的可选值，当属性的录入方式为列表选择的时候对应的可选值，使用英文符号逗号进行分割（注意：英文符号逗号）" name="attr_values" id="attr_values">{{ $goods_attr->attr_values }}</textarea>
                     </div>
                 </div>
                 <div class="form-group">

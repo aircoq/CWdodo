@@ -44,31 +44,31 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">是否显示在导航栏</font></font></label>
+                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">显示在顶部导航栏</font></font></label>
                             <div class="col-sm-10">
                                 <div class="col-sm-4 radio">
                                     <label>
-                                        <input type="radio" name="show_in_nav" value="1" checked="">是
+                                        <input type="radio" name="show_in_nav" value="1">是
                                     </label>
                                 </div>
                                 <div class="col-sm-6 radio">
                                     <label>
-                                        <input type="radio" name="show_in_nav" value="0" checked="">否
+                                        <input type="radio" name="show_in_nav" value="0">否
                                     </label>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">是否显示在前台</font></font></label>
+                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">显示在左侧菜单</font></font></label>
                             <div class="col-sm-10">
                                 <div class="col-sm-4 radio">
                                     <label>
-                                        <input type="radio" name="is_show" value="1" checked="">是
+                                        <input type="radio" name="is_show" value="1" id="is_show1" checked="checked">是
                                     </label>
                                 </div>
                                 <div class="col-sm-6 radio">
                                     <label>
-                                        <input type="radio" name="is_show" value="0" checked="">否
+                                        <input type="radio" name="is_show" value="0" id="is_show0">否
                                     </label>
                                 </div>
                             </div>

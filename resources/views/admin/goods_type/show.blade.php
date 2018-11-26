@@ -15,9 +15,8 @@
     <div class="box-header">
         <div class="col-sm-12">
             <select class="form-control" style="width:30%;" id="project">
-                <option value="0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">选择商品类型</font></font></option>
                 @foreach ($all_type as $v)
-                    <option value="{{ $v['id'] }}">
+                    <option value="{{ $v['id'] }}" id="project{{ $v['id'] }}">
                         <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
                                 {{ $v['type_name'] }}
                             </font></font>
@@ -202,6 +201,9 @@
                 });
             });
         }
+        $(function() {
+            $('#project{{ $id }}').attr('selected','selected');
+        });
         /**动态选择框ajax无刷新*/
         $('#project').change(function() {
         table.ajax.url( "{{ url('admin/goods_type') }}"+'/'+$('#project').val() ).load();

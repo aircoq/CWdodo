@@ -12,11 +12,6 @@ use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request, Role $role,RoleAuthRelated $roleAuthRelated)
     {
         if ($request->ajax()) {
@@ -43,23 +38,13 @@ class RoleController extends Controller
         }
         return view('admin.role.index');
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create(RoleAuth $auth )
     {
         $data['auth'] = $auth->all();
         return view('admin.role.create',$data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request,Role $adminRole ,RoleAuthRelated $authRelated)
     {
         $data = $request->only('role_name','note','auth_id_list');
@@ -106,23 +91,11 @@ class RoleController extends Controller
         return ['status' => "success", 'msg' => '添加成功'];
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Role $role,RoleAuth $auth,RoleAuthRelated $authRelated)
     {
         $data['role'] = $role;
@@ -132,16 +105,10 @@ class RoleController extends Controller
         foreach (objArr($auth_list) as $v){
             $data['auth_list'][] += $v['auth_id'];
         }
+//        dump(objArr($data));die();
         return view('admin.role.edit',$data);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Role $role ,RoleAuthRelated $authRelated)
     {
         $data = $request->only('role_name','note','auth_id_list');

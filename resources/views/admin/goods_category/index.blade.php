@@ -57,7 +57,7 @@
                                                 导航栏显示
                                             </th>
                                             <th class="sorting td-manage" tabindex="3">
-                                                前台显示
+                                                是否显示
                                             </th>
                                             <th class="sorting td-manage" tabindex="4">
                                                 父级分类
@@ -109,7 +109,7 @@
                                                 导航栏显示
                                             </th>
                                             <th class="sorting">
-                                                前台显示
+                                                是否显示
                                             </th>
                                             <th class="sorting">
                                                 父级分类
