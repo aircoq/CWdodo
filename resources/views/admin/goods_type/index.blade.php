@@ -176,12 +176,9 @@
                     $('#coutent').html( cnt );
                     $(row).addClass('text-c');//居中
                     //操作
-                    $(row).find('td:eq(3)').html(
-
-                    );
                     $(row).find('td:eq(-1)').html(
                         '<div class="btn-group">' +
-                        '<button type="button" class="btn btn-info" onclick="layer_show(' + '\'查看属性\',\'/admin/goods_type/'+data.id+'\',1200,800)" >' +
+                        '<button type="button" class="btn btn-twitter" onclick="layer_show(' + '\'查看属性\',\'/admin/goods_type/'+data.id+'\',1200,800)" >' +
                         '<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">查看属性</font></font>' +
                         '</button>'+
                         '<button type="button" class="btn btn-info" onclick="layer_show(' + '\'编辑\',\'/admin/goods_type/'+data.id+'/edit\',1200,800)" >' +

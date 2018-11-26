@@ -30,8 +30,10 @@ class GoodsController extends Controller
 
     public function create(GoodsCategory $goodsCategory,GoodsType $goodsType, GoodsBrand $goodsBrand,Goods $goods)
     {
+        $data['goods_type'] = $goodsType->all();
         $data['goods_category'] = $goodsCategory->where('is_show','1')->get();
-        return view('admin.goods_category.create',$data);
+        $data['goods_brand'] = $goodsBrand->all();
+        return view('admin.goods.create',$data);
     }
 
 

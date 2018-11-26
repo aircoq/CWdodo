@@ -71,23 +71,22 @@ class CreateGoodsModel extends Migration
         Schema::create('goods',function(Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id')->comment('主键ID');
+            $table->string('goods_sn')->comment('商品编码');
             $table->string('goods_name', 50)->comment('商品名称');
             $table->unsignedSmallInteger('cate_id')->comment('所属分类');
             $table->unsignedSmallInteger('type_id')->comment('商品类型id(属性框)');
             $table->unsignedSmallInteger('brand_id')->nullable()->comment('品牌id');
             $table->unsignedSmallInteger('inventory')->comment('商品库存数量');
-            $table->decimal('goods_weight', 5, 2)->nullable()->comment('商品的重量');
+            $table->unsignedTinyInteger('warn_num')->comment('报警数量');
+            $table->decimal('goods_weight', 5, 2)->nullable()->comment('商品的重量-KG');
             $table->decimal('market_price', 8, 2)->comment('市场价');
             $table->decimal('shop_price', 8, 2)->comment('本店价');
             $table->decimal('promote_price', 8, 2)->nullable()->comment('促销价格');
             $table->unsignedInteger('promote_start_at')->nullable()->comment('促销开始时间');
             $table->unsignedInteger('promote_end_at')->nullable()->comment('促销结束时间');
-            $table->unsignedTinyInteger('warn_num')->comment('报警数量');
-            $table->string('keywords', 20)->comment('商品关键字');
             $table->string('goods_thumb', 200)->comment('商品在前台显示的微缩图片，搜索的时候显示');
             $table->string('goods_img', 200)->comment('商品的实际图片');
             $table->enum('is_real',['0','1'])->default('1')->comment('是否是实物：0否比如服务、虚拟卡；1是');
-            $table->string('extension_code', 200)->nullable()->comment('商品的扩展属性');
             $table->enum('is_on_sale',['0','1'])->comment('是否开放售卖：0否；1是');
             $table->enum('is_alone_sale',['0','1'])->default('1')->comment('是否能单独售卖：0否作为配件或者赠品销售；1是');
             $table->enum('is_best',['0','1'])->default('0')->comment('是否是精品：0否；1是');
@@ -99,6 +98,8 @@ class CreateGoodsModel extends Migration
             $table->text('goods_desc')->nullable()->comment('商品描述富文本');
             $table->string('seller_note',150)->nullable()->comment('商品的商家备注，仅商家可见');
             $table->unsignedSmallInteger('give_integral')->nullable()->comment('购买商品时赠送的积分');
+            $table->string('extension_code', 200)->nullable()->comment('商品的扩展属性');
+            $table->string('keywords', 20)->comment('商品关键字');
             $table->timestamps();//商品创建时间
             $table->softDeletes();//一般来说商品信息是不能物理删除
             //关联关系

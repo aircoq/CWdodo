@@ -35,7 +35,7 @@
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">商品类型表</h3>
-                        <a class="btn btn-box-tool btn-xs"  href="javascript:;" onclick="layer_show('添加','{{ url('admin/goods_type/create')  }}','1200','800')" id="a-admin-add">
+                        <a class="btn btn-box-tool btn-xs"  href="javascript:;" onclick="layer_show('添加','{{ url('admin/goods/create')  }}','1200','800')" id="a-admin-add">
                             <font style="vertical-align:inherit; color:#3c8dbc;"><font style="font-size:14px;"><i class="fa fa-fw fa-plus"></i>新增类型</font></font>
                         </a>
                     </div>
@@ -54,51 +54,48 @@
                                                 名称
                                             </th>
                                             <th class="sorting" tabindex="2">
-                                                图像
-                                            </th>
-                                            <th class="sorting" tabindex="2">
-                                                分类
+                                                头像
                                             </th>
                                             <th class="sorting" tabindex="3">
-                                                类型
+                                                分类
                                             </th>
                                             <th class="sorting" tabindex="4">
-                                                品牌
+                                                类型
                                             </th>
                                             <th class="sorting" tabindex="5">
-                                                库存/报警数量
+                                                品牌
                                             </th>
                                             <th class="sorting" tabindex="6">
-                                                重量
+                                                库存/报警数量
                                             </th>
                                             <th class="sorting" tabindex="7">
-                                                市场价/本店价/促销价格
+                                                重量
                                             </th>
                                             <th class="sorting" tabindex="8">
+                                                市场价/本店价/促销价格
+                                            </th>
+                                            <th class="sorting" tabindex="9">
                                                 促销开始/结束时间
                                             </th>
-                                            <th class="sorting" tabindex="9">
-                                                状态
+                                            <th class="sorting" tabindex="10">
+                                                在售
                                             </th>
-                                            <th class="sorting" tabindex="9">
+                                            <th class="sorting" tabindex="11">
+                                                精品/新品/热销
+                                            </th>
+                                            <th class="sorting" tabindex="12">
+                                                特价
+                                            </th>
+                                            <th class="sorting" tabindex="13">
+                                                积分
+                                            </th>
+                                            <th class="sorting" tabindex="14">
+                                                赠积分
+                                            </th>
+                                            <th class="sorting" tabindex="15">
                                                 删除时间
                                             </th>
-                                            <th class="sorting" tabindex="9">
-                                                删除时间
-                                            </th>
-                                            <th class="sorting" tabindex="9">
-                                                删除时间
-                                            </th>
-                                            <th class="sorting" tabindex="9">
-                                                删除时间
-                                            </th>
-                                            <th class="sorting" tabindex="9">
-                                                删除时间
-                                            </th>
-                                            <th class="sorting" tabindex="9">
-                                                删除时间
-                                            </th>
-                                            <th class="sorting td-manage" tabindex="10">
+                                            <th class="sorting td-manage" tabindex="16">
                                                 操作
                                             </th>
                                         </tr>
@@ -106,6 +103,18 @@
                                         <tbody>
                                         <tr role="row">
                                             <td class="sorting_1">id</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -118,10 +127,46 @@
                                                 ID
                                             </th>
                                             <th class="sorting">
-                                                商品类型名称
+                                                名称
                                             </th>
                                             <th class="sorting">
-                                                商品类型描述
+                                                头像
+                                            </th>
+                                            <th class="sorting">
+                                                分类
+                                            </th>
+                                            <th class="sorting">
+                                                类型
+                                            </th>
+                                            <th class="sorting">
+                                                品牌
+                                            </th>
+                                            <th class="sorting">
+                                                库存/报警数量
+                                            </th>
+                                            <th class="sorting">
+                                                重量
+                                            </th>
+                                            <th class="sorting">
+                                                市场价/本店价/促销价格
+                                            </th>
+                                            <th class="sorting">
+                                                促销开始/结束时间
+                                            </th>
+                                            <th class="sorting">
+                                                在售
+                                            </th>
+                                            <th class="sorting">
+                                                精品/新品/热销
+                                            </th>
+                                            <th class="sorting">
+                                                特价
+                                            </th>
+                                            <th class="sorting">
+                                                积分
+                                            </th>
+                                            <th class="sorting">
+                                                赠积分
                                             </th>
                                             <th class="sorting">
                                                 删除时间
@@ -181,8 +226,20 @@
                 },
                 'columns':[//按列显示从服务器端过来的数据
                     {'data':'id',"defaultContent": ""},
-                    {'data':'type_name',"defaultContent": ""},
-                    {'data':'mark_up',"defaultContent": ""},
+                    {'data':'',"defaultContent": ""},
+                    {'data':'',"defaultContent": ""},
+                    {'data':'',"defaultContent": ""},
+                    {'data':'',"defaultContent": ""},
+                    {'data':'',"defaultContent": ""},
+                    {'data':'',"defaultContent": ""},
+                    {'data':'',"defaultContent": ""},
+                    {'data':'',"defaultContent": ""},
+                    {'data':'',"defaultContent": ""},
+                    {'data':'',"defaultContent": ""},
+                    {'data':'',"defaultContent": ""},
+                    {'data':'',"defaultContent": ""},
+                    {'data':'',"defaultContent": ""},
+                    {'data':'',"defaultContent": ""},
                     {'data':'deleted_at',"defaultContent": ""},
                     {'data':'b',"defaultContent": ""},
                 ],
