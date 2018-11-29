@@ -77,7 +77,7 @@ class CreateGoodsModel extends Migration
             $table->unsignedSmallInteger('type_id')->comment('商品类型id(属性框)');
             $table->unsignedSmallInteger('brand_id')->nullable()->comment('品牌id');
             $table->unsignedSmallInteger('inventory')->comment('商品库存数量');
-            $table->unsignedTinyInteger('warn_num')->comment('报警数量');
+            $table->unsignedSmallInteger('warn_num')->comment('报警数量');
             $table->decimal('goods_weight', 5, 2)->nullable()->comment('商品的重量-KG');
             $table->decimal('market_price', 8, 2)->comment('市场价');
             $table->decimal('shop_price', 8, 2)->comment('本店价');
@@ -85,12 +85,12 @@ class CreateGoodsModel extends Migration
             $table->unsignedInteger('promote_start_at')->nullable()->comment('促销开始时间');
             $table->unsignedInteger('promote_end_at')->nullable()->comment('促销结束时间');
             $table->string('goods_thumb', 200)->comment('商品在前台显示的微缩图片，搜索的时候显示');
-            $table->string('goods_img', 200)->comment('商品的实际图片');
+            $table->jsonb('goods_img')->comment('商品轮播图');
             $table->enum('is_real',['0','1'])->default('1')->comment('是否是实物：0否比如服务、虚拟卡；1是');
             $table->enum('is_on_sale',['0','1'])->comment('是否开放售卖：0否；1是');
-            $table->enum('is_alone_sale',['0','1'])->default('1')->comment('是否能单独售卖：0否作为配件或者赠品销售；1是');
-            $table->enum('is_best',['0','1'])->default('0')->comment('是否是精品：0否；1是');
-            $table->enum('is_new',['0','1'])->default('0')->comment('是否是新品：0否；1是');
+            $table->enum('is_alone_sale',['0','1'])->default('1')->comment('能否单独售卖：0否作为配件或者赠品销售；1是');
+            $table->enum('is_best',['0','1'])->default('0')->comment('是否精品：0否；1是');
+            $table->enum('is_new',['0','1'])->default('0')->comment('是否新品：0否；1是');
             $table->enum('is_hot',['0','1'])->default('0')->comment('是否热销：0否；1是');
             $table->enum('is_promote',['0','1'])->default('0')->comment('是否特价促销：0否；1是');
             $table->unsignedSmallInteger('integral')->nullable()->comment('所需积分');

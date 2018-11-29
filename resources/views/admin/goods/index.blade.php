@@ -34,9 +34,9 @@
                 -------------------------->
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">商品类型表</h3>
+                        <h3 class="box-title">商品表</h3>
                         <a class="btn btn-box-tool btn-xs"  href="javascript:;" onclick="layer_show('添加','{{ url('admin/goods/create')  }}','1200','800')" id="a-admin-add">
-                            <font style="vertical-align:inherit; color:#3c8dbc;"><font style="font-size:14px;"><i class="fa fa-fw fa-plus"></i>新增类型</font></font>
+                            <font style="vertical-align:inherit; color:#3c8dbc;"><font style="font-size:14px;"><i class="fa fa-fw fa-plus"></i>新增商品</font></font>
                         </a>
                     </div>
                     <!-- /.box-header -->

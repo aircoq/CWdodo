@@ -31,7 +31,7 @@ Route::group(['namespace' => 'Admin','prefix'=>'admin'],function (){
         # 管理员模块
         Route::resource('admin','AdminController');
         Route::post('/admin/restore','AdminController@re_store')->name('admin.restore');//恢复管理员
-        Route::match(['get', 'post'],'avatar_upload','AdminController@avatar_upload')->name('admin.upload');//上传头像
+        Route::match(['get', 'post'],'avatar_upload','AdminController@avatar_upload')->name('admin.upload');//上传管理员头像
         Route::resource('auth','AuthController');
         Route::post('/auth/restore','AuthController@re_store')->name('auth.restore');//恢复权限
         Route::resource('role','RoleController');
@@ -62,10 +62,10 @@ Route::group(['namespace' => 'Admin','prefix'=>'admin'],function (){
 Route::group(['namespace' => 'Home','prefix'=>'home'],function (){
     # 登陆
     Route::match(['get', 'post'],'login','IndexController@login')->name('home.login');
-
+    Route::match(['get', 'post'],'avatar_upload','IndexController@avatar_upload');//用户上传头像
     # 前台防翻墙
     Route::middleware(['CheckUser'])->group(function () {//带‘/’的只能ajax访问
-        Route::match(['get', 'post'],'avatar_upload','IndexController@avatar_upload');//用户上传头像
+//        Route::match(['get', 'post'],'avatar_upload','IndexController@avatar_upload');//用户上传头像
     });
 
 });

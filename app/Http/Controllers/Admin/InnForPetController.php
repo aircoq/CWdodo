@@ -10,9 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class InnForPetController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request, InnForPet $innForPet)
     {
         if ($request->ajax()) {
@@ -33,20 +30,11 @@ class InnForPetController extends Controller
         return view('admin.inn.index');
     }
 
-    /**
-     * Show the form for creating a new resource
-     */
     public function create()
     {
         return view('admin.inn.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request,InnForPet $innForPet)
     {
         $data = $request->only('inn_name','inn_sn','is_self','inn_status','is_running','inn_tel','inn_address','inn_img','start_time','end_time','note','admin_id','city','adcode');
@@ -118,36 +106,17 @@ class InnForPetController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit(InnForPet $innForPet)
     {
         $data['inn'] =$innForPet;
         return view('admin.inn.edit',$data);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(InnForPet $innForPet,Request $request)
     {
         $data = $request->only('inn_name','inn_sn','is_self','inn_status','is_running','inn_tel','inn_address','inn_img','start_time','end_time','note','admin_id','city','adcode');
@@ -221,9 +190,6 @@ class InnForPetController extends Controller
         }
     }
 
-    /**
-     *软删除
-     */
     public function destroy(InnForPet $innForPet)
     {
         # 只有超级管理员才可以操作
@@ -238,9 +204,6 @@ class InnForPetController extends Controller
         return ['status' => 'fail', 'msg' => '您无权限操作'];
     }
 
-    /**
-     * 恢复软删除（超级管理员权限）
-     */
     public function re_store(Request $request,InnForPet $innForPet)
     {
         if ($request->ajax()) {

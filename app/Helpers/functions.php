@@ -18,19 +18,17 @@ function getGaoMapInfo($address,$city=null){
 }
 //每年更新一次高德省市区三级联动的本地json数据
 
-/***
- * 上传剪切头像
- * @param $request
- * laravel request 类
+/**
+ * 结合cropper插件上传剪切头像
  * @param $img_path
  * 存放图片文件夹的路径（格式：uploads / backend or frontend / 模型下+方法 / date('Ymd') /）；例如： $img_path = 'uploads/frontend/user_avatar/'.date('Ymd').'/';
  * @param null $img_name 重命名的文件名
  * @return bool|string 成功返回地址，失败返回false
  */
-function uploadBase64Img($request,$img_path,$img_name = null ){
+function uploadBase64Img($img_path='uploads/default/',$img_name = null){
     error_reporting(0);//禁用错误报告
     $img_name = empty($img_name) ? date('Ymd').uniqid() : $img_name;
-    if ($request->isMethod('post')) {
+    if (Request::isMethod('post')) {
         header('Content-type:text/html;charset=utf-8');
         $base64_image_content = $_POST['imgBase'];//获取图片编码
         //将base64编码转换为图片保存
@@ -44,16 +42,59 @@ function uploadBase64Img($request,$img_path,$img_name = null ){
             $new_file = $img_path . $img;
             //将图片保存到指定的位置
             if (file_put_contents($new_file, base64_decode(str_replace($result[1], '', $base64_image_content)))) {
-                return $new_file;//返回前端图片地址
+                return $new_file;//返回图片地址
             }else{
                 return false;
             }
         }else{
             return false;
         }
-
     }
 }
+
+/**
+ * 上传图片
+ * @param $file
+ * @param string $new_path
+ * @param null $new_name
+ * @return bool|string
+ */
+function uploadPic($file, $new_path='uploads/default/',$new_name= null )
+{
+
+    if (Request::hasFile($file)){//是否存在上传文件
+        $file = Request::file($file);// #获取文件
+        if ($file->isValid()){//检查图片是否合法
+            if(in_array( strtolower($file->extension()),['jpeg','bmp','jpg','gif','gpeg','png'])){
+                $format = '.'.$file->extension();
+                $new_name = empty($new_name) ? date('Ymd').uniqid() : $new_name;
+                $new_file = $new_name.$format;
+                if (!Request::hasFile($new_path)){//接收的文件夹是否存在
+                    mkdir ($new_path,0777,true);
+                }
+                if($file->move($new_path,$new_file)){//移动文件,并修改名字
+                    return $new_path.'/'.$new_file;
+                }else{
+                    return false;
+                }
+            }else{
+                return false;
+            }
+
+        }else{
+            return false;
+        }
+    }else{
+        return false;
+    }
+}
+
+
+
+
+
+
+
 
 /**
  * 在数据库中获取的数据 Collection 转数组
