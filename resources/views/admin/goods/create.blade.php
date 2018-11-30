@@ -1,5 +1,5 @@
 @extends('admin.common.common')
-
+<meta name="csrf-token" content="{{ csrf_token() }}">
 @section('title')
 
 @endsection
@@ -239,9 +239,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">商品描述</label>
                     <div class="col-sm-10">
-                        <div style="width:70%;">
                             <textarea id="goods_desc" name="goods_desc" rows="10" cols="5" >This is my textarea to be replaced with CKEditor.</textarea>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -269,16 +267,18 @@
     <!-- CK Editor -->
     <script src="{{ asset('bower_components/ckeditor/ckeditor.js')}}"></script>
     <script src="{{ asset('bower_components/ckeditor/config.js')}}"></script>
+    <script src="{{ asset('bower_components/ckeditor/lang/zh-cn.js')}}"></script>
     <script>
         $(function(){
             /***配置富文本编辑器*/
             CKEDITOR.replace('goods_desc',{//实例化插件
                 height: 450,
-                {{--filebrowserBrowseUrl: './',--}}
-                {{--filebrowserUploadUrl: '{{url('admin/images')}}?_token={{csrf_token()}}',--}}
-                image_previewText:'',
-                // removeDialogTabs : 'image:advanced;image:Link',
-        });
+                {{--filebrowserImageUploadUrl : '{{url('/admin/goods/image_upload')}}?_token={{csrf_token()}}',--}}
+                filebrowserImageUploadUrl : '{{url('/admin/goods/image_upload')}}',
+                removePlugins:'elementspath,resize',
+                codeSnippet_theme: 'zenburn',
+
+            });
             /***编写Javascript表单验证区域*/
             $("#form-admin-add").validate({
                 rules:{//规则
@@ -325,5 +325,10 @@
         //        CKEditor.setData(data);
         //      }
         //  CKEditor.setData(data);
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
     </script>
 @endsection

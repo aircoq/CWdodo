@@ -61,7 +61,6 @@ function uploadBase64Img($img_path='uploads/default/',$img_name = null){
  */
 function uploadPic($file, $new_path='uploads/default/',$new_name= null )
 {
-
     if (Request::hasFile($file)){//是否存在上传文件
         $file = Request::file($file);// #获取文件
         if ($file->isValid()){//检查图片是否合法
@@ -69,23 +68,23 @@ function uploadPic($file, $new_path='uploads/default/',$new_name= null )
                 $format = '.'.$file->extension();
                 $new_name = empty($new_name) ? date('Ymd').uniqid() : $new_name;
                 $new_file = $new_name.$format;
-                if (!Request::hasFile($new_path)){//接收的文件夹是否存在
+                if (!is_dir($new_path)){//接收的文件夹是否存在
                     mkdir ($new_path,0777,true);
                 }
                 if($file->move($new_path,$new_file)){//移动文件,并修改名字
                     return $new_path.'/'.$new_file;
                 }else{
-                    return false;
+                    return false;//移动失败，系统故障
                 }
             }else{
-                return false;
+                return false;//图片不是'jpeg','bmp','jpg','gif','gpeg','png'
             }
 
         }else{
-            return false;
+            return false;//图片不合法
         }
     }else{
-        return false;
+        return false;//不存在该文件
     }
 }
 

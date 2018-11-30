@@ -126,13 +126,13 @@ class GoodsController extends Controller
         if ($validator->fails()) {
             return ['status' => 'fail', 'msg' => $validator->messages()->first()];
         }
-        $tf1 = uploadPic('goods_thumb','uploads/frontend/goods/'.date('Ymd'));
+        $tf1 = uploadPic('goods_thumb','uploads/backend/goods/'.date('Ymd'));
         if($tf1){
             $data['goods_thumb'] = $tf1;
         }else{
             return ['status' => "fail", 'msg' => '缩略图添加失败'];
         }
-        $tf2 = uploadPic('goods_img1','uploads/frontend/goods/'.date('Ymd'));
+        $tf2 = uploadPic('goods_img1','uploads/backend/goods/'.date('Ymd'));
         if($tf2){
             $goods_img[] = $tf2;
         }else{
@@ -140,7 +140,7 @@ class GoodsController extends Controller
             return ['status' => "fail", 'msg' => '图片1添加失败'];
         }
         if(!empty($data['goods_img2'])){
-            $tf3 = uploadPic('goods_img2','uploads/frontend/goods/'.date('Ymd'));
+            $tf3 = uploadPic('goods_img2','uploads/backend/goods/'.date('Ymd'));
             if($tf3){
                 $goods_img[] = $tf3;
             }else{
@@ -150,7 +150,7 @@ class GoodsController extends Controller
             }
         }
         if(!empty($data['goods_img3'])){
-            $tf4 = uploadPic('goods_img3','uploads/frontend/goods/'.date('Ymd'));
+            $tf4 = uploadPic('goods_img3','uploads/backend/goods/'.date('Ymd'));
             if($tf4){
                 $goods_img[] = $tf4;
             }else{
@@ -161,7 +161,7 @@ class GoodsController extends Controller
             }
         }
         if(!empty($data['goods_img4'])){
-            $tf5 = uploadPic('goods_img4','uploads/frontend/goods/'.date('Ymd'));
+            $tf5 = uploadPic('goods_img4','uploads/backend/goods/'.date('Ymd'));
             if($tf5){
                 $goods_img[] = $tf5;
             }else{
@@ -173,7 +173,7 @@ class GoodsController extends Controller
             }
         }
         if(!empty($data['goods_img5'])){
-            $tf6 = uploadPic('goods_img5','uploads/frontend/goods/'.date('Ymd'));
+            $tf6 = uploadPic('goods_img5','uploads/backend/goods/'.date('Ymd'));
             if($tf6){
                 $goods_img[] = $tf6;
             }else{
@@ -186,7 +186,7 @@ class GoodsController extends Controller
             }
         }
         if(!empty($data['goods_img6'])){
-            $tf7 = uploadPic('goods_img6','uploads/frontend/goods/'.date('Ymd'));
+            $tf7 = uploadPic('goods_img6','uploads/backend/goods/'.date('Ymd'));
             if($tf7){
                 $goods_img[] = $tf7;
             }else{
@@ -314,6 +314,31 @@ class GoodsController extends Controller
             } else {
                 return ['status' => 'fail', 'msg' => '恢复失败！'];
             }
+        }
+    }
+
+    public function uploadImage(Request $request)
+    {
+        $data = $request->only('upload');
+//        dump($data);die();
+        $role = [
+            'upload' => 'required|file|image|mimes:png,gif,jpeg,jpg|max:1500',
+        ];
+        $message = [
+            'upload.mimes' => '缩略图格式为png,gif,jpeg,jpg',
+            'upload.max' => '缩略图不超过1.5m',
+        ];
+        $validator = Validator::make($data, $role, $message);
+        if ($validator->fails()) {
+            return ["uploaded" => "0", "error" => $validator->messages()->first()];
+        }
+        $tf = uploadPic('upload','uploads/backend/goods_desc/'.date('Ymd'));
+        if($tf){
+            $img_url = url("$tf");
+            return ["uploaded" => "1" , "fileName" => "$tf" ,"url" => "$img_url"];
+        }else{
+            return ["uploaded" => "0" , "error"=>[ "message"=>"上传失败"]];
+
         }
     }
 }

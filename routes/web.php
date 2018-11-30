@@ -22,6 +22,7 @@ Route::group(['namespace' => 'Admin','prefix'=>'admin'],function (){
     Route::match(['get', 'post'],'login','IndexController@login')->name('admin.login');//后台登陆
     Route::get('logout','IndexController@logout');//后台登出
     Route::match(['get', 'post'],'err404','IndexController@err404')->name('admin.404');//404
+    Route::post('goods/image_upload','GoodsController@uploadImage');
     # 后台防翻墙
     Route::middleware(['CheckAdminAuth'])->group(function () {//带‘/’的只能ajax访问
 //   Route::group(['middleware' => 'web'],function (){//重置，无验证项
@@ -51,6 +52,7 @@ Route::group(['namespace' => 'Admin','prefix'=>'admin'],function (){
         Route::post('goods_category/restore','GoodsCategoryController@re_store')->name('goods_category.restore');
         Route::resource('goods_brand','GoodsBrandController');//商品品牌
         Route::resource('goods','GoodsController');//商品管理
+
     });
 });
 
