@@ -2,46 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5e34fc05-11b0-4cd3-8661-f499f1c56395" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/GoodsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/GoodsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/public/bower_components/webuploader/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/admin_upload.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/admin_webuploader.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/bower_components/webuploader/admin_webuploader.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/cropper/cropper.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/cropper/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/cropper/uploader.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/expressInstall.swf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/image-upload/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/image-upload/upload.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/md5-demo/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/md5-demo/script.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/requirejs/app.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/requirejs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/requirejs/require.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/server/crossdomain.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/server/fileupload.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/server/fileupload2.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/server/preview.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.custom.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.custom.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.custom.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.fis.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.fis.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.flashonly.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.flashonly.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.flashonly.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.flashonly.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.html5only.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.html5only.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.html5only.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.html5only.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.noimage.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.noimage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.noimage.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.noimage.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.nolog.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.nolog.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.nolog.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.nolog.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.withoutimage.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.withoutimage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.withoutimage.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.withoutimage.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/goods/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/goods/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/goods/create2.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/goods/create2.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/goods_attr/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/goods_attr/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/role/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/role/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/AuthController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -113,11 +74,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="web.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="web.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="260">
-              <caret line="25" column="12" lean-forward="true" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
+            <state relative-caret-position="551">
+              <caret line="58" column="70" lean-forward="true" selection-start-line="58" selection-start-column="70" selection-end-line="58" selection-end-column="70" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AuthController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AuthController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="491">
+              <caret line="102" lean-forward="true" selection-start-line="102" selection-end-line="102" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2018_10_16_104629_create_admin_role_auth_model.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/database/migrations/2018_10_16_104629_create_admin_role_auth_model.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="400">
+              <caret line="22" column="63" selection-start-line="22" selection-start-column="63" selection-end-line="22" selection-end-column="63" />
             </state>
           </provider>
         </entry>
@@ -202,7 +181,6 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/UserController.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/user/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/模板/index.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/AuthController.php" />
         <option value="$PROJECT_DIR$/app/Models/Admin/GoodsCategory.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/goods_category/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/goods_attr/edit.blade.php" />
@@ -233,6 +211,7 @@
         <option value="$PROJECT_DIR$/resources/views/admin/goods/create.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/goods/create2.blade.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/AuthController.php" />
       </list>
     </option>
   </component>
@@ -378,7 +357,34 @@
             <path>
               <item name="pet" type="b2602c69:ProjectViewProjectNode" />
               <item name="pet" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pet" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pet" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="Admin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pet" type="462c0819:PsiDirectoryNode" />
               <item name="database" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pet" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
+              <item name="migrations" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="pet" type="b2602c69:ProjectViewProjectNode" />
@@ -401,14 +407,6 @@
               <item name="pet" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pet" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pet" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
               <item name="admin" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -506,7 +504,7 @@
       <workItem from="1543801679001" duration="16765000" />
       <workItem from="1543885400579" duration="9442000" />
       <workItem from="1543895044546" duration="9160000" />
-      <workItem from="1543933200625" duration="382000" />
+      <workItem from="1543933200625" duration="1520000" />
     </task>
     <task id="LOCAL-00001" summary="登陆定位">
       <created>1541747557847</created>
@@ -687,7 +685,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="398991000" />
+    <option name="totallyTimeSpent" value="400129000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
@@ -736,20 +734,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/auth/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="184" column="65" lean-forward="true" selection-start-line="184" selection-start-column="65" selection-end-line="184" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/Admin/GoodsType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="18" column="44" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/goods_type/edit.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-129">
@@ -792,13 +776,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="571">
           <caret line="80" column="30" selection-start-line="80" selection-start-column="30" selection-end-line="80" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AuthController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="15" column="161" selection-start-line="15" selection-start-column="161" selection-end-line="15" selection-end-column="161" />
         </state>
       </provider>
     </entry>
@@ -1059,8 +1036,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="25" column="12" lean-forward="true" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
+        <state relative-caret-position="551">
+          <caret line="58" column="70" lean-forward="true" selection-start-line="58" selection-start-column="70" selection-end-line="58" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/Admin/Auth.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2018_10_16_104629_create_admin_role_auth_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="22" column="63" selection-start-line="22" selection-start-column="63" selection-end-line="22" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AuthController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="491">
+          <caret line="102" lean-forward="true" selection-start-line="102" selection-end-line="102" />
         </state>
       </provider>
     </entry>

@@ -56,9 +56,6 @@ Route::group(['prefix'=>'admin','middleware' => 'CheckAdminAuth','namespace' => 
 
 
 
-
-
-
 /******    前台路由    **************************************************/
 # 前台不需要登陆的页面
 Route::group(['namespace' => 'Home','prefix'=>'home'],function (){

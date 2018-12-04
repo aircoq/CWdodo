@@ -29,7 +29,7 @@ class AuthController extends Controller
 
     public function create(Auth $auth)
     {
-        $data['auth'] = $auth->where('is_menu','1')->get();
+        $data['auth'] = $auth->where('is_menu','1')->where('path','<','3')->get();
         return view('admin.auth.create',$data);
     }
 
@@ -97,7 +97,7 @@ class AuthController extends Controller
     {
         $data['auth'] = $auth;//当前记录
         $all_auth = new Auth();
-        $data['all_auth'] = $all_auth->where('is_menu','1')->where('id','!=',$auth->id)->get();//除去本身外的所有记录
+        $data['all_auth'] = $all_auth->where('is_menu','1')->where('path','<','3')->where('id','!=',$auth->id)->get();//除去本身外的所有记录
         return view('admin.auth.edit',$data);
     }
 
