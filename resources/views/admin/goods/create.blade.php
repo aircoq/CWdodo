@@ -5,16 +5,29 @@
 @endsection
 
 @section('css')
+    <!-- bootstrap datepicker -->
+    <link rel="stylesheet" href="{{ asset('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/webuploader/webuploader.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/webuploader/admin_webuploader.css')}}" />
     <style>
+        .ui-datepicker-today .ui-state-highlight{
+            border: 1px solid #eee;
+            color: #f60;
+        }
+        .ui-datepicker-current-day .ui-state-active{
+            border: 1px solid #eee;
+            color: #06f;
+        }
         .error{color:red;}
     </style>
 @endsection
 
 @section('content')
-    <form class="form-horizontal" id="form-admin-add" action="{{ url('admin/goods')  }}" method="post" enctype="multipart/form-data">
+    <form class="form-horizontal" id="form-add" action="{{ url('admin/goods')  }}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     <!-- /.box-header -->
         <!-- form start -->
+        <input type="hidden" name="step" value="0"/>
         <div class="box-body">
             <div class="cl-sm-12">
                 <div class="form-group">
@@ -91,8 +104,8 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">促销时间段</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control start_time" style="width:34.855%;display:inline;" placeholder="促销开始时间" name="promote_start_at" id="promote_start_at"/>
-                        <input type="text" class="form-control end_time" style="width:34.855%;display:inline;" placeholder="促销结束时间" name="promote_end_at" id="promote_end_at"/>
+                        <input type="text" class="form-control" style="width:34.855%;display:inline;" placeholder="促销开始时间" name="promote_start_at"/>
+                        <input type="text" class="form-control" style="width:34.855%;display:inline;" placeholder="促销结束时间" name="promote_end_at"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -239,7 +252,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">商品描述</label>
                     <div class="col-sm-10">
-                            <textarea id="goods_desc" name="goods_desc" rows="10" cols="5" >This is my textarea to be replaced with CKEditor.</textarea>
+                        <textarea id="goods_desc" name="goods_desc" rows="10" cols="5" ></textarea>
                     </div>
                 </div>
             </div>
@@ -264,12 +277,33 @@
     <script type="text/javascript" src="{{ asset('plugins/layer/admin_layer.js')}}"></script>
     <script type="text/javascript" src="{{ asset('plugins/layer/admin_layer.js')}}"></script>
     <script type="text/javascript" src="{{ asset('plugins/jQueryUI/jquery.form.js')}}"></script>
+    <!-- bootstrap datepicker -->
+    <script src="{{ asset('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
+    <script src="{{ asset('bower_components/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js')}}"></script>
     <!-- CK Editor -->
     <script src="{{ asset('bower_components/ckeditor/ckeditor.js')}}"></script>
     <script src="{{ asset('bower_components/ckeditor/config.js')}}"></script>
     <script src="{{ asset('bower_components/ckeditor/lang/zh-cn.js')}}"></script>
     <script>
+        // $("input[name='promote_end_at']").timepicker({
+        //     autoclose: true
+        // });
         $(function(){
+            /***时间插件*/
+            $("input[name='promote_start_at']").datepicker({
+                language: "zh-CN",
+                autoclose: true,//选中之后自动隐藏日期选择框
+                clearBtn: true,//清除按钮
+                todayBtn: true,//今日按钮
+                format: "yyyy-mm-dd"
+            });
+            $("input[name='promote_end_at']").datepicker({
+                language: "zh-CN",
+                autoclose: true,//选中之后自动隐藏日期选择框
+                clearBtn: true,//清除按钮
+                todayBtn: true,//今日按钮
+                format: "yyyy-mm-dd"
+            });
             /***配置富文本编辑器*/
             CKEDITOR.replace('goods_desc',{//实例化插件
                 height: 450,
@@ -280,7 +314,7 @@
 
             });
             /***编写Javascript表单验证区域*/
-            $("#form-admin-add").validate({
+            $("#form-add").validate({
                 rules:{//规则
                     type_name:{
                         required:true,
@@ -306,11 +340,12 @@
                                 skin: 'layer-ext-moon'
                             });
                         }else{ // 成功
+                            var id = msg.id;
                             layer.msg(msg.msg, {
                                 icon: 1,
                                 skin: 'layer-ext-moon'
                             },function(){
-                                parent.location.reload();
+                                parent.layer_show('添加轮播图','{{ url('admin/goods/create').'/?step=1&id=' }}'+id,'1200','800');
                                 var index = parent.layer.getFrameIndex( window.name );
                                 parent.layer.close(index);
                             });
@@ -319,12 +354,6 @@
                 }
             });
         });
-        // var goods_desc = CKEDITOR.instances.content.getData();//提交表单时将goods_desc的内容复制给textarea
-        // $('#goods_desc').val(goods_desc);
-        // CKEditor.on('instanceReady',function(data) {
-        //        CKEditor.setData(data);
-        //      }
-        //  CKEditor.setData(data);
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
