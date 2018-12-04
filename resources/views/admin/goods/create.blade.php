@@ -23,7 +23,7 @@
 @endsection
 
 @section('content')
-    <form class="form-horizontal" id="form-add" action="{{ url('admin/goods')  }}" method="post" enctype="multipart/form-data">
+    <form class="form-horizontal" id="form-add" action="{{ url('admin/goods') }}" method="post" enctype="multipart/form-data">
     {{ csrf_field() }}
     <!-- /.box-header -->
         <!-- form start -->
@@ -265,8 +265,6 @@
             </div>
         </div>
     </form>
-    </div>
-    </div>
 @endsection
 
 @section('script')

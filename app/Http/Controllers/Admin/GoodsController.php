@@ -115,6 +115,7 @@ class GoodsController extends Controller
                 return ['status' => 'fail', 'msg' => '新增失败！'];
             }
         }else{
+            dump(objArr($request->all()));die();
             $data = $request->only('goods_thumb','goods_img1','goods_img2','goods_img3','goods_img4','goods_img5','goods_img6');
             $role = [
                 'goods_thumb' => 'required|file|image|mimes:png,gif,jpeg,jpg|max:100|dimensions:width=300,height=300',

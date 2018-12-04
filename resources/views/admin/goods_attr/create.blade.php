@@ -95,7 +95,6 @@
             </div>
         </form>
     </div>
-    </div>
 @endsection
 
 @section('script')
