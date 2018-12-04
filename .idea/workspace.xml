@@ -2,6 +2,49 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5e34fc05-11b0-4cd3-8661-f499f1c56395" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/Uploader.swf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/admin_upload.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/admin_webuploader.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/cropper/cropper.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/cropper/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/cropper/uploader.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/expressInstall.swf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/image-upload/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/image-upload/upload.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/images/bg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/images/icons.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/images/icons.psd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/images/image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/images/progress.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/images/progress.psd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/images/success.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/md5-demo/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/md5-demo/script.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/requirejs/app.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/requirejs/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/requirejs/require.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/server/crossdomain.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/server/fileupload.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/server/fileupload2.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/server/preview.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.custom.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.custom.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.fis.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.flashonly.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.flashonly.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.html5only.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.html5only.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.noimage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.noimage.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.nolog.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.nolog.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.withoutimage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/bower_components/webuploader/webuploader.withoutimage.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/admin/goods/create2.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/GoodsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/GoodsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/Admin/GoodsBrand.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Admin/GoodsBrand.php" afterDir="false" />
@@ -52,20 +95,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="create.blade.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="create.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/admin/goods/create.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="29" column="48" lean-forward="true" selection-start-line="29" selection-start-column="48" selection-end-line="29" selection-end-column="49" />
+            <state relative-caret-position="461">
+              <caret line="341" column="36" selection-start-line="341" selection-start-column="36" selection-end-line="341" selection-end-column="36" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="create2.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="create2.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/admin/goods/create2.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-180">
-              <caret line="36" column="43" lean-forward="true" selection-start-line="36" selection-start-column="43" selection-end-line="36" selection-end-column="43" />
+            <state relative-caret-position="600">
+              <caret line="75" column="82" selection-start-line="75" selection-start-column="82" selection-end-line="75" selection-end-column="82" />
               <folding>
                 <element signature="e#7457#7475#0#HTML" expanded="true" />
                 <element signature="e#7699#7720#0#HTML" expanded="true" />
@@ -89,6 +132,15 @@
                 <element signature="n#style#0;n#font#0;n#button#3;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#font#0;n#font#0;n#button#3;n#div#0;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="admin_upload.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/bower_components/webuploader/admin_upload.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="467">
+              <caret line="264" column="56" selection-start-line="264" selection-start-column="53" selection-end-line="264" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -124,7 +176,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>登</find>
       <find>IndexController</find>
       <find>role</find>
       <find>length</find>
@@ -154,6 +205,7 @@
       <find>progress</find>
       <find>promote</find>
       <find>form-admin-add</find>
+      <find>php</find>
     </findStrings>
     <replaceStrings>
       <replace>user</replace>
@@ -220,8 +272,8 @@
         <option value="$PROJECT_DIR$/database/migrations/2018_10_16_154819_create_goods_model.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/goods/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/GoodsController.php" />
-        <option value="$PROJECT_DIR$/resources/views/admin/goods/create.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/goods/create2.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/goods/create.blade.php" />
       </list>
     </option>
   </component>
@@ -372,6 +424,24 @@
             <path>
               <item name="pet" type="b2602c69:ProjectViewProjectNode" />
               <item name="pet" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pet" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="bower_components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pet" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="bower_components" type="462c0819:PsiDirectoryNode" />
+              <item name="webuploader" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pet" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -385,14 +455,6 @@
               <item name="pet" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pet" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pet" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
               <item name="admin" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -488,7 +550,7 @@
       <workItem from="1543541332919" duration="1970000" />
       <workItem from="1543543438437" duration="14606000" />
       <workItem from="1543801679001" duration="16765000" />
-      <workItem from="1543885400579" duration="8692000" />
+      <workItem from="1543885400579" duration="9338000" />
     </task>
     <task id="LOCAL-00001" summary="登陆定位">
       <created>1541747557847</created>
@@ -669,7 +731,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="388699000" />
+    <option name="totallyTimeSpent" value="389345000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="0" />
@@ -945,13 +1007,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/bower_components/webuploader/admin_upload.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3180">
-          <caret line="159" column="54" selection-start-line="159" selection-start-column="54" selection-end-line="159" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Models/Admin/Admin.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1054,21 +1109,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/goods/create.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="29" column="48" lean-forward="true" selection-start-line="29" selection-start-column="48" selection-end-line="29" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/goods/create2.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-180">
-          <caret line="36" column="43" lean-forward="true" selection-start-line="36" selection-start-column="43" selection-end-line="36" selection-end-column="43" />
+        <state relative-caret-position="600">
+          <caret line="75" column="82" selection-start-line="75" selection-start-column="82" selection-end-line="75" selection-end-column="82" />
           <folding>
             <element signature="e#7457#7475#0#HTML" expanded="true" />
             <element signature="e#7699#7720#0#HTML" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/bower_components/webuploader/admin_upload.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="467">
+          <caret line="264" column="56" selection-start-line="264" selection-start-column="53" selection-end-line="264" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/goods/create.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="461">
+          <caret line="341" column="36" selection-start-line="341" selection-start-column="36" selection-end-line="341" selection-end-column="36" />
         </state>
       </provider>
     </entry>
