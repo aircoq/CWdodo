@@ -417,12 +417,11 @@
                                 skin: 'layer-ext-moon'
                             });
                         }else{ // 成功
-                            var id = msg.id;
-                            layer.msg(msg.msg, {
+                            layer.msg('添加成功！', {
                                 icon: 1,
                                 skin: 'layer-ext-moon'
                             },function(){
-                                parent.layer_show('添加轮播图','{{ url('admin/goods/create').'/?step=1&id=' }}'+id,'1200','800');
+                                parent.location.reload();
                                 var index = parent.layer.getFrameIndex( window.name );
                                 parent.layer.close(index);
                             });

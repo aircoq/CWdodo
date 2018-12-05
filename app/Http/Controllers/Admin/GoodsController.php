@@ -144,7 +144,6 @@ class GoodsController extends Controller
             if($tf3){
                 $goods_img[] = $tf3;
             }else{
-                @unlink($tf2);
                 return ['status' => "fail", 'msg' => '图片2添加失败'];
             }
         }
@@ -153,8 +152,6 @@ class GoodsController extends Controller
             if($tf4){
                 $goods_img[] = $tf4;
             }else{
-                @unlink($tf2);
-                @unlink($tf3);
                 return ['status' => "fail", 'msg' => '图片3添加失败'];
             }
         }
@@ -163,9 +160,6 @@ class GoodsController extends Controller
             if($tf5){
                 $goods_img[] = $tf5;
             }else{
-                @unlink($tf2);
-                @unlink($tf3);
-                @unlink($tf4);
                 return ['status' => "fail", 'msg' => '图片4添加失败'];
             }
         }
@@ -174,10 +168,6 @@ class GoodsController extends Controller
             if($tf6){
                 $goods_img[] = $tf6;
             }else{
-                @unlink($tf2);
-                @unlink($tf3);
-                @unlink($tf4);
-                @unlink($tf5);
                 return ['status' => "fail", 'msg' => '图片5添加失败'];
             }
         }
@@ -186,11 +176,6 @@ class GoodsController extends Controller
             if($tf7){
                 $goods_img[] = $tf7;
             }else{
-                @unlink($tf2);
-                @unlink($tf3);
-                @unlink($tf4);
-                @unlink($tf5);
-                @unlink($tf6);
                 return ['status' => "fail", 'msg' => '图片6添加失败'];
             }
         }
@@ -226,6 +211,7 @@ class GoodsController extends Controller
             @unlink($tf7);
             @unlink($new_full_img);
             #删除富文本图片
+            self::delRichTextImg($data['goods_desc']);
             return ['status' => 'fail', 'msg' => '新增失败！'];
         }
     }
@@ -329,7 +315,7 @@ class GoodsController extends Controller
             }
         }
     }
-
+    /** 富文本上传图片接口 */
     public function uploadImage(Request $request)
     {
         $data = $request->only('upload');
@@ -344,7 +330,7 @@ class GoodsController extends Controller
         if ($validator->fails()) {
             return ["uploaded" => "0", "error" => $validator->messages()->first()];
         }
-        $tf = uploadPic('upload','uploads/backend/goods_desc/'.date('Ymd'));
+        $tf = uploadPic('upload','uploads/backend/goods_desc/rich_text/'.date('Y').'/'.date('md'));
         if($tf){
             $img_url = url("$tf");
             return ["uploaded" => "1" , "fileName" => "$tf" ,"url" => "$img_url"];
@@ -353,10 +339,33 @@ class GoodsController extends Controller
 
         }
     }
-    /** 删除富文本中的图片 */
-    public function delRichText($text)
+    /** 删除富文本残留 */
+    public function delRichText(Request $request)
     {
-        preg_match_all('/<img[^>]*?src="([^"]*?)"[^>]*?>/i',$text,$match);
-        echo $match[1];
+        #获取富文本中所有的图片的src属性
+        $text = $request['text'];
+        if(self::delRichTextImg($text)){
+            return 1;
+        }
+        return 0;
+    }
+    /** 删除富文本中的图片 */
+    private function delRichTextImg($text)
+    {
+        try{
+            preg_match_all('/<img[^>]*?src="([^"]*?)"[^>]*?>/i',$text,$match);
+            if(is_array($match)){
+                # 删除图片
+                foreach ($match[1] as $k){
+                    //转换成服务器本地路径
+                    $url_count = strlen(url('').'/');
+                    $img_url=substr_replace($k,"",0,$url_count);
+                    @unlink($img_url);
+                }
+            }
+        }catch(\Illuminate\Database\QueryException $ex){
+            return ['status' => 'fail', 'msg' => '删除失败！'];
+        }
+       return ['status' => "success", 'msg' => '删除成功'];
     }
 }

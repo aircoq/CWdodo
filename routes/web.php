@@ -20,7 +20,7 @@ Route::any('/','Home\IndexController@index');//设置默认访问控制器方法
 # 后台不需要验证页面
 Route::group(['namespace' => 'Admin','prefix'=>'admin'],function (){
     Route::match(['get', 'post'],'login','IndexController@login')->name('admin.login');//后台登陆
-    Route::get('logout','IndexController@logout');//后台登出
+    Route::get('logout','IndexController@logout')->name('logout.index');//后台登出
     Route::match(['get', 'post'],'err404','IndexController@err404')->name('admin.404');//404
 });
 # 后台需要验证权限页面
@@ -52,6 +52,7 @@ Route::group(['prefix'=>'admin','middleware' => 'CheckAdminAuth','namespace' => 
     Route::post('goods_category/restore','GoodsCategoryController@re_store')->name('goods_category.restore');
     Route::resource('goods_brand','GoodsBrandController');//商品品牌
     Route::resource('goods','GoodsController');//商品管理
+    Route::match(['get', 'post'],'del_rich_text','GoodsController@delRichText');//商品管理
 });
 
 
