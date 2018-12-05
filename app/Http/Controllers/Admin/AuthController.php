@@ -13,7 +13,7 @@ class AuthController extends Controller
     public function index(Request $request, Auth $auth)
     {
         if ($request->ajax()) {
-            $data = $auth->select('id','auth_name','auth_controller','auth_action','auth_pid','route_name','is_menu','is_enable','path','sort_order','auth_desc','deleted_at')->withTrashed()->get();
+            $data = $auth->select('id','auth_name','auth_controller','auth_action','auth_pid','route_name','is_check','is_menu','is_enable','path','sort_order','auth_desc','deleted_at')->withTrashed()->get();
             $cnt = count($data);
             $info = [
                 'draw' => $request->get('draw'),
@@ -36,13 +36,14 @@ class AuthController extends Controller
 
     public function store(Request $request,Auth $auth)
     {
-        $data = $request->only('auth_name','auth_controller','auth_action','auth_pid','is_menu','is_enable','sort_order','auth_desc');
+        $data = $request->only('auth_name','auth_controller','auth_action','auth_pid','is_check','is_menu','is_enable','sort_order','auth_desc');
         $role = [
             'auth_name' => 'nullable|alpha_num|between:2,8|unique:auth',
             'auth_controller' => 'nullable|required_if:is_enable,1|required_with:auth_action|alpha_dash',
             'auth_action'=> 'nullable|alpha_dash',
             'auth_pid' => 'required|integer',
             'is_menu' => 'required|in:0,1',
+            'is_check' => 'required|in:0,1',
             'is_enable' => 'required|in:0,1',
             'sort_order' => 'nullable|integer',
             'auth_desc' => 'nullable|string',
@@ -56,6 +57,7 @@ class AuthController extends Controller
             'auth_controller.required_with' => '当前情况控制器为必填',
             'auth_controller.alpha_dash' => '控制器为普通字符串',
             'auth_action.alpha_dash' => '方法为普通字符串',
+            'is_check.in' => '是否验证的值有误',
             'is_menu.in' => '菜单显示的值有误',
             'is_enable.in' => '是否可用的值有误',
             'sort_order.integer' => '排序字段必须为整数',
@@ -104,13 +106,14 @@ class AuthController extends Controller
 
     public function update(Request $request,auth $auth)
     {
-        $data = $request->only('auth_name','auth_controller','auth_action','auth_pid','is_menu','is_enable','sort_order','auth_desc');
+        $data = $request->only('auth_name','auth_controller','auth_action','auth_pid','is_check','is_menu','is_enable','sort_order','auth_desc');
         $role = [
             'auth_name' => 'nullable|alpha_num|between:2,8|unique:auth,auth_name,'.$auth->id,
             'auth_controller' => 'nullable|required_if:is_enable,1|required_with:auth_action|alpha_dash',
             'auth_action'=> 'nullable|alpha_dash',
             'auth_pid' => 'required|integer|not_in:'.$auth->id,
             'is_menu' => 'required|in:0,1',
+            'is_check' => 'required|in:0,1',
             'is_enable' => 'required|in:0,1',
             'sort_order' => 'nullable|integer',
             'auth_desc' => 'nullable|string',
@@ -126,6 +129,7 @@ class AuthController extends Controller
             'auth_action.alpha_dash' => '方法为普通字符串',
             'auth_pid.integer' => '父级菜单非法',
             'auth_pid.not_in' => '父级菜单不能为其本身',
+            'is_check.in' => '是否验证的值有误',
             'is_menu.in' => '菜单显示的值有误',
             'is_enable.in' => '是否可用的值有误',
             'sort_order.integer' => '排序字段必须为整数',

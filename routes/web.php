@@ -26,8 +26,8 @@ Route::group(['namespace' => 'Admin','prefix'=>'admin'],function (){
 # 后台需要验证权限页面
 Route::group(['prefix'=>'admin','middleware' => 'CheckAdminAuth','namespace' => 'Admin',],function (){//重置，无验证项
     # 后台首页
-    Route::any('index', 'IndexController@index');
-    Route::any('dashboard', 'IndexController@dashboard');
+    Route::any('index', 'IndexController@index')->name('index.index');
+    Route::any('dashboard', 'IndexController@dashboard')->name('index.dashboard');
     # 管理员模块
     Route::resource('admin','AdminController');
     Route::post('/admin/restore','AdminController@re_store')->name('admin.restore');//恢复管理员

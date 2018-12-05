@@ -41,7 +41,7 @@ class RoleController extends Controller
 
     public function create(RoleAuth $auth )
     {
-        $data['auth'] = $auth->all();
+        $data['auth'] = $auth->where('is_check','1')->get();
         return view('admin.role.create',$data);
     }
 
@@ -99,7 +99,7 @@ class RoleController extends Controller
     public function edit(Role $role,RoleAuth $auth,RoleAuthRelated $authRelated)
     {
         $data['role'] = $role;
-        $data['auth'] = $auth->all();
+        $data['auth'] = $auth->where('is_check','1')->get();
         $auth_list = $authRelated->where('role_id',$role->id)->get();
         $data['auth_list'] = [];
         foreach (objArr($auth_list) as $v){

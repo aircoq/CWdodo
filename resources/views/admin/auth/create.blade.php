@@ -56,16 +56,31 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">作为左边的菜单显示</font></font></label>
+                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">此路由须要权限验证</font></font></label>
                             <div class="col-sm-10">
                                 <div class="col-sm-4 radio">
                                     <label>
-                                        <input type="radio" name="is_menu" id="is_menu" value="1" checked="">是
+                                        <input type="radio" name="is_check" value="1" checked="checked">是
                                     </label>
                                 </div>
                                 <div class="col-sm-6 radio">
                                     <label>
-                                        <input type="radio" name="is_menu" id="is_menu" value="0" checked="">否
+                                        <input type="radio" name="is_check" value="0" >否
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">作为左边的菜单显示</font></font></label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-4 radio">
+                                    <label>
+                                        <input type="radio" name="is_menu" value="1" checked="">是
+                                    </label>
+                                </div>
+                                <div class="col-sm-6 radio">
+                                    <label>
+                                        <input type="radio" name="is_menu" value="0" checked="">否
                                     </label>
                                 </div>
                             </div>
@@ -75,12 +90,12 @@
                             <div class="col-sm-10">
                                 <div class="col-sm-4 radio">
                                     <label>
-                                        <input type="radio" name="is_enable" id="is_enable" value="1" checked="">是
+                                        <input type="radio" name="is_enable" value="1" checked="">是
                                     </label>
                                 </div>
                                 <div class="col-sm-6 radio">
                                     <label>
-                                        <input type="radio" name="is_enable" id="is_enable" value="0" checked="">否
+                                        <input type="radio" name="is_enable" value="0" checked="">否
                                     </label>
                                 </div>
                             </div>

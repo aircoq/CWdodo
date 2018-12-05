@@ -7,8 +7,6 @@
 @section('css')
     <!-- bootstrap datepicker -->
     <link rel="stylesheet" href="{{ asset('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/webuploader/webuploader.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/webuploader/admin_webuploader.css')}}" />
     <style>
         .ui-datepicker-today .ui-state-highlight{
             border: 1px solid #eee;
@@ -250,6 +248,48 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="col-sm-2 control-label">详情图1(必填)</label>
+                    <div class="col-sm-10">
+                        <input type="file" accept="image/png, image/jpeg, image/gif, image/jpg" class="filepath" onchange="changepic(this)" name="goods_img1"/><font style="color: red">只能上传高宽各为800，不超过550K的图片</font><br/>
+                        <img src=""/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">详情图2</label>
+                    <div class="col-sm-10">
+                        <input type="file" accept="image/png, image/jpeg, image/gif, image/jpg" class="filepath" onchange="changepic(this)" name="goods_img2"/><font style="color: red">只能上传高宽各为800，不超过550K的图片</font><br>
+                        <img src=""/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">详情图3</label>
+                    <div class="col-sm-10">
+                        <input type="file" accept="image/png, image/jpeg, image/gif, image/jpg" class="filepath" onchange="changepic(this)" name="goods_img3"/><font style="color: red">只能上传高宽各为800，不超过550K的图片</font><br>
+                        <img src="" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">详情图4</label>
+                    <div class="col-sm-10">
+                        <input type="file" accept="image/png, image/jpeg, image/gif, image/jpg" class="filepath" onchange="changepic(this)" name="goods_img4"/><font style="color: red">只能上传高宽各为800，不超过550K的图片</font><br>
+                        <img src="" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">详情图5</label>
+                    <div class="col-sm-10">
+                        <input type="file" accept="image/png, image/jpeg, image/gif, image/jpg" class="filepath" onchange="changepic(this)" name="goods_img5"/><font style="color: red">只能上传高宽各为800，不超过550K的图片</font><br>
+                        <img src="" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">详情图6</label>
+                    <div class="col-sm-10">
+                        <input type="file" accept="image/png, image/jpeg, image/gif, image/jpg" class="filepath" onchange="changepic(this)" name="goods_img6"/><font style="color: red">只能上传高宽各为800，不超过550K的图片</font><br>
+                        <img src="" />
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="col-sm-2 control-label">商品描述</label>
                     <div class="col-sm-10">
                         <textarea id="goods_desc" name="goods_desc" rows="10" cols="5" ></textarea>
@@ -283,9 +323,25 @@
     <script src="{{ asset('bower_components/ckeditor/config.js')}}"></script>
     <script src="{{ asset('bower_components/ckeditor/lang/zh-cn.js')}}"></script>
     <script>
-        // $("input[name='promote_end_at']").timepicker({
-        //     autoclose: true
-        // });
+        function changepic(obj) {
+            var newsrc=getObjectURL(obj.files[0]);
+            console.log(obj.id);
+            $(obj).siblings('font').remove();
+            $(obj).siblings('img').attr({"src":newsrc,height:200,width:200});
+        }
+        //建立一个可存取到file的url
+        function getObjectURL(file) {
+            var url = null ;
+            // 针对不同浏览器获得url的方法
+            if (window.createObjectURL!=undefined) { // basic
+                url = window.createObjectURL(file) ;
+            } else if (window.URL!=undefined) { // mozilla(firefox)
+                url = window.URL.createObjectURL(file) ;
+            } else if (window.webkitURL!=undefined) { // webkit or chrome
+                url = window.webkitURL.createObjectURL(file) ;
+            }
+            return url ;
+        }
         $(function(){
             /***时间插件*/
             $("input[name='promote_start_at']").datepicker({
@@ -305,7 +361,6 @@
             /***配置富文本编辑器*/
             CKEDITOR.replace('goods_desc',{//实例化插件
                 height: 450,
-                {{--filebrowserImageUploadUrl : '{{url('/admin/goods/image_upload')}}?_token={{csrf_token()}}',--}}
                 filebrowserImageUploadUrl : '{{url('/admin/goods/image_upload')}}',
                 removePlugins:'elementspath,resize',
                 codeSnippet_theme: 'zenburn',
@@ -314,12 +369,36 @@
             /***编写Javascript表单验证区域*/
             $("#form-add").validate({
                 rules:{//规则
-                    type_name:{
+                    goods_name:{
                         required:true,
-                        rangelength:[1,12]
+                        rangelength:[1,15]
                     },
-                    mark_up:{
-                        maxlength:200,
+                    cate_id:{
+                        digits:true
+                    },
+                    type_id:{
+                        digits:true
+                    },
+                    brand_id:{
+                        digits:true
+                    },
+                    inventory:{
+                        digits:true
+                    },
+                    warn_num:{
+                        digits:true
+                    },
+                    is_real:{
+                        range:[0,1]
+                    },
+                    integral:{
+                        digits:true
+                    },
+                    sort_order:{
+                        digits:true
+                    },
+                    give_integral:{
+                        digits:true
                     },
                 },
                 messages: {//自定义提示信息

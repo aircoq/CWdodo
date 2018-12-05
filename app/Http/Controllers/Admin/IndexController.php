@@ -82,4 +82,8 @@ class IndexController extends Controller
     {
         return view('admin.index.404');
     }
+    public function dashboard()
+    {
+        echo 123;
+    }
 }

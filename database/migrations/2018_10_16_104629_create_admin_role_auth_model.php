@@ -17,6 +17,7 @@ class CreateAdminRoleAuthModel extends Migration
             $table->string('auth_action',50)->nullable()->comment('权限所属方法，如果是顶级，则用字符串null表示');
             $table->integer('auth_pid')->default(0)->comment('父级ID，如果是顶级权限，则为0；否则其他的为自己父级的主键ID');
             $table->string('route_name')->nullable()->comment('路由别名，如：admin.create');
+            $table->enum('is_check',['0','1'])->default(1)->comment('此权限是否需要验证:0不需要,1需要');
             $table->enum('is_menu',['0','1'])->default(0)->comment('是否作为左边的菜单显示:0否(可能是button)，1是');
             $table->enum('is_enable',['0','1'])->default(1)->comment('是否可用:0否(只是作为菜单显示)，1是');
             $table->integer('first_pid')->comment('一级父ID，指向顶级菜单path=1 pid=0；顶级菜单为其本身');

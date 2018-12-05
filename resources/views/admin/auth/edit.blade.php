@@ -57,6 +57,21 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">此路由须要权限验证</font></font></label>
+                            <div class="col-sm-10">
+                                <div class="col-sm-4 radio">
+                                    <label>
+                                        <input type="radio" name="is_check" id="is_check1" value="1">是
+                                    </label>
+                                </div>
+                                <div class="col-sm-6 radio">
+                                    <label>
+                                        <input type="radio" name="is_check" id="is_check0" value="0" >否
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">作为左边的菜单显示</font></font></label>
                             <div class="col-sm-10">
                                 <div class="col-sm-4 radio">
@@ -130,6 +145,7 @@
     <script>
         $(function(){
             $('#option{{$auth->auth_pid}}').attr('selected','selected');//父id选中
+            $('#is_check{{$auth->is_check}}').attr('checked','true');//是否显示
             $('#is_menu{{$auth->is_menu}}').attr('checked','true');//是否显示
             $('#is_enable{{$auth->is_enable}}').attr('checked','true');//是否可用
             /***编写Javascript表单验证区域*/

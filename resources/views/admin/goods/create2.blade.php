@@ -1,25 +1,12 @@
 @extends('admin.common.common')
-<meta name="csrf-token" content="{{ csrf_token() }}">
+
 @section('title')
 
 @endsection
 
 @section('css')
-    <!-- bootstrap datepicker -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/webuploader/webuploader.css')}}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/webuploader/admin_webuploader.css')}}" />
-
     <style>
-        .ui-datepicker-today .ui-state-highlight{
-            border: 1px solid #eee;
-            color: #f60;
-        }
-        .ui-datepicker-current-day .ui-state-active{
-            border: 1px solid #eee;
-            color: #06f;
-        }
         .error{color:red;}
-        #filePicker{float:none}
     </style>
 @endsection
 
@@ -27,46 +14,60 @@
     <div class="cl-sm-12">
         <!-- /.box-header -->
         <!-- form start -->
-        {{--<form class="form-horizontal" id="form-admin-add" action="{{ url('admin/goods?step=1&'.'id='.$id) }}" method="post" enctype="multipart/form-data">--}}
+        <form class="form-horizontal" id="form-admin-add" action="{{ url('admin/goods?step=1&id=').$id  }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="box-body">
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">上传商品图片</label>
+                    <label class="col-sm-2 control-label">详情图1(必填)</label>
                     <div class="col-sm-10">
-                        <input type="file" style="width:70%;display:inline;" name="goods_img1" id="role_name"/>
+                        <input type="file" accept="image/png, image/jpeg, image/gif, image/jpg" class="filepath" onchange="changepic(this)" name="goods_img1"/><br>
+                        <img src="" width="200">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">上传商品图片</label>
+                    <label class="col-sm-2 control-label">详情图2</label>
                     <div class="col-sm-10">
-                        <div id="uploader">
-                            <div class="queueList">
-                                <div style="width:70%;" id="dndArea" class="placeholder">
-                                    <div id="filePicker"></div>
-                                </div>
-                            </div>
-                            <div class="statusBar" style="display:none;">
-                                <div class="progress">
-                                    <span class="text">0%</span>
-                                    <span class="percentage"></span>
-                                </div><div class="info"></div>
-                                <div class="btns">
-                                    <div id="filePicker2"></div><div class="uploadBtn">开始上传</div>
-                                </div>
-                            </div>
-                        </div>
+                        <input type="file" accept="image/png, image/jpeg, image/gif, image/jpg" class="filepath" onchange="changepic(this)" name="goods_img2"/><br>
+                        <img src="" width="200">
                     </div>
                 </div>
-
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">详情图3</label>
+                    <div class="col-sm-10">
+                        <input type="file" accept="image/png, image/jpeg, image/gif, image/jpg" class="filepath" onchange="changepic(this)" name="goods_img3"/><br>
+                        <img src="" width="200">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">详情图4</label>
+                    <div class="col-sm-10">
+                        <input type="file" accept="image/png, image/jpeg, image/gif, image/jpg" class="filepath" onchange="changepic(this)" name="goods_img4"/><br>
+                        <img src="" width="200">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">详情图5</label>
+                    <div class="col-sm-10">
+                        <input type="file" accept="image/png, image/jpeg, image/gif, image/jpg" class="filepath" onchange="changepic(this)" name="goods_img5"/><br>
+                        <img src="" width="200">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">详情图6</label>
+                    <div class="col-sm-10">
+                        <input type="file" accept="image/png, image/jpeg, image/gif, image/jpg" class="filepath" onchange="changepic(this)" name="goods_img6"/><br>
+                        <img src="" width="200">
+                    </div>
+                </div>
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
                 <label class="col-sm-2 control-label"></label>
                 <div class="col-sm-10">
-                    <input type="submit" id="ctlBtn" class="btn btn-primary radius" value="确认提交"/>
+                    <input type="submit" class="btn btn-primary radius" value="确认上传"/>
                 </div>
             </div>
-        {{--</form>--}}
+        </form>
     </div>
 @endsection
 
@@ -77,21 +78,38 @@
     <script type="text/javascript" src="{{ asset('plugins/layer/layer.js')}}"></script>
     <script type="text/javascript" src="{{ asset('plugins/layer/admin_layer.js')}}"></script>
     <script type="text/javascript" src="{{ asset('plugins/layer/admin_layer.js')}}"></script>
-    <!-- Web Uploader -->
-    <script src="{{ asset('bower_components/webuploader/webuploader.js')}}"></script>
-    <script src="{{ asset('bower_components/webuploader/admin_webuploader.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('plugins/jQueryUI/jquery.form.js')}}"></script>
     <script>
+        function changepic(obj) {
+            var newsrc=getObjectURL(obj.files[0]);
+            console.log(obj.id);
+            $(obj).siblings('img').attr({"src":newsrc,height:200});
+        }
+        //建立一个可存取到file的url
+        function getObjectURL(file) {
+            var url = null ;
+            // 针对不同浏览器获得url的方法
+            if (window.createObjectURL!=undefined) { // basic
+                url = window.createObjectURL(file) ;
+            } else if (window.URL!=undefined) { // mozilla(firefox)
+                url = window.URL.createObjectURL(file) ;
+            } else if (window.webkitURL!=undefined) { // webkit or chrome
+                url = window.webkitURL.createObjectURL(file) ;
+            }
+            return url ;
+        }
         $(function(){
             /***编写Javascript表单验证区域*/
-            $("#form-add").validate({
-                rules:{//规则
-                    type_name:{
+            $("#form-admin-add").validate({
+                role_name:{//规则
+                    nickname:{
                         required:true,
                         rangelength:[1,12]
                     },
-                    mark_up:{
-                        maxlength:200,
+                    note:{
+                        maxlength:100,
                     },
+
                 },
                 messages: {//自定义提示信息
                 },
@@ -109,7 +127,7 @@
                                 skin: 'layer-ext-moon'
                             });
                         }else{ // 成功
-                            layer.msg(msg.msg, {
+                            layer.msg('添加成功！', {
                                 icon: 1,
                                 skin: 'layer-ext-moon'
                             },function(){
@@ -121,11 +139,6 @@
                     });
                 }
             });
-        });
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
         });
     </script>
 @endsection
