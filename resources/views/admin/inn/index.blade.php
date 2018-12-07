@@ -234,8 +234,8 @@
                     $('#coutent').html( cnt );
                     $(row).addClass('text-c');//居中
                     $(row).find('td:eq(1)').html(
-                        data.avatar ==
-                        null ? '<img src="{{ url('sys_img/user_avatar.png') }}" style="width: 50px;height: 40px;">' : '<img src="/'+ data.avatar +'" style="width: 50px;height: 40px;">'
+                        data.inn_logo ==
+                        null ? '<img src="{{ url('sys_img/user_avatar.png') }}" style="width: 40px;height: 40px;">' : '<img src="/'+ data.inn_logo +'" style="width: 40px;height: 40px;">'
                     );
                     $(row).find('td:eq(4)').html(
                         data.inn_status==0 ? '<font style="vertical-align:inherit; color:green;">未审核</font>' :

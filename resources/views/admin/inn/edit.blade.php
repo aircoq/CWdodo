@@ -24,7 +24,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">门店logo</label>
                     <div class="col-sm-10">
-                        <input type="file" accept="image/png, image/jpeg, image/gif, image/jpg" class="filepath" onchange="changepic(this)" name="inn_avatar"/><font style="color: red">只能上传高宽各为300，不超过100K的图片</font><br>
+                        <input type="file" accept="image/png, image/jpeg, image/gif, image/jpg" class="filepath" onchange="changepic(this)" name="inn_logo"/><font style="color: red">只能上传高宽各为300，不超过100K的图片</font><br>
                         <img src=""/>
                     </div>
                 </div>

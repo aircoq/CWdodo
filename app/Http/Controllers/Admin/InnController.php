@@ -39,12 +39,12 @@ class InnController extends Controller
     {
         $data = $request->only('inn_name','inn_sn','is_self','inn_status','is_running','inn_tel','inn_address','start_time','end_time','note','admin_id','city','adcode','inn_logo','inn_img1','inn_img2','inn_img3');
         $role = [
-            'inn_name' => 'required|string|between:1,12|unique:inn_for_pet',
-            'inn_sn' => 'required|alpha_num|between:5,12|unique:inn_for_pet',
+            'inn_name' => 'required|string|between:1,12|unique:inn',
+            'inn_sn' => 'required|alpha_num|between:5,12|unique:inn',
             'is_self' => 'required|in:0,1',
             'inn_status' => 'required|in:-2,-1,0,1',
             'is_running' => 'required|in:0,1',
-            'inn_tel' => 'required|digits:11|unique:inn_for_pet',
+            'inn_tel' => 'required|digits:11|unique:inn',
             'inn_address' => 'required|string|between:3,30',
             'start_time' => 'required|string|between:4,5',
             'end_time' => 'required|string|between:4,5|after:start_time',
@@ -95,7 +95,6 @@ class InnController extends Controller
             'inn_img3.mimes' => '图片3格式为png,gif,jpeg,jpg',
             'inn_img3.max' => '图片3不超过5500kb',
             'inn_img3.dimensions' => '图片3宽高各为800',
-
         ];
         $validator = Validator::make( $data, $role, $message );
         if( $validator->fails() ){
@@ -169,27 +168,30 @@ class InnController extends Controller
     public function edit(Inn $inn)
     {
         $data['inn'] =$inn;
-        dump(objArr($data));die();
         return view('admin.inn.edit',$data);
     }
 
     public function update(Inn $inn,Request $request)
     {
-        $data = $request->only('inn_name','inn_sn','is_self','inn_status','is_running','inn_tel','inn_address','inn_img','start_time','end_time','note','admin_id','city','adcode');
+        $data = $request->only('inn_name','inn_sn','is_self','inn_status','is_running','inn_tel','inn_address','inn_img','start_time','end_time','note','admin_id','city','adcode','inn_logo','inn_img1','inn_img2','inn_img3');
         $role = [
-            'inn_name' => 'nullable|string|between:1,12|unique:inn_for_pet,inn_name,'.$inn->id,
-            'inn_sn' => 'nullable|alpha_num|between:5,12|unique:inn_for_pet,inn_sn,'.$inn->id,
+            'inn_name' => 'nullable|string|between:1,12|unique:inn,inn_name,'.$inn->id,
+            'inn_sn' => 'nullable|alpha_num|between:5,12|unique:inn,inn_sn,'.$inn->id,
             'is_self' => 'nullable|in:0,1',
             'inn_status' => 'nullable|in:-2,-1,0,1',
             'is_running' => 'nullable|in:0,1',
-            'inn_tel' => 'nullable|digits:11|unique:inn_for_pet,inn_tel,'.$inn->id,
+            'inn_tel' => 'nullable|digits:11|unique:inn,inn_tel,'.$inn->id,
             'inn_address' => 'nullable|string|between:3,22',
             'start_time' => 'nullable|string|between:4,5',
             'end_time' => 'nullable|string|between:4,5|after:start_time',
             'note' => 'nullable|string|between:0,100',
             'admin_id' => 'nullable|exists:admin,id',
             'city' => 'nullable|string|between:2,10',
-            'adcode' => 'nullable|digits:6'
+            'adcode' => 'nullable|digits:6',
+            'inn_logo' => 'required|file|image|mimes:png,gif,jpeg,jpg|max:150|dimensions:width=300,height=300',
+            'inn_img1' => 'nullable|required_with:inn_img2|file|image|mimes:png,gif,jpeg,jpg|max:550|dimensions:width=800,height=800',
+            'inn_img2' => 'nullable|required_with:inn_img3|file|image|mimes:png,gif,jpeg,jpg|max:550|dimensions:width=800,height=800',
+            'inn_img3' => 'nullable|file|image|mimes:png,gif,jpeg,jpg|max:550|dimensions:width=800,height=800',
         ];
         $message = [
             'inn_name.string' => '门店名称为1到12位的字符串组成',
@@ -214,6 +216,20 @@ class InnController extends Controller
             'city.string' => '请填写正确的地址',
             'city.between' => '请填写正确的地址',
             'adcode.digits' => '请填写正确的地址',
+            'inn_logo.mimes' => 'LOGO格式为png,gif,jpeg,jpg',
+            'inn_logo.max' => 'LOGO不超过550kb',
+            'inn_logo.dimensions' => 'LOGO宽高各为300',
+            'inn_img1.required_with' => '该情况图片1不能为空',
+            'inn_img1.mimes' => '图片1格式为png,gif,jpeg,jpg',
+            'inn_img1.max' => '图片1不超过5500kb',
+            'inn_img1.dimensions' => '图片1宽高各为800',
+            'inn_img2.required_with' => '该情况图片2不能为空',
+            'inn_img2.mimes' => '图片2格式为png,gif,jpeg,jpg',
+            'inn_img2.max' => '图片2不超过5500kb',
+            'inn_img2.dimensions' => '图片2宽高各为800',
+            'inn_img3.mimes' => '图片3格式为png,gif,jpeg,jpg',
+            'inn_img3.max' => '图片3不超过5500kb',
+            'inn_img3.dimensions' => '图片3宽高各为800',
         ];
         $validator = Validator::make( $data, $role, $message );
         if( $validator->fails() ){
@@ -238,8 +254,42 @@ class InnController extends Controller
             unset($data['city']);
             unset($data['adcode']);
         }
+        $tf1 = uploadPic('inn_logo','uploads/backend/inn/logo/'.date('Ymd'));
+        if($tf1){
+            $data['inn_logo'] = $tf1;
+        }else{
+            return ['status' => "fail", 'msg' => 'LOGO添加失败'];
+        }
+        if(!empty($data['inn_img1'])){
+            $tf2 = uploadPic('inn_img1','uploads/backend/inn/img/'.date('Ymd'));
+            if($tf2){
+                $inn_img[] = $tf2;
+            }else{
+                return ['status' => "fail", 'msg' => '图片1添加失败'];
+            }
+        }
+        if(!empty($data['inn_img2'])){
+            $tf3 = uploadPic('inn_img2','uploads/backend/inn/img/'.date('Ymd'));
+            if($tf3){
+                $inn_img[] = $tf3;
+            }else{
+                return ['status' => "fail", 'msg' => '图片2添加失败'];
+            }
+        }
+        if(!empty($data['inn_img3'])){
+            $tf4 = uploadPic('inn_img3','uploads/backend/inn/img/'.date('Ymd'));
+            if($tf4){
+                $inn_img[] = $tf4;
+            }else{
+                return ['status' => "fail", 'msg' => '图片3添加失败'];
+            }
+        }
+        if(!empty($inn_img)){
+            $data['inn_img'] = json_encode($inn_img, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        }
         $res = $inn->update($data);
         if ($res) { // 如果添加数据成功，则返回列表页
+
             return ['status' => "success", 'msg' => '修改成功'];
         }else{
             return ['status' => 'fail', 'msg' => '修改失败'];
