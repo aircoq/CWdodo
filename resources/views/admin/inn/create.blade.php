@@ -18,6 +18,14 @@
         <form class="form-horizontal" id="form-inn-add" action="{{ url('admin/inn')  }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             <input type="hidden" name="adcode" id="adcode"/>
+            <br/>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">门店logo</label>
+                <div class="col-sm-10">
+                    <input type="file" accept="image/png, image/jpeg, image/gif, image/jpg" class="filepath" onchange="changepic(this)" name="inn_avatar"/><font style="color: red">只能上传高宽各为300，不超过100K的图片</font><br>
+                    <img src=""/>
+                </div>
+            </div>
             <div class="box-body">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">门店名称</label>
@@ -99,11 +107,24 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">上传logo</label>
+                    <label class="col-sm-2 control-label">门店详情1</label>
                     <div class="col-sm-10">
-                        <a href="javascript:;" onclick="layer_show('上传头像','','350','350')" id="a-admin-avatar" class="btn-sm btn-primary">
-                            选择文件
-                        </a>
+                        <input type="file" accept="image/png, image/jpeg, image/gif, image/jpg" class="filepath" onchange="changepic(this)" name="inn_img1"/><font style="color: red">只能上传高宽各为800，不超过550K的图片</font><br>
+                        <img src=""/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">门店详情2</label>
+                    <div class="col-sm-10">
+                        <input type="file" accept="image/png, image/jpeg, image/gif, image/jpg" class="filepath" onchange="changepic(this)" name="inn_img2"/><font style="color: red">只能上传高宽各为800，不超过550K的图片</font><br>
+                        <img src="" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">门店详情3</label>
+                    <div class="col-sm-10">
+                        <input type="file" accept="image/png, image/jpeg, image/gif, image/jpg" class="filepath" onchange="changepic(this)" name="inn_img3"/><font style="color: red">只能上传高宽各为800，不超过550K的图片</font><br>
+                        <img src="" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -134,6 +155,25 @@
     <script type="text/javascript" src="{{ asset('plugins/jQueryUI/jquery.form.js')}}"></script>
     <script type="text/javascript" src="{{ asset('plugins/timepicker/bootstrap-timepicker.min.js')}}"></script>
     <script>
+        /** 上传图片时生成图片预览 */
+        function changepic(obj) {
+            var newsrc=getObjectURL(obj.files[0]);
+            console.log(obj.id);
+            $(obj).siblings('font').remove();
+            $(obj).siblings('img').attr({"src":newsrc,height:200,width:200});
+        }
+        function getObjectURL(file) {//建立一个可存取到图片的url
+            var url = null ;
+            // 针对不同浏览器获得url的方法
+            if (window.createObjectURL!=undefined) { // basic
+                url = window.createObjectURL(file) ;
+            } else if (window.URL!=undefined) { // mozilla(firefox)
+                url = window.URL.createObjectURL(file) ;
+            } else if (window.webkitURL!=undefined) { // webkit or chrome
+                url = window.webkitURL.createObjectURL(file) ;
+            }
+            return url ;
+        }
         $(function(){
             /***时间插件*/
             $('.start_time').timepicker({

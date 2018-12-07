@@ -14,7 +14,7 @@ class CreateInnModel extends Migration
     public function up()
     {
         # 单店表
-        Schema::create('inn_for_pet',function(Blueprint $table){
+        Schema::create('inn',function(Blueprint $table){
             // 声明表结构
             $table->engine = 'InnoDB';
             $table->increments('id')->comment('主键ID');
@@ -32,7 +32,7 @@ class CreateInnModel extends Migration
             $table->string('district',60)->nullable()->comment('门店所在区县');
             $table->string('adcode',8)->nullable()->comment('门店所在高德区域编码');
             $table->text('inn_address')->nullable()->comment('门店详细地址');
-            $table->string('inn_avatar',255)->nullable()->comment('门店头像');
+            $table->string('inn_logo',255)->nullable()->comment('门店头像');
             $table->string('inn_img',255)->nullable()->comment('门店图片');
             $table->string('start_time',10)->comment('营业开始时间');
             $table->string('end_time',10)->comment('营业结束时间');
@@ -62,7 +62,7 @@ class CreateInnModel extends Migration
             $table->string('end_at',255)->nullable()->comment('寄养结束时间');
             $table->unsignedinteger('sort')->comment('排序');
             //关联关系
-            $table->foreign('inn_id')->references('id')->on('inn_for_pet') ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('inn_id')->references('id')->on('inn') ->onUpdate('cascade')->onDelete('cascade');
         });
 
         # 店铺评论表（暂未开发）
@@ -89,7 +89,7 @@ class CreateInnModel extends Migration
     public function down()
     {
         Schema::dropIfExists('inn_room');
-        Schema::dropIfExists('inn_for_pet');
+        Schema::dropIfExists('inn');
         Schema::dropIfExists('inn_evaluation_star');
     }
 }

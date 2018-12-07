@@ -5,18 +5,18 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Admin\InnForPet;
+use App\Models\Admin\Inn;
 use Illuminate\Support\Facades\Auth;
 
-class InnForPetController extends Controller
+class InnController extends Controller
 {
-    public function index(Request $request, InnForPet $innForPet)
+    public function index(Request $request, Inn $inn)
     {
         if ($request->ajax()) {
             if (Auth::guard('admin')->user()->role_id == '*') {//管理员查看包括软删除的用户
-                $data = $innForPet->select('id', 'inn_name', 'inn_sn', 'cate_id', 'is_self', 'inn_status', 'is_running', 'inn_tel', 'lat', 'lng', 'province', 'city', 'district', 'adcode', 'inn_address', 'inn_avatar', 'inn_img', 'start_time', 'end_time', 'note', 'admin_id', 'bank_id', 'bank_account_name', 'bank_account', 'created_at', 'updated_at', 'deleted_at')->withTrashed()->get();
+                $data = $inn->select('id', 'inn_name', 'inn_sn', 'cate_id', 'is_self', 'inn_status', 'is_running', 'inn_tel', 'lat', 'lng', 'province', 'city', 'district', 'adcode', 'inn_address', 'inn_logo', 'inn_img', 'start_time', 'end_time', 'note', 'admin_id', 'bank_id', 'bank_account_name', 'bank_account', 'created_at', 'updated_at', 'deleted_at')->withTrashed()->get();
             } else {
-                $data = $innForPet->select('id', 'inn_name', 'inn_sn', 'cate_id', 'is_self', 'inn_status', 'is_running', 'inn_tel', 'lat', 'lng', 'province', 'city', 'district', 'adcode', 'inn_address', 'inn_avatar', 'inn_img', 'start_time', 'end_time', 'note', 'admin_id', 'bank_id', 'bank_account_name', 'bank_account', 'created_at', 'updated_at')->get();
+                $data = $inn->select('id', 'inn_name', 'inn_sn', 'cate_id', 'is_self', 'inn_status', 'is_running', 'inn_tel', 'lat', 'lng', 'province', 'city', 'district', 'adcode', 'inn_address', 'inn_logo', 'inn_img', 'start_time', 'end_time', 'note', 'admin_id', 'bank_id', 'bank_account_name', 'bank_account', 'created_at', 'updated_at')->get();
             }
             $cnt = count($data);
             $info = [
@@ -35,9 +35,9 @@ class InnForPetController extends Controller
         return view('admin.inn.create');
     }
 
-    public function store(Request $request,InnForPet $innForPet)
+    public function store(Request $request,Inn $inn)
     {
-        $data = $request->only('inn_name','inn_sn','is_self','inn_status','is_running','inn_tel','inn_address','inn_img','start_time','end_time','note','admin_id','city','adcode');
+        $data = $request->only('inn_name','inn_sn','is_self','inn_status','is_running','inn_tel','inn_address','start_time','end_time','note','admin_id','city','adcode','inn_logo','inn_img1','inn_img2','inn_img3');
         $role = [
             'inn_name' => 'required|string|between:1,12|unique:inn_for_pet',
             'inn_sn' => 'required|alpha_num|between:5,12|unique:inn_for_pet',
@@ -51,7 +51,11 @@ class InnForPetController extends Controller
             'note' => 'nullable|string|between:0,100',
             'admin_id' => 'exists:admin,id',
             'city' => 'required|string|between:2,10',
-            'adcode' => 'required|digits:6'
+            'adcode' => 'required|digits:6',
+            'inn_logo' => 'required|file|image|mimes:png,gif,jpeg,jpg|max:150|dimensions:width=300,height=300',
+            'inn_img1' => 'nullable|required_with:inn_img2|file|image|mimes:png,gif,jpeg,jpg|max:550|dimensions:width=800,height=800',
+            'inn_img2' => 'nullable|required_with:inn_img3|file|image|mimes:png,gif,jpeg,jpg|max:550|dimensions:width=800,height=800',
+            'inn_img3' => 'nullable|file|image|mimes:png,gif,jpeg,jpg|max:550|dimensions:width=800,height=800',
         ];
         $message = [
             'inn_name.string' => '门店名称为1到12位的字符串组成',
@@ -77,10 +81,24 @@ class InnForPetController extends Controller
             'city.string' => '请填写正确的地址',
             'city.between' => '请填写正确的地址',
             'adcode.digits' => '请填写正确的地址',
+            'inn_logo.mimes' => 'LOGO格式为png,gif,jpeg,jpg',
+            'inn_logo.max' => 'LOGO不超过550kb',
+            'inn_logo.dimensions' => 'LOGO宽高各为300',
+            'inn_img1.required_with' => '该情况图片1不能为空',
+            'inn_img1.mimes' => '图片1格式为png,gif,jpeg,jpg',
+            'inn_img1.max' => '图片1不超过5500kb',
+            'inn_img1.dimensions' => '图片1宽高各为800',
+            'inn_img2.required_with' => '该情况图片2不能为空',
+            'inn_img2.mimes' => '图片2格式为png,gif,jpeg,jpg',
+            'inn_img2.max' => '图片2不超过5500kb',
+            'inn_img2.dimensions' => '图片2宽高各为800',
+            'inn_img3.mimes' => '图片3格式为png,gif,jpeg,jpg',
+            'inn_img3.max' => '图片3不超过5500kb',
+            'inn_img3.dimensions' => '图片3宽高各为800',
+
         ];
         $validator = Validator::make( $data, $role, $message );
         if( $validator->fails() ){
-//            $request->flash();//保存当前数据到一次性session中
             return ['status' => "fail", 'msg' => $validator->messages()->first()];
         }
         //获取当前地址的高德信息
@@ -97,11 +115,48 @@ class InnForPetController extends Controller
         }else{
             return ['status' => "fail", 'msg' => '请求失败，请重新输入地址'];
         }
-        $res = $innForPet->create($data);
+        $tf1 = uploadPic('inn_logo','uploads/backend/inn/logo/'.date('Ymd'));
+        if($tf1){
+            $data['inn_logo'] = $tf1;
+        }else{
+            return ['status' => "fail", 'msg' => 'LOGO添加失败'];
+        }
+        if(!empty($data['inn_img1'])){
+            $tf2 = uploadPic('inn_img1','uploads/backend/inn/img/'.date('Ymd'));
+            if($tf2){
+                $inn_img[] = $tf2;
+            }else{
+                return ['status' => "fail", 'msg' => '图片1添加失败'];
+            }
+        }
+        if(!empty($data['inn_img2'])){
+            $tf3 = uploadPic('inn_img2','uploads/backend/inn/img/'.date('Ymd'));
+            if($tf3){
+                $inn_img[] = $tf3;
+            }else{
+                return ['status' => "fail", 'msg' => '图片2添加失败'];
+            }
+        }
+        if(!empty($data['inn_img3'])){
+            $tf4 = uploadPic('inn_img3','uploads/backend/inn/img/'.date('Ymd'));
+            if($tf4){
+                $inn_img[] = $tf4;
+            }else{
+                return ['status' => "fail", 'msg' => '图片3添加失败'];
+            }
+        }
+        if(!empty($inn_img)){
+            $data['inn_img'] = json_encode($inn_img, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        }
+        $res = $inn->create($data);
         if ($res->id) {
             // 如果添加数据成功，则返回列表页
             return ['status' => "success", 'msg' => '添加成功'];
         }else{
+            @unlink($tf1);
+            @unlink($tf2);
+            @unlink($tf3);
+            @unlink($tf4);
             return ['status' => 'fail', 'msg' => '添加失败'];
         }
     }
@@ -111,22 +166,23 @@ class InnForPetController extends Controller
         //
     }
 
-    public function edit(InnForPet $innForPet)
+    public function edit(Inn $inn)
     {
-        $data['inn'] =$innForPet;
+        $data['inn'] =$inn;
+        dump(objArr($data));die();
         return view('admin.inn.edit',$data);
     }
 
-    public function update(InnForPet $innForPet,Request $request)
+    public function update(Inn $inn,Request $request)
     {
         $data = $request->only('inn_name','inn_sn','is_self','inn_status','is_running','inn_tel','inn_address','inn_img','start_time','end_time','note','admin_id','city','adcode');
         $role = [
-            'inn_name' => 'nullable|string|between:1,12|unique:inn_for_pet,inn_name,'.$innForPet->id,
-            'inn_sn' => 'nullable|alpha_num|between:5,12|unique:inn_for_pet,inn_sn,'.$innForPet->id,
+            'inn_name' => 'nullable|string|between:1,12|unique:inn_for_pet,inn_name,'.$inn->id,
+            'inn_sn' => 'nullable|alpha_num|between:5,12|unique:inn_for_pet,inn_sn,'.$inn->id,
             'is_self' => 'nullable|in:0,1',
             'inn_status' => 'nullable|in:-2,-1,0,1',
             'is_running' => 'nullable|in:0,1',
-            'inn_tel' => 'nullable|digits:11|unique:inn_for_pet,inn_tel,'.$innForPet->id,
+            'inn_tel' => 'nullable|digits:11|unique:inn_for_pet,inn_tel,'.$inn->id,
             'inn_address' => 'nullable|string|between:3,22',
             'start_time' => 'nullable|string|between:4,5',
             'end_time' => 'nullable|string|between:4,5|after:start_time',
@@ -182,7 +238,7 @@ class InnForPetController extends Controller
             unset($data['city']);
             unset($data['adcode']);
         }
-        $res = $innForPet->update($data);
+        $res = $inn->update($data);
         if ($res) { // 如果添加数据成功，则返回列表页
             return ['status' => "success", 'msg' => '修改成功'];
         }else{
@@ -190,11 +246,11 @@ class InnForPetController extends Controller
         }
     }
 
-    public function destroy(InnForPet $innForPet)
+    public function destroy(Inn $inn)
     {
         # 只有超级管理员才可以操作
         if(Auth::guard('admin')->user()->role_id == '*') {//1.当前是超级管理员可以禁用任何人
-            $res = $innForPet->delete();
+            $res = $inn->delete();
             if ($res) {
                 return ['status' => 'success'];
             } else {
@@ -204,13 +260,13 @@ class InnForPetController extends Controller
         return ['status' => 'fail', 'msg' => '您无权限操作'];
     }
 
-    public function re_store(Request $request,InnForPet $innForPet)
+    public function re_store(Request $request,Inn $inn)
     {
         if ($request->ajax()) {
             # 只有超级管理员才可以操作
             if (Auth::guard('admin')->user()->role_id == '*') {//当前是超级管理员可以
                 $id = $request->only('id');
-                $res = $innForPet->where('id', $id)->restore();
+                $res = $inn->where('id', $id)->restore();
                 if ($res) {
                     return ['status' => 'success'];
                 } else {

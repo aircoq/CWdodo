@@ -40,8 +40,8 @@ Route::group(['prefix'=>'admin','middleware' => 'CheckAdminAuth','namespace' => 
     Route::resource('user','UserController');
     Route::post('/user/restore','UserController@re_store')->name('user.restore');//恢复用户
     # 门店管理模块
-    Route::resource('inn','InnForPetController');
-    Route::post('/inn/restore','InnForPetController@re_store')->name('inn.restore');//恢复门店
+    Route::resource('inn','InnController');
+    Route::post('/inn/restore','InnController@re_store')->name('inn.restore');//恢复门店
     # 商品模块
     Route::resource('goods_type','GoodsTypeController');//商品类型
     Route::post('goods/image_upload','GoodsController@uploadImage');

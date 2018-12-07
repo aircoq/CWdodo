@@ -323,6 +323,7 @@
     <script src="{{ asset('bower_components/ckeditor/config.js')}}"></script>
     <script src="{{ asset('bower_components/ckeditor/lang/zh-cn.js')}}"></script>
     <script>
+        /** 上传图片时生成图片预览 */
         function changepic(obj) {
             var newsrc=getObjectURL(obj.files[0]);
             console.log(obj.id);
