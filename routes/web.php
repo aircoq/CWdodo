@@ -42,6 +42,7 @@ Route::group(['prefix'=>'admin','middleware' => 'CheckAdminAuth','namespace' => 
     # 门店管理模块
     Route::resource('inn','InnController');
     Route::post('/inn/restore','InnController@re_store')->name('inn.restore');//恢复门店
+    Route::resource('inn_room','InnRoomController');
     # 商品模块
     Route::resource('goods_type','GoodsTypeController');//商品类型
     Route::post('goods/image_upload','GoodsController@uploadImage');

@@ -42,13 +42,14 @@ class CreateAdminRoleAuthModel extends Migration
         # 角色权限表
         Schema::create('role_auth_related',function(Blueprint $table){
             $table->engine = 'InnoDB';
-            $table->smallincrements('id')->comment('主键ID');
+//            $table->smallincrements('id')->comment('主键ID');
             $table->unsignedSmallInteger('role_id')->comment('角色ID');
             $table->unsignedInteger('auth_id')->comment('权限id');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('role_id')->references('id')->on('role') ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('auth_id')->references('id')->on('auth') ->onUpdate('cascade')->onDelete('cascade');
+            $table->primary(['role_id','auth_id']);//删除掉主键使用
         });
 
         # 管理员表
@@ -81,13 +82,14 @@ class CreateAdminRoleAuthModel extends Migration
         # 管理员拥有的角色表
         Schema::create('admin_role_related',function(Blueprint $table){
             $table->engine = 'InnoDB';
-            $table->smallincrements('id')->comment('主键ID');
+//            $table->smallincrements('id')->comment('主键ID');
             $table->unsignedSmallInteger('role_id')->comment('角色ID');
             $table->unsignedInteger('admin_id')->comment('管理员id');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('role_id')->references('id')->on('role') ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('admin_id')->references('id')->on('admin') ->onUpdate('cascade')->onDelete('cascade');
+            $table->primary(['role_id','admin_id']);//删除掉主键使用
         });
 
         # 管理员积分和现金操作记录表

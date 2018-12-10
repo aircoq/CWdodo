@@ -14,7 +14,7 @@
             <div class="cl-sm-12">
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form class="form-horizontal" id="form-admin-add" action="{{ url('admin/auth/' . $auth->id)  }}" method="post" enctype="multipart/form-data">
+                <form class="form-horizontal" id="form-admin-add" action="{{ url('admin/auth/'.$auth->id) }}" method="post" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     {{ method_field('put') }}
                     <div class="box-body">
@@ -37,27 +37,25 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">父级菜单</font></font></label>
+                            <label class="col-sm-2 control-label">父级菜单</label>
                             <div class="col-sm-10">
                                 <select class="form-control" style="width:70%;" name="auth_pid">
-                                    <option value="0" id = 'option0'><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">顶级菜单</font></font></option>
+                                    <option value="0" id = 'option0'>顶级菜单</option>
                                     @foreach ($all_auth as $v)
                                     <option value="{{ $v['id'] }}" id = 'option{{ $v['id'] }}'>
-                                        <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
                                                 <?php
                                                 for ($i=$v['path'];$i>0;$i--){
                                                     echo '&nbsp&nbsp&nbsp&nbsp&nbsp';
                                                 }
                                                 ?>
                                                 {{ $v['auth_name'] }}
-                                        </font></font>
                                     </option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">此路由须要权限验证</font></font></label>
+                            <label class="col-sm-2 control-label">此路由需要权限验证</label>
                             <div class="col-sm-10">
                                 <div class="col-sm-4 radio">
                                     <label>
@@ -72,7 +70,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">作为左边的菜单显示</font></font></label>
+                            <label class="col-sm-2 control-label">作为左边的菜单显示</label>
                             <div class="col-sm-10">
                                 <div class="col-sm-4 radio">
                                     <label>
@@ -87,7 +85,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">是否可用</font></font></label>
+                            <label class="col-sm-2 control-label">是否可用</label>
                             <div class="col-sm-10">
                                 <div class="col-sm-4 radio">
                                     <label>
@@ -172,7 +170,7 @@
                                 skin: 'layer-ext-moon'
                             });
                         }else{ // 成功
-                            layer.msg('添加成功！', {
+                            layer.msg('更新成功！', {
                                 icon: 1,
                                 skin: 'layer-ext-moon'
                             },function(){

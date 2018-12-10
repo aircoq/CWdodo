@@ -51,16 +51,16 @@ class CreateInnModel extends Migration
 
         # 宠物房间表
         Schema::create('inn_room',function(Blueprint $table){
-            $table->smallIncrements('id');
+            $table->Increments('id');
             $table->string('room_number')->comment('房间编号');
             $table->unsignedinteger('inn_id')->comment('所属商家');
-            $table->enum('room_status',['0','1'])->default(1)->comment('是否可用：0不可用；1可用');
-            $table->unsignedTinyInteger('room_type')->comment('房间类型:0普通；1中型；3大型；4豪华');
-            $table->enum('bunk',['0','1','2'])->default(1)->comment('上下铺：0无；1下层；2上层');
-            $table->unsignedInteger('pet_id')->nullable()->comment('所使用的宠物pet_id');
+            $table->enum('is_enable',['0','1'])->default(1)->comment('是否可用：0不可用；1可用');
+            $table->enum('room_type',['-1','0','1','2'])->comment('房间类型:-1小型；0普通；1大型；2豪华');
+            $table->enum('bunk',['-1','0','1','2'])->nullable()->comment('所属层：-1无：0下层；1上层；2上下贯通');
+            $table->unsignedInteger('pet_id')->nullable()->comment('所使用的宠物pet_id:暂未开通');
             $table->string('start_at',255)->nullable()->comment('寄养开始时间');
             $table->string('end_at',255)->nullable()->comment('寄养结束时间');
-            $table->unsignedinteger('sort')->comment('排序');
+            $table->unsignedinteger('sort_order')->nullable()->comment('排序');
             //关联关系
             $table->foreign('inn_id')->references('id')->on('inn') ->onUpdate('cascade')->onDelete('cascade');
         });

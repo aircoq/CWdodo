@@ -36,10 +36,10 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">父级菜单</font></font></label>
+                            <label class="col-sm-2 control-label">父级菜单</label>
                             <div class="col-sm-10">
                                 <select class="form-control" style="width:70%;" name="auth_pid">
-                                    <option value="0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">顶级菜单</font></font></option>
+                                    <option value="0"><font style="vertical-align: inherit;">顶级菜单</font></option>
                                     @foreach ($auth as $v)
                                         <option value="{{ $v['id'] }}">
                                             <font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
@@ -56,7 +56,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">此路由须要权限验证</font></font></label>
+                            <label class="col-sm-2 control-label">此路由需要权限验证</label>
                             <div class="col-sm-10">
                                 <div class="col-sm-4 radio">
                                     <label>
@@ -71,7 +71,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">作为左边的菜单显示</font></font></label>
+                            <label class="col-sm-2 control-label">作为左边的菜单显示</label>
                             <div class="col-sm-10">
                                 <div class="col-sm-4 radio">
                                     <label>
@@ -86,7 +86,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">是否可用</font></font></label>
+                            <label class="col-sm-2 control-label">是否可用</label>
                             <div class="col-sm-10">
                                 <div class="col-sm-4 radio">
                                     <label>

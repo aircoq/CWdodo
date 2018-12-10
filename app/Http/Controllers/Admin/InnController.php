@@ -13,7 +13,7 @@ class InnController extends Controller
     public function index(Request $request, Inn $inn)
     {
         if ($request->ajax()) {
-            if (Auth::guard('admin')->user()->role_id == '*') {//管理员查看包括软删除的用户
+            if (Auth::guard('admin')->user()->role_class == '*') {//管理员查看包括软删除的用户
                 $data = $inn->select('id', 'inn_name', 'inn_sn', 'cate_id', 'is_self', 'inn_status', 'is_running', 'inn_tel', 'lat', 'lng', 'province', 'city', 'district', 'adcode', 'inn_address', 'inn_logo', 'inn_img', 'start_time', 'end_time', 'note', 'admin_id', 'bank_id', 'bank_account_name', 'bank_account', 'created_at', 'updated_at', 'deleted_at')->withTrashed()->get();
             } else {
                 $data = $inn->select('id', 'inn_name', 'inn_sn', 'cate_id', 'is_self', 'inn_status', 'is_running', 'inn_tel', 'lat', 'lng', 'province', 'city', 'district', 'adcode', 'inn_address', 'inn_logo', 'inn_img', 'start_time', 'end_time', 'note', 'admin_id', 'bank_id', 'bank_account_name', 'bank_account', 'created_at', 'updated_at')->get();
@@ -289,7 +289,6 @@ class InnController extends Controller
         }
         $res = $inn->update($data);
         if ($res) { // 如果添加数据成功，则返回列表页
-
             return ['status' => "success", 'msg' => '修改成功'];
         }else{
             return ['status' => 'fail', 'msg' => '修改失败'];
@@ -299,7 +298,7 @@ class InnController extends Controller
     public function destroy(Inn $inn)
     {
         # 只有超级管理员才可以操作
-        if(Auth::guard('admin')->user()->role_id == '*') {//1.当前是超级管理员可以禁用任何人
+        if(Auth::guard('admin')->user()->role_class == '*') {//1.当前是超级管理员可以禁用任何人
             $res = $inn->delete();
             if ($res) {
                 return ['status' => 'success'];
@@ -314,7 +313,7 @@ class InnController extends Controller
     {
         if ($request->ajax()) {
             # 只有超级管理员才可以操作
-            if (Auth::guard('admin')->user()->role_id == '*') {//当前是超级管理员可以
+            if (Auth::guard('admin')->user()->role_class == '*') {//当前是超级管理员可以
                 $id = $request->only('id');
                 $res = $inn->where('id', $id)->restore();
                 if ($res) {

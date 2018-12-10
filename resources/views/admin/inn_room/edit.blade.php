@@ -14,84 +14,97 @@
     <div class="cl-sm-12">
         <!-- /.box-header -->
         <!-- form start -->
-        <form class="form-horizontal" id="form-admin-edit" action="{{ url('admin/admin/' . $user->id ) }}" method="post">
+        <form class="form-horizontal" id="form-edit" action="{{ url('admin/inn_room/'.$inn_room->id) }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             {{ method_field('put') }}
             <div class="box-body">
                 <div class="form-group">
-                    <br/>
-                    <label class="col-sm-3 control-label"></label>
-                    <div class="col-sm-7">
-                        <a href="javascript:;" onclick="layer_show('上传头像','{{ url('admin/avatar_upload?id='.$user->id) }}','350','350')" id="a-admin-avatar">
-                            <img src="{{ url("$user->avatar" ? "$user->avatar" : 'sys_img/user_avatar.png') }}" style="width:15%;height:15%;display:flex;border-radius: 50%;align-items: center;justify-content:center;overflow: hidden;"/>
-                        </a>
-                    </div>
-                </div>
-                <br/>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">姓名</label>
+                    <label class="col-sm-2 control-label">房间编号</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="姓名" name="username" id="username" value="{{$user->username}}"/>
+                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="房间编号" name="room_number" value="{{ $inn_room->room_number }}"/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">性别</label>
+                    <label class="col-sm-2 control-label">所属店铺</label>
                     <div class="col-sm-10">
-                        <select class="form-control" style="width:70%;" name="sex" >
-                            <option id="sex0" value="0">女</option>
-                            <option id="sex1" value="1">男</option>
-                            <option id="sex2" value="2">保密</option>
+                        <select class="form-control" style="width:70%;" name="inn_id">
+                            @foreach ($inn as $v)
+                                <option value="{{ $v['id'] }}" id="inn{{ $v['id'] }}">
+                                            {{ $v['inn_name'] }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">手机</label>
+                    <label class="col-sm-2 control-label">是否可用</label>
                     <div class="col-sm-10">
-                        <input type="tel" class="form-control" style="width:70%;display:inline;" placeholder="手机"  name="phone" id="phone" value="{{$user->phone}}"/>
+                        <div class="col-sm-4 radio">
+                            <label>
+                                <input type="radio" name="is_enable" id="is_enable1" value="1">是
+                            </label>
+                        </div>
+                        <div class="col-sm-6 radio">
+                            <label>
+                                <input type="radio" name="is_enable" id="is_enable0" value="0">否
+                            </label>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">邮箱</label>
+                    <label class="col-sm-2 control-label">房间类型</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" style="width:70%;display:inline;" placeholder="邮箱" name="email" id="email" value="{{$user->email}}">
+                        <div class="col-sm-2 radio">
+                            <label>
+                                <input type="radio" name="room_type" id="room_type-1" value="-1">小型
+                            </label>
+                        </div>
+                        <div class="col-sm-2 radio">
+                            <label>
+                                <input type="radio" name="room_type" value="0" id="room_type0">普通
+                            </label>
+                        </div>
+                        <div class="col-sm-2 radio">
+                            <label>
+                                <input type="radio" name="room_type" value="1" id="room_type1" >大型
+                            </label>
+                        </div>
+                        <div class="col-sm-2 radio">
+                            <label>
+                                <input type="radio" name="room_type" value="2" id="room_type2" >豪华
+                            </label>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">密码</label>
+                    <label class="col-sm-2 control-label">上下铺</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" style="width:70%;display:inline;" placeholder="密码" id="password" name="password"/>
+                        <div class="col-sm-2 radio">
+                            <label>
+                                <input type="radio" name="bunk" value="-1" id="bunk-1">无
+                            </label>
+                        </div>
+                        <div class="col-sm-2 radio">
+                            <label>
+                                <input type="radio" name="bunk" value="0" id="bunk0" >下铺
+                            </label>
+                        </div>
+                        <div class="col-sm-2 radio">
+                            <label>
+                                <input type="radio" name="bunk" value="1" id="bunk1" >上铺
+                            </label>
+                        </div>
+                        <div class="col-sm-2 radio">
+                            <label>
+                                <input type="radio" name="bunk" value="2" id="bunk2" >上下贯通
+                            </label>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">确认密码</label>
+                    <label class="col-sm-2 control-label">排序权重</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" style="width:70%;display:inline;" placeholder="确认密码" id="confirm_password" name="confirm_password">
-                    </div>
-                </div>
-                <div class="form-group" id="div-role-id">
-                    <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">角色</font></font></label>
-                    <div class="col-sm-10">
-                        <select class="form-control" name="role_id" style="width:70%;">
-                            <option value="1" id=""><font  style="vertical-align: inherit;"><font style="vertical-align: inherit;">选项1</font></font></option>
-                            <option value="2" id=""><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">选项2</font></font></option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group" id="div-admin-status">
-                    <label class="col-sm-2 control-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">账号状态</font></font></label>
-                    <div class="col-sm-10">
-                        <select class="form-control" style="width:70%;" name="admin_status">
-                            <option value="-2" id="admin_status-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">拒绝</font></font></option>
-                            <option value="-1" id="admin_status-1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">已停止</font></font></option>
-                            <option value="0" id="admin_status0"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">未审核</font></font></option>
-                            <option value="1" id="admin_status1"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">通过</font></font></option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">备注</label>
-                    <div class="col-sm-10">
-                        <textarea class="textarea" style="width: 70%; height: 100px; font-size: 14px;" placeholder="备注" name="note"></textarea>
+                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="数值越大排名越前" id="sort_order" name="sort_order" value="{{ $inn_room->sort_order }}">
                     </div>
                 </div>
             </div>
@@ -117,45 +130,22 @@
     <script type="text/javascript" src="{{ asset('plugins/jQueryUI/jquery.form.js')}}"></script>
     <script>
         $(function(){
-            /** 数据渲染 ***/
-            //隐藏无权限部分
-            var role_id_now = "<?php echo (Auth::guard('admin')->user()->role_id); ?>";//当前用户role_id
-            var role_id_edit = "<?php echo $user->role_id; ?>";//被编辑的用户id
-            if(role_id_now != '*' || role_id_edit=='*' ){//当前不是超级管理员或在编辑管理员
-                $('#div-role-id').remove();
-                $('#div-admin-status').remove();
-            }
-            $('#sex{{$user->sex}}').attr('selected','selected');//性别选中
-            $('#admin_status{{$user->admin_status}}').attr('selected','selected');//状态选中
-
+            $('#inn{{ $inn_room->inn_id }}').attr('selected','selected');
+            $('#is_enable{{$inn_room->is_enable}}').attr('checked','true');
+            $('#room_type{{$inn_room->room_type}}').attr('checked','true');
+            $('#bunk{{$inn_room->bunk}}').attr('checked','true');
             /***编写Javascript表单验证区域*/
-            $("#form-admin-edit").validate({
+            $("#form-edit").validate({
                 rules:{//规则
-                    username:{
-                        rangelength:[5,12]
-                    },
-                    phone:{
-                        minlength:11,
-                        maxlength:11,
-                        digits:true
-                    },
-                    email:{
-                        email:true,
-                    },
-                    password:{
-                        rangelength:[5,20]
-                    },
-                    confirm_password:{
-                        equalTo: "#password"
-                    },
-                    form_check:{
+                    inn_number:{
                         required:true,
+                        rangelength:[1,12]
+                    },
+                    mark_up:{
+                        maxlength:200,
                     },
                 },
                 messages: {//自定义提示信息
-                    form_check:{
-                        required:"请仔细阅读相关条款",
-                    },
                 },
                 onkeyup:false,
                 focusCleanup:false,
@@ -171,12 +161,12 @@
                                 skin: 'layer-ext-moon'
                             });
                         }else{ // 成功
-                            layer.msg('更新成功！', {
+                            layer.msg(msg.msg, {
                                 icon: 1,
                                 skin: 'layer-ext-moon'
                             },function(){
                                 parent.location.reload();
-                                var index = parent.layer.getFrameIndex(window.name);
+                                var index = parent.layer.getFrameIndex( window.name );
                                 parent.layer.close(index);
                             });
                         }
