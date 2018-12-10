@@ -30,8 +30,8 @@ class CreateInnModel extends Migration
             $table->string('province',60)->nullable()->comment('门店所在省');
             $table->string('city',60)->nullable()->comment('门店所在市');
             $table->string('district',60)->nullable()->comment('门店所在区县');
-            $table->string('adcode',8)->nullable()->comment('门店所在高德区域编码');
             $table->text('inn_address')->nullable()->comment('门店详细地址');
+            $table->string('adcode',8)->nullable()->comment('门店所在高德区域编码');
             $table->string('inn_logo',255)->nullable()->comment('门店头像');
             $table->string('inn_img',255)->nullable()->comment('门店图片');
             $table->string('start_time',10)->comment('营业开始时间');

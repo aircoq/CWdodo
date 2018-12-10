@@ -67,15 +67,16 @@ class CreateUserAddressModel extends Migration
             $table->string('Consignee_tel',15)->nullable()->comment('收货人电话');
             $table->string('Consignee_phone',15)->comment('收货人手机');
             $table->string('adr_label',150)->nullable()->comment('地址标签:家；公司；学校或自定义');
-            $table->unsignedSmallInteger('country')->comment('国家');
-            $table->unsignedSmallInteger('province')->comment('省份');
-            $table->unsignedSmallInteger('city')->comment('城市');
-            $table->unsignedSmallInteger('district')->comment('地区');
-            $table->unsignedSmallInteger('street')->comment('街道');
-            $table->string('address',255)->comment('收货人详细地址');
+            $table->string('country',10)->comment('国家');
+            $table->string('province',10)->comment('省份');
+            $table->string('city',25)->comment('城市');
+            $table->string('district',30)->comment('地区');
+            $table->string('street',30)->comment('街道');
+            $table->string('address',60)->comment('收货人详细地址');
             $table->string('zip_code',60)->comment('收货人邮编:系统根据API自动生成');
             $table->timestamps();
         });
+
         # 用户积分和现金自操作记录表（对应的还有管理员操作记录表）
         Schema::create('user_account_log', function (Blueprint $table) {
             $table->engine = 'InnoDB';
