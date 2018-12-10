@@ -22,7 +22,6 @@ class CreateAppointmentTable extends Migration
             $table->enum('sex',['1','2'])->default(2)->comment('预约用户性别:0女；1男；');
             $table->unsignedInteger('user_phone')->comment('预约时的电话号码');
             $table->enum('pet_id',['0','1'])->comment('宠物id');
-//
             $table->string('province',60)->nullable()->comment('用户预约所在省');
             $table->string('city',60)->nullable()->comment('用户预约所在市');
             $table->string('district',60)->nullable()->comment('用户预约所在区县');
