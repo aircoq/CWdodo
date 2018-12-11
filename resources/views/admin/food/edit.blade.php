@@ -14,13 +14,14 @@
     <div class="cl-sm-12">
         <!-- /.box-header -->
         <!-- form start -->
-        <form class="form-horizontal" id="form-table1" action="{{ url('admin/food')  }}" method="post" enctype="multipart/form-data">
+        <form class="form-horizontal" id="form-table1" action="{{ url('admin/food/'.$food->id )  }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
+            {{ method_field('put') }}
             <div class="box-body">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">食物名称</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="食物名称" name="food_name" id="food_name"/>
+                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="食物名称" name="food_name" id="food_name" value="{{ $food->food_name }}"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -46,19 +47,19 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">单价</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="元/天" name="price">
+                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="元/天" name="price" value="{{ $food->price }}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">排序权重</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="数值越大排名越前" id="sort_order" name="sort_order">
+                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="数值越大排名越前" id="sort_order" name="sort_order" value="{{ $food->sort_order }}">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">备注</label>
                     <div class="col-sm-10">
-                        <textarea class="textarea" style="width: 70%; height: 150px; font-size: 14px;" placeholder="备注" name="mark_up"></textarea>
+                        <textarea class="textarea" style="width: 70%; height: 150px; font-size: 14px;" placeholder="备注" name="mark_up">{{ $food->mark_up }}</textarea>
                     </div>
                 </div>
             </div>
@@ -84,6 +85,8 @@
     <script type="text/javascript" src="{{ asset('plugins/jQueryUI/jquery.form.js')}}"></script>
     <script>
         $(function(){
+            $('#cate{{$food->food_category}}').attr('selected','selected');
+            $('#age{{$food->food_age}}').attr('selected','selected');
             /***编写Javascript表单验证区域*/
             $("#form-table1").validate({
                 rules:{//规则

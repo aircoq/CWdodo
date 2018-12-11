@@ -24,9 +24,26 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">商品类型说明</label>
+                    <label class="col-sm-2 control-label">适用年龄</label>
                     <div class="col-sm-10">
-                        <textarea class="textarea" style="width: 70%; height: 150px; font-size: 14px;" placeholder="管理员的备注" name="mark_up"></textarea>
+                        <select class="form-control" style="width:70%;" name="food_age" >
+                            <option id="age0" value="0">离乳期</option>
+                            <option id="age1" value="1">幼年</option>
+                            <option id="age2" value="2">成年</option>
+                            <option id="age3" value="3">老年</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">排序权重</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="数值越大排名越前" id="sort_order" name="sort_order">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">备注</label>
+                    <div class="col-sm-10">
+                        <textarea class="textarea" style="width: 70%; height: 150px; font-size: 14px;" placeholder="备注" name="mark_up"></textarea>
                     </div>
                 </div>
             </div>

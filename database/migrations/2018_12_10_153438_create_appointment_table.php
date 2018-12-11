@@ -15,7 +15,7 @@ class CreateAppointmentTable extends Migration
             $table->enum('appointment_type',['0','1','2'])->comment('预约的服务类型:0寄养；1洗澡；2美容；3SPA');
             $table->unsignedInteger('user_id')->comment('预约的用户id');
             $table->string('user_name',15)->comment('预约时的用户名');
-            $table->enum('sex',['1','2'])->default(0)->comment('预约用户性别:0女；1男；');
+            $table->enum('sex',['1','2'])->comment('预约用户性别:0女；1男；');
             $table->unsignedInteger('user_phone')->comment('预约时的电话号码');
             $table->unsignedInteger('pet_id')->comment('宠物id');
             $table->enum('is_pickup',['0','1'])->comment('是否接送');
@@ -36,7 +36,6 @@ class CreateAppointmentTable extends Migration
             $table->softDeletes();//完成即软删除
             $table->foreign('user_id')->references('id')->on('user') ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('pet_id')->references('id')->on('pet') ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('food_id')->references('id')->on('food') ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
