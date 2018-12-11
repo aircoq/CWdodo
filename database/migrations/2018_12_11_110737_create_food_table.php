@@ -6,11 +6,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateFoodTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         #宠物食品表
@@ -26,11 +21,6 @@ class CreateFoodTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('food');

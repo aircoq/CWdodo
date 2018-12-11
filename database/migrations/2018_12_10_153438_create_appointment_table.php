@@ -25,10 +25,10 @@ class CreateAppointmentTable extends Migration
             $table->string('address',60)->comment('用户预约详细地址');
             $table->string('lat',30)->comment('用户预约所在经度');
             $table->string('lng',30)->comment('用户预约所在纬度');
-            $table->string('from_way',30)->comment('预约途径');
+            $table->string('from_way',30)->comment('预约途径(功能暂未开通)');
             $table->string('start_at',255)->nullable()->comment('预约开始时间（时间戳）');
             $table->string('end_at',255)->nullable()->comment('预约服务结束时间（时间戳）    ');
-            $table->unsignedSmallInteger('food_id')->nullable()->comment('期间使用食品');
+            $table->unsignedInteger('food_id')->nullable()->comment('期间使用食品');
             $table->string('provider',30)->comment('接待者');
             $table->enum('appointment_status',['0','1'])->comment('接管状态：0未完成；1完成');
             $table->text('mark_up')->nullable()->comment('备注');
@@ -36,6 +36,7 @@ class CreateAppointmentTable extends Migration
             $table->softDeletes();//完成即软删除
             $table->foreign('user_id')->references('id')->on('user') ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('pet_id')->references('id')->on('pet') ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('food_id')->references('id')->on('food') ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

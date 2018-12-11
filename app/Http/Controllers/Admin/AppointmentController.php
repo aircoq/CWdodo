@@ -20,7 +20,7 @@ class AppointmentController extends Controller
 
     public function store(Request $request,Appointment $appointment)
     {
-        $data = $request->only('appointment_type','user_id','user_name','sex', 'user_phone', 'pet_id','is_pickup','province','city','district','address','from_way','start_at','end_at','food_id','provider','appointment_status','mark_up');//'appointment_number','lat','lng'
+        $data = $request->only('appointment_type','user_id','user_name','sex', 'user_phone', 'pet_id','is_pickup','province','city','district','address','from_way','start_at','end_at','food_id','mark_up');
         $role = [
             'appointment_type' => 'required|in:0,1,2',
             'user_id' => 'required|exists:user,id',
@@ -29,10 +29,14 @@ class AppointmentController extends Controller
             'user_phone'=> 'required|regex:/^1[3-9]\d{9}/',
             'pet_id' => 'required|exists:pet,id',
             'is_pickup' => 'required|in:0,1',
-            'province' => 'required|string|between:2,15',
-            'city' => 'required|string|between:2,15',
-            'district' => 'required|string|between:2,15',
-            'address' => 'required|string|between:3,35',
+            'province' => 'nullable|required_if:is_pickup,1|string|between:2,15',
+            'city' => 'nullable|required_if:is_pickup,1|string|between:2,15',
+            'district' => 'rnullable|required_if:is_pickup,1|string|between:2,15',
+            'address' => 'nullable|required_if:is_pickup,1|string|between:3,35',
+            'from_way' => 'nullable|string|between:0,50',
+            'start_at' => 'required|date_format:20180916',
+            'end_at' => 'nullable|required_if:appointment_type,0|date_format:20180916',
+            'food_id' => 'nullable|required_if:appointment_type,0|exists:food,id',
             'mark_up' => 'nullable|string|between:0,200',
         ];
         $message = [
@@ -47,9 +51,20 @@ class AppointmentController extends Controller
             'pet_id.exists' => '宠物不存在',
             'is_pickup.in' => '是否接送不合法',
             'province.between' => '省级字节超限',
+            'province.required_if' => '接送地址不能空',
             'city.between' => '市级字节超限',
+            'city.required_if' => '接送地址不能空',
             'district.between' => '区县级字节超限',
+            'district.required_if' => '接送地址不能空',
             'address.between' => '详细地址最长为35个字节',
+            'address.required_if' => '接送地址不能空',
+            'from_way.between' => '预约途径最长为50个字节',
+            'start_at.required' => '预约服务时间不能为空',
+            'start_at.date_format' => '预约服务时间格式不正确',
+            'end_at.required_if' => '寄养结束时间不能为空',
+            'end_at.date_format' => '预约服务时间格式不正确',
+            'food_id.required_if' => '宠物食品不能为空',
+            'food_id.exists' => '宠物食品不存在',
             'mark_up.string' => '备注不正确',
             'mark_up.between' => '备注最大100个字节',
         ];
@@ -96,7 +111,7 @@ class AppointmentController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->only('appointment_type','user_id','user_name','sex', 'user_phone', 'pet_id','is_pickup','province','city','district','address','from_way','start_at','end_at','food_id','provider','appointment_status','mark_up');//'appointment_number','lat','lng',
     }
 
     public function destroy($id)

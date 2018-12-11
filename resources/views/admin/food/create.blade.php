@@ -18,9 +18,9 @@
             {{ csrf_field() }}
             <div class="box-body">
                 <div class="form-group">
-                    <label class="col-sm-2 control-label">商品类型名称</label>
+                    <label class="col-sm-2 control-label">食物名称</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="商品类型名称" name="type_name" id="type_name"/>
+                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="食物名称" name="food_name" id="food_name"/>
                     </div>
                 </div>
                 <div class="form-group">

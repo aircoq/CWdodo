@@ -27,7 +27,7 @@ class FoodController extends Controller
             'food_age' => 'required|in:0,1,2,3',
             'price' => 'required|numeric|min:0',
             'sort_order' => 'nullable|integer',
-            'mark_up' => 'nullable|string|between:0,100'
+            'mark_up' => 'nullable|string|between:0,200'
         ];
         $message = [
             'food_name.required' => '名称不能为空',
@@ -37,7 +37,7 @@ class FoodController extends Controller
             'price.numeric' => '每天单价有误',
             'price.min' => '每天单价不能小于0',
             'mark_up.string' => '备注不正确',
-            'mark_up.between' => '备注最大100个字节',
+            'mark_up.between' => '备注最大200个字节',
         ];
         $validator = Validator::make( $data, $role, $message );
         if( $validator->fails() ){
