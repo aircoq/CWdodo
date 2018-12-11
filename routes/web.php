@@ -54,6 +54,7 @@ Route::group(['prefix'=>'admin','middleware' => 'CheckAdminAuth','namespace' => 
     Route::resource('goods_brand','GoodsBrandController');//商品品牌
     Route::resource('goods','GoodsController');//商品管理
     Route::match(['get', 'post'],'del_rich_text','GoodsController@delRichText');//商品管理
+    Route::resource('appointment','AppointmentController');//预约管理
 });
 
 

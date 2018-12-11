@@ -13,7 +13,6 @@ class CreatePetTable extends Migration
      */
     public function up()
     {
-        # 宠物类别表
         # 宠物信息表
         Schema::create('pet',function(Blueprint $table){
             $table->engine = 'InnoDB';

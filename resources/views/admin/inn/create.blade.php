@@ -58,14 +58,13 @@
                     <label class="col-sm-2 control-label">门店详细地址</label>
                     <div class="col-sm-10">
                         <select class="form-control" style="width:10%;display:inline" id="province" name="province">
-                            <option value=null><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">省级</font></font></option>
+                            <option value=null>省级</option>
                         </select>
-
                         <select class="form-control" style="width:10%;display:inline"  id="city" name="city">
-                            <option value=null><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">地级市</font></font></option>
+                            <option value=null>地级市</option>
                         </select>
                         <select class="form-control" style="width:10%;display:inline"  id="district" name="district">
-                            <option value=null><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">区/县级</font></font></option>
+                            <option value=null>区/县级</option>
                         </select>
                         <input type="tel" class="form-control" style="width:39%;display:inline;" placeholder="门店详细地址"  name="inn_address" id="inn_address"/>
                     </div>

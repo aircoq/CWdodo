@@ -20,11 +20,11 @@
             <section class="content-header">
                 <h1>
                     店铺管理
-                    <small>房间管理</small>
+                    <small>预约管理</small>
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="{{ url('admin/index') }}"><i class="fa fa-dashboard"></i>系统首页</a></li>
-                    <li class="active">房间管理</li>
+                    <li class="active">预约管理</li>
                 </ol>
             </section>
             <!-- 主要内容 -->
@@ -34,9 +34,9 @@
                 -------------------------->
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">房间列表</h3>
-                        <a class="btn btn-box-tool btn-xs"  href="javascript:;" onclick="layer_show('添加','{{ url('admin/inn_room/create')  }}','1200','800')" id="a-admin-add">
-                            <font style="vertical-align:inherit; color:#3c8dbc;"><font style="font-size:14px;"><i class="fa fa-fw fa-plus"></i>新增房间</font></font>
+                        <h3 class="box-title">预约列表</h3>
+                        <a class="btn btn-box-tool btn-xs"  href="javascript:;" onclick="layer_show('添加','{{ url('admin/appointment/create')  }}','1200','800')" id="a-admin-add">
+                            <font style="vertical-align:inherit; color:#3c8dbc;"><font style="font-size:14px;"><i class="fa fa-fw fa-plus"></i>新增预约</font></font>
                         </a>
                     </div>
                     <!-- /.box-header -->
@@ -51,24 +51,15 @@
                                                 ID
                                             </th>
                                             <th class="sorting" tabindex="1">
-                                                房间编号
+                                                预约订单号
                                             </th>
-                                            <th class="sorting" tabindex="2">
-                                                所属门店
+                                            <th class="sorting td-manage" tabindex="2">
+                                                服务时间
                                             </th>
-                                            <th class="sorting" tabindex="3">
-                                                房间类型
+                                            <th class="sorting" tabindex="9">
+                                                服务类型
                                             </th>
-                                            <th class="sorting" tabindex="3">
-                                                所属层
-                                            </th>
-                                            <th class="sorting" tabindex="4">
-                                                是否可用
-                                            </th>
-                                            <th class="sorting" tabindex="5">
-                                                使用时间段
-                                            </th>
-                                            <th class="sorting td-manage" tabindex="6">
+                                            <th class="sorting td-manage" tabindex="10">
                                                 操作
                                             </th>
                                         </tr>
@@ -76,9 +67,6 @@
                                         <tbody>
                                         <tr role="row">
                                             <td class="sorting_1">id</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -91,22 +79,13 @@
                                                 ID
                                             </th>
                                             <th class="sorting">
-                                                房间编号
+                                                商品类型名称
                                             </th>
                                             <th class="sorting">
-                                                所属门店
+                                                商品类型描述
                                             </th>
                                             <th class="sorting">
-                                                房间类型
-                                            </th>
-                                            <th class="sorting">
-                                                所属层
-                                            </th>
-                                            <th class="sorting">
-                                                是否可用
-                                            </th>
-                                            <th class="sorting">
-                                                使用时间段
+                                                删除时间
                                             </th>
                                             <th class="sorting td-manage">
                                                 操作
@@ -157,18 +136,15 @@
                     "orderable": false
                 }],
                 "ajax": {
-                    "url": "{{ url('admin/inn_room/') }}",// 服务端uri地址，显示数据的uri
+                    "url": "{{ url('admin/goods_type/') }}",// 服务端uri地址，显示数据的uri
                     "type": "get",   // ajax 的http请求类型
                     'headers': { 'X-CSRF-TOKEN' : '{{ csrf_token() }}' },
                 },
                 'columns':[//按列显示从服务器端过来的数据
                     {'data':'id',"defaultContent": ""},
-                    {'data':'room_number',"defaultContent": ""},
-                    {'data':'inn_id',"defaultContent": ""},
-                    {'data':'room_type',"defaultContent": ""},
-                    {'data':'bunk',"defaultContent": ""},
-                    {'data':'is_enable',"defaultContent": ""},
-                    {'data':'',"defaultContent": ""},
+                    {'data':'type_name',"defaultContent": ""},
+                    {'data':'mark_up',"defaultContent": ""},
+                    {'data':'deleted_at',"defaultContent": ""},
                     {'data':'b',"defaultContent": ""},
                 ],
                 language: {//汉化显示
@@ -205,11 +181,14 @@
                     );
                     $(row).find('td:eq(-1)').html(
                         '<div class="btn-group">' +
-                        '<button type="button" class="btn btn-info" onclick="layer_show(' + '\'编辑\',\'/admin/inn_room/'+data.id+'/edit\',1200,800)" >' +
+                        '<button type="button" class="btn btn-info" onclick="layer_show(' + '\'编辑\',\'/admin/goods_type/'+data.id+'/edit\',1200,800)" >' +
                         '<font style="vertical-align: inherit;">编辑</font>' +
                         '</button>'+
-                        '<button type="button" class="btn btn-danger" onclick="do_del(this,\''+data.id+'\',\''+data.room_number+'\',1200,800)" >' +
+                        '<button type="button" class="btn btn-danger" onclick="do_del(this,\''+data.id+'\',\''+data.type_name+'\',1200,800)" >' +
                         '<font style="vertical-align: inherit;">删除</font>' +
+                        '</button>'+
+                        '<button type="button" class="btn btn-warning" onclick="re_store(this,\''+data.id+'\',\''+data.type_name+'\')">' +
+                        '<font style="vertical-align: inherit;">恢复</font>' +
                         '</button>'+
                         '</div>'
                     ).attr('class','td-manage');
@@ -218,9 +197,9 @@
         });
         /*删除*/
         function do_del(obj,id,username){
-            layer.confirm('<font color="red" >危险！确定永久删除(<b>'+username+'<b/>)吗？</font>',function(index){
+            layer.confirm('<font color="red" >危险！确定删除(<b>'+username+'<b/>)吗？</font>',function(index){
                 //此处请求后台程序，下方是成功后的前台处理……
-                url = '/admin/inn_room/'+ id;
+                url = '/admin/appointment/'+ id;
                 data = {
                     '_token':'{{ csrf_token() }}',
                     '_method':'delete',
@@ -235,6 +214,30 @@
                         location.reload();
                         $(obj).parents('tr').remove();
                         layer.msg('删除成功',{icon:1,time:1000});
+                    }
+                });
+            });
+        }
+        /*恢复*/
+        function re_store(obj,id,username){
+            layer.confirm('确认要恢复当前(<font color="red" ><b>'+username+'<b/></font>)吗？',function(index){
+                //此处请求后台程序，下方是成功后的前台处理……
+                url = '/admin/appointment/restore';
+                data = {
+                    '_token':'{{ csrf_token()  }}',
+                    'id':id,
+                    '_method':'post',
+                };
+                $.post(url,data,function (msg) {
+                    if( msg.status != 'success' ){
+                        layer.alert(msg.msg,{
+                            icon:5,
+                            skin:'layer-ext-moon'
+                        })
+                    }else{
+                        location.reload();
+                        $(obj).parents('tr').remove();
+                        layer.msg(msg.msg,{icon:1,time:1000});
                     }
                 });
             });

@@ -182,16 +182,16 @@
                     $(row).find('td:eq(-1)').html(
                         '<div class="btn-group">' +
                         '<button type="button" class="btn btn-info" onclick="layer_show(' + '\'查看属性\',\'/admin/goods_type/'+data.id+'\',1200,800)" >' +
-                        '<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">查看属性</font></font>' +
+                        '<font style="vertical-align: inherit;">查看属性</font>' +
                         '</button>'+
                         '<button type="button" class="btn btn-info" onclick="layer_show(' + '\'编辑\',\'/admin/goods_type/'+data.id+'/edit\',1200,800)" >' +
-                        '<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">编辑</font></font>' +
+                        '<font style="vertical-align: inherit;">编辑</font>' +
                         '</button>'+
                         '<button type="button" class="btn btn-danger" onclick="do_del(this,\''+data.id+'\',\''+data.type_name+'\',1200,800)" >' +
-                        '<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">删除</font></font>' +
+                        '<font style="vertical-align: inherit;">删除</font>' +
                         '</button>'+
                         '<button type="button" class="btn btn-warning" onclick="re_store(this,\''+data.id+'\',\''+data.type_name+'\')">' +
-                        '<font style="vertical-align: inherit;"><font style="vertical-align: inherit;">恢复</font></font>' +
+                        '<font style="vertical-align: inherit;">恢复</font>' +
                         '</button>'+
                         '</div>'
                     ).attr('class','td-manage');
