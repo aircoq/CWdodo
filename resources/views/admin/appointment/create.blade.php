@@ -5,6 +5,7 @@
 @endsection
 
 @section('css')
+    <link rel="stylesheet" href="{{ asset('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
     <style>
         .error{color:red;}
     </style>
@@ -14,20 +15,20 @@
     <div class="cl-sm-12">
         <!-- /.box-header -->
         <!-- form start -->
-        <form class="form-horizontal" id="form-table1" action="{{ url('admin/appointment')  }}" method="post" enctype="multipart/form-data">
+        <form class="form-horizontal" id="form-table1" action="{{ url('admin/appointment') }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="box-body">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">宠物</label>
-                    {{--<div class="col-sm-10">--}}
-                        {{--<select class="form-control" style="width:70%;" name="inn_id">--}}
-                            {{--@foreach ($pet as $v)--}}
-                                {{--<option value="{{ $v['id'] }}">--}}
-                                    {{--{{ $v['pet_name'] }}--}}
-                                {{--</option>--}}
-                            {{--@endforeach--}}
-                        {{--</select>--}}
-                    {{--</div>--}}
+                    <div class="col-sm-10">
+                        <select class="form-control" style="width:70%;" name="pet_id">
+                            @foreach ($pet as $v)
+                                <option value="{{ $v['id'] }}">
+                                    {{ $v['pet_name'] }}-{{ $v['pet_category']==0 ? '狗' : '猫' }}-{{ $v['male']==0 ? '母' : '公' }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">预约服务类型</label>
@@ -55,7 +56,13 @@
                 <div class="form-group foster">
                     <label class="col-sm-2 control-label">期间使用食品</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="期间使用食品" name="end_at"/>
+                        <select class="form-control" style="width:70%;" name="food_id">
+                            @foreach ($food as $v)
+                                <option value="{{ $v['id'] }}">
+                                    {{ $v['food_name'] }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="form-group">
@@ -130,6 +137,9 @@
     <script type="text/javascript" src="{{ asset('plugins/layer/admin_layer.js')}}"></script>
     <script type="text/javascript" src="{{ asset('plugins/layer/admin_layer.js')}}"></script>
     <script type="text/javascript" src="{{ asset('plugins/jQueryUI/jquery.form.js')}}"></script>
+    <!-- bootstrap datepicker -->
+    <script src="{{ asset('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
+    <script src="{{ asset('bower_components/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js')}}"></script>
     <script>
         $(function(){
             /***编写省市县三级联动*/
@@ -189,6 +199,23 @@
                 }
             }
             xhr.send();
+            /***时间插件*/
+            $("input[name='start_at']").datepicker({
+                language: "zh-CN",
+                autoclose: true,//选中之后自动隐藏日期选择框
+                clearBtn: true,//清除按钮
+                todayBtn: true,//今日按钮
+                todayHighlight: true,
+                format: "yyyy-mm-dd hh:ii"
+            });
+            $("input[name='end_at']").datepicker({
+                language: "zh-CN",
+                autoclose: true,//选中之后自动隐藏日期选择框
+                clearBtn: true,//清除按钮
+                todayBtn: true,//今日按钮
+                todayHighlight: true,
+                format: "yyyy-mm-dd hh:ii"
+            });
             /***编写Javascript表单验证区域*/
             $("#form-table1").validate({
                 rules:{//规则

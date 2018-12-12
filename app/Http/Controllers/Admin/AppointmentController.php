@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Admin\Appointment;
+use App\Models\Admin\Food;
+use App\Models\Admin\Pet;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class AppointmentController extends Controller
 {
@@ -13,41 +16,45 @@ class AppointmentController extends Controller
         return view('admin.appointment.index');
     }
 
-    public function create()
+    public function create(Pet $pet ,Food $food)
     {
-        return view('admin.appointment.create');
+        $data['pet'] = $pet->all();
+        $data['food'] = $food->all();
+        return view('admin.appointment.create',$data);
     }
 
     public function store(Request $request,Appointment $appointment)
     {
         $data = $request->only('appointment_type','user_id','user_name','sex', 'user_phone', 'pet_id','is_pickup','province','city','district','address','from_way','start_at','end_at','food_id','mark_up');
+//        dump($data);die();
         $role = [
             'appointment_type' => 'required|in:0,1,2',
-            'user_id' => 'required|exists:user,id',
+//            'user_id' => 'required|exists:user,id',
             'user_name' => 'required|string|between:2,15',
             'sex' => 'required|in:0,1',
-            'user_phone'=> 'required|regex:/^1[3-9]\d{9}/',
+            'user_phone'=> 'required|digits:11',
             'pet_id' => 'required|exists:pet,id',
             'is_pickup' => 'required|in:0,1',
             'province' => 'nullable|required_if:is_pickup,1|string|between:2,15',
             'city' => 'nullable|required_if:is_pickup,1|string|between:2,15',
-            'district' => 'rnullable|required_if:is_pickup,1|string|between:2,15',
+            'district' => 'nullable|required_if:is_pickup,1|string|between:2,15',
             'address' => 'nullable|required_if:is_pickup,1|string|between:3,35',
             'from_way' => 'nullable|string|between:0,50',
-            'start_at' => 'required|date_format:20180916',
-            'end_at' => 'nullable|required_if:appointment_type,0|date_format:20180916',
+            'start_at' => 'required|date',
+            'end_at' => 'nullable|required_if:appointment_type,0|date|after:start_at',
             'food_id' => 'nullable|required_if:appointment_type,0|exists:food,id',
             'mark_up' => 'nullable|string|between:0,200',
         ];
         $message = [
             'appointment_type.in' => '选择服务类型不正确',
+//            'user_id.exists' => '用户不存在',
             'user_name.required' => '用户名不能为空',
             'user_name.string' => '用户长度为2到15位的英文、数字组成',
             'user_name.between' => '用户长度为2到15位的英文、数字组成',
             'sex.in' => '性别格式不合法',
             'user_phone.required' => '手机号码不能为空',
             'user_phone.unique' => '此号码已存在，请勿重复申请',
-            'user_phone.regex' => '手机号码不正确',
+            'user_phone.digits' => '手机号码不正确',
             'pet_id.exists' => '宠物不存在',
             'is_pickup.in' => '是否接送不合法',
             'province.between' => '省级字节超限',
@@ -60,9 +67,10 @@ class AppointmentController extends Controller
             'address.required_if' => '接送地址不能空',
             'from_way.between' => '预约途径最长为50个字节',
             'start_at.required' => '预约服务时间不能为空',
-            'start_at.date_format' => '预约服务时间格式不正确',
+            'start_at.date' => '预约服务时间格式不正确',
             'end_at.required_if' => '寄养结束时间不能为空',
-            'end_at.date_format' => '预约服务时间格式不正确',
+            'end_at.date' => '预约服务时间格式不正确',
+            'end_at.after' => '寄养结束时间不能小于开始时间',
             'food_id.required_if' => '宠物食品不能为空',
             'food_id.exists' => '宠物食品不存在',
             'mark_up.string' => '备注不正确',
@@ -87,6 +95,7 @@ class AppointmentController extends Controller
             return ['status' => "fail", 'msg' => '请求失败，请重新输入地址'];
         }
         if($data['province'] == $pro && $data['city'] == $city && $data['district'] == $district){//核对填写的地址
+            dump($data);die();
             $res = $appointment->create($data);
             if ($res) { // 如果添加数据成功，则返回列表页
                 return ['status' => "success", 'msg' => '预约成功'];

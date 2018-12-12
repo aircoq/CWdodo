@@ -30,6 +30,7 @@ class CreatePetTable extends Migration
             $table->unsignedTinyInteger('star')->default(8)->comment('爱星：满星10星');
             $table->date('birthday')->nullable()->comment('宠物出生日');
             $table->string('born_where')->nullable()->comment('宠物产地');
+            $table->unsignedInteger('room_id')->nullable()->comment('寄养的房间');
             $table->text('pet_desc')->nullable()->comment('宠物描述');
             $table->timestamps();
         });
