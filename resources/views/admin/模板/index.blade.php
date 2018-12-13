@@ -35,7 +35,7 @@
                 <div class="box">
                     <div class="box-header">
                         <h3 class="box-title">商品类型表</h3>
-                        <a class="btn btn-box-tool btn-xs"  href="javascript:;" onclick="layer_show('添加','{{ url('admin/goods_type/create')  }}','1200','800')" id="a-admin-add">
+                        <a class="btn btn-box-tool btn-xs"  href="javascript:;" onclick="layer_show('添加','{{ url('admin/-controller-/create')  }}','1200','800')" id="a-admin-add">
                             <font style="vertical-align:inherit; color:#3c8dbc;"><font style="font-size:14px;"><i class="fa fa-fw fa-plus"></i>新增类型</font></font>
                         </a>
                     </div>
@@ -181,10 +181,10 @@
                     );
                     $(row).find('td:eq(-1)').html(
                         '<div class="btn-group">' +
-                        '<button type="button" class="btn btn-info" onclick="layer_show(' + '\'查看属性\',\'/admin/goods_type/'+data.id+'\',1200,800)" >' +
+                        '<button type="button" class="btn btn-info" onclick="layer_show(' + '\'查看属性\',\'/admin/-controller-/'+data.id+'\',1200,800)" >' +
                         '<font style="vertical-align: inherit;">查看属性</font>' +
                         '</button>'+
-                        '<button type="button" class="btn btn-info" onclick="layer_show(' + '\'编辑\',\'/admin/goods_type/'+data.id+'/edit\',1200,800)" >' +
+                        '<button type="button" class="btn btn-info" onclick="layer_show(' + '\'编辑\',\'/admin/-controller-/'+data.id+'/edit\',1200,800)" >' +
                         '<font style="vertical-align: inherit;">编辑</font>' +
                         '</button>'+
                         '<button type="button" class="btn btn-danger" onclick="do_del(this,\''+data.id+'\',\''+data.type_name+'\',1200,800)" >' +
@@ -202,7 +202,7 @@
         function do_del(obj,id,username){
             layer.confirm('<font color="red" >危险！确定删除(<b>'+username+'<b/>)吗？</font>',function(index){
                 //此处请求后台程序，下方是成功后的前台处理……
-                url = '/admin/goods_type/'+ id;
+                url = '/admin/-controller-/'+ id;
                 data = {
                     '_token':'{{ csrf_token() }}',
                     '_method':'delete',
@@ -225,7 +225,7 @@
         function re_store(obj,id,username){
             layer.confirm('确认要恢复当前(<font color="red" ><b>'+username+'<b/></font>)吗？',function(index){
                 //此处请求后台程序，下方是成功后的前台处理……
-                url = '/admin/goods_type/restore';
+                url = '/admin/-controller-/restore';
                 data = {
                     '_token':'{{ csrf_token()  }}',
                     'id':id,

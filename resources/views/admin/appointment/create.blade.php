@@ -22,7 +22,7 @@
                     <label class="col-sm-2 control-label">用户</label>
                     <div class="col-sm-10">
                         <select class="form-control" style="width:70%;" name="user_id">
-                            <option value="1">用户1</option>
+                            <option value="1">示例用户1</option>
                         </select>
                     </div>
                 </div>

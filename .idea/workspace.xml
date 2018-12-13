@@ -2,16 +2,89 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5e34fc05-11b0-4cd3-8661-f499f1c56395" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/pet.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pet.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/AppointmentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/AppointmentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Admin/Pet.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Admin/Pet.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2018_10_16_104629_create_admin_role_auth_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2018_10_16_104629_create_admin_role_auth_model.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2018_10_16_162502_create_user_address_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2018_10_16_162502_create_user_address_model.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2018_12_10_153438_create_appointment_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2018_12_10_153438_create_appointment_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/backend/inn/img/20181207/201812075c0a330edac03.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/uploads/backend/inn/logo/20181207/201812075c0a330ed90ab.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2018_10_16_113753_create_pet_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2018_10_16_113753_create_pet_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/appointment/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/appointment/create.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/admin/goods/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/goods/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/模板/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/模板/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/模板/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/模板/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_files.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_files.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/egulias/email-validator/EmailValidator/Validation/MultipleValidationWithAnd.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/EmailValidator/Validation/MultipleValidationWithAnd.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/egulias/email-validator/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/egulias/email-validator/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/guzzlehttp/psr7/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/guzzlehttp/psr7/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/guzzlehttp/psr7/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/guzzlehttp/psr7/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/guzzlehttp/psr7/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/guzzlehttp/psr7/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/guzzlehttp/psr7/src/AppendStream.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/guzzlehttp/psr7/src/AppendStream.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/guzzlehttp/psr7/src/FnStream.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/guzzlehttp/psr7/src/FnStream.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/guzzlehttp/psr7/src/InflateStream.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/guzzlehttp/psr7/src/InflateStream.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/guzzlehttp/psr7/src/Request.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/guzzlehttp/psr7/src/Request.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/guzzlehttp/psr7/src/Response.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/guzzlehttp/psr7/src/Response.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/guzzlehttp/psr7/src/ServerRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/guzzlehttp/psr7/src/ServerRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/guzzlehttp/psr7/src/Stream.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/guzzlehttp/psr7/src/Stream.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/guzzlehttp/psr7/src/StreamWrapper.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/guzzlehttp/psr7/src/StreamWrapper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/guzzlehttp/psr7/src/Uri.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/guzzlehttp/psr7/src/Uri.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/guzzlehttp/psr7/src/functions.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/guzzlehttp/psr7/src/functions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/css-selector/Exception/ExceptionInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/css-selector/Exception/ExceptionInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/css-selector/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/css-selector/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/debug/DebugClassLoader.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/debug/DebugClassLoader.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/Debug/TraceableEventDispatcher.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/Debug/TraceableEventDispatcher.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/Debug/TraceableEventDispatcherInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/Debug/TraceableEventDispatcherInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/event-dispatcher/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/HttpKernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/http-kernel/HttpKernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/http-kernel/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/http-kernel/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/routing/Matcher/UrlMatcher.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/routing/Matcher/UrlMatcher.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/routing/Tests/Matcher/RedirectableUrlMatcherTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/routing/Tests/Matcher/RedirectableUrlMatcherTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/routing/Tests/Matcher/UrlMatcherTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/routing/Tests/Matcher/UrlMatcherTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/Catalogue/MergeOperation.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/Catalogue/MergeOperation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/Catalogue/TargetOperation.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/Catalogue/TargetOperation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/Command/XliffLintCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/Command/XliffLintCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/DataCollector/TranslationDataCollector.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/DataCollector/TranslationDataCollector.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/DataCollectorTranslator.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/DataCollectorTranslator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/Dumper/FileDumper.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/Dumper/FileDumper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/Exception/ExceptionInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/Exception/ExceptionInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/Formatter/ChoiceMessageFormatterInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/Formatter/ChoiceMessageFormatterInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/Formatter/MessageFormatter.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/Formatter/MessageFormatter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/IdentityTranslator.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/IdentityTranslator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/Interval.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/Interval.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/Loader/XliffFileLoader.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/Loader/XliffFileLoader.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/Loader/schema/dic/xliff-core/xliff-core-1.2-strict.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/Loader/schema/dic/xliff-core/xliff-core-2.0.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/Loader/schema/dic/xliff-core/xml.xsd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/LoggingTranslator.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/LoggingTranslator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/MessageCatalogue.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/MessageCatalogue.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/MessageCatalogueInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/MessageCatalogueInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/MessageSelector.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/MessageSelector.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/PluralizationRules.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/PluralizationRules.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/Resources/schemas/xliff-core-1.2-strict.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/Resources/schemas/xliff-core-1.2-strict.xsd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/Tests/Catalogue/MergeOperationTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/Tests/Catalogue/MergeOperationTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/Tests/Catalogue/TargetOperationTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/Tests/Catalogue/TargetOperationTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/Tests/Command/XliffLintCommandTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/Tests/Command/XliffLintCommandTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/Tests/DataCollectorTranslatorTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/Tests/DataCollectorTranslatorTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/Tests/Dumper/FileDumperTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/Tests/Dumper/FileDumperTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/Tests/Formatter/MessageFormatterTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/Tests/Formatter/MessageFormatterTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/Tests/IdentityTranslatorTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/Tests/IdentityTranslatorTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/Tests/IntervalTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/Tests/IntervalTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/Tests/LoggingTranslatorTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/Tests/LoggingTranslatorTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/Tests/MessageCatalogueTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/Tests/MessageCatalogueTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/Tests/MessageSelectorTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/Tests/MessageSelectorTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/Tests/PluralizationRulesTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/Tests/PluralizationRulesTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/Tests/TranslatorCacheTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/Tests/TranslatorCacheTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/Tests/TranslatorTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/Tests/TranslatorTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/Translator.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/Translator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/TranslatorInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/TranslatorInterface.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/symfony/translation/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/symfony/translation/composer.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -25,50 +98,86 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="2018_12_10_153438_create_appointment_table.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/database/migrations/2018_12_10_153438_create_appointment_table.php">
+      <file leaf-file-name="2018_10_16_113753_create_pet_table.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/database/migrations/2018_10_16_113753_create_pet_table.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="22" column="58" selection-start-line="22" selection-start-column="58" selection-end-line="22" selection-end-column="58" />
+            <state relative-caret-position="540">
+              <caret line="29" column="74" selection-start-line="29" selection-start-column="72" selection-end-line="29" selection-end-column="74" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2018_12_11_110737_create_food_table.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/database/migrations/2018_12_11_110737_create_food_table.php">
+      <file leaf-file-name="Pet.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Models/Admin/Pet.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+            <state relative-caret-position="240">
+              <caret line="12" column="52" selection-start-line="12" selection-start-column="52" selection-end-line="12" selection-end-column="52" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AppointmentController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AppointmentController.php">
+      <file leaf-file-name="PetController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/PetController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="760">
-              <caret line="43" column="82" selection-start-line="43" selection-start-column="82" selection-end-line="43" selection-end-column="82" />
+            <state relative-caret-position="431">
+              <caret line="89" column="28" selection-start-line="89" selection-start-column="28" selection-end-line="89" selection-end-column="28" />
               <folding>
-                <element signature="e#46#79#0#PHP" expanded="true" />
+                <element signature="e#46#71#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2018_10_16_113753_create_pet_table.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/database/migrations/2018_10_16_113753_create_pet_table.php">
+      <file leaf-file-name="create.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/admin/pet/create.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="23" column="74" lean-forward="true" selection-start-line="23" selection-start-column="74" selection-end-line="23" selection-end-column="74" />
+            <state relative-caret-position="411">
+              <caret line="27" column="68" selection-start-line="27" selection-start-column="68" selection-end-line="27" selection-end-column="68" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="create.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/admin/appointment/create.blade.php">
+      <file leaf-file-name="GoodsAttrController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/GoodsAttrController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="500">
-              <caret line="25" column="33" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
+            <state relative-caret-position="420">
+              <caret line="67" column="9" selection-start-line="67" selection-start-column="9" selection-end-line="67" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2018_10_16_152446_create_inn_model.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/database/migrations/2018_10_16_152446_create_inn_model.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="460">
+              <caret line="40" column="92" selection-start-line="40" selection-start-column="92" selection-end-line="40" selection-end-column="92" />
+              <folding>
+                <element signature="e#7#45#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="web.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/web.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="560">
+              <caret line="61" selection-start-line="61" selection-end-line="61" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/admin/pet/index.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="436">
+              <caret line="65" column="50" selection-start-line="65" selection-start-column="50" selection-end-line="65" selection-end-column="50" />
+              <folding>
+                <element signature="n#style#0;n#font#0;n#button#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#font#0;n#button#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#font#0;n#button#2;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#font#0;n#button#3;n#div#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -120,6 +229,7 @@
       <replace>Inn</replace>
       <replace>role_class</replace>
       <replace>food</replace>
+      <replace>pet</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -128,11 +238,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/public/bower_components/webuploader/admin_webuploader.css" />
-        <option value="$PROJECT_DIR$/app/Models/Admin/GoodsBrand.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2018_10_16_154819_create_goods_model.php" />
-        <option value="$PROJECT_DIR$/public/bower_components/webuploader/admin_upload.js" />
-        <option value="$PROJECT_DIR$/resources/views/admin/goods_attr/create.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/role/create.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/goods/index.blade.php" />
         <option value="D:/OfficeFolder/个人文件夹/kevin/代码库/简单上传图片生成预览/show_upload_img.html" />
@@ -155,7 +260,6 @@
         <option value="$PROJECT_DIR$/resources/views/admin/inn_room/create.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/auth/edit.blade.php" />
         <option value="$PROJECT_DIR$/database/migrations/2018_10_16_152446_create_inn_model.php" />
-        <option value="$PROJECT_DIR$/resources/views/admin/模板/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/inn_room/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/appointment/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/inn/create.blade.php" />
@@ -164,21 +268,27 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/InnController.php" />
         <option value="$PROJECT_DIR$/app/Models/Admin/Role.php" />
         <option value="$PROJECT_DIR$/app/Models/Admin/Food.php" />
-        <option value="$PROJECT_DIR$/resources/views/admin/模板/create.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/food/create.blade.php" />
         <option value="$PROJECT_DIR$/database/migrations/2018_12_11_110737_create_food_table.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/food/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/food/edit.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/FoodController.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2018_10_16_113753_create_pet_table.php" />
         <option value="$PROJECT_DIR$/app/Models/Admin/pet.php" />
-        <option value="$PROJECT_DIR$/routes/web.php" />
-        <option value="$PROJECT_DIR$/resources/views/admin/goods/create.blade.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2018_10_16_104629_create_admin_role_auth_model.php" />
         <option value="$PROJECT_DIR$/database/migrations/2018_10_16_162502_create_user_address_model.php" />
         <option value="$PROJECT_DIR$/database/migrations/2018_12_10_153438_create_appointment_table.php" />
-        <option value="$PROJECT_DIR$/resources/views/admin/appointment/create.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/AppointmentController.php" />
+        <option value="$PROJECT_DIR$/routes/web.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/模板/index.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/appointment/create.blade.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2018_10_16_104629_create_admin_role_auth_model.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/模板/create.blade.php" />
+        <option value="$PROJECT_DIR$/app/Models/Admin/Pet.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/UserController.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2018_10_16_113753_create_pet_table.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/goods/create.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/pet/create.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/PetController.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/pet/index.blade.php" />
       </list>
     </option>
   </component>
@@ -290,6 +400,8 @@
       <path value="$PROJECT_DIR$/vendor/intervention/image" />
       <path value="$PROJECT_DIR$/vendor/guzzlehttp/psr7" />
       <path value="$PROJECT_DIR$/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/vendor/symfony/contracts" />
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
@@ -353,13 +465,6 @@
             <path>
               <item name="pet" type="b2602c69:ProjectViewProjectNode" />
               <item name="pet" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Models" type="462c0819:PsiDirectoryNode" />
-              <item name="Admin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="pet" type="b2602c69:ProjectViewProjectNode" />
-              <item name="pet" type="462c0819:PsiDirectoryNode" />
               <item name="database" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -393,6 +498,22 @@
               <item name="views" type="462c0819:PsiDirectoryNode" />
               <item name="admin" type="462c0819:PsiDirectoryNode" />
               <item name="goods" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pet" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="pet" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pet" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="模板" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -487,7 +608,7 @@
       <workItem from="1544490657817" duration="24481000" />
       <workItem from="1544576411280" duration="3457000" />
       <workItem from="1544580667153" duration="6322000" />
-      <workItem from="1544663566145" duration="25000" />
+      <workItem from="1544663566145" duration="9773000" />
     </task>
     <task id="LOCAL-00001" summary="登陆定位">
       <created>1541747557847</created>
@@ -675,7 +796,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="511461000" />
+    <option name="totallyTimeSpent" value="521209000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -724,27 +845,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/inn/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2460">
-          <caret line="240" column="110" selection-start-line="240" selection-start-column="110" selection-end-line="240" selection-end-column="110" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/Admin/Inn.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="18" column="74" lean-forward="true" selection-start-line="18" selection-start-column="74" selection-end-line="18" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/role/create.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="31" column="18" lean-forward="true" selection-start-line="31" selection-start-column="18" selection-end-line="31" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AuthController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="846">
@@ -753,11 +853,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/GoodsBrandController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-29" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/GoodsAttrController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-29" />
       </provider>
@@ -771,13 +866,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
           <caret line="11" column="10" selection-start-line="11" selection-start-column="10" selection-end-line="11" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/InnRoomController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="931">
-          <caret line="148" column="64" lean-forward="true" selection-start-line="148" selection-start-column="64" selection-end-line="148" selection-end-column="64" />
         </state>
       </provider>
     </entry>
@@ -795,24 +883,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/模板/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3331">
-          <caret line="196" column="48" lean-forward="true" selection-start-line="196" selection-start-column="48" selection-end-line="196" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Database/Schema/Blueprint.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="10" column="6" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2018_10_16_152446_create_inn_model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-300">
-          <caret line="3" column="36" lean-forward="true" selection-start-line="3" selection-start-column="36" selection-end-line="3" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -852,13 +926,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/inn/create.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="512">
-          <caret line="243" column="41" selection-start-line="243" selection-start-column="41" selection-end-line="243" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/goods_type/show.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="682">
@@ -894,31 +961,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2018_10_16_154819_create_goods_model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="571">
-          <caret line="88" column="85" selection-start-line="88" selection-start-column="85" selection-end-line="88" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/GoodsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-807">
-          <caret line="52" column="59" lean-forward="true" selection-start-line="52" selection-start-column="59" selection-end-line="52" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/inn_room/create.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-820">
           <caret line="51" column="22" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/模板/create.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="32" column="67" lean-forward="true" selection-start-line="32" selection-start-column="67" selection-end-line="32" selection-end-column="67" />
         </state>
       </provider>
     </entry>
@@ -978,20 +1024,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/Admin/Pet.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="9" column="41" lean-forward="true" selection-start-line="9" selection-start-column="41" selection-end-line="9" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/auth/edit.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2880">
@@ -999,17 +1031,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/web.php">
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AppointmentController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="700">
-          <caret line="44" column="60" selection-start-line="44" selection-start-column="60" selection-end-line="44" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/UserController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="139" column="46" selection-start-line="139" selection-start-column="39" selection-end-line="139" selection-end-column="46" />
+        <state relative-caret-position="171">
+          <caret line="43" column="82" selection-start-line="43" selection-start-column="82" selection-end-line="43" selection-end-column="82" />
+          <folding>
+            <element signature="e#46#79#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1020,55 +1048,172 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/goods/create.blade.php">
+    <entry file="file://$PROJECT_DIR$/database/migrations/2018_12_10_153438_create_appointment_table.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2711">
-          <caret line="361" column="42" selection-start-line="361" selection-start-column="42" selection-end-line="361" selection-end-column="42" />
+        <state relative-caret-position="191">
+          <caret line="22" column="58" selection-start-line="22" selection-start-column="58" selection-end-line="22" selection-end-column="58" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2018_10_16_162502_create_user_address_model.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/模板/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="28" column="79" selection-start-line="28" selection-start-column="79" selection-end-line="28" selection-end-column="79" />
+        <state relative-caret-position="287">
+          <caret line="138" column="52" selection-start-line="138" selection-start-column="42" selection-end-line="138" selection-end-column="52" />
+          <folding>
+            <element signature="n#style#0;n#font#0;n#button#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#font#0;n#button#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#font#0;n#button#2;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#font#0;n#button#3;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2018_10_16_154819_create_goods_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="631">
+          <caret line="88" column="85" selection-start-line="88" selection-start-column="85" selection-end-line="88" selection-end-column="85" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2018_10_16_104629_create_admin_role_auth_model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="60" column="64" selection-start-line="60" selection-start-column="64" selection-end-line="60" selection-end-column="64" />
+        <state relative-caret-position="91">
+          <caret line="85" column="53" lean-forward="true" selection-start-line="85" selection-start-column="53" selection-end-line="85" selection-end-column="53" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2018_12_10_153438_create_appointment_table.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/inn/create.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="22" column="58" selection-start-line="22" selection-start-column="58" selection-end-line="22" selection-end-column="58" />
+        <state relative-caret-position="-1174">
+          <caret line="27" column="18" lean-forward="true" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/模板/create.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="16" column="90" selection-start-line="16" selection-start-column="90" selection-end-line="16" selection-end-column="90" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AdminController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="69" column="51" lean-forward="true" selection-start-line="69" selection-start-column="51" selection-end-line="69" selection-end-column="51" />
+          <folding>
+            <element signature="e#46#73#0#PHP" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/UserController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="651">
+          <caret line="152" column="19" selection-start-line="152" selection-start-column="19" selection-end-line="152" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2018_10_16_162502_create_user_address_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="111">
+          <caret line="28" column="79" selection-start-line="28" selection-start-column="79" selection-end-line="28" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/Admin/Pet.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="12" column="52" selection-start-line="12" selection-start-column="52" selection-end-line="12" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="61" selection-start-line="61" selection-end-line="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/InnRoomController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1415">
+          <caret line="148" column="64" lean-forward="true" selection-start-line="148" selection-start-column="64" selection-end-line="148" selection-end-column="64" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/appointment/create.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="25" column="33" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
+        <state relative-caret-position="240">
+          <caret line="27" column="22" lean-forward="true" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AppointmentController.php">
+    <entry file="file://$PROJECT_DIR$/database/migrations/2018_10_16_152446_create_inn_model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="760">
-          <caret line="43" column="82" selection-start-line="43" selection-start-column="82" selection-end-line="43" selection-end-column="82" />
+        <state relative-caret-position="460">
+          <caret line="40" column="92" selection-start-line="40" selection-start-column="92" selection-end-line="40" selection-end-column="92" />
           <folding>
-            <element signature="e#46#79#0#PHP" expanded="true" />
+            <element signature="e#7#45#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/GoodsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2040">
+          <caret line="138" column="32" lean-forward="true" selection-start-line="138" selection-start-column="32" selection-end-line="138" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/GoodsAttrController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="67" column="9" selection-start-line="67" selection-start-column="9" selection-end-line="67" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/goods/create.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="851">
+          <caret line="439" column="9" selection-start-line="439" selection-start-column="9" selection-end-line="439" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/pet/create.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="411">
+          <caret line="27" column="68" selection-start-line="27" selection-start-column="68" selection-end-line="27" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/PetController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="431">
+          <caret line="89" column="28" selection-start-line="89" selection-start-column="28" selection-end-line="89" selection-end-column="28" />
+          <folding>
+            <element signature="e#46#71#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2018_10_16_113753_create_pet_table.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="23" column="74" lean-forward="true" selection-start-line="23" selection-start-column="74" selection-end-line="23" selection-end-column="74" />
+        <state relative-caret-position="540">
+          <caret line="29" column="74" selection-start-line="29" selection-start-column="72" selection-end-line="29" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/pet/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="436">
+          <caret line="65" column="50" selection-start-line="65" selection-start-column="50" selection-end-line="65" selection-end-column="50" />
+          <folding>
+            <element signature="n#style#0;n#font#0;n#button#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#font#0;n#button#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#font#0;n#button#2;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#font#0;n#button#3;n#div#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

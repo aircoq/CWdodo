@@ -150,7 +150,7 @@ class UserController extends Controller
             'nickname.alpha_num' => '用户长度为5到12位的英文、数字组成',
             'nickname.between' => '用户长度为5到12位的英文、数字组成',
             'nickname.unique' => '用户名重复',
-            'sex.integer' => '性别格式不合法',
+            'sex.in' => '性别格式不合法',
             'phone.required' => '手机号码不能为空',
             'phone.unique' => '此号码已存在，请勿重复申请',
             'phone.regex' => '手机号码不正确',
@@ -171,16 +171,14 @@ class UserController extends Controller
         ];
         $validator = Validator::make( $data, $role, $message );
         if( $validator->fails() ){
-//            dump( $validator->messages()->first(),$data ); exit();// 获取一条错误信息
-            $request->flash();//保存当前数据到一次性session中
-            //返回上一页做提示！
+//            $request->flash();//保存当前数据到一次性session中
             return ['status' => "fail", 'msg' => $validator->messages()->first()];
         }
         // 数据调整
         $data['password'] = bcrypt($data['password']);
         //保存头像
         if( $request->hasFile('avatar') ){
-            $path = '/vatar/'.date('Y-m-d');
+            $path = '/avatar/'.date('Y-m-d');
             // store默认会帮我们把上传文件保存到 storage/app/public目录下
             $data['avatar'] = $data['avatar']->store( $path,'public');
         }

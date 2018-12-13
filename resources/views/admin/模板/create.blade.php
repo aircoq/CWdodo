@@ -14,7 +14,7 @@
     <div class="cl-sm-12">
         <!-- /.box-header -->
         <!-- form start -->
-        <form class="form-horizontal" id="form-table1" action="{{ url('admin/goods_type')  }}" method="post" enctype="multipart/form-data">
+        <form class="form-horizontal" id="form-table1" action="{{ url('admin/goods_type') }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="box-body">
                 <div class="form-group">

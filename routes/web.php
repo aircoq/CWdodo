@@ -39,6 +39,7 @@ Route::group(['prefix'=>'admin','middleware' => 'CheckAdminAuth','namespace' => 
     # 用户模块
     Route::resource('user','UserController');
     Route::post('/user/restore','UserController@re_store')->name('user.restore');//恢复用户
+    Route::resource('pet','PetController');//宠物管理
     # 门店管理模块
     Route::resource('inn','InnController');
     Route::post('/inn/restore','InnController@re_store')->name('inn.restore');//恢复门店

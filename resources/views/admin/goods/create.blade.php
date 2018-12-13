@@ -323,26 +323,6 @@
     <script src="{{ asset('bower_components/ckeditor/config.js')}}"></script>
     <script src="{{ asset('bower_components/ckeditor/lang/zh-cn.js')}}"></script>
     <script>
-        /** 上传图片时生成图片预览 */
-        function changepic(obj) {
-            var newsrc=getObjectURL(obj.files[0]);
-            console.log(obj.id);
-            $(obj).siblings('font').remove();
-            $(obj).siblings('img').attr({"src":newsrc,height:200,width:200});
-        }
-        //建立一个可存取到file的url
-        function getObjectURL(file) {
-            var url = null ;
-            // 针对不同浏览器获得url的方法
-            if (window.createObjectURL!=undefined) { // basic
-                url = window.createObjectURL(file) ;
-            } else if (window.URL!=undefined) { // mozilla(firefox)
-                url = window.URL.createObjectURL(file) ;
-            } else if (window.webkitURL!=undefined) { // webkit or chrome
-                url = window.webkitURL.createObjectURL(file) ;
-            }
-            return url ;
-        }
         $(function(){
             /***时间插件*/
             $("input[name='promote_start_at']").datetimepicker({
@@ -438,5 +418,25 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+        /** 上传图片时生成图片预览 */
+        function changepic(obj) {
+            var newsrc=getObjectURL(obj.files[0]);
+            console.log(obj.id);
+            $(obj).siblings('font').remove();
+            $(obj).siblings('img').attr({"src":newsrc,height:200,width:200});
+        }
+        //建立一个可存取到file的url
+        function getObjectURL(file) {
+            var url = null ;
+            // 针对不同浏览器获得url的方法
+            if (window.createObjectURL!=undefined) { // basic
+                url = window.createObjectURL(file) ;
+            } else if (window.URL!=undefined) { // mozilla(firefox)
+                url = window.URL.createObjectURL(file) ;
+            } else if (window.webkitURL!=undefined) { // webkit or chrome
+                url = window.webkitURL.createObjectURL(file) ;
+            }
+            return url ;
+        }
     </script>
 @endsection
