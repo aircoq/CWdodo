@@ -58,7 +58,7 @@ class CreateAdminRoleAuthModel extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id')->comment('主键ID');
             $table->string('username',150)->coment('用户名');
-            $table->string('phone','15')->unique()->comment('手机');
+            $table->char('phone','11')->unique()->comment('手机');
             $table->string('email',150)->comment('邮箱');
             $table->string('password','255')->comment('登陆密码');
             //权限管理

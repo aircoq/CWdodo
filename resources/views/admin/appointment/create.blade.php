@@ -5,7 +5,7 @@
 @endsection
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('bower_components/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css')}}">
     <style>
         .error{color:red;}
     </style>
@@ -18,6 +18,14 @@
         <form class="form-horizontal" id="form-table1" action="{{ url('admin/appointment') }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="box-body">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">用户</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" style="width:70%;" name="user_id">
+                            <option value="1">用户1</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">宠物</label>
                     <div class="col-sm-10">
@@ -137,9 +145,9 @@
     <script type="text/javascript" src="{{ asset('plugins/layer/admin_layer.js')}}"></script>
     <script type="text/javascript" src="{{ asset('plugins/layer/admin_layer.js')}}"></script>
     <script type="text/javascript" src="{{ asset('plugins/jQueryUI/jquery.form.js')}}"></script>
-    <!-- bootstrap datepicker -->
-    <script src="{{ asset('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
-    <script src="{{ asset('bower_components/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js')}}"></script>
+    <!-- bootstrap datetimepicker -->
+    <script src="{{ asset('bower_components/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js')}}"></script>
+    <script src="{{ asset('bower_components/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js')}}"></script>
     <script>
         $(function(){
             /***编写省市县三级联动*/
@@ -200,7 +208,7 @@
             }
             xhr.send();
             /***时间插件*/
-            $("input[name='start_at']").datepicker({
+            $("input[name='start_at']").datetimepicker({
                 language: "zh-CN",
                 autoclose: true,//选中之后自动隐藏日期选择框
                 clearBtn: true,//清除按钮
@@ -208,7 +216,7 @@
                 todayHighlight: true,
                 format: "yyyy-mm-dd hh:ii"
             });
-            $("input[name='end_at']").datepicker({
+            $("input[name='end_at']").datetimepicker({
                 language: "zh-CN",
                 autoclose: true,//选中之后自动隐藏日期选择框
                 clearBtn: true,//清除按钮

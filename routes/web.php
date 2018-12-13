@@ -42,7 +42,9 @@ Route::group(['prefix'=>'admin','middleware' => 'CheckAdminAuth','namespace' => 
     # 门店管理模块
     Route::resource('inn','InnController');
     Route::post('/inn/restore','InnController@re_store')->name('inn.restore');//恢复门店
-    Route::resource('inn_room','InnRoomController');
+    Route::resource('inn_room','InnRoomController');//寄养房间管理
+    Route::resource('food','foodController');//寄养食品管理
+    Route::resource('appointment','AppointmentController');//预约管理
     # 商品模块
     Route::resource('goods_type','GoodsTypeController');//商品类型
     Route::post('goods/image_upload','GoodsController@uploadImage');
@@ -53,9 +55,7 @@ Route::group(['prefix'=>'admin','middleware' => 'CheckAdminAuth','namespace' => 
     Route::post('goods_category/restore','GoodsCategoryController@re_store')->name('goods_category.restore');
     Route::resource('goods_brand','GoodsBrandController');//商品品牌
     Route::resource('goods','GoodsController');//商品管理
-    Route::match(['get', 'post'],'del_rich_text','GoodsController@delRichText');//商品管理
-    Route::resource('food','foodController');//寄养食品管理
-    Route::resource('appointment','AppointmentController');//预约管理
+    Route::match(['get', 'post'],'del_rich_text','GoodsController@delRichText');//删除富文本
 });
 
 

@@ -6,7 +6,7 @@
 
 @section('css')
     <!-- bootstrap datepicker -->
-    <link rel="stylesheet" href="{{ asset('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('bower_components/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css')}}">
     <style>
         .ui-datepicker-today .ui-state-highlight{
             border: 1px solid #eee;
@@ -315,9 +315,9 @@
     <script type="text/javascript" src="{{ asset('plugins/layer/admin_layer.js')}}"></script>
     <script type="text/javascript" src="{{ asset('plugins/layer/admin_layer.js')}}"></script>
     <script type="text/javascript" src="{{ asset('plugins/jQueryUI/jquery.form.js')}}"></script>
-    <!-- bootstrap datepicker -->
-    <script src="{{ asset('bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
-    <script src="{{ asset('bower_components/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js')}}"></script>
+    <!-- bootstrap datetimepicker -->
+    <script src="{{ asset('bower_components/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js')}}"></script>
+    <script src="{{ asset('bower_components/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js')}}"></script>
     <!-- CK Editor -->
     <script src="{{ asset('bower_components/ckeditor/ckeditor.js')}}"></script>
     <script src="{{ asset('bower_components/ckeditor/config.js')}}"></script>
@@ -345,19 +345,21 @@
         }
         $(function(){
             /***时间插件*/
-            $("input[name='promote_start_at']").datepicker({
+            $("input[name='promote_start_at']").datetimepicker({
                 language: "zh-CN",
                 autoclose: true,//选中之后自动隐藏日期选择框
                 clearBtn: true,//清除按钮
                 todayBtn: true,//今日按钮
-                format: "yyyy-mm-dd"
+                todayHighlight: true,
+                format: "yyyy-mm-dd hh:ii"
             });
             $("input[name='promote_end_at']").datepicker({
                 language: "zh-CN",
                 autoclose: true,//选中之后自动隐藏日期选择框
                 clearBtn: true,//清除按钮
                 todayBtn: true,//今日按钮
-                format: "yyyy-mm-dd"
+                todayHighlight: true,
+                format: "yyyy-mm-dd hh:ii"
             });
             /***配置富文本编辑器*/
             CKEDITOR.replace('goods_desc',{//实例化插件
