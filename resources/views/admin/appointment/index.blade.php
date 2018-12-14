@@ -51,13 +51,31 @@
                                                 ID
                                             </th>
                                             <th class="sorting" tabindex="1">
-                                                预约订单号
+                                                预约时间
                                             </th>
                                             <th class="sorting td-manage" tabindex="2">
-                                                服务时间
+                                                服务类型
+                                            </th>
+                                            <th class="sorting" tabindex="3">
+                                                客户基本信息
+                                            </th>
+                                            <th class="sorting" tabindex="4">
+                                               接送地址
+                                            </th>
+                                            <th class="sorting" tabindex="5">
+                                                寄养信息
+                                            </th>
+                                            <th class="sorting" tabindex="6">
+                                                订单号
+                                            </th>
+                                            <th class="sorting" tabindex="7">
+                                                接管状态
+                                            </th>
+                                            <th class="sorting" tabindex="8">
+                                                接待者
                                             </th>
                                             <th class="sorting" tabindex="9">
-                                                服务类型
+                                                完成时间
                                             </th>
                                             <th class="sorting td-manage" tabindex="10">
                                                 操作
@@ -70,6 +88,12 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                             <td class="td-manage">do</td>
                                         </tr>
                                         </tbody>
@@ -79,13 +103,31 @@
                                                 ID
                                             </th>
                                             <th class="sorting">
-                                                商品类型名称
+                                                预约时间
                                             </th>
                                             <th class="sorting">
-                                                商品类型描述
+                                                服务类型
                                             </th>
                                             <th class="sorting">
-                                                删除时间
+                                                客户基本信息
+                                            </th>
+                                            <th class="sorting">
+                                                接送地址
+                                            </th>
+                                            <th class="sorting">
+                                                寄养信息
+                                            </th>
+                                            <th class="sorting">
+                                                订单号
+                                            </th>
+                                            <th class="sorting">
+                                                接管状态
+                                            </th>
+                                            <th class="sorting">
+                                                接待者
+                                            </th>
+                                            <th class="sorting">
+                                                完成时间
                                             </th>
                                             <th class="sorting td-manage">
                                                 操作
@@ -136,13 +178,19 @@
                     "orderable": false
                 }],
                 "ajax": {
-                    "url": "{{ url('admin/goods_type/') }}",// 服务端uri地址，显示数据的uri
+                    "url": "{{ url('admin/appointment/') }}",// 服务端uri地址，显示数据的uri
                     "type": "get",   // ajax 的http请求类型
                     'headers': { 'X-CSRF-TOKEN' : '{{ csrf_token() }}' },
                 },
                 'columns':[//按列显示从服务器端过来的数据
                     {'data':'id',"defaultContent": ""},
-                    {'data':'type_name',"defaultContent": ""},
+                    {'data':'',"defaultContent": ""},
+                    {'data':'',"defaultContent": ""},
+                    {'data':'',"defaultContent": ""},
+                    {'data':'',"defaultContent": ""},
+                    {'data':'',"defaultContent": ""},
+                    {'data':'',"defaultContent": ""},
+                    {'data':'',"defaultContent": ""},
                     {'data':'mark_up',"defaultContent": ""},
                     {'data':'deleted_at',"defaultContent": ""},
                     {'data':'b',"defaultContent": ""},
@@ -181,7 +229,7 @@
                     );
                     $(row).find('td:eq(-1)').html(
                         '<div class="btn-group">' +
-                        '<button type="button" class="btn btn-info" onclick="layer_show(' + '\'编辑\',\'/admin/goods_type/'+data.id+'/edit\',1200,800)" >' +
+                        '<button type="button" class="btn btn-info" onclick="layer_show(' + '\'编辑\',\'/admin/appointment/'+data.id+'/edit\',1200,800)" >' +
                         '<font style="vertical-align: inherit;">编辑</font>' +
                         '</button>'+
                         '<button type="button" class="btn btn-danger" onclick="do_del(this,\''+data.id+'\',\''+data.type_name+'\',1200,800)" >' +

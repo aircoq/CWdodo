@@ -17,6 +17,7 @@
         <!-- form start -->
         <form class="form-horizontal" id="form-table1" action="{{ url('admin/appointment') }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
+                <input type="hidden" name="from_way" value="web"/>
             <div class="box-body">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">用户</label>
@@ -214,7 +215,7 @@
                 clearBtn: true,//清除按钮
                 todayBtn: true,//今日按钮
                 todayHighlight: true,
-                format: "yyyy-mm-dd hh:ii"
+                format: "yyyy-mm-dd hh:ii",
             });
             $("input[name='end_at']").datetimepicker({
                 language: "zh-CN",

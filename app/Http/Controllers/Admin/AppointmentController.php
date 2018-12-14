@@ -14,11 +14,7 @@ class AppointmentController extends Controller
     public function index(Request $request,Appointment $appointment)
     {
         if ($request->ajax()) {
-            if(Auth::guard('admin')->user()->role_class == '*') {//管理员查看包括软删除的用户
-                $data =  $appointment->select('id','username','avatar','role_class','admin_status','agency_id','note','deleted_at')->withTrashed()->get();
-            }else{
-                $data =  $appointment->select('id','username','avatar','role_class','admin_status','agency_id','note','deleted_at')->get();
-            }
+            $data =  $appointment->select('id','appointment_number','appointment_type','user_id','user_name','sex', 'user_phone', 'pet_id','is_pickup','province','city','district','address','lat','lng','from_way','start_at','end_at','food_id','provider','appointment_status','mark_up','created_at','updated_at', 'deleted_at')->get();
             $cnt = count($data);
             $info = [
                 'draw' => $request->get('draw'),
@@ -54,7 +50,7 @@ class AppointmentController extends Controller
             'district' => 'nullable|required_if:is_pickup,1|string|between:2,15',
             'address' => 'nullable|required_if:is_pickup,1|string|between:3,35',
             'from_way' => 'nullable|string|between:0,50',
-            'start_at' => 'required|date',
+            'start_at' => 'required|date|after:now',
             'end_at' => 'nullable|required_if:appointment_type,0|date|after:start_at',
             'food_id' => 'nullable|required_if:appointment_type,0|exists:food,id',
             'mark_up' => 'nullable|string|between:0,200',
