@@ -9,8 +9,19 @@ use Illuminate\Support\Facades\Validator;
 
 class PetController extends Controller
 {
-    public function index()
+    public function index(Request $request,Pet $pet)
     {
+        if ($request->ajax()) {
+            $data =  $pet->select('id','user_id','pet_thump','male','pet_name','pet_category','varieties','height','weight','color','status','star','birthday','born_where','room_id','pet_desc','created_at','updated_at')->get();
+            $cnt = count($data);
+            $info = [
+                'draw' => $request->get('draw'),
+                'recordsTotal' => $cnt,
+                'recordsFiltered' => $cnt,
+                'data' => $data,
+            ];
+            return $info;
+        }
         return view('admin.pet.index');
     }
 
@@ -68,10 +79,11 @@ class PetController extends Controller
         }
         $tf = uploadPic('pet_thump','uploads/backend/pet/'.date('Ymd'));
         if($tf){
-            $goods_img[] = $tf;
+            $data['pet_thump'] = $tf;
         }else{
             return ['status' => "fail", 'msg' => '网络故障，图片上传失败'];
         }
+//        dump($data);die();
         $res = $pet->create($data);
         if ($res) {
             return ['status' => "success", 'msg' => '添加成功'];
@@ -108,7 +120,7 @@ class PetController extends Controller
             'birthday' => 'required|date',
             'born_where' => 'nullable|string|between:0,15',
             'room_id' => 'nullable|exists:inn_room,id',
-            'pet_thump'   => 'required|file|image|mimes:png,gif,jpeg,jpg|max:600|dimensions:width=800,height=800',
+            'pet_thump'   => 'nullable|file|image|mimes:png,gif,jpeg,jpg|max:600|dimensions:width=800,height=800',
             'pet_desc' => 'nullable|string|between:0,100',
         ];
         $message = [
@@ -125,7 +137,6 @@ class PetController extends Controller
             'birthday.date' => '生日格式不正确',
             'born_where.between' => '产物产地不能超过15个字节',
             'room_id.exists' => '房间不存在',
-            'pet_thump.required'      => '图片不能为空！',
             'pet_thump.file'      => '图片上传失败！',
             'pet_thump.image'     => '必须是图片格式！',
             'pet_thump.mimes'     => '图片格式不正确！',
@@ -138,11 +149,13 @@ class PetController extends Controller
         if( $validator->fails() ){
             return ['status' => "fail", 'msg' => $validator->messages()->first()];
         }
-        $tf = uploadPic('pet_thump','uploads/backend/pet/'.date('Ymd'));
-        if($tf){
-            $goods_img[] = $tf;
-        }else{
-            return ['status' => "fail", 'msg' => '网络故障，图片上传失败'];
+        if(!empty($data['pet_thump'])){
+            $tf = uploadPic('pet_thump','uploads/backend/pet/'.date('Ymd'));
+            if($tf){
+                $data['pet_thump'] = $tf;
+            }else{
+                return ['status' => "fail", 'msg' => '网络故障，图片上传失败'];
+            }
         }
         $res = $pet->update($data);
         if ($res) {
@@ -152,8 +165,14 @@ class PetController extends Controller
         }
     }
 
-    public function destroy($id)
+    public function destroy(Pet $pet)
     {
-        //
+        $res = $pet->delete();
+        if ($res) {
+            // 如果添加数据成功，则返回列表页
+            return ['status' => "success", 'msg' => '删除成功'];
+        }else{
+            return ['status' => 'fail', 'msg' => '删除失败'];
+        }
     }
 }

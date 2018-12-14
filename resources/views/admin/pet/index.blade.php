@@ -51,35 +51,36 @@
                                                 ID
                                             </th>
                                             <th class="sorting" tabindex="1">
+                                                图片
+                                            </th>
+                                            <th class="sorting" tabindex="2">
                                                 宠物昵称
                                             </th>
-                                            <th class="sorting td-manage" tabindex="2">
+                                            <th class="sorting" tabindex="3">
                                                 主人id
                                             </th>
-                                            <th class="sorting" tabindex="9">
+                                            <th class="sorting" tabindex="4">
                                                 寄养的房间
                                             </th>
-                                            <th class="sorting" tabindex="9">
+                                            <th class="sorting" tabindex="5">
                                                 宠物类型
                                             </th>
-                                            <th class="sorting" tabindex="9">
+                                            <th class="sorting" tabindex="6">
                                                 状态
                                             </th>
-                                            <th class="sorting" tabindex="9">
+                                            <th class="sorting" tabindex="7">
                                                 宠物出生日
                                             </th>
-                                            <th class="sorting" tabindex="9">
+                                            <th class="sorting" tabindex="8">
                                                 性别
                                             </th>
-
                                             <th class="sorting" tabindex="9">
-                                                寄养的房间
+                                                宠物品种
                                             </th>
-                                            <th class="sorting" tabindex="9">
-                                                寄养的房间
+                                            <th class="sorting" tabindex="10">
+                                                爱星
                                             </th>
-
-                                            <th class="sorting td-manage" tabindex="10">
+                                            <th class="sorting td-manage" tabindex="11">
                                                 操作
                                             </th>
                                         </tr>
@@ -87,6 +88,13 @@
                                         <tbody>
                                         <tr role="row">
                                             <td class="sorting_1">id</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>
@@ -99,13 +107,34 @@
                                                 ID
                                             </th>
                                             <th class="sorting">
-                                                商品类型名称
+                                                图片
                                             </th>
                                             <th class="sorting">
-                                                商品类型描述
+                                                宠物昵称
                                             </th>
                                             <th class="sorting">
-                                                删除时间
+                                                主人id
+                                            </th>
+                                            <th class="sorting">
+                                                寄养的房间
+                                            </th>
+                                            <th class="sorting">
+                                                宠物类型
+                                            </th>
+                                            <th class="sorting">
+                                                状态
+                                            </th>
+                                            <th class="sorting">
+                                                宠物出生日
+                                            </th>
+                                            <th class="sorting">
+                                                性别
+                                            </th>
+                                            <th class="sorting">
+                                                宠物品种
+                                            </th>
+                                            <th class="sorting">
+                                                爱星
                                             </th>
                                             <th class="sorting td-manage">
                                                 操作
@@ -162,9 +191,16 @@
                 },
                 'columns':[//按列显示从服务器端过来的数据
                     {'data':'id',"defaultContent": ""},
-                    {'data':'type_name',"defaultContent": ""},
-                    {'data':'mark_up',"defaultContent": ""},
-                    {'data':'deleted_at',"defaultContent": ""},
+                    {'data':'',"defaultContent": ""},
+                    {'data':'pet_name',"defaultContent": ""},
+                    {'data':'user_id',"defaultContent": ""},
+                    {'data':'room_id',"defaultContent": ""},
+                    {'data':'pet_category',"defaultContent": ""},
+                    {'data':'status',"defaultContent": ""},
+                    {'data':'birthday',"defaultContent": ""},
+                    {'data':'male',"defaultContent": ""},
+                    {'data':'varieties',"defaultContent": ""},
+                    {'data':'star',"defaultContent": ""},
                     {'data':'b',"defaultContent": ""},
                 ],
                 language: {//汉化显示
@@ -201,17 +237,11 @@
                     );
                     $(row).find('td:eq(-1)').html(
                         '<div class="btn-group">' +
-                        '<button type="button" class="btn btn-info" onclick="layer_show(' + '\'查看属性\',\'/admin/pet/'+data.id+'\',1200,800)" >' +
-                        '<font style="vertical-align: inherit;">查看属性</font>' +
-                        '</button>'+
                         '<button type="button" class="btn btn-info" onclick="layer_show(' + '\'编辑\',\'/admin/pet/'+data.id+'/edit\',1200,800)" >' +
                         '<font style="vertical-align: inherit;">编辑</font>' +
                         '</button>'+
-                        '<button type="button" class="btn btn-danger" onclick="do_del(this,\''+data.id+'\',\''+data.type_name+'\',1200,800)" >' +
+                        '<button type="button" class="btn btn-danger" onclick="do_del(this,\''+data.id+'\',\''+data.pet_name+'\',1200,800)" >' +
                         '<font style="vertical-align: inherit;">删除</font>' +
-                        '</button>'+
-                        '<button type="button" class="btn btn-warning" onclick="re_store(this,\''+data.id+'\',\''+data.type_name+'\')">' +
-                        '<font style="vertical-align: inherit;">恢复</font>' +
                         '</button>'+
                         '</div>'
                     ).attr('class','td-manage');

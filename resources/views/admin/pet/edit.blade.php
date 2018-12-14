@@ -14,14 +14,15 @@
     <div class="cl-sm-12">
         <!-- /.box-header -->
         <!-- form start -->
-        <form class="form-horizontal" id="form-table1" action="{{ url('admin/pet') }}" method="post" enctype="multipart/form-data">
+        <form class="form-horizontal" id="form-table1" action="{{ url('admin/pet/'.$pet->id) }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
+            {{ method_field('put') }}
             <div class="box-body">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">宠物相片</label>
                     <div class="col-sm-10">
                         <input type="file" accept="image/png, image/jpeg, image/gif, image/jpg" class="filepath" onchange="changepic(this)" name="pet_thump"/><font style="color: red">只能上传高宽各为800，不超过500K的图片</font><br>
-                        <img src=""/>
+                        <img src="{{ url('').'/'.$pet->pet_thump }}" height="200" width="200"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -35,13 +36,22 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">宠物名字</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="宠物名字" name="pet_name" id="pet_name"/>
+                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="宠物名字" name="pet_name" value="{{ $pet->pet_name }}"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">宠物类型</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" style="width:70%;" name="pet_category" >
+                            <option value="0" id="pet_category0">狗</option>
+                            <option value="1" id="pet_category1">猫</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">宠物生日</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="宠物生日" name="birthday"/>
+                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="宠物生日" name="birthday" value="{{ $pet->birthday }}"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -49,47 +59,38 @@
                     <div class="col-sm-10">
                         <div class="col-sm-4 radio">
                             <label>
-                                <input type="radio" name="male" value="0">否
+                                <input type="radio" name="male" value="0" id="male0">否
                             </label>
                         </div>
                         <div class="col-sm-6 radio">
                             <label>
-                                <input type="radio" name="male" value="1">是
+                                <input type="radio" name="male" value="1" id="male1">是
                             </label>
                         </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">宠物类型</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" style="width:70%;" name="pet_category" >
-                            <option id="age0" value="0">狗</option>
-                            <option id="age1" value="1">猫</option>
-                        </select>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">宠物品种</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="宠物名字" name="varieties" id="varieties"/>
+                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="宠物名字" name="varieties" value="{{ $pet->varieties }}"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">宠物身高</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="宠物身高" name="height"/>
+                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="宠物身高" name="height" value="{{ $pet->height }}"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">宠物体重</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="宠物体重" name="weight"/>
+                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="宠物体重" name="weight" value="{{ $pet->weight }}"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">色系</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="色系" name="color"/>
+                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="色系" name="color" value="{{ $pet->color }}"/>
                     </div>
                 </div>
                 <div class="form-group">
@@ -97,17 +98,17 @@
                     <div class="col-sm-10">
                         <div class="col-sm-2 radio">
                             <label>
-                                <input type="radio" name="status" value="-1">病态
+                                <input type="radio" name="status" value="-1" id="status-1">病态
                             </label>
                         </div>
                         <div class="col-sm-2 radio">
                             <label>
-                                <input type="radio" name="status" value="0">正常
+                                <input type="radio" name="status" value="0" id="status0">正常
                             </label>
                         </div>
                         <div class="col-sm-2 radio">
                             <label>
-                                <input type="radio" name="status" value="1">优秀
+                                <input type="radio" name="status" value="1" id="status1">优秀
                             </label>
                         </div>
                     </div>
@@ -115,19 +116,19 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">宠物爱心</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="宠物爱心（满星为10）" name="star"/>
+                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="宠物爱心（满星为10）" name="star" value="{{ $pet->star }}"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">宠物产地</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="宠物产地" name="born_where"/>
+                        <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="宠物产地" name="born_where" value="{{ $pet->born_where }}"/>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-sm-2 control-label">备注</label>
                     <div class="col-sm-10">
-                        <textarea class="textarea" style="width: 70%; height: 150px; font-size: 14px;" placeholder="备注" name="pet_desc"></textarea>
+                        <textarea class="textarea" style="width: 70%; height: 150px; font-size: 14px;" placeholder="备注" name="pet_desc">{{ $pet->pet_desc }}</textarea>
                     </div>
                 </div>
             </div>
@@ -153,12 +154,15 @@
     <script type="text/javascript" src="{{ asset('plugins/jQueryUI/jquery.form.js')}}"></script>
     <script>
         $(function(){
+            $('#pet_category{{$pet->pet_category}}').attr('selected','selected');
+            $('#male{{$pet->male}}').attr('checked','true');
+            $('#status{{$pet->status}}').attr('checked','true');
             /***编写Javascript表单验证区域*/
             $("#form-table1").validate({
                 rules:{//规则
-                    type_name:{
+                    pet_name:{
                         required:true,
-                        rangelength:[1,12]
+                        rangelength:[1,15]
                     },
                     mark_up:{
                         maxlength:200,

@@ -11,8 +11,23 @@ use Illuminate\Support\Facades\Validator;
 
 class AppointmentController extends Controller
 {
-    public function index()
+    public function index(Request $request,Appointment $appointment)
     {
+        if ($request->ajax()) {
+            if(Auth::guard('admin')->user()->role_class == '*') {//管理员查看包括软删除的用户
+                $data =  $appointment->select('id','username','avatar','role_class','admin_status','agency_id','note','deleted_at')->withTrashed()->get();
+            }else{
+                $data =  $appointment->select('id','username','avatar','role_class','admin_status','agency_id','note','deleted_at')->get();
+            }
+            $cnt = count($data);
+            $info = [
+                'draw' => $request->get('draw'),
+                'recordsTotal' => $cnt,
+                'recordsFiltered' => $cnt,
+                'data' => $data,
+            ];
+            return $info;
+        }
         return view('admin.appointment.index');
     }
 
@@ -134,8 +149,13 @@ class AppointmentController extends Controller
         $data = $request->only('appointment_type','user_id','user_name','sex', 'user_phone', 'pet_id','is_pickup','province','city','district','address','from_way','start_at','end_at','food_id','provider','appointment_status','mark_up');//'appointment_number','lat','lng',
     }
 
-    public function destroy($id)
+    public function destroy(Appointment $appointment)
     {
-        //
+        $res = $appointment->delete();
+        if ($res) {
+            return ['status' => "success", 'msg' => '删除成功'];
+        }else{
+            return ['status' => 'fail', 'msg' => '删除失败'];
+        }
     }
 }

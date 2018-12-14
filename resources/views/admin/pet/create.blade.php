@@ -39,6 +39,15 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="col-sm-2 control-label">宠物类型</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" style="width:70%;" name="pet_category" >
+                            <option id="age0" value="0">狗</option>
+                            <option id="age1" value="1">猫</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="col-sm-2 control-label">宠物生日</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" style="width:70%;display:inline;" placeholder="宠物生日" name="birthday"/>
@@ -57,15 +66,6 @@
                                 <input type="radio" name="male" value="1">是
                             </label>
                         </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">宠物类型</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" style="width:70%;" name="pet_category" >
-                            <option id="age0" value="0">狗</option>
-                            <option id="age1" value="1">猫</option>
-                        </select>
                     </div>
                 </div>
                 <div class="form-group">
