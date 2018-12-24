@@ -18,7 +18,6 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\UserRegistered' => [
             'App\Listeners\SendWelcomeMail',
-            'App\Listeners\SignUpForWeeklyNewsletter',
         ],
     ];
 

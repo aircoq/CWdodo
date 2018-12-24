@@ -7,25 +7,15 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
 
-class SendWelcomeMail implements ShouldQueue
+class SendWelcomeMail implements ShouldQueue//使用ShouldQueue队列发送执行事件
 {
     use InteractsWithQueue;//手动访问监听器下面队列任务的 delete 和 release 方法
-    /**
-     * Create the event listener.
-     *
-     * @return void
-     */
+
     public function __construct()
     {
         //
     }
 
-    /**
-     * Handle the event.
-     *
-     * @param  UserRegistered  $event
-     * @return void
-     */
     public function handle(UserRegistered $event)
     {
         $msg_data = '恭喜您注册成功！';

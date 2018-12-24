@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Admin\User;
+use App\Events\UserRegistered;
 
 class IndexController extends Controller
 {
