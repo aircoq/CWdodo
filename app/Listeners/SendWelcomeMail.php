@@ -28,10 +28,10 @@ class SendWelcomeMail implements ShouldQueue
      */
     public function handle(UserRegistered $event)
     {
-        $msg_data = '测试邮件123ddd';
+        $msg_data = '恭喜您注册成功！';
         $to = objArr($event->eloquent);
-        $data = ['msg_data' => $msg_data];//传给view文件的变量
-        $subject = '来自公司的测试邮件';
+        $data = ['msg_data' => $msg_data,'name' => $to['nickname']];//传给view文件的变量
+        $subject = '恭喜您注册成功！';
         Mail::send(
             'emails.test',//view下的blade文件用来显示邮件内容
             $data,

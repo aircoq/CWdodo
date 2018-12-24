@@ -73,8 +73,8 @@ class IndexController extends Controller
             }
             $res = $user->create($data);
             if ($res->id) {
+                event(new UserRegistered($res));
                 // 如果添加数据成功，则激发注册成功事件
-//            event(new UserRegistered($user));//用户注册成功事件
                 echo '注册成功';
 //            return redirect()->back()->withErrors(['error'=>'添加失败！']);
             }else{

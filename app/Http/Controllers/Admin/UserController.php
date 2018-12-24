@@ -12,11 +12,6 @@ use App\Events\UserRegistered;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request,User $user)
     {
         if ($request->ajax()) {
@@ -35,11 +30,6 @@ class UserController extends Controller
         return view('admin.user.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('admin.user.create');
@@ -77,54 +67,29 @@ class UserController extends Controller
         ];
         $validator = Validator::make( $data, $role, $message );
         if( $validator->fails() ){
-//            dump( $validator->messages()->first(),$data ); exit();// 获取一条错误信息
-            $request->flash();//保存当前数据到一次性session中
-            //返回上一页做提示！
             return ['status' => "fail", 'msg' => $validator->messages()->first()];
         }
         // 数据调整
         $data['password'] = bcrypt($data['password']);
         $res = $user->create($data);
-        event(new UserRegistered($res));
         if ($res->id) {
-            // 如果添加数据成功，则返回列表页
-//            return ['status' => "success", 'msg' => '添加成功'];
-            echo 123;
+            return ['status' => "success", 'msg' => '添加成功'];
         }else{
             return ['status' => 'fail', 'msg' => '添加失败'];
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit(User $user)
     {
         $data['user'] = $user;
         return view('admin.user.edit',$data);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, User $user)
     {
         $data = $request->only('nickname','sex','phone','email','password','confirm_password','user_status','birthday','city','avatar','height','weight','note','accepted');
@@ -168,7 +133,6 @@ class UserController extends Controller
         ];
         $validator = Validator::make( $data, $role, $message );
         if( $validator->fails() ){
-//            $request->flash();//保存当前数据到一次性session中
             return ['status' => "fail", 'msg' => $validator->messages()->first()];
         }
         // 数据调整
@@ -182,9 +146,9 @@ class UserController extends Controller
         $res = $user->update($data);
         if ($res) {
             // 如果添加数据成功，则返回列表页
-            return ['status' => "success", 'msg' => '添加成功'];
+            return ['status' => "success", 'msg' => '更新成功'];
         }else{
-            return ['status' => 'fail', 'msg' => '添加失败'];
+            return ['status' => 'fail', 'msg' => '更新失败'];
         }
     }
 
