@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\Events\UserRegistered;
 
 class UserController extends Controller
 {
@@ -44,12 +45,6 @@ class UserController extends Controller
         return view('admin.user.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request,User $user)
     {
         $data = $request->only('nickname','phone','email','password','confirm_password','user_status','note','accepted');
@@ -90,9 +85,11 @@ class UserController extends Controller
         // 数据调整
         $data['password'] = bcrypt($data['password']);
         $res = $user->create($data);
+        event(new UserRegistered($res));
         if ($res->id) {
             // 如果添加数据成功，则返回列表页
-            return ['status' => "success", 'msg' => '添加成功'];
+//            return ['status' => "success", 'msg' => '添加成功'];
+            echo 123;
         }else{
             return ['status' => 'fail', 'msg' => '添加失败'];
         }

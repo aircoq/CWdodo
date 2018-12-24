@@ -16,6 +16,19 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\Event' => [
             'App\Listeners\EventListener',
         ],
+        'App\Events\UserRegistered' => [
+            'App\Listeners\SendWelcomeMail',
+            'App\Listeners\SignUpForWeeklyNewsletter',
+        ],
+    ];
+
+    /**
+     * 需要注册的订阅者类。
+     *
+     * @var array
+     */
+    protected $subscribe = [
+//        'App\Listeners\SignUpForWeeklyNewsletter',
     ];
 
     /**

@@ -26,8 +26,8 @@ class CreateAppointmentTable extends Migration
             $table->string('lat',30)->nullable()->comment('用户预约所在经度');
             $table->string('lng',30)->nullable()->comment('用户预约所在纬度');
             $table->string('from_way',30)->comment('预约途径');
-            $table->string('start_at',255)->nullable()->comment('预约开始时间（时间戳）');
-            $table->string('end_at',255)->nullable()->comment('预约服务结束时间（时间戳）    ');
+            $table->string('start_at',10)->nullable()->comment('预约开始时间（时间戳）');
+            $table->string('end_at',10)->nullable()->comment('预约服务结束时间（时间戳）');
             $table->unsignedInteger('food_id')->nullable()->comment('期间使用食品');
             $table->string('provider',30)->nullable()->comment('接待者');
             $table->enum('appointment_status',['0','1'])->comment('接管状态：0未完成；1完成');

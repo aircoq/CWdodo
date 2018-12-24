@@ -14,7 +14,9 @@ class AppointmentController extends Controller
     public function index(Request $request,Appointment $appointment)
     {
         if ($request->ajax()) {
-            $data =  $appointment->select('id','appointment_number','appointment_type','user_id','user_name','sex', 'user_phone', 'pet_id','is_pickup','province','city','district','address','lat','lng','from_way','start_at','end_at','food_id','provider','appointment_status','mark_up','created_at','updated_at', 'deleted_at')->get();
+            $data =  $appointment->select('id','appointment_number','appointment_type','user_id','user_name','sex', 'user_phone', 'pet_id','is_pickup','province','city','district','address','lat','lng','from_way','start_at','end_at','food_id','provider','appointment_status','mark_up','deleted_at')->get();
+            //格式化时间戳
+            dump(objArr($data));die();
             $cnt = count($data);
             $info = [
                 'draw' => $request->get('draw'),
@@ -105,12 +107,17 @@ class AppointmentController extends Controller
                 $pro = $get_adr_info['geocodes'][0]['province'];
                 $city = $get_adr_info['geocodes'][0]['city'];
                 $district = $get_adr_info['geocodes'][0]['district'];
-            }else{
+            }else{//不接送
                 return ['status' => "fail", 'msg' => '请求失败，请重新输入地址'];
             }
             if($data['province'] != $pro || $data['city'] != $city || $data['district'] != $district){//核对填写的地址
                 return ['status' => "fail", 'msg' => '地址填写有误，重新输入或联系客服'];
             }
+        }else{
+            unset($data['province']);
+            unset($data['city']);
+            unset($data['district']);
+            unset($data['address']);
         }
         # 生成预约编号 appointment_number
         $data['appointment_number'] =  date('Ymd').uniqid();
@@ -143,6 +150,7 @@ class AppointmentController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->only('appointment_type','user_id','user_name','sex', 'user_phone', 'pet_id','is_pickup','province','city','district','address','from_way','start_at','end_at','food_id','provider','appointment_status','mark_up');//'appointment_number','lat','lng',
+
     }
 
     public function destroy(Appointment $appointment)

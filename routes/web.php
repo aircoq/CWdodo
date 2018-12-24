@@ -65,10 +65,11 @@ Route::group(['prefix'=>'admin','middleware' => 'CheckAdminAuth','namespace' => 
 # 前台不需要登陆的页面
 Route::group(['namespace' => 'Home','prefix'=>'home'],function (){
     Route::match(['get', 'post'],'login','IndexController@login')->name('home.login');//登陆
-    Route::match(['get', 'post'],'avatar_upload','IndexController@avatar_upload');//用户上传头像
+    Route::match(['get', 'post'],'register','IndexController@register')->name('home.login');//用户注册
 });
 # 前台需要登陆的页面
 Route::group(['prefix'=>'home','middleware'=>'CheckUser','namespace' => 'Home'],function (){
-//        Route::match(['get', 'post'],'avatar_upload','IndexController@avatar_upload');//用户上传头像
+    Route::match(['get', 'post'],'avatar_upload','IndexController@avatar_upload');//用户上传头像
+
 });
 
