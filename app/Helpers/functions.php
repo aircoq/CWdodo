@@ -11,8 +11,8 @@ function getGaoMapInfo($address,$city=null){
     $gao_key = 'a7fd905b7c27f710443e0104dd87aa3b';
     $get_url = $map_url.'key='.$gao_key.'&address='.$address.'&output=json'.'&city='.$city;
     $adr_info = json_decode(file_get_contents($get_url),true);//转数组
-    if($adr_info['status'] == 1){
-        return $adr_info;
+    if($adr_info['status'] == 1){//请求成功
+            return $adr_info;//须要判断['count']
     }
     return false;
 }
@@ -87,14 +87,6 @@ function uploadPic($file, $new_path='uploads/default/',$new_name= null )
         return false;//不存在该文件
     }
 }
-
-
-
-
-
-
-
-
 /**
  * 在数据库中获取的数据 Collection 转数组
  * 就是这么吊！
@@ -103,4 +95,25 @@ function uploadPic($file, $new_path='uploads/default/',$new_name= null )
  */
 function objArr ($obj){
     return json_decode(json_encode($obj),true);
+}
+/**
+ *判断姓名是否全是中文
+ */
+function isAllChinese($str){
+    //新疆等少数民族可能有·
+    if(strpos($str,'·')){
+        //将·去掉，看看剩下的是不是都是中文
+        $str=str_replace("·",'',$str);
+        if(preg_match('/^[\x7f-\xff]+$/', $str)){
+            return true;//全是中文
+        }else{
+            return false;//不全是中文
+        }
+    }else{
+        if(preg_match('/^[\x7f-\xff]+$/', $str)){
+            return true;//全是中文
+        }else{
+            return false;//不全是中文
+        }
+    }
 }

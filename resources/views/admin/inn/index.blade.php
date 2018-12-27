@@ -68,10 +68,10 @@
                                             <th class="sorting" tabindex="5">
                                                 是否直营
                                             </th>
-                                            <th class="sorting" tabindex="6">
+                                            <th tabindex="6">
                                                 门店地址
                                             </th>
-                                            <th class="sorting" tabindex="7">
+                                            <th tabindex="7">
                                                 联系电话
                                             </th>
                                             <th class="sorting" tabindex="8">
@@ -80,7 +80,7 @@
                                             <th class="sorting" tabindex="9">
                                                 删除时间
                                             </th>
-                                            <th class="sorting td-manage" tabindex="10">
+                                            <th class="td-manage" tabindex="10">
                                                 操作
                                             </th>
                                         </tr>
@@ -238,8 +238,8 @@
                         null ? '<img src="{{ url('sys_img/user_avatar.png') }}" style="width: 40px;height: 40px;">' : '<img src="/'+ data.inn_logo +'" style="width: 40px;height: 40px;">'
                     );
                     $(row).find('td:eq(4)').html(
-                        data.inn_status==0 ? '<font style="vertical-align:inherit; color:green;">未审核</font>' :
-                            data.inn_status==1 ? '<font style="vertical-align:inherit; color:blue;">已通过</font>' :
+                        data.inn_status==0 ? '<font style="vertical-align:inherit; color:blue;">未审核</font>' :
+                            data.inn_status==1 ? '<font style="vertical-align:inherit; color:green;">已通过</font>' :
                                 data.inn_status==-1 ? '<font style="vertical-align:inherit; color:grey;">已停止</font>' :
                                     '<font style="vertical-align:inherit; color:red;">拒绝</font>'
                     );//z状态

@@ -102,8 +102,7 @@ class InnController extends Controller
         }
         //获取当前地址的高德信息
         $get_adr_info = getGaoMapInfo($data['inn_address'],$data['city']);
-
-        if($get_adr_info){
+        if($get_adr_info['count'] != 0){//可以查到该地址
             $lat_lng = explode(',',$get_adr_info['geocodes'][0]['location']);
             $data['lat'] = $lat_lng['0'];
             $data['lng'] = $lat_lng['1'];
@@ -112,7 +111,7 @@ class InnController extends Controller
             $data['district'] = $get_adr_info['geocodes'][0]['district'];
             $data['adcode'] = $get_adr_info['geocodes'][0]['adcode'];
         }else{
-            return ['status' => "fail", 'msg' => '请求失败，请重新输入地址'];
+            return ['status' => "fail", 'msg' => '不能识别该地址，请重新输入地址'];
         }
         $tf1 = uploadPic('inn_logo','uploads/backend/inn/logo/'.date('Ymd'));
         if($tf1){
@@ -239,7 +238,7 @@ class InnController extends Controller
         if(!empty($data['adcode'])){
             //获取当前地址的高德信息
             $get_adr_info = getGaoMapInfo($data['inn_address'],$data['city']);
-            if($get_adr_info){
+            if($get_adr_info['count'] != 0){
                 $lat_lng = explode(',',$get_adr_info['geocodes'][0]['location']);
                 $data['lat'] = $lat_lng['0'];
                 $data['lng'] = $lat_lng['1'];

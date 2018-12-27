@@ -44,9 +44,9 @@
                     <div class="col-sm-10">
                         <select class="form-control" style="width:70%;" name="appointment_type" id="appointment_type">
                                 <option value="0" selected>寄养</option>
-                                <option value="1">洗澡</option>
-                                <option value="2">美容</option>
-                                <option value="3">SPA</option>
+                                <option value="1">美容</option>
+                                <option value="2">洗澡</option>
+                                <option value="3">护理</option>
                         </select>
                     </div>
                 </div>

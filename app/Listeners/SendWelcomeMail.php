@@ -33,7 +33,19 @@ class SendWelcomeMail implements ShouldQueue//使用ShouldQueue队列发送执�
             echo '邮件发送失败';
         }
     }
+    /**
+     * 任务应该发送到的队列的连接的名称
+     *
+     * @var string|null
+     */
+//    public $connection = 'sqs';
 
+    /**
+     * 任务应该发送到的队列的名称
+     *
+     * @var string|null
+     */
+//    public $queue = 'listeners';
     /**
      * 处理失败队列
      */

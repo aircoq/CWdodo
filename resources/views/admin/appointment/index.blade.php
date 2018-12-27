@@ -47,37 +47,37 @@
                                     <table id="dataTables" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="dataTables_info" style="width:100%">
                                         <thead>
                                         <tr role="row">
-                                            <th class="sorting_asc" tabindex="0">
+                                            <th tabindex="0">
                                                 ID
                                             </th>
-                                            <th class="sorting" tabindex="1">
+                                            <th tabindex="1">
                                                 预约时间
                                             </th>
-                                            <th class="sorting td-manage" tabindex="2">
+                                            <th tabindex="2">
                                                 服务类型
                                             </th>
-                                            <th class="sorting" tabindex="3">
+                                            <th tabindex="3">
                                                 客户基本信息
                                             </th>
-                                            <th class="sorting" tabindex="4">
+                                            <th tabindex="4">
                                                接送地址
                                             </th>
-                                            <th class="sorting" tabindex="5">
+                                            <th tabindex="5">
                                                 寄养信息
                                             </th>
-                                            <th class="sorting" tabindex="6">
+                                            <th tabindex="6">
                                                 订单号
                                             </th>
-                                            <th class="sorting" tabindex="7">
+                                            <th tabindex="7">
                                                 接管状态
                                             </th>
-                                            <th class="sorting" tabindex="8">
+                                            <th tabindex="8">
                                                 接待者
                                             </th>
-                                            <th class="sorting" tabindex="9">
+                                            <th tabindex="9">
                                                 完成时间
                                             </th>
-                                            <th class="sorting td-manage" tabindex="10">
+                                            <th class="td-manage" tabindex="10">
                                                 操作
                                             </th>
                                         </tr>
@@ -99,37 +99,37 @@
                                         </tbody>
                                         <tfoot>
                                         <tr role="row">
-                                            <th class="sorting_asc">
+                                            <th>
                                                 ID
                                             </th>
-                                            <th class="sorting">
+                                            <th >
                                                 预约时间
                                             </th>
-                                            <th class="sorting">
+                                            <th>
                                                 服务类型
                                             </th>
-                                            <th class="sorting">
+                                            <th>
                                                 客户基本信息
                                             </th>
-                                            <th class="sorting">
+                                            <th>
                                                 接送地址
                                             </th>
-                                            <th class="sorting">
+                                            <th>
                                                 寄养信息
                                             </th>
-                                            <th class="sorting">
+                                            <th>
                                                 订单号
                                             </th>
-                                            <th class="sorting">
+                                            <th>
                                                 接管状态
                                             </th>
-                                            <th class="sorting">
+                                            <th>
                                                 接待者
                                             </th>
-                                            <th class="sorting">
+                                            <th>
                                                 完成时间
                                             </th>
-                                            <th class="sorting td-manage">
+                                            <th class="td-manage">
                                                 操作
                                             </th>
                                         </tr>
@@ -162,21 +162,20 @@
     <script type="text/javascript" src="{{ asset('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
     <script>
         $(function (){
+            /** 时间戳转换为普通日期格式  */
+            function getLocalTime(nS) {
+                return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
+            }
             /** database 插件  */
             $('#dataTables').DataTable({
                 "lengthMenu":[[10,20,50,-1],[10,20,50,'全部']],
                 'paging':true,//分页
                 'info':true,//分页辅助
                 'searching':true,//既时搜索
-                'ordering':true,//启用排序
-                "order": [[ 0, "desc" ]],//排序规则  默认下标为1的显示倒序
+                'ordering':false,//启用排序
                 "processing":true,//当表格在处理的时候（比如排序操作）是否显示“处理中...”
                 "stateSave":true,//是否开启状态保存,这样当终端用户重新加载这个页面的时候可以使用以前的设置
                 "serverSide": false,//是否开启服务端
-                "columnDefs": [{//设置不需要排序的字段
-                    "targets": [1,2,-1],
-                    "orderable": false
-                }],
                 "ajax": {
                     "url": "{{ url('admin/appointment/') }}",// 服务端uri地址，显示数据的uri
                     "type": "get",   // ajax 的http请求类型
@@ -184,15 +183,15 @@
                 },
                 'columns':[//按列显示从服务器端过来的数据
                     {'data':'id',"defaultContent": ""},
+                    {'data':'start_at',"defaultContent": ""},
                     {'data':'',"defaultContent": ""},
                     {'data':'',"defaultContent": ""},
                     {'data':'',"defaultContent": ""},
                     {'data':'',"defaultContent": ""},
+                    {'data':'appointment_number',"defaultContent": ""},
                     {'data':'',"defaultContent": ""},
-                    {'data':'',"defaultContent": ""},
-                    {'data':'',"defaultContent": ""},
-                    {'data':'mark_up',"defaultContent": ""},
-                    {'data':'deleted_at',"defaultContent": ""},
+                    {'data':'provider',"defaultContent": "N/A"},
+                    {'data':'deleted_at',"defaultContent": "N/A"},
                     {'data':'b',"defaultContent": ""},
                 ],
                 language: {//汉化显示
@@ -224,18 +223,34 @@
                     $('#coutent').html( cnt );
                     $(row).addClass('text-c');//居中
                     //操作
-                    $(row).find('td:eq(3)').html(
-
+                    $(row).find('td:eq(1)').html(
+                        getLocalTime(data.start_at)
                     );
+                    $(row).find('td:eq(2)').html(
+                        data.appointment_type == 0 ? '寄养' : data.appointment_type == 1 ? '美容' : data.appointment_type == 2 ? '洗澡' : '护理'
+                    );
+                    $(row).find('td:eq(3)').html(
+                        data.user_name + (data.sex==1?'先生':'女士') + data.user_phone
+                    );
+                    $(row).find('td:eq(4)').html(
+                        data.is_pickup ==1 ? (data.province+data.city+data.district+data.address) : '无需接送'
+                    );
+                    $(row).find('td:eq(5)').html(
+                        data.appointment_type ==0 ? ('至'+getLocalTime(data.end_at)) : 'N/A'
+                    );
+                    $(row).find('td:eq(7)').html(
+                        data.appointment_status ==0 ? '<font style="vertical-align:inherit; color:blue;">未完成</font>' : '已完成'
+                    );
+
                     $(row).find('td:eq(-1)').html(
                         '<div class="btn-group">' +
                         '<button type="button" class="btn btn-info" onclick="layer_show(' + '\'编辑\',\'/admin/appointment/'+data.id+'/edit\',1200,800)" >' +
                         '<font style="vertical-align: inherit;">编辑</font>' +
                         '</button>'+
-                        '<button type="button" class="btn btn-danger" onclick="do_del(this,\''+data.id+'\',\''+data.type_name+'\',1200,800)" >' +
-                        '<font style="vertical-align: inherit;">删除</font>' +
+                        '<button type="button" class="btn btn-danger" onclick="do_del(this,\''+data.id+'\',\''+'ID='+data.id+'\',1200,800)" >' +
+                        '<font style="vertical-align: inherit;">完成</font>' +
                         '</button>'+
-                        '<button type="button" class="btn btn-warning" onclick="re_store(this,\''+data.id+'\',\''+data.type_name+'\')">' +
+                        '<button type="button" class="btn btn-warning" onclick="re_store(this,\''+data.id+'\',\''+'ID='+data.id+'\')">' +
                         '<font style="vertical-align: inherit;">恢复</font>' +
                         '</button>'+
                         '</div>'
@@ -245,11 +260,13 @@
         });
         /*删除*/
         function do_del(obj,id,username){
-            layer.confirm('<font color="red" >危险！确定删除(<b>'+username+'<b/>)吗？</font>',function(index){
-                //此处请求后台程序，下方是成功后的前台处理……
+            layer.prompt({
+                title: '请签名确认订单('+username+')为已完成？'
+            }, function(val, index){
                 url = '/admin/appointment/'+ id;
                 data = {
                     '_token':'{{ csrf_token() }}',
+                    'provider':val,
                     '_method':'delete',
                 };
                 $.post(url,data,function (msg) {
