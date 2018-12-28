@@ -250,9 +250,6 @@
                         '<button type="button" class="btn btn-danger" onclick="do_del(this,\''+data.id+'\',\''+'ID='+data.id+'\',1200,800)" >' +
                         '<font style="vertical-align: inherit;">完成</font>' +
                         '</button>'+
-                        '<button type="button" class="btn btn-warning" onclick="re_store(this,\''+data.id+'\',\''+'ID='+data.id+'\')">' +
-                        '<font style="vertical-align: inherit;">恢复</font>' +
-                        '</button>'+
                         '</div>'
                     ).attr('class','td-manage');
                 }
@@ -261,7 +258,7 @@
         /*删除*/
         function do_del(obj,id,username){
             layer.prompt({
-                title: '请签名确认订单('+username+')为已完成？'
+                title: '请签名确认订单('+username+')为已完成'
             }, function(val, index){
                 url = '/admin/appointment/'+ id;
                 data = {
@@ -279,30 +276,6 @@
                         location.reload();
                         $(obj).parents('tr').remove();
                         layer.msg('删除成功',{icon:1,time:1000});
-                    }
-                });
-            });
-        }
-        /*恢复*/
-        function re_store(obj,id,username){
-            layer.confirm('确认要恢复当前(<font color="red" ><b>'+username+'<b/></font>)吗？',function(index){
-                //此处请求后台程序，下方是成功后的前台处理……
-                url = '/admin/appointment/restore';
-                data = {
-                    '_token':'{{ csrf_token()  }}',
-                    'id':id,
-                    '_method':'post',
-                };
-                $.post(url,data,function (msg) {
-                    if( msg.status != 'success' ){
-                        layer.alert(msg.msg,{
-                            icon:5,
-                            skin:'layer-ext-moon'
-                        })
-                    }else{
-                        location.reload();
-                        $(obj).parents('tr').remove();
-                        layer.msg(msg.msg,{icon:1,time:1000});
                     }
                 });
             });

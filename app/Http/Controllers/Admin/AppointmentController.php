@@ -142,9 +142,12 @@ class AppointmentController extends Controller
         //
     }
 
-    public function edit($id)
+    public function edit(Pet $pet,Food $food,Appointment $appointment)
     {
-        //
+        $data['pet'] = $pet->all();
+        $data['food'] = $food->all();
+        $data['appointment'] = $appointment;
+        return view('admin.appointment.edit',$data);
     }
 
     public function update(Request $request,Pet $pet, Appointment $appointment)
@@ -208,7 +211,7 @@ class AppointmentController extends Controller
             return ['status' => "fail", 'msg' => '请核对填写宠物信息是否正确'];
         }
         # 如果接送 生成坐标 核对填写的地址
-        if($data['is_pickup'] == 1){
+        if($data['is_pickup'] == 1 && (!empty($data['district']))){
             $get_adr_info = getGaoMapInfo($data['address'],$data['city']);
             if($get_adr_info['count'] != 0){
                 $lat_lng = explode(',',$get_adr_info['geocodes'][0]['location']);
