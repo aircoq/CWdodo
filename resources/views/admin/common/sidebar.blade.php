@@ -6,7 +6,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="<?php echo Auth::guard('admin')->user()->avatar ? url('').'/'.Auth::guard('admin')->user()->avatar : url('').'/'.'sys_img/user_avatar.png';?>" class="img-circle" alt="User Image">
+                <img src="<?php echo Auth::guard('admin')->user()->avatar ? url('').'/'.Auth::guard('admin')->user()->avatar : url('').'/'.'system_static_file/img/user_avatar.png';?>" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
                 <p>{{ Auth::guard('admin')->user()->username }}</p>

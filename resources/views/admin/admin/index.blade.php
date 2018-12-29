@@ -212,8 +212,7 @@
                         $('#coutent').html( cnt );
                         $(row).addClass('text-c');//居中
                         $(row).find('td:eq(2)').html(
-                            data.avatar ==
-                            null ? '<img src="{{ url('sys_img/user_avatar.png') }}" style="width: 50px;height: 40px;">' : '<img src="/'+ data.avatar +'" style="width: 50px;height: 40px;">'
+                            data.avatar == null ? '<img src="{{ url('system_static_file/img/user_avatar.png') }}" style="width: 50px;height: 40px;">' : '<img src="/'+ data.avatar +'" style="width: 50px;height: 40px;">'
                         );
                         $(row).find('td:eq(3)').html(data.deleted_at==null  ? '启用' : '禁用');//z状态
                         //操作
@@ -295,7 +294,7 @@
                         $(row).addClass('text-c');//居中
                         $(row).find('td:eq(2)').html(
                             data.avatar ==
-                            null ? '<img src="{{ url('sys_img/user_avatar.png') }}" style="width: 50px;height: 40px;">' : '<img src="/'+ data.avatar +'" style="width: 50px;height: 40px;">'
+                            null ? '<img src="{{ url('system_static_file/img/user_avatar.png') }}" style="width: 50px;height: 40px;">' : '<img src="/'+ data.avatar +'" style="width: 50px;height: 40px;">'
                         );
                         $(row).find('td:eq(3)').html(data.deleted_at==null  ? '启用' : '禁用');//z状态
                     }

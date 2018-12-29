@@ -16,7 +16,6 @@ class AppointmentController extends Controller
         if ($request->ajax()) {
             $data =  $appointment->select('id','appointment_number','appointment_type','user_id','user_name','sex', 'user_phone', 'pet_id','is_pickup','province','city','district','address','lat','lng','from_way','start_at','end_at','food_id','provider','appointment_status','mark_up','deleted_at')->orderBy('start_at','DESC')->withTrashed()->get();
             //格式化时间戳
-//            dump(objArr($data));die();
             $cnt = count($data);
             $info = [
                 'draw' => $request->get('draw'),

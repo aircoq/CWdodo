@@ -255,7 +255,7 @@
                 }
             });
         });
-        /*删除*/
+        /**完成订单（软删除）*/
         function do_del(obj,id,username){
             layer.prompt({
                 title: '请签名确认订单('+username+')为已完成'
@@ -280,5 +280,7 @@
                 });
             });
         }
+        /**新消息提醒*/
+
     </script>
 @endsection

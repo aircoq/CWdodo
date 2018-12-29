@@ -23,7 +23,7 @@
                     <label class="col-sm-3 control-label"></label>
                     <div class="col-sm-7">
                         <a href="javascript:;" onclick="layer_show('上传头像','{{ url('home/avatar_upload?id='.$user->id) }}','350','350')" id="a-admin-avatar">
-                            <img src="{{ url("$user->avatar" ? "$user->avatar" : 'sys_img/user_avatar.png') }}" style="width:15%;height:15%;display:flex;border-radius: 50%;align-items: center;justify-content:center;overflow: hidden;"/>
+                            <img src="{{ url("$user->avatar" ? "$user->avatar" : 'system_static_file/img/user_avatar.png') }}" style="width:15%;height:15%;display:flex;border-radius: 50%;align-items: center;justify-content:center;overflow: hidden;"/>
                         </a>
                     </div>
                 </div>
