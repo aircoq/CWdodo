@@ -19,6 +19,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\UserRegistered' => [
             'App\Listeners\SendWelcomeMail',
         ],
+        'App\Events\AppointmentCreated' => [//预约成功后
+            'App\Listeners\SendNotice',//新增预约订单提醒记录到rides队列（发送通知到商家）
+        ],
     ];
 
     /**

@@ -14,7 +14,7 @@ class AppointmentController extends Controller
     public function index(Request $request,Appointment $appointment)
     {
         if ($request->ajax()) {
-            $data =  $appointment->select('id','appointment_number','appointment_type','user_id','user_name','sex', 'user_phone', 'pet_id','is_pickup','province','city','district','address','lat','lng','from_way','start_at','end_at','food_id','provider','appointment_status','mark_up','deleted_at')->orderBy('start_at','DESC')->withTrashed()->get();
+            $data =  $appointment->select('id','appointment_number','appointment_type','user_id','user_name','sex', 'user_phone', 'pet_id','is_pickup','province','city','district','address','lat','lng','from_way','start_at','end_at','food_id','provider','appointment_status','mark_up','deleted_at')->orderBy('start_at','DESC')->withTrashed()->limit(1500)->get();
             //格式化时间戳
             $cnt = count($data);
             $info = [

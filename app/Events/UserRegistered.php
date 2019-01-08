@@ -24,6 +24,6 @@ class UserRegistered
 
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return new PrivateChannel('user_registered');//channel-name
     }
 }
