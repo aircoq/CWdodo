@@ -430,6 +430,7 @@ class ComposerStaticInit0423ec5facec0dde95fe37134f06c0e5
         'App\\Http\\Controllers\\Admin\\RoleController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/RoleController.php',
         'App\\Http\\Controllers\\Admin\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/UserController.php',
         'App\\Http\\Controllers\\Api\\BaseController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/BaseController.php',
+        'App\\Http\\Controllers\\Api\\IndexController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/IndexController.php',
         'App\\Http\\Controllers\\Api\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/UserController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\Home\\IndexController' => __DIR__ . '/../..' . '/app/Http/Controllers/Home/IndexController.php',

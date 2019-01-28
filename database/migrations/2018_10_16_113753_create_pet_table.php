@@ -20,7 +20,7 @@ class CreatePetTable extends Migration
             $table->string('pet_name',50)->nullable()->comment('宠物昵称');
             $table->unsignedInteger('user_id')->comment('主人id');
             $table->unsignedInteger('room_id')->nullable()->comment('寄养的房间');
-            $table->enum('pet_category',['0','1'])->comment('宠物类型：0狗；1猫');
+            $table->enum('pet_category',['0','1','2'])->comment('宠物类型：0其他；1狗；2猫');
             $table->date('birthday')->nullable()->comment('宠物出生日');
             $table->enum('male',['0','1'])->comment('性别:0母;1公');
             $table->string('varieties',50)->nullable()->comment('宠物品种');

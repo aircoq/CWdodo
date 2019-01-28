@@ -26,6 +26,7 @@ return array(
     'App\\Http\\Controllers\\Admin\\RoleController' => $baseDir . '/app/Http/Controllers/Admin/RoleController.php',
     'App\\Http\\Controllers\\Admin\\UserController' => $baseDir . '/app/Http/Controllers/Admin/UserController.php',
     'App\\Http\\Controllers\\Api\\BaseController' => $baseDir . '/app/Http/Controllers/Api/BaseController.php',
+    'App\\Http\\Controllers\\Api\\IndexController' => $baseDir . '/app/Http/Controllers/Api/IndexController.php',
     'App\\Http\\Controllers\\Api\\UserController' => $baseDir . '/app/Http/Controllers/Api/UserController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\Home\\IndexController' => $baseDir . '/app/Http/Controllers/Home/IndexController.php',
