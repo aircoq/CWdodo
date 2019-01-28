@@ -61,8 +61,9 @@ class CreateAdminRoleAuthModel extends Migration
             $table->char('phone','11')->unique()->comment('手机');
             $table->string('email',150)->comment('邮箱');
             $table->string('password','255')->comment('登陆密码');
+            $table->string('openid',250)->coment('微信openid');
             //权限管理
-            $table->enum('role_class',['*','0','1','2'])->default(0)->commemt('角色类型:*为超级管理员;0一般角色;1......');
+            $table->enum('role_class',['*','0','1','2'])->default(0)->commemt('角色类型:*为超级管理员;0一般角色;1单店商户......');
             $table->enum('admin_status',['-2','-1','0','1'])->default(0)->comment('-2拒绝;-1已停止;0未审核;1已审核');
             //社交
             $table->jsonb('friends_list')->nullable()->comment( '关注的好友,json格式' );

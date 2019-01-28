@@ -77,6 +77,7 @@ desired effect
         return this.href == url;
     }).parentsUntil(".sidebar-menu > .treeview-menu").siblings().removeClass('active').end().addClass('active');
 
+
 </script>
 @yield('script')
 <!--您可以选择添加Slimscroll和FastClick插件。推荐使用这两个插件来增强用户体验 -->
