@@ -18,7 +18,9 @@ class CreateUserAddressModel extends Migration
             //用户账号信息
             $table->engine = 'InnoDB';
             $table->increments('id')->comment('主键ID');
-            $table->char('phone',11)->unique()->comment('手机');
+            $table->string('openid',250)->comment('用户微信openid');
+            $table->string('session_key',255)->nullable()->comment('用户微信session_key');
+            $table->char('phone',11)->nullable()->unique()->comment('手机');
             $table->string('email',60)->nullable()->comment('邮箱');
             $table->string('password',255)->comment('密码');
             $table->string('remember_token', 60)->nullable()->comment('记住登录');

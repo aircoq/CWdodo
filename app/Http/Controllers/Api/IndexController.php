@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Admin\Service;
+use Dingo\Api\Http\Request;
 
 class IndexController extends BaseController
 {
@@ -24,10 +25,16 @@ class IndexController extends BaseController
         $data = json_encode($data,JSON_UNESCAPED_SLASHES);
         return $data;
     }
+   # 用户注册或登录
+//    public function login(Request $request)
+//    {
+//        $code = $request['code'];
+//        $json = 'https://api.weixin.qq.com/sns/jscode2session?appid='.'APPID'.'&secret='.'APPSECRET'.'&js_code='.$code.'&grant_type=authorization_code';
+//        $user_wx =  json_decode(file_get_contents($json), true);//{"session_key": "odMd5E1qJI5KJH7OTBVZYg==","expires_in": 7200,"openid": "oqMjq0BqLl6mRarbByCf9rOAc3k0"}
+//
+//    }
+
     # 添加查看编辑宠物信息
-
-
-
 
 
     # 发起预约服务
