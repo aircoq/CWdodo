@@ -126,6 +126,8 @@ class ServiceController extends Controller
             }else{
                 return ['status' => "fail", 'msg' => '图片添加失败'];
             }
+        }else{
+            unset($data['service_thumb']);
         }
         $tf = $service->update($data);
         if ($tf) {
@@ -164,58 +166,5 @@ class ServiceController extends Controller
                 return ['status' => 'fail', 'msg' => '恢复失败！'];
             }
         }
-    }
-    /** 富文本上传图片接口 */
-    public function uploadImage(Request $request)
-    {
-        $data = $request->only('upload');
-        $role = [
-            'upload' => 'required|file|image|mimes:png,gif,jpeg,jpg|max:1500',
-        ];
-        $message = [
-            'upload.mimes' => '缩略图格式为png,gif,jpeg,jpg',
-            'upload.max' => '缩略图不超过1.5m',
-        ];
-        $validator = Validator::make($data, $role, $message);
-        if ($validator->fails()) {
-            return ["uploaded" => "0", "error" => $validator->messages()->first()];
-        }
-        $tf = uploadPic('upload','uploads/backend/service_desc/rich_text/'.date('Y').'/'.date('md'));
-        if($tf){
-            $img_url = url("$tf");
-            return ["uploaded" => "1" , "fileName" => "$tf" ,"url" => "$img_url"];
-        }else{
-            return ["uploaded" => "0" , "error"=>[ "message"=>"上传失败"]];
-
-        }
-    }
-    /** 删除富文本残留 */
-    public function delRichText(Request $request)
-    {
-        #获取富文本中所有的图片的src属性
-        $text = $request['text'];
-        if(self::delRichTextImg($text)){
-            return 1;
-        }
-        return 0;
-    }
-    /** 删除富文本中的图片 */
-    private function delRichTextImg($text)
-    {
-        try{
-            preg_match_all('/<img[^>]*?src="([^"]*?)"[^>]*?>/i',$text,$match);
-            if(is_array($match)){
-                # 删除图片
-                foreach ($match[1] as $k){
-                    //转换成服务器本地路径
-                    $url_count = strlen(url('').'/');
-                    $img_url=substr_replace($k,"",0,$url_count);
-                    @unlink($img_url);
-                }
-            }
-        }catch(\Illuminate\Database\QueryException $ex){
-            return ['status' => 'fail', 'msg' => '删除失败！'];
-        }
-        return ['status' => "success", 'msg' => '删除成功'];
     }
 }
