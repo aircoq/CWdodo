@@ -58,6 +58,9 @@ Route::group(['prefix'=>'admin','middleware' => 'CheckAdminAuth','namespace' => 
     Route::resource('goods_brand','GoodsBrandController');//商品品牌
     Route::resource('goods','GoodsController');//商品管理
     Route::match(['get', 'post'],'del_rich_text','GoodsController@delRichText');//删除富文本
+    # 服务模块
+    Route::resource('service','ServiceController');//服务类商品
+    Route::post('service/restore','ServiceController@re_store')->name('service.restore');
 });
 
 

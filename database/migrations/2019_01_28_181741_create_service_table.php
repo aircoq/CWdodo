@@ -16,7 +16,7 @@ class CreateServiceTable extends Migration
         Schema::create('service', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id')->comment('主键ID');
-            $table->string('service_name', 50)->comment('商品名称');
+            $table->string('service_name', 50)->comment('服务名称');
             $table->enum('pet_category',['0','1','2'])->comment('适用宠物类型：0其他；1狗；2猫');
             $table->string('service_thumb', 200)->nullable()->comment('商品在前台显示的微缩图片，搜索的时候显示');
             $table->enum('is_on_sale',['0','1'])->comment('是否开放售卖：0否；1是');
