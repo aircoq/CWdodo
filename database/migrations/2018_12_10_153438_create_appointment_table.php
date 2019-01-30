@@ -35,7 +35,6 @@ class CreateAppointmentTable extends Migration
             $table->timestamps();//预约发起时间
             $table->softDeletes();//完成即软删除
             $table->foreign('user_id')->references('id')->on('user') ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('pet_id')->references('id')->on('pet') ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

@@ -92,9 +92,9 @@ class PetController extends Controller
         }
     }
 
-    public function show($id)
+    public function show(Pet $pet)
     {
-        //
+        return $pet;
     }
 
     public function edit(Pet $pet)
