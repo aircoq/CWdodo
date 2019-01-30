@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Admin\Appointment;
+use App\Models\Admin\Pet;
 use App\Models\Admin\Service;
 use Dingo\Api\Http\Request;
+use Illuminate\Foundation\Auth\User;
 
 class IndexController extends BaseController
 {
@@ -25,14 +28,34 @@ class IndexController extends BaseController
         $data = json_encode($data,JSON_UNESCAPED_SLASHES);
         return $data;
     }
-   # 用户注册或登录
-//    public function login(Request $request)
-//    {
-//        $code = $request['code'];
-//        $json = 'https://api.weixin.qq.com/sns/jscode2session?appid='.'APPID'.'&secret='.'APPSECRET'.'&js_code='.$code.'&grant_type=authorization_code';
-//        $user_wx =  json_decode(file_get_contents($json), true);//{"session_key": "odMd5E1qJI5KJH7OTBVZYg==","expires_in": 7200,"openid": "oqMjq0BqLl6mRarbByCf9rOAc3k0"}
-//
-//    }
+    # 我的订单（判断用户是否已绑定手机）
+    public function MyOrder(Request $request,Pet $pet,Appointment $appointment)
+    {
+        $data = $request->only('session_key','phone');
+        $role = [
+            'session_key' => 'required|string',
+        ];
+        $message = [
+            'session_key.required' => '用户数据有误',
+            'session_key.string' => '用户数据格式有误',
+        ];
+        $validator = Validator::make( $data, $role, $message );
+        if( $validator->fails() ){
+            return ['status' => "0", 'msg' => $validator->messages()->first()];
+        }
+        #获取当前用户信息
+        $user_now = $request->session()->get($data['session_key']);
+        if(empty($user_now['phone'])){
+            return ['status' => "0", 'msg' => '请先绑定手机'];
+        }else{
+            //查询该用户的昵称，当前的星球，该用户的宠物，我的所有订单（订单号，购买商品名称，所使用的宠物，单价，总价，订单状态，使用的优惠券名称）
+            $data['user'] = $user_now;
+            $data['my_pet'] = $pet->where('user_id',$user_now['id'])->get();
+            $data['my_order'] = $appointment->where('user_id',$user_now['id'])->get();
+            $data = json_encode($data,JSON_UNESCAPED_SLASHES);
+            return ['status' => "1", 'msg' => '绑定成功',"data" => $data];
+        }
+    }
 
     # 添加查看编辑宠物信息
 
@@ -67,7 +90,6 @@ class IndexController extends BaseController
             'user_name.between' => '用户长度为2到15位的英文、数字组成',
             'sex.in' => '性别格式不合法',
             'user_phone.required' => '手机号码不能为空',
-            'user_phone.unique' => '此号码已存在，请勿重复申请',
             'user_phone.digits' => '手机号码不正确',
             'pet_id.integer' => '宠物不存在',
             'is_pickup.in' => '是否接送不合法',
