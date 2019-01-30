@@ -22,7 +22,7 @@ class CreateUserAddressModel extends Migration
             $table->string('session_key',255)->nullable()->comment('用户微信session_key');
             $table->char('phone',11)->nullable()->unique()->comment('手机');
             $table->string('email',60)->nullable()->comment('邮箱');
-            $table->string('password',255)->comment('密码');
+            $table->string('password',255)->nullable()->comment('密码');
             $table->string('api_token', 60)->unique()->nullable()->comment('token认证');
             $table->string('remember_token', 60)->nullable()->comment('记住登录');
             $table->enum('user_status',['-2','-1','0','1'])->default(1)->comment('-2已停止;-1拒绝;0未审核;1已审核');

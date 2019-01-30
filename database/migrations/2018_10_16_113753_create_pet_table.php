@@ -30,7 +30,7 @@ class CreatePetTable extends Migration
             $table->enum('status',['-1','0','1'])->default(0)->comment('状态:-1病态；0正常；1优秀');
             $table->unsignedTinyInteger('star')->default(8)->comment('爱星：满星10星');
             $table->string('born_where')->nullable()->comment('宠物产地');
-            $table->string('pet_thump',255)->nullable()->comment('宠物头像');
+            $table->string('pet_thumb',255)->nullable()->comment('宠物头像');
             $table->text('pet_desc')->nullable()->comment('宠物描述');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('user') ->onUpdate('cascade')->onDelete('cascade');

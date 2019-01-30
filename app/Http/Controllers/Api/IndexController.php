@@ -6,7 +6,9 @@ use App\Models\Admin\Appointment;
 use App\Models\Admin\Pet;
 use App\Models\Admin\Service;
 use Dingo\Api\Http\Request;
-use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Facades\Validator;
+use Redis;
+use Illuminate\Support\Facades\URL;
 
 class IndexController extends BaseController
 {
@@ -16,7 +18,7 @@ class IndexController extends BaseController
         $data = $service->select('id','service_name','pet_category','service_thumb','market_price','shop_price')
             ->where('pet_category','1')->where('is_on_sale','1')
             ->get();
-        $data = json_encode($data,JSON_UNESCAPED_SLASHES);
+        $data = json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
         return $data;
     }
     # 查询猫服务
@@ -25,7 +27,7 @@ class IndexController extends BaseController
         $data = $service->select('id','service_name','pet_category','service_thumb','market_price','shop_price')
             ->where('pet_category','2')->where('is_on_sale','1')
             ->get();
-        $data = json_encode($data,JSON_UNESCAPED_SLASHES);
+        $data = json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
         return $data;
     }
     # 我的订单（判断用户是否已绑定手机）
@@ -44,16 +46,20 @@ class IndexController extends BaseController
             return ['status' => "0", 'msg' => $validator->messages()->first()];
         }
         #获取当前用户信息
-        $user_now = $request->session()->get($data['session_key']);
+        $user_now = Redis::get($data['session_key']);
+        $user_now = json_decode($user_now,true);
         if(empty($user_now['phone'])){
-            return ['status' => "0", 'msg' => '请先绑定手机'];
+            return ['status' => "2", 'msg' => '请先绑定手机'];
         }else{
             //查询该用户的昵称，当前的星球，该用户的宠物，我的所有订单（订单号，购买商品名称，所使用的宠物，单价，总价，订单状态，使用的优惠券名称）
-            $data['user'] = $user_now;
-            $data['my_pet'] = $pet->where('user_id',$user_now['id'])->get();
-            $data['my_order'] = $appointment->where('user_id',$user_now['id'])->get();
-            $data = json_encode($data,JSON_UNESCAPED_SLASHES);
-            return ['status' => "1", 'msg' => '绑定成功',"data" => $data];
+            $info['user']['id'] = $user_now['id'];
+            $info['user']['avatar'] = URL::previous().'/'.$user_now['avatar'];
+            $info['user']['nickname'] = $user_now['nickname'];
+            $info['user']['sex'] = $user_now['sex'];
+            $info['my_pet'] = $pet->select('pet_thumb','male','pet_name','pet_category','varieties','weight','birthday')->where('user_id',$user_now['id'])->get();
+            $info['my_order'] = $appointment->select('id','appointment_number','appointment_type','user_name','sex','user_phone','is_pickup','address','appointment_status','pet_name')->where('user_id',$user_now['id'])->get();
+            $res = json_encode(['status' => "1", 'msg' => '查询成功',"data" => $info], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+            return $res;
         }
     }
 

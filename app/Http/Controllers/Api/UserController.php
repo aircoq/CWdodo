@@ -4,14 +4,60 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Models\Admin\User;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Redis;
 
 class UserController extends BaseController
 {
     use ThrottlesLogins;
 
-    public function test(){
-        return ['你好',1,3,5];
+    public function test(Request $request){
+        $token_key = '123abcdef';
+        $user_now =[
+            "id" => 1,
+            "openid" => null,
+            "session_key" => null,
+            "phone" => null,
+            "email" => "email@qq.com",
+            "api_token" => null,
+            "remember_token" => null,
+            "user_status" => "1",
+            "integral" => null,
+            "frozen_integral" => null,
+            "user_money" => null,
+            "frozen_money" => null,
+            "credit_line" => null,
+            "cost_total" => null,
+            "nickname" => "你好2020",
+            "user_level" => 0,
+            "avatar" => "uploads/frontend/user_avatar/20181127/201811275bfcf0ab3e1cb.jpeg",
+            "sex" => "2",
+            "birthday" => null,
+            "city" => "深圳",
+            "height" => null,
+            "weight" => null,
+            "has_medal" => null,
+            "flag" => null,
+            "address_id" => null,
+            "qr_code" => null,
+            "parent_id" => null,
+            "zone_cate_id" => null,
+            "friends_list" => null,
+            "fans_list" => null,
+            "desc" => null,
+            "note" => null,
+            "question_answer" => null,
+            "last_ip" => "0",
+            "last_login" => null,
+            "created_at" => "2018-11-20 10:24:11",
+            "updated_at" => "2018-11-27 15:22:19",
+            "deleted_at" => null,
+        ];
+        $user_now = json_encode($user_now, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        Redis::set($token_key,$user_now);
+        $data = Redis::get($token_key);
+        dump($data);
     }
     # 注册或更新用户
     public function login(Request $request,User $user) {
@@ -30,8 +76,9 @@ class UserController extends BaseController
         }
         // 创建用户信息的key
         $token_key = md5(mt_rand() . $user_now['openid']);
-        $request->session()->put($token_key,$user_now);
-        return ['session_key' => $token_key ];//保存到微信端作登陆认证
+        $user_now = json_encode($user_now, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        Redis::set($token_key,$user_now);//保存到服务端作登陆认证
+        return ['session_key' => $token_key ];//保存到客户端作登陆认证
     }
     # CURL
     public function curlGet($url){
@@ -65,9 +112,12 @@ class UserController extends BaseController
             return ['status' => "0", 'msg' => $validator->messages()->first()];
         }
         #获取当前用户信息
-        $user_now = $request->session()->get($data['session_key']);
+        $user_now = Redis::get($data['session_key']);
+        $user_now = json_decode($user_now,true);
         $tf = $user->where('id',$user_now['id'])->update(['phone'=>$data['phone']]);
         if($tf){
+            $new_user_info = $user->where('id',$user_now['id'])->first();
+            Redis::set($data['session_key'],$new_user_info);
             return ['status' => "1", 'msg' => '绑定成功'];
         }else{
             return ['status' => "0", 'msg' => '绑定失败'];
