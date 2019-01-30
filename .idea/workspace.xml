@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5e34fc05-11b0-4cd3-8661-f499f1c56395" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Admin/Appointment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Admin/Appointment.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Admin/Pet.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Admin/Pet.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2018_10_16_113753_create_pet_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2018_10_16_113753_create_pet_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2018_10_16_162502_create_user_address_model.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2018_10_16_162502_create_user_address_model.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2018_12_10_153438_create_appointment_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2018_12_10_153438_create_appointment_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,7 +22,7 @@
         <entry file="file://$PROJECT_DIR$/routes/api.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="560">
-              <caret line="28" selection-start-line="28" selection-end-line="28" />
+              <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
             </state>
           </provider>
         </entry>
@@ -35,8 +30,8 @@
       <file leaf-file-name="IndexController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="447">
-              <caret line="59" column="116" selection-start-line="59" selection-start-column="116" selection-end-line="59" selection-end-column="116" />
+            <state relative-caret-position="122">
+              <caret line="123" column="27" lean-forward="true" selection-start-line="123" selection-start-column="27" selection-end-line="123" selection-end-column="27" />
               <folding>
                 <element signature="e#44#77#0#PHP" expanded="true" />
               </folding>
@@ -44,62 +39,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Appointment.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Models/Admin/Appointment.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="460">
-              <caret line="24" column="1" selection-start-line="24" selection-start-column="1" selection-end-line="24" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="2018_12_10_153438_create_appointment_table.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/database/migrations/2018_12_10_153438_create_appointment_table.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="19" column="66" selection-start-line="19" selection-start-column="66" selection-end-line="19" selection-end-column="66" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="2018_10_16_162502_create_user_address_model.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/database/migrations/2018_10_16_162502_create_user_address_model.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="640">
-              <caret line="43" column="78" selection-start-line="43" selection-start-column="78" selection-end-line="43" selection-end-column="78" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="2018_10_16_113753_create_pet_table.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/database/migrations/2018_10_16_113753_create_pet_table.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="19" column="71" selection-start-line="19" selection-start-column="71" selection-end-line="19" selection-end-column="71" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Service.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Models/Admin/Service.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="8" column="27" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
-              <folding>
-                <element signature="e#36#75#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/UserController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1200">
-              <caret line="60" column="5" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
-              <folding>
-                <element signature="e#44#72#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="240">
+              <caret line="14" column="96" selection-start-line="14" selection-start-column="73" selection-end-line="14" selection-end-column="96" />
             </state>
           </provider>
         </entry>
@@ -108,8 +52,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>filePicker</find>
-      <find>image_</find>
       <find>WU_FILE</find>
       <find>file</find>
       <find>changepic</find>
@@ -138,6 +80,8 @@
       <find>Redis::get</find>
       <find>json_encode</find>
       <find>user_id</find>
+      <find>$validator-&gt;fails()</find>
+      <find>food_id</find>
     </findStrings>
     <replaceStrings>
       <replace>user</replace>
@@ -206,12 +150,12 @@
         <option value="$PROJECT_DIR$/app/Models/Admin/Service.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/ServiceController.php" />
         <option value="$PROJECT_DIR$/database/migrations/2018_10_16_162502_create_user_address_model.php" />
-        <option value="$PROJECT_DIR$/routes/api.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Api/UserController.php" />
         <option value="$PROJECT_DIR$/database/migrations/2018_10_16_113753_create_pet_table.php" />
         <option value="$PROJECT_DIR$/app/Models/Admin/Pet.php" />
-        <option value="$PROJECT_DIR$/database/migrations/2018_12_10_153438_create_appointment_table.php" />
         <option value="$PROJECT_DIR$/app/Models/Admin/Appointment.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2018_12_10_153438_create_appointment_table.php" />
+        <option value="$PROJECT_DIR$/routes/api.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php" />
       </list>
     </option>
@@ -414,6 +358,17 @@
               <item name="Models" type="462c0819:PsiDirectoryNode" />
               <item name="Admin" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="pet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pet" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="pet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="pet" type="462c0819:PsiDirectoryNode" />
+              <item name="database" type="462c0819:PsiDirectoryNode" />
+              <item name="migrations" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -540,7 +495,7 @@
       <workItem from="1548665503189" duration="5937000" />
       <workItem from="1548766815217" duration="4732000" />
       <workItem from="1548772841542" duration="5421000" />
-      <workItem from="1548813663733" duration="15199000" />
+      <workItem from="1548813663733" duration="17249000" />
     </task>
     <task id="LOCAL-00001" summary="登陆定位">
       <created>1541747557847</created>
@@ -728,11 +683,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="670535000" />
+    <option name="totallyTimeSpent" value="672585000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32731137" />
@@ -817,13 +771,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/appointment/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1851">
-          <caret line="262" column="48" selection-start-line="262" selection-start-column="48" selection-end-line="262" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Events/UserRegistered.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
@@ -1092,24 +1039,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/api.php">
+    <entry file="file://$PROJECT_DIR$/app/Models/Admin/Pet.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="560">
-          <caret line="28" selection-start-line="28" selection-end-line="28" />
+        <state relative-caret-position="400">
+          <caret line="19" column="1" lean-forward="true" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
+          <folding>
+            <element signature="e#36#75#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2018_10_16_162502_create_user_address_model.php">
+    <entry file="file://$PROJECT_DIR$/routes/api.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="640">
-          <caret line="43" column="78" selection-start-line="43" selection-start-column="78" selection-end-line="43" selection-end-column="78" />
+        <state relative-caret-position="560">
+          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/UserController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1200">
-          <caret line="60" column="5" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
+        <state relative-caret-position="402">
+          <caret line="110" column="31" selection-start-line="110" selection-start-column="12" selection-end-line="110" selection-end-column="31" />
           <folding>
             <element signature="e#44#72#0#PHP" expanded="true" />
           </folding>
@@ -1128,18 +1078,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2018_10_16_113753_create_pet_table.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="19" column="71" selection-start-line="19" selection-start-column="71" selection-end-line="19" selection-end-column="71" />
+        <state relative-caret-position="400">
+          <caret line="22" column="12" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="82" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/Admin/Pet.php">
+    <entry file="file://$PROJECT_DIR$/database/migrations/2018_10_16_162502_create_user_address_model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="19" column="1" lean-forward="true" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
-          <folding>
-            <element signature="e#36#75#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="640">
+          <caret line="43" column="78" selection-start-line="43" selection-start-column="78" selection-end-line="43" selection-end-column="78" />
         </state>
       </provider>
     </entry>
@@ -1150,17 +1097,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/Admin/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="20" column="21" lean-forward="true" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2018_12_10_153438_create_appointment_table.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="19" column="66" selection-start-line="19" selection-start-column="66" selection-end-line="19" selection-end-column="66" />
+        <state relative-caret-position="240">
+          <caret line="14" column="96" selection-start-line="14" selection-start-column="73" selection-end-line="14" selection-end-column="96" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Api/IndexController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
-          <caret line="59" column="116" selection-start-line="59" selection-start-column="116" selection-end-line="59" selection-end-column="116" />
+        <state relative-caret-position="122">
+          <caret line="123" column="27" lean-forward="true" selection-start-line="123" selection-start-column="27" selection-end-line="123" selection-end-column="27" />
           <folding>
             <element signature="e#44#77#0#PHP" expanded="true" />
           </folding>
