@@ -27,8 +27,8 @@ class CreatePetTable extends Migration
             $table->unsignedTinyInteger('height')->nullable()->comment('宠物身高(cm)');
             $table->unsignedTinyInteger('weight')->nullable()->comment('体重(kg)');
             $table->string('color',7)->nullable()->comment('色系');
-            $table->enum('status',['-1','0','1'])->default(0)->comment('状态:-1病态；0正常；1优秀');
-            $table->unsignedTinyInteger('star')->default(8)->comment('爱星：满星10星');
+            $table->enum('status',['-1','0','1'])->nullable()->default(0)->comment('状态:-1病态；0正常；1优秀');
+            $table->unsignedTinyInteger('star')->nullable()->default(8)->comment('爱星：满星10星');
             $table->string('born_where')->nullable()->comment('宠物产地');
             $table->string('pet_thumb',255)->nullable()->comment('宠物头像');
             $table->text('pet_desc')->nullable()->comment('宠物描述');

@@ -51,33 +51,36 @@
                                                 ID
                                             </th>
                                             <th tabindex="1">
-                                                预约时间
+                                                宠物名称
                                             </th>
                                             <th tabindex="2">
-                                                服务类型
+                                                预约时间
                                             </th>
                                             <th tabindex="3">
-                                                客户基本信息
+                                                服务类型
                                             </th>
                                             <th tabindex="4">
-                                               接送地址
+                                                客户基本信息
                                             </th>
                                             <th tabindex="5">
-                                                寄养信息
+                                               接送地址
                                             </th>
                                             <th tabindex="6">
-                                                订单号
+                                                寄养信息
                                             </th>
                                             <th tabindex="7">
-                                                接管状态
+                                                订单号
                                             </th>
                                             <th tabindex="8">
-                                                接待者
+                                                接管状态
                                             </th>
                                             <th tabindex="9">
+                                                接待者
+                                            </th>
+                                            <th tabindex="10">
                                                 完成时间
                                             </th>
-                                            <th class="td-manage" tabindex="10">
+                                            <th class="td-manage" tabindex="11">
                                                 操作
                                             </th>
                                         </tr>
@@ -94,6 +97,7 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
+                                            <td></td>
                                             <td class="td-manage">do</td>
                                         </tr>
                                         </tbody>
@@ -101,6 +105,9 @@
                                         <tr role="row">
                                             <th>
                                                 ID
+                                            </th>
+                                            <th>
+                                                宠物名称
                                             </th>
                                             <th >
                                                 预约时间
@@ -183,6 +190,7 @@
                 },
                 'columns':[//按列显示从服务器端过来的数据
                     {'data':'id',"defaultContent": ""},
+                    {'data':'pet_name',"defaultContent": "暂无"},
                     {'data':'start_at',"defaultContent": ""},
                     {'data':'',"defaultContent": ""},
                     {'data':'',"defaultContent": ""},
@@ -223,22 +231,22 @@
                     $('#coutent').html( cnt );
                     $(row).addClass('text-c');//居中
                     //操作
-                    $(row).find('td:eq(1)').html(
+                    $(row).find('td:eq(2)').html(
                         getLocalTime(data.start_at)
                     );
-                    $(row).find('td:eq(2)').html(
+                    $(row).find('td:eq(3)').html(
                         data.appointment_type == 0 ? '寄养' : data.appointment_type == 1 ? '美容' : data.appointment_type == 2 ? '洗澡' : '护理'
                     );
-                    $(row).find('td:eq(3)').html(
+                    $(row).find('td:eq(4)').html(
                         data.user_name + (data.sex==1?'先生':'女士') + data.user_phone
                     );
-                    $(row).find('td:eq(4)').html(
+                    $(row).find('td:eq(5)').html(
                         data.is_pickup ==1 ? (data.province+data.city+data.district+data.address) : '无需接送'
                     );
-                    $(row).find('td:eq(5)').html(
+                    $(row).find('td:eq(6)').html(
                         data.appointment_type ==0 ? ('至'+getLocalTime(data.end_at)) : 'N/A'
                     );
-                    $(row).find('td:eq(7)').html(
+                    $(row).find('td:eq(8)').html(
                         data.appointment_status ==0 ? '<font style="vertical-align:inherit; color:blue;">未完成</font>' : '已完成'
                     );
 
