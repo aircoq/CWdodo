@@ -20,7 +20,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">宠物相片</label>
                     <div class="col-sm-10">
-                        <input type="file" accept="image/png, image/jpeg, image/gif, image/jpg" class="filepath" onchange="changepic(this)" name="pet_thump"/><font style="color: red">只能上传高宽各为800，不超过500K的图片</font><br>
+                        <input type="file" accept="image/png, image/jpeg, image/gif, image/jpg" class="filepath" onchange="changepic(this)" name="pet_thumb"/><font style="color: red">只能上传高宽各为800，不超过500K的图片</font><br>
                         <img src=""/>
                     </div>
                 </div>
@@ -174,7 +174,7 @@
                 },
                 submitHandler:function(form){
                     $(form).ajaxSubmit(function(msg){
-                        if( msg.status != 'success' ){
+                        if( msg.status != "1" ){
                             layer.alert(msg.msg, {
                                 icon: 5,
                                 skin: 'layer-ext-moon'

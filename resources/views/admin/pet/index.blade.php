@@ -19,12 +19,12 @@
             <!-- 内容页眉标题 -->
             <section class="content-header">
                 <h1>
-                    商品管理
-                    <small>商品类型</small>
+                    宠物管理
+                    <small>宠物列表</small>
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="{{ url('admin/index') }}"><i class="fa fa-dashboard"></i>系统首页</a></li>
-                    <li class="active">商品类型管理</li>
+                    <li class="active">宠物管理</li>
                 </ol>
             </section>
             <!-- 主要内容 -->
@@ -34,9 +34,9 @@
                 -------------------------->
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">商品类型表</h3>
+                        <h3 class="box-title">宠物列表</h3>
                         <a class="btn btn-box-tool btn-xs"  href="javascript:;" onclick="layer_show('添加','{{ url('admin/pet/create')  }}','1200','800')" id="a-admin-add">
-                            <font style="vertical-align:inherit; color:#3c8dbc;"><font style="font-size:14px;"><i class="fa fa-fw fa-plus"></i>新增类型</font></font>
+                            <font style="vertical-align:inherit; color:#3c8dbc;"><font style="font-size:14px;"><i class="fa fa-fw fa-plus"></i>新增宠物</font></font>
                         </a>
                     </div>
                     <!-- /.box-header -->
@@ -231,7 +231,9 @@
                     var cnt = data.recordsFiltered;//分页数据
                     $('#coutent').html( cnt );
                     $(row).addClass('text-c');//居中
-                    //操作
+                    $(row).find('td:eq(1)').html(
+                        data.pet_thumb == null  ? '<img src="{{ url('system_static_file/img/user_avatar.png') }}" style="width: 50px;height: 40px;">' : '<img src="/'+ data.pet_thumb +'" style="width: 50px;height: 40px;">'
+                    );
                     $(row).find('td:eq(3)').html(
 
                     );

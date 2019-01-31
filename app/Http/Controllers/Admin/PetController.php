@@ -6,13 +6,14 @@ use App\Models\Admin\Pet;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class PetController extends Controller
 {
-    public function index(Request $request,Pet $pet)
+    public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data =  $pet->select('id','user_id','pet_thump','male','pet_name','pet_category','varieties','height','weight','color','status','star','birthday','born_where','room_id','pet_desc','created_at','updated_at')->get();
+            $data =  DB::table('pet')->select('id','user_id','pet_thumb','male','pet_name','pet_category','varieties','height','weight','color','status','star','birthday','born_where','room_id','pet_desc','created_at','updated_at')->get();
             $cnt = count($data);
             $info = [
                 'draw' => $request->get('draw'),
@@ -32,9 +33,10 @@ class PetController extends Controller
 
     public function store(Request $request ,Pet $pet)
     {
-        $data = $request->only('user_id','pet_name','male','pet_category','varieties','height','weight','color','status','star','birthday','born_where','room_id','pet_thump','pet_desc');
+        $data = $request->only('session_key','user_id','pet_name','male','pet_category','varieties','height','weight','color','status','star','birthday','born_where','room_id','pet_thumb','pet_desc');
         $role = [
-            'user_id' => 'required|exists:user,id',
+            'session_key' => 'required_without:user_id|string',
+            'user_id' => 'required_without:session_key|exists:user,id',
             'pet_name' => 'required|string|between:2,12',
             'male' => 'required|in:0,1,2',
             'pet_category' => 'required|in:0,1,2',
@@ -47,7 +49,7 @@ class PetController extends Controller
             'birthday' => 'required|date',
             'born_where' => 'nullable|string|between:0,15',
             'room_id' => 'nullable|exists:inn_room,id',
-            'pet_thump'   => 'required|file|image|mimes:png,gif,jpeg,jpg|max:600|dimensions:width=800,height=800',
+            'pet_thumb'   => 'required|file|image|mimes:png,gif,jpeg,jpg|max:600|dimensions:width=800,height=800',
             'pet_desc' => 'nullable|string|between:0,100',
         ];
         $message = [
@@ -64,37 +66,43 @@ class PetController extends Controller
             'birthday.date' => '生日格式不正确',
             'born_where.between' => '产物产地不能超过15个字节',
             'room_id.exists' => '房间不存在',
-            'pet_thump.required'      => '图片不能为空！',
-            'pet_thump.file'      => '图片上传失败！',
-            'pet_thump.image'     => '必须是图片格式！',
-            'pet_thump.mimes'     => '图片格式不正确！',
-            'pet_thump.max'       => '图片最大500K',
-            'pet_thump.dimensions' => '图片宽高各为800',
+            'pet_thumb.required'      => '图片不能为空！',
+            'pet_thumb.file'      => '图片上传失败！',
+            'pet_thumb.image'     => '必须是图片格式！',
+            'pet_thumb.mimes'     => '图片格式不正确！',
+            'pet_thumb.max'       => '图片最大500K',
+            'pet_thumb.dimensions' => '图片宽高各为800',
             'pet_desc.string' => '描述不正确',
             'pet_desc.between' => '描述最大100个字节',
         ];
         $validator = Validator::make( $data, $role, $message );
         if( $validator->fails() ){
-            return ['status' => "fail", 'msg' => $validator->messages()->first()];
+            return ['status' => "0", 'msg' => $validator->messages()->first()];
         }
-        $tf = uploadPic('pet_thump','uploads/backend/pet/'.date('Ymd'));
+        $tf = uploadPic('pet_thumb','uploads/backend/pet/'.date('Ymd'));
         if($tf){
-            $data['pet_thump'] = $tf;
+            $data['pet_thumb'] = $tf;
         }else{
-            return ['status' => "fail", 'msg' => '网络故障，图片上传失败'];
+            return ['status' => "0", 'msg' => '网络故障，图片上传失败'];
         }
 //        dump($data);die();
         $res = $pet->create($data);
         if ($res) {
-            return ['status' => "success", 'msg' => '添加成功'];
+            return ['status' => "1", 'msg' => '添加成功'];
         }else{
-            return ['status' => 'fail', 'msg' => '添加失败'];
+            return ['status' => '0', 'msg' => '添加失败'];
         }
     }
 
-    public function show(Pet $pet)
+    public function show(Pet $pet,Request $request)
     {
-        return $pet;
+        $pet = $pet->where('id',$request['pet_id'])->first();
+        if(empty($pet)){
+            return ['status' => '0', 'msg' => '网络故障，稍后再试'];
+        }else{
+            return json_encode(['status' => "1", 'msg' => '查询成功',"data" => $pet], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+        }
+
     }
 
     public function edit(Pet $pet)
@@ -105,7 +113,7 @@ class PetController extends Controller
 
     public function update(Request $request, Pet $pet)
     {
-        $data = $request->only('user_id','pet_name','male','pet_category','varieties','height','weight','color','status','star','birthday','born_where','room_id','pet_thump','pet_desc');
+        $data = $request->only('user_id','pet_name','male','pet_category','varieties','height','weight','color','status','star','birthday','born_where','room_id','pet_thumb','pet_desc');
         $role = [
             'user_id' => 'required|exists:user,id',
             'pet_name' => 'required|string|between:2,12',
@@ -120,7 +128,7 @@ class PetController extends Controller
             'birthday' => 'required|date',
             'born_where' => 'nullable|string|between:0,15',
             'room_id' => 'nullable|exists:inn_room,id',
-            'pet_thump'   => 'nullable|file|image|mimes:png,gif,jpeg,jpg|max:600|dimensions:width=800,height=800',
+            'pet_thumb'   => 'nullable|file|image|mimes:png,gif,jpeg,jpg|max:600|dimensions:width=800,height=800',
             'pet_desc' => 'nullable|string|between:0,100',
         ];
         $message = [
@@ -137,11 +145,11 @@ class PetController extends Controller
             'birthday.date' => '生日格式不正确',
             'born_where.between' => '产物产地不能超过15个字节',
             'room_id.exists' => '房间不存在',
-            'pet_thump.file'      => '图片上传失败！',
-            'pet_thump.image'     => '必须是图片格式！',
-            'pet_thump.mimes'     => '图片格式不正确！',
-            'pet_thump.max'       => '图片最大500K',
-            'pet_thump.dimensions' => '图片宽高各为800',
+            'pet_thumb.file'      => '图片上传失败！',
+            'pet_thumb.image'     => '必须是图片格式！',
+            'pet_thumb.mimes'     => '图片格式不正确！',
+            'pet_thumb.max'       => '图片最大500K',
+            'pet_thumb.dimensions' => '图片宽高各为800',
             'pet_desc.string' => '描述不正确',
             'pet_desc.between' => '描述最大100个字节',
         ];
@@ -149,10 +157,10 @@ class PetController extends Controller
         if( $validator->fails() ){
             return ['status' => "fail", 'msg' => $validator->messages()->first()];
         }
-        if(!empty($data['pet_thump'])){
-            $tf = uploadPic('pet_thump','uploads/backend/pet/'.date('Ymd'));
+        if(!empty($data['pet_thumb'])){
+            $tf = uploadPic('pet_thumb','uploads/backend/pet/'.date('Ymd'));
             if($tf){
-                $data['pet_thump'] = $tf;
+                $data['pet_thumb'] = $tf;
             }else{
                 return ['status' => "fail", 'msg' => '网络故障，图片上传失败'];
             }

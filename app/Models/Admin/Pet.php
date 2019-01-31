@@ -3,7 +3,6 @@
 namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\URL;
 
 class Pet extends Model
 {
@@ -15,6 +14,8 @@ class Pet extends Model
     //定义图片查询事件
     public function getPetThumbAttribute()
     {
-        return URL::previous().'/'.$this->attributes['pet_thumb'];
+        if (!empty($this->attributes['pet_thumb'])){
+            return $_SERVER["HTTP_HOST"].'/'.$this->attributes['pet_thumb'];
+        }
     }
 }

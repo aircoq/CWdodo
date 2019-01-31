@@ -6,13 +6,14 @@ use App\Models\Admin\Service;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class ServiceController extends Controller
 {
-    public function index(Request $request, Service $service)
+    public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = $service->select('id','service_name','pet_category','service_thumb','is_on_sale','market_price','shop_price','sort_order','updated_at', 'deleted_at')->withTrashed()->get();
+            $data = DB::table('service')->select('id','service_name','pet_category','service_thumb','is_on_sale','market_price','shop_price','sort_order','updated_at', 'deleted_at')->get();
             $cnt = count($data);
             $info = [
                 'draw' => $request->get('draw'),

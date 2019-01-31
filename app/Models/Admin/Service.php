@@ -4,7 +4,6 @@ namespace App\Models\Admin;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\URL;
 
 class Service extends Model
 {
@@ -20,6 +19,8 @@ class Service extends Model
     //定义图片查询事件
     public function getServiceThumbAttribute()
     {
-        return URL::previous().'/'.$this->attributes['service_thumb'];
+        if (!empty($this->attributes['service_thumb'])) {
+            return $_SERVER["HTTP_HOST"].'/'.$this->attributes['service_thumb'];
+        }
     }
 }
