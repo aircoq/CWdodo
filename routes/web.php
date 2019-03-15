@@ -19,6 +19,7 @@ Route::any('/','Home\IndexController@index');//设置默认访问控制器方法
 /******    后台路由    **************************************************/
 # 后台不需要验证页面
 Route::group(['namespace' => 'Admin','prefix'=>'admin'],function (){
+//    Route::resource('admin','AdminController');
     Route::match(['get', 'post'],'login','IndexController@login')->name('admin.login');//后台登陆
     Route::get('logout','IndexController@logout')->name('logout.index');//后台登出
     Route::match(['get', 'post'],'err404','IndexController@err404')->name('admin.404');//404

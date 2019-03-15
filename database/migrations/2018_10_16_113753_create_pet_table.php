@@ -33,7 +33,6 @@ class CreatePetTable extends Migration
             $table->string('pet_thump',255)->nullable()->comment('宠物头像');
             $table->text('pet_desc')->nullable()->comment('宠物描述');
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('user') ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
