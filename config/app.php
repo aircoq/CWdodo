@@ -177,6 +177,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,//图片扩展包
+        Dingo\Api\Provider\LaravelServiceProvider::class,//api插件
 
     ],
 

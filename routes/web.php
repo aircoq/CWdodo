@@ -23,6 +23,7 @@ Route::group(['namespace' => 'Admin','prefix'=>'admin'],function (){
     Route::match(['get', 'post'],'login','IndexController@login')->name('admin.login');//后台登陆
     Route::get('logout','IndexController@logout')->name('logout.index');//后台登出
     Route::match(['get', 'post'],'err404','IndexController@err404')->name('admin.404');//404
+    Route::match(['get', 'post'],'order_notice','AppointmentController@order_notice');//预约订单声音提醒功能
 });
 # 后台需要验证权限页面
 Route::group(['prefix'=>'admin','middleware' => 'CheckAdminAuth','namespace' => 'Admin',],function (){//重置，无验证项
@@ -58,6 +59,9 @@ Route::group(['prefix'=>'admin','middleware' => 'CheckAdminAuth','namespace' => 
     Route::resource('goods_brand','GoodsBrandController');//商品品牌
     Route::resource('goods','GoodsController');//商品管理
     Route::match(['get', 'post'],'del_rich_text','GoodsController@delRichText');//删除富文本
+    # 服务模块
+    Route::resource('service','ServiceController');//服务类商品
+    Route::post('service/restore','ServiceController@re_store')->name('service.restore');
 });
 
 

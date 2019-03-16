@@ -75,16 +75,20 @@ function uploadPic($file, $new_path='uploads/default/',$new_name= null )
                     return $new_path.'/'.$new_file;
                 }else{
                     return false;//移动失败，系统故障
+//                    return 1;//移动失败，系统故障
                 }
             }else{
                 return false;//图片不是'jpeg','bmp','jpg','gif','gpeg','png'
+//                return 2;
             }
 
         }else{
             return false;//图片不合法
+//            return 3;
         }
     }else{
         return false;//不存在该文件
+//        return 4;
     }
 }
 /**

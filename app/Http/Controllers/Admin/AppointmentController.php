@@ -8,13 +8,15 @@ use App\Models\Admin\Pet;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redis;
+use App\Events\AppointmentCreated;
 
 class AppointmentController extends Controller
 {
     public function index(Request $request,Appointment $appointment)
     {
         if ($request->ajax()) {
-            $data =  $appointment->select('id','appointment_number','appointment_type','user_id','user_name','sex', 'user_phone', 'pet_id','is_pickup','province','city','district','address','lat','lng','from_way','start_at','end_at','food_id','provider','appointment_status','mark_up','deleted_at')->orderBy('start_at','DESC')->withTrashed()->limit(1500)->get();
+            $data =  $appointment->select('id','appointment_number','appointment_type','user_id','user_name','sex', 'user_phone', 'pet_name','is_pickup','province','city','district','address','lat','lng','from_way','start_at','end_at','food_id','provider','appointment_status','mark_up','deleted_at')->orderBy('start_at','DESC')->withTrashed()->limit(1500)->get();
             //格式化时间戳
             $cnt = count($data);
             $info = [
@@ -130,6 +132,7 @@ class AppointmentController extends Controller
         }
         $res = $appointment->create($data);
         if ($res) { // 如果添加数据成功，则返回列表页
+            event(new AppointmentCreated($res));
             return ['status' => "success", 'msg' => '预约成功'];
         }else{
             return ['status' => 'fail', 'msg' => '预约失败'];
@@ -265,4 +268,18 @@ class AppointmentController extends Controller
             return ['status' => 'fail', 'msg' => '输入错误，请正确填写您的姓名'];
         }
     }
+
+    /**
+     * 预约提醒
+     */
+    public function order_notice()
+    {
+        if (Redis::exists('appointment_order_notice')){
+            Redis::del('appointment_order_notice');
+            return ['status' => "success", 'status_code' => 1 ];//有新订单，发送提示音
+        }else{
+            return ['status' => "success", 'status_code' => 0 ];//有新订单，发送提示音
+        }
+    }
+
 }

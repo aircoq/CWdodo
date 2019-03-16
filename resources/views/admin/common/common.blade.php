@@ -21,8 +21,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect. -->
     <link rel="stylesheet" href="{{asset('dist/css/skins/skin-blue.min.css')}}">
-    @yield('css')
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+@yield('css')
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -84,7 +84,51 @@ desired effect
     $('ul.treeview-menu a').filter(function() {
         return this.href == url;
     }).parentsUntil(".sidebar-menu > .treeview-menu").siblings().removeClass('active').end().addClass('active');
+    /**新消息提醒*/
+    var role_class_now = "<?php echo(Auth::guard('admin')->user()->role_class); ?>";//当前用户role_class
+    if (role_class_now == '1') {//单店商户
+        var func = function (){
+            $.ajax({
+                type:'POST',
+                url:'{{ url('admin/order_notice') }}',
+                dataType:'json',
+                success:function(data){
+                    console.log(JSON.stringify(data));
+                    if(data.status_code == 1)
+                    {
+                        playSound();
+                    }
+                }
+            });
+        }
+        var playSound = function()
+        {
+            var borswer = window.navigator.userAgent.toLowerCase();
+            if ( borswer.indexOf( "ie" ) >= 0 )
+            {
+                //IE内核浏览器
+                var strEmbed = '<embed name="embedPlay" src="{{ url('system_static_file/sound/ding.wav') }}" autostart="true" hidden="true" loop="false"></embed>';
+                if ( $( "body" ).find( "embed" ).length <= 0 )
+                    $( "body" ).append( strEmbed );
+                var embed = document.embedPlay;
 
+                //浏览器不支持 audion，则使用 embed 播放
+                embed.volume = 100;
+                //embed.play();
+            } else
+            {
+                //非IE内核浏览器
+                var strAudio = "<audio id='audioPlay' src='{{ url('system_static_file/sound/ding.wav') }}' hidden='true'>";
+                if ( $( "body" ).find( "audio" ).length <= 0 )
+                    $( "body" ).append( strAudio );
+                var audio = document.getElementById( "audioPlay" );
+
+                //浏览器支持 audion
+                audio.play();
+            }
+        }
+        setInterval("func()", 30000);
+    }
 </script>
 @yield('script')
 <!--您可以选择添加Slimscroll和FastClick插件。推荐使用这两个插件来增强用户体验 -->
