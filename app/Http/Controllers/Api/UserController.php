@@ -63,7 +63,7 @@ class UserController extends BaseController
     public function login(Request $request,User $user) {
         // 拿code换取session_key与openid
         $code = $request['code'];
-        $url = 'https://api.weixin.qq.com/sns/jscode2session?appid='.'APPID'.'&secret='.'APPSECRET'.'&js_code='.$code.'&grant_type=authorization_code';
+        $url = 'https://api.weixin.qq.com/sns/jscode2session?appid='.'wx53505aeba39689d6'.'&secret='.'bd2422a0850b8518f0aaf2d4687e71b1'.'&js_code='.$code.'&grant_type=authorization_code';
 //        $data =  json_decode(file_get_contents($url), true);//{"session_key": "odMd5E1qJI5KJH7OTBVZYg==","expires_in": 7200,"openid": "oqMjq0BqLl6mRarbByCf9rOAc3k0"}
         $data = $this-> curlGet($url);
         // 判断新老用户
