@@ -58,7 +58,7 @@ class IndexController extends BaseController
             $info['user']['sex'] = $user_now['sex'];
             $info['my_pet'] = $pet->select('pet_thumb','male','pet_name','pet_category','varieties','weight','birthday')->where('user_id',$user_now['id'])->get();
             $info['my_order'] = $appointment
-                ->select('id','appointment_number','appointment_type','user_name','sex','user_phone','is_pickup','address','appointment_status','pet_name','order_status','price','times','amount','order_img')
+                ->select('id','service_name','appointment_number','appointment_type','user_name','sex','user_phone','is_pickup','address','appointment_status','pet_name','order_status','price','times','amount','order_img')
                 ->where('user_id',$user_now['id'])->get();
             $res = json_encode(['status' => "1", 'msg' => '查询成功',"data" => $info], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
             return $res;
@@ -71,9 +71,14 @@ class IndexController extends BaseController
     # 发起预约服务
     public function makeAppointment(Request $request,Pet $pet,Appointment $appointment)
     {
-        $data = $request->only('appointment_type','user_phone', 'pet_id','is_pickup','province','city','district','address','start_at','end_at','food_type','price','times','amount','order_img');
+        $data = $request->only('service_name','appointment_type','user_phone', 'pet_id','is_pickup','province','city','district','address','start_at','end_at','food_type','price','times','amount','order_img');
         $role = [
             'appointment_type' => 'required|in:0,1,2,3',
+            'service_name' => 'required|string',
+            'order_img' => 'required|string',
+            'price' => 'required|integer',
+            'times' => 'required|integer',
+            'amount' => 'required|integer',
             'user_phone'=> 'required|digits:11',
             'pet_id' => 'required|exists:pet,id',
             'is_pickup' => 'required|in:0,1',

@@ -12,6 +12,7 @@ class CreateAppointmentTable extends Migration
         Schema::create('appointment', function (Blueprint $table) {
             $table->increments('id');
             $table->string('appointment_number')->comment('预约订单号');
+            $table->string('service_name')->comment('服务名称');
             $table->enum('appointment_type',['0','1','2','3'])->comment('预约的服务类型:0寄养；1美容；2洗澡；3护理');
             $table->unsignedInteger('user_id')->comment('预约的用户id');
             $table->string('user_name',15)->comment('预约时的用户名');

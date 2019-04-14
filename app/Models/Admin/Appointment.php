@@ -17,7 +17,7 @@ class Appointment extends Model
     //应更改为日期的属性
     protected $dates = ['deleted_at'];
     //过滤，只有以下字段才能被修改
-    protected $fillable = ['id','appointment_number','appointment_type','user_id','user_name','sex', 'user_phone', 'pet_name','is_pickup','province','city','district','address','lat','lng','from_way','start_at','end_at','food_id','provider','appointment_status','mark_up','created_at','updated_at', 'deleted_at','order_status','price','times','amount','order_img'];
+    protected $fillable = ['id','service_name','appointment_number','appointment_type','user_id','user_name','sex', 'user_phone', 'pet_name','is_pickup','province','city','district','address','lat','lng','from_way','start_at','end_at','food_id','provider','appointment_status','mark_up','created_at','updated_at', 'deleted_at','order_status','price','times','amount','order_img'];
     //模型事件
 //    protected $events = [
 //        'created' => AppointmentCreated::class  , //key就是事件的名字，值就是触发的事件。这个事件可以是一个完整的类
