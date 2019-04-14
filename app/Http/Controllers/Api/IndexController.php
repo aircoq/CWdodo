@@ -15,7 +15,7 @@ class IndexController extends BaseController
     # 查询狗服务
     public function Dog(Service $service)
     {
-        $data = $service->select('id','service_name','pet_category','service_thumb','market_price','shop_price')
+        $data = $service->select('id','service_name','pet_category','service_thumb','market_price','shop_price','service_explain','tips','appointment_info')
             ->where('pet_category','1')->where('is_on_sale','1')
             ->get();
         $data = json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
@@ -24,7 +24,7 @@ class IndexController extends BaseController
     # 查询猫服务
     public function Cat(Service $service)
     {
-        $data = $service->select('id','service_name','pet_category','service_thumb','market_price','shop_price')
+        $data = $service->select('id','service_name','pet_category','service_thumb','market_price','shop_price','service_explain','tips','appointment_info')
             ->where('pet_category','2')->where('is_on_sale','1')
             ->get();
         $data = json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
@@ -57,7 +57,9 @@ class IndexController extends BaseController
             $info['user']['nickname'] = $user_now['nickname'];
             $info['user']['sex'] = $user_now['sex'];
             $info['my_pet'] = $pet->select('pet_thumb','male','pet_name','pet_category','varieties','weight','birthday')->where('user_id',$user_now['id'])->get();
-            $info['my_order'] = $appointment->select('id','appointment_number','appointment_type','user_name','sex','user_phone','is_pickup','address','appointment_status','pet_name')->where('user_id',$user_now['id'])->get();
+            $info['my_order'] = $appointment
+                ->select('id','appointment_number','appointment_type','user_name','sex','user_phone','is_pickup','address','appointment_status','pet_name','order_status','price','times','amount','order_img')
+                ->where('user_id',$user_now['id'])->get();
             $res = json_encode(['status' => "1", 'msg' => '查询成功',"data" => $info], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
             return $res;
         }
@@ -69,7 +71,7 @@ class IndexController extends BaseController
     # 发起预约服务
     public function makeAppointment(Request $request,Pet $pet,Appointment $appointment)
     {
-        $data = $request->only('appointment_type','user_phone', 'pet_id','is_pickup','province','city','district','address','start_at','end_at','food_type');
+        $data = $request->only('appointment_type','user_phone', 'pet_id','is_pickup','province','city','district','address','start_at','end_at','food_type','price','times','amount','order_img');
         $role = [
             'appointment_type' => 'required|in:0,1,2,3',
             'user_phone'=> 'required|digits:11',

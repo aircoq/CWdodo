@@ -22,6 +22,9 @@ class CreateServiceTable extends Migration
             $table->enum('is_on_sale',['0','1'])->comment('是否开放售卖：0否；1是');
             $table->decimal('market_price', 8, 2)->comment('市场价');
             $table->decimal('shop_price', 8, 2)->comment('本店价');
+            $table->text('service_explain')->nullable()->comment('服务说明');
+            $table->text('tips')->nullable()->comment('用户提示');
+            $table->text('appointment_info')->nullable()->comment('预约说明');
             $table->unsignedInteger('sort_order')->nullable()->comment('搜索时的排序字段，越大越靠前');
             $table->timestamps();//商品创建时间
             $table->softDeletes();//一般来说商品信息是不能物理删除

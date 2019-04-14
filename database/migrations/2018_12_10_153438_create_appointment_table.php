@@ -30,7 +30,12 @@ class CreateAppointmentTable extends Migration
             $table->bigInteger('end_at')->nullable()->comment('预约服务结束时间（时间戳）');
             $table->unsignedInteger('food_id')->nullable()->comment('期间使用食品');
             $table->string('provider',20)->nullable()->comment('接待者');
-            $table->enum('appointment_status',['0','1'])->comment('接管状态：0未完成；1完成');
+            $table->enum('appointment_status',['0','1'])->default(0)->comment('商家接管状态：0未完成；1完成');
+            $table->enum('order_status',['0','1','2'])->default(0)->comment('用户确认订单状态：0未收货，2已收货');
+            $table->integer('price')->nullable()->comment('预约单价');
+            $table->integer('times')->default(1)->comment('预约次数或天数');
+            $table->integer('amount')->nullable()->comment('预计订单总价');
+            $table->text('order_img')->nullable()->comment('预约时的图片');
             $table->text('mark_up')->nullable()->comment('备注');
             $table->timestamps();//预约发起时间
             $table->softDeletes();//完成即软删除

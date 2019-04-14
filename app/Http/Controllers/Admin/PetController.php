@@ -31,6 +31,14 @@ class PetController extends Controller
         return view('admin.pet.create');
     }
 
+    public function myShow(Request $request ,Pet $pet)
+    {
+        echo 'dassdasdsa';die();
+        $user_id = $request->only('user_id');
+        $data = $pet->select('id','user_id','pet_thumb','male','pet_name','pet_category','varieties','height','weight','color','status','star','birthday','born_where','room_id','pet_desc','created_at','updated_at')->where('user_id',$user_id)->get();
+        return json_encode(['status' => "1", 'msg' => '查询成功',"data" => $data], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    }
+
     public function store(Request $request ,Pet $pet)
     {
         $data = $request->only('session_key','user_id','pet_name','male','pet_category','varieties','height','weight','color','status','star','birthday','born_where','room_id','pet_thumb','pet_desc');
