@@ -77,14 +77,14 @@ class IndexController extends BaseController
             'service_name' => 'required|string',
             'order_img' => 'required|string',
             'price' => 'required|integer',
-            'times' => 'required|integer',
+            'times' => 'integer',
             'amount' => 'required|integer',
             'user_phone'=> 'required|digits:11',
             'pet_id' => 'required|exists:pet,id',
             'is_pickup' => 'required|in:0,1',
-            'province' => 'nullable|required_if:is_pickup,1|string|between:2,15',
-            'city' => 'nullable|required_if:is_pickup,1|string|between:2,15',
-            'district' => 'nullable|required_if:is_pickup,1|string|between:2,15',
+//            'province' => 'nullable|required_if:is_pickup,1|string|between:2,15',
+//            'city' => 'nullable|required_if:is_pickup,1|string|between:2,15',
+//            'district' => 'nullable|required_if:is_pickup,1|string|between:2,15',
             'address' => 'nullable|required_if:is_pickup,1|string|between:3,35',
             'start_at' => 'required|date|after:now',
             'end_at' => 'nullable|required_if:appointment_type,0|date|after:start_at',
@@ -96,12 +96,12 @@ class IndexController extends BaseController
             'user_phone.digits' => '手机号码不正确',
             'pet_id.integer' => '宠物不存在',
             'is_pickup.in' => '是否接送不合法',
-            'province.between' => '省级字节超限',
-            'province.required_if' => '接送地址不能空',
-            'city.between' => '市级字节超限',
-            'city.required_if' => '接送地址不能空',
-            'district.between' => '区县级字节超限',
-            'district.required_if' => '接送地址不能空',
+//            'province.between' => '省级字节超限',
+//            'province.required_if' => '接送地址不能空',
+//            'city.between' => '市级字节超限',
+//            'city.required_if' => '接送地址不能空',
+//            'district.between' => '区县级字节超限',
+//            'district.required_if' => '接送地址不能空',
             'address.between' => '详细地址最长为35个字节',
             'address.required_if' => '接送地址不能空',
             'start_at.required' => '预约服务时间不能为空',
@@ -128,37 +128,39 @@ class IndexController extends BaseController
             return ['status' => "fail", 'msg' => '请核对填写宠物信息是否正确'];
         }
         $data['pet_name'] = $tf['pet_name'];
-        # 如果接送 生成坐标 核对填写的地址
-        if($data['is_pickup'] == 1){
-            $get_adr_info = getGaoMapInfo($data['address'],$data['city']);
-            if($get_adr_info['count'] != 0){
-                $lat_lng = explode(',',$get_adr_info['geocodes'][0]['location']);
-                $data['lat'] = $lat_lng['0'];
-                $data['lng'] = $lat_lng['1'];
-                $pro = $get_adr_info['geocodes'][0]['province'];
-                $city = $get_adr_info['geocodes'][0]['city'];
-                $district = $get_adr_info['geocodes'][0]['district'];
-            }else{//不接送
-                return ['status' => "fail", 'msg' => '不能识别地址，请重新输入地址'];
-            }
-            if($data['province'] != $pro || $data['city'] != $city || $data['district'] != $district){//核对填写的地址
-                return ['status' => "fail", 'msg' => '地址填写有误，重新输入或联系客服'];
-            }
-        }else{
-            unset($data['province']);
-            unset($data['city']);
-            unset($data['district']);
-            unset($data['address']);
-        }
+//        # 如果接送 生成坐标 核对填写的地址
+//        if($data['is_pickup'] == 1){
+//            $get_adr_info = getGaoMapInfo($data['address'],$data['city']);
+//            if($get_adr_info['count'] != 0){
+//                $lat_lng = explode(',',$get_adr_info['geocodes'][0]['location']);
+//                $data['lat'] = $lat_lng['0'];
+//                $data['lng'] = $lat_lng['1'];
+//                $pro = $get_adr_info['geocodes'][0]['province'];
+//                $city = $get_adr_info['geocodes'][0]['city'];
+//                $district = $get_adr_info['geocodes'][0]['district'];
+//            }else{//不接送
+//                return ['status' => "fail", 'msg' => '不能识别地址，请重新输入地址'];
+//            }
+//            if($data['province'] != $pro || $data['city'] != $city || $data['district'] != $district){//核对填写的地址
+//                return ['status' => "fail", 'msg' => '地址填写有误，重新输入或联系客服'];
+//            }
+//        }else{
+//            unset($data['province']);
+//            unset($data['city']);
+//            unset($data['district']);
+//            unset($data['address']);
+//        }
         # 生成预约编号 appointment_number
         $data['appointment_number'] =  date('Ymd').uniqid();
         # 转换时间戳
         $data['start_at'] = strtotime($data['start_at']);
-        if($data['appointment_type'] != 0){ //如果是寄养
+        if($data['appointment_type'] != 0){ //如果不是寄养
             unset($data['end_at']);
             unset($data['food_type']);
+            $data['times'] = 1;
         }else{
             $data['end_at'] = strtotime($data['end_at']);
+            $data['times'] = ceil(($data['end_at']-$data['start_at'])/86400);
         }
         $data['from_way'] = 'api';//手机端接口
         $res = $appointment->create($data);
@@ -170,4 +172,45 @@ class IndexController extends BaseController
         }
     }
 
+    /**
+     * 微信小程序上传地址
+     * @param Request $request
+     * @return array
+     */
+    public function uploadImg(Request $request)
+    {
+        $data = $request->only('img');
+        $role = [
+            'img' => 'required|file|image|mimes:png,gif,jpeg,jpg|max:2000',
+        ];
+        $message = [
+            'img.required_with' => '图片不能为空',
+            'img.mimes' => '图片格式为png,gif,jpeg,jpg',
+            'img.max' => '图片不超过2000kb',
+        ];
+        $validator = Validator::make( $data, $role, $message );
+        if( $validator->fails() ){
+            return ['status' => "0", 'msg' => $validator->messages()->first()];
+        }
+        $img = uploadPic('img','uploads/weChat/'.date('Ymd'));
+        if($img){
+            return ['status' => "1", 'msg' => '上传成功' ,'data' => $img];
+        }else{
+            return ['status' => "0", 'msg' => '上传失败，稍后在试'];
+        }
+    }
+
+    public function myShow(Request $request ,Pet $pet)
+    {
+        $data = $request->only('session_key');
+        //获取用户id
+        #获取当前用户信息
+        $user_now = Redis::get($data['session_key']);
+        $user_now = json_decode($user_now,true);
+        $user_id = $user_now['id'];
+        $data = $pet
+            ->select('id','user_id','pet_thumb','male','pet_name','pet_category','varieties','height','weight','color','status','star','birthday','born_where','room_id','pet_desc','created_at','updated_at')
+            ->where('user_id',$user_id)->get();
+        return json_encode(['status' => "1", 'msg' => '查询成功',"data" => $data], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    }
 }

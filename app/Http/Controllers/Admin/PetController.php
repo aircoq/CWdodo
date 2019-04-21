@@ -31,13 +31,6 @@ class PetController extends Controller
         return view('admin.pet.create');
     }
 
-    public function myShow(Request $request ,Pet $pet)
-    {
-        echo 'dassdasdsa';die();
-        $user_id = $request->only('user_id');
-        $data = $pet->select('id','user_id','pet_thumb','male','pet_name','pet_category','varieties','height','weight','color','status','star','birthday','born_where','room_id','pet_desc','created_at','updated_at')->where('user_id',$user_id)->get();
-        return json_encode(['status' => "1", 'msg' => '查询成功',"data" => $data], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-    }
 
     public function store(Request $request ,Pet $pet)
     {
@@ -208,7 +201,7 @@ class PetController extends Controller
             'birthday' => 'required|date',
             'born_where' => 'nullable|string|between:0,15',
             'room_id' => 'nullable|exists:inn_room,id',
-            'pet_thumb'   => 'required|file|image|mimes:png,gif,jpeg,jpg|max:600|dimensions:width=800,height=800',
+//            'pet_thumb'   => 'string',
             'pet_desc' => 'nullable|string|between:0,100',
         ];
         $message = [
@@ -225,11 +218,11 @@ class PetController extends Controller
             'birthday.date' => '生日格式不正确',
             'born_where.between' => '产物产地不能超过15个字节',
             'room_id.exists' => '房间不存在',
-            'pet_thumb.file'      => '图片上传失败！',
-            'pet_thumb.image'     => '必须是图片格式！',
-            'pet_thumb.mimes'     => '图片格式不正确！',
-            'pet_thumb.max'       => '图片最大500K',
-            'pet_thumb.dimensions' => '图片宽高各为800',
+//            'pet_thumb.file'      => '图片上传失败！',
+//            'pet_thumb.image'     => '必须是图片格式！',
+//            'pet_thumb.mimes'     => '图片格式不正确！',
+//            'pet_thumb.max'       => '图片最大500K',
+//            'pet_thumb.dimensions' => '图片宽高各为800',
             'pet_desc.string' => '描述不正确',
             'pet_desc.between' => '描述最大100个字节',
         ];
@@ -237,23 +230,23 @@ class PetController extends Controller
         if( $validator->fails() ){
             return ['status' => "0", 'msg' => $validator->messages()->first()];
         }
-        if(!empty($data['pet_thumb'])){
-            $tf = uploadPic('pet_thumb','uploads/backend/pet/'.date('Ymd'));
-            if($tf){
-                $data['pet_thumb'] = $tf;
-            }else{
-                return ['status' => "0", 'msg' => '网络故障，图片上传失败'];
-            }
-        }
+//        if(!empty($data['pet_thumb'])){
+//            $tf = uploadPic('pet_thumb','uploads/backend/pet/'.date('Ymd'));
+//            if($tf){
+//                $data['pet_thumb'] = $tf;
+//            }else{
+//                return ['status' => "0", 'msg' => '网络故障，图片上传失败'];
+//            }
+//        }
         # 验证用户权限
         $user_now = json_decode(Redis::get($data['session_key']),true);//获取API用户信息
         $tf = $pet->where('user_id',$user_now['id'])->where('id',$data['pet_id'])->first();
         if(empty($tf)){
             return ['status' => '0', 'msg' => '请输入正确的宠物关系'];
         }
-        if(empty($data['pet_thumb'])){
-            unset($data['pet_thumb']);
-        }
+//        if(empty($data['pet_thumb'])){
+//            unset($data['pet_thumb']);
+//        }
         $res = $pet->update($data);
         if ($res) {
             return ['status' => "1", 'msg' => '更新成功'];
@@ -287,4 +280,37 @@ class PetController extends Controller
             return ['status' => '0', 'msg' => '删除失败'];
         }
     }
+
+    public function updatePetImg(Request $request, Pet $pet)
+    {
+        $data = $request->only('pet_id','session_key','pet_thumb');
+        $role = [
+            'pet_id' => 'required|integer',
+            'session_key' => 'required|string',
+            'pet_thumb'   => 'required|string',
+        ];
+        $message = [
+            'pet_id.required' => '请选择要更新的宠物',
+            'pet_thumb.required' => '图片地址不能为空',
+        ];
+        $validator = Validator::make( $data, $role, $message );
+        if( $validator->fails() ){
+            return ['status' => "0", 'msg' => $validator->messages()->first()];
+        }
+
+        # 验证用户权限
+        $user_now = json_decode(Redis::get($data['session_key']),true);//获取API用户信息
+        $tf = $pet->where('user_id',$user_now['id'])->where('id',$data['pet_id'])->first();
+        if(empty($tf)){
+            return ['status' => '0', 'msg' => '请输入正确的宠物关系'];
+        }
+
+        $res = $pet->where('id',$data['pet_id'])->update($data);
+        if ($res) {
+            return ['status' => "1", 'msg' => '上传成功'];
+        }else{
+            return ['status' => '0', 'msg' => '上传失败'];
+        }
+    }
+
 }
